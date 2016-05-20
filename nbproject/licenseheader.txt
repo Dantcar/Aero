@@ -1,0 +1,12 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Este Software tem Objetivo Educacional
+${licensePrefix}Para fins de aprendizagem e avaliacao na
+ ${licensePrefix}Na Disciplina de Programação Orientada a Objetos - Avançada
+ ${licensePrefix} do Curso de Analise de Sistemas da Fatec - Ipiranga
+ ${licensePrefix}Ano 2016 - Janeiro a Junho 
+ ${licensePrefix}Aluno Decio Antonio de Carvalho ${licensePrefix}
+<#if licenseLast??>
+${licenseLast}
+</#if>
