@@ -18,22 +18,27 @@ public class Pagamento {
   private String nomePagador;
   private String rgPagador;
   private String cpfPagador;
-  private String vlTotal;
+  private float vlTotal;
   private String formaPagamento;
   private String referenciaPagamento;
 
-  /**
-   * 
-   * @param idPagamento
-   * @param dataPagamento
-   * @param nomePagador
-   * @param rgPagador
-   * @param cpfPagador
-   * @param vlTotal
-   * @param formaPagamento
-   * @param referenciaPagamento 
-   */  
-  public Pagamento(String idPagamento, String dataPagamento, String nomePagador, String rgPagador, String cpfPagador, String vlTotal, String formaPagamento, String referenciaPagamento) {
+    public Pagamento() {
+    }
+/**
+ * 
+ * @param idPagamento
+ * @param dataPagamento
+ * @param nomePagador
+ * @param rgPagador
+ * @param cpfPagador
+ * @param vlTotal
+ * @param formaPagamento
+ * @param referenciaPagamento 
+ */
+    public Pagamento(String idPagamento, String dataPagamento, String nomePagador, 
+        String rgPagador, String cpfPagador, float vlTotal, String formaPagamento, 
+        String referenciaPagamento) {
+        
         this.idPagamento = idPagamento;
         this.dataPagamento = dataPagamento;
         this.nomePagador = nomePagador;
@@ -84,11 +89,11 @@ public class Pagamento {
         this.cpfPagador = cpfPagador;
     }
 
-    public String getVlTotal() {
+    public float getVlTotal() {
         return vlTotal;
     }
 
-    public void setVlTotal(String vlTotal) {
+    public void setVlTotal(float vlTotal) {
         this.vlTotal = vlTotal;
     }
 
@@ -107,6 +112,6 @@ public class Pagamento {
     public void setReferenciaPagamento(String referenciaPagamento) {
         this.referenciaPagamento = referenciaPagamento;
     }
-  
+    
   
 }
