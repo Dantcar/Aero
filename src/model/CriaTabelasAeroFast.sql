@@ -19,7 +19,6 @@ CPF VARCHAR(14)not null primary key
 )
 
 -- DROP TABLE aeronave
-
 CREATE TABLE AERONAVE(
 idAeronave int not null,
 prefixo VARCHAR(8)not null primary key,
@@ -30,9 +29,32 @@ modelo VARCHAR(50),
 fabricante VARCHAR(50)
 )
 
+
+-- DROP TABLE ENDCEP
+
+CREATE TABLE endcep(
+idCep int not null,
+endereco VARCHAR(60)not null,
+complemento VARCHAR(60)not null,
+bairro VARCHAR(60)not null,
+cidade VARCHAR(60)not null,
+uf VARCHAR(2)not null,
+cep VARCHAR(8)not null primary key
+)
+
+ 
 ---Classes Model AeroFast
-
-
+/*
+public class Pagamento {
+  private String idPagamento;
+  private String dataPagamento;
+  private String nomePagador;
+  private String rgPagador;
+  private String cpfPagador;
+  private float vlTotal;
+  private String formaPagamento;
+  private String referenciaPagamento;
+*/
 
 /*
 public class Cliente {
@@ -60,4 +82,14 @@ public class Aeronave {
     int seatBusinesClasse;
     String modelo;
     String fabricante;
+*/
+
+/*
+public class EndCep {
+ private String endereco;
+   private String bairro;
+   private String complemento;
+   private String cidade;
+   private String uf;
+   private String cep; 
 */
