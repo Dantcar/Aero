@@ -30,20 +30,20 @@ public class DBAeroFast {
   public static boolean acesso;
   public DBAeroFast(){
   
-      url ="jdbc:derby://localhost:1527/Tutor1";
-      usuario ="root";
-      senha = "admin";
+      url ="jdbc:derby://localhost:1527/Aerofast";
+      usuario ="DAC";
+      senha = "12345";
       
       try{
           System.out.println("Tentativa de conexao");
           Class.forName("org.apache.derby.jdbc.ClientDriver");
           con = DriverManager.getConnection(url, usuario, senha);
-          System.out.println("Ok conexao com o banco: "+url +" estabelecida");
+          // System.out.println("Ok conexao com o banco: "+url +" estabelecida");
           acesso=true;
       }catch (ClassNotFoundException e){ 
       
       }catch (SQLException e){
-      System.out.println("Falhou conexao");
+      //System.out.println("Falhou conexao");
             acesso=false;
       }
    
@@ -64,6 +64,32 @@ public class DBAeroFast {
       stm.executeUpdate("INSERT INTO ROOT.Clientes VALUES('"+nome+"','"+nasc+"','"+ende+"','"+email+"','"+rg+"','"+cpf+"')");
   }
   
+  /**
+   * Classe booleana que verifica se o acesso a base de dados
+   * Aerofast esta disponível e estabelecida
+   * @return true caso consiga conectar ao banco Aerofast
+   */
+  public boolean verificaConexao(){
+      boolean con1=false;
+      url ="jdbc:derby://localhost:1527/Aerofast";
+      usuario ="DAC";
+      senha = "12345";
+      
+      try{
+          System.out.println("Tentativa de conexao");
+          Class.forName("org.apache.derby.jdbc.ClientDriver");
+          con = DriverManager.getConnection(url, usuario, senha);
+          //System.out.println("Ok conexao com o banco: "+url +" estabelecida");
+          con1=true;
+      }catch (ClassNotFoundException e){ 
+      
+      }catch (SQLException e){
+      //System.out.println("Falhou conexao");
+            con1=false;
+      }
+      
+      return con1;
+  }
   /**
    * método para criar tabelas no banco
    */

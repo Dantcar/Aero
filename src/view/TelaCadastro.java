@@ -8,7 +8,8 @@
  */
 package view;
 
-import Control.Cadastro;;
+import Control.Cadastro;import javax.swing.JLayeredPane;
+;
 /*
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -61,6 +62,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         MenuVooAeronaveCadastrar = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
         jMenuSobreTela = new javax.swing.JMenuItem();
+        menuSobreVerificaStatusBanco = new javax.swing.JMenuItem();
         jMenu1Sair = new javax.swing.JMenu();
         jMenuSairSair = new javax.swing.JMenuItem();
 
@@ -160,6 +162,16 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
         jMenuSobre.add(jMenuSobreTela);
 
+        menuSobreVerificaStatusBanco.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuSobreVerificaStatusBanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        menuSobreVerificaStatusBanco.setText("Verifica Conexão Banco");
+        menuSobreVerificaStatusBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreVerificaStatusBancoActionPerformed(evt);
+            }
+        });
+        jMenuSobre.add(menuSobreVerificaStatusBanco);
+
         jMenuBar1.add(jMenuSobre);
 
         jMenu1Sair.setText("Sair");
@@ -230,6 +242,20 @@ public class TelaCadastro extends javax.swing.JFrame {
        Cadastro.montaTelaNewVoo();
     }//GEN-LAST:event_MenuNovoVooActionPerformed
 
+    private void menuSobreVerificaStatusBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreVerificaStatusBancoActionPerformed
+        //Cadastro.montaTelaVerificaStatusBanco();
+        String tituloStatus;
+        tituloStatus = "Verifica Conexao ao Banco de Dados";
+        
+        TelaStatusBanco telaStatus = new TelaStatusBanco();
+        telaStatus.setTitle(tituloStatus);
+        telaStatus.setVisible(true);
+        add(telaStatus, JLayeredPane.DEFAULT_LAYER);
+        
+        telaStatus.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaStatus.setLocation(50, 50);
+    }//GEN-LAST:event_menuSobreVerificaStatusBancoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,6 +302,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuSobre;
     private javax.swing.JMenuItem jMenuSobreTela;
     public javax.swing.JLabel lblConexao;
+    private javax.swing.JMenuItem menuSobreVerificaStatusBanco;
     private javax.swing.JMenuItem novaPassagem;
     // End of variables declaration//GEN-END:variables
 }

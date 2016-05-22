@@ -1,5 +1,5 @@
 -- select * from DAC.AERONAVE;
-DROP TABLE CLIENTE
+--DROP TABLE CLIENTE
 CREATE TABLE CLIENTE (
 idCliente int not null, 
 nome VARCHAR(60)not null,

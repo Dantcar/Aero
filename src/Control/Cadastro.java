@@ -20,6 +20,7 @@ import view.TelaNovoVoo;
 //import view.TelaPassagem;
 import view.TelaNovaPassagem;
 import view.TelaNovoPassageiro;
+import view.TelaStatusBanco;
 //import view.TelaVoo;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -171,5 +172,10 @@ public class Cadastro{
         telaNewVoo.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaNewVoo.setLocation(50, 50);
         
+    }
+    
+    public static void montaTelaVerificaStatusBanco(){
+        
+             
     }
 }
