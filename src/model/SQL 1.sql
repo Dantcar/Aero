@@ -1,4 +1,4 @@
-select * from DAC.AERONAVE;
+-- select * from DAC.AERONAVE;
 DROP TABLE CLIENTE
 CREATE TABLE CLIENTE (
 idCliente int not null, 
@@ -16,7 +16,7 @@ RG VARCHAR(12),
 CPF VARCHAR(14)not null primary key
 )
 
-DROP TABLE aeronave
+-- DROP TABLE aeronave
 CREATE TABLE AERONAVE(
 idAeronave int not null,
 prefixo VARCHAR(8)not null primary key,
@@ -27,7 +27,7 @@ modelo VARCHAR(50),
 fabricante VARCHAR(50)
 )
 
-DROP TABLE ENDCEP
+-- DROP TABLE ENDCEP
 CREATE TABLE endcep(
 idCep int not null,
 endereco VARCHAR(60)not null,
