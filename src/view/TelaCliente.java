@@ -8,8 +8,10 @@
  */
 package view;
 
+import Control.ClienteCtrl;
 import Control.Util;
 import Control.ValidaCampos;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -145,7 +147,7 @@ public class TelaCliente extends javax.swing.JFrame {
         JPanelClienteTituloLayout.setHorizontalGroup(
             JPanelClienteTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelClienteTituloLayout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTelaNomesTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloTelaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -517,9 +519,9 @@ public class TelaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 847, Short.MAX_VALUE)
+                    .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -559,6 +561,7 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparClienteActionPerformed
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
+      ClienteCtrl cCliente = new ClienteCtrl();
       Cliente objCli;
       objCli = new Cliente();
       
@@ -706,7 +709,12 @@ public class TelaCliente extends javax.swing.JFrame {
             
         if (btnSalvarCliente.isEnabled()){
                  boolean resultadoCliente = arrayCli.add(objCli);
-                // System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
+                try {
+            cCliente.receberCliente(objCli);
+            } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+// System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
             }
             else{
             
