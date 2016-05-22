@@ -214,7 +214,25 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairSairActionPerformed
 
     private void MenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuClienteActionPerformed
-       Cadastro.montaTelaCliente();
+      // Cadastro.montaTelaCliente();
+        String tituloCliente;
+        tituloCliente = "Gestão Cliente";
+        
+        TelaCliente telaCliente = new TelaCliente();
+        telaCliente.setTitle(tituloCliente);
+        telaCliente.setVisible(true);
+        add(telaCliente, JLayeredPane.DEFAULT_LAYER);
+        
+        telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaCliente.setLocation(40, 5); //(ponto inicial apartir lateral,altura)
+        
+        /* 
+        TelaCliente telaCliente = new TelaCliente();
+        telaCliente.setTitle(Cadastro.tituloCliente);
+        telaCliente.setVisible(true);
+        telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaCliente.setLocation(50, 50);
+        */
     }//GEN-LAST:event_MenuClienteActionPerformed
 
     private void jMenuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroActionPerformed
