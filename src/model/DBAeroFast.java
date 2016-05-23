@@ -23,10 +23,10 @@ public class DBAeroFast {
     /**
      *con
      */
-  public Connection con;
-  private String url;
-  private String usuario;
-  private String senha;
+  public static Connection con;
+  private static String url;
+  private static String usuario;
+  private static String senha;
   public static boolean acesso;
   public DBAeroFast(){
   
@@ -64,6 +64,24 @@ public class DBAeroFast {
       stm.executeUpdate("INSERT INTO ROOT.Clientes VALUES('"+nome+"','"+nasc+"','"+ende+"','"+email+"','"+rg+"','"+cpf+"')");
   }
   
+  public static Connection capturaConexao(){
+       con = null;
+      try{
+          System.out.println("Tentativa de conexao");
+          Class.forName("org.apache.derby.jdbc.ClientDriver");
+          con = DriverManager.getConnection(url, usuario, senha);
+          // System.out.println("Ok conexao com o banco: "+url +" estabelecida");
+         
+      }catch (ClassNotFoundException e){ 
+      
+      }catch (SQLException e){
+      //System.out.println("Falhou conexao");
+            acesso=false;
+      }
+      
+      return con;
+  }
+  
   /**
    * Classe booleana que verifica se o acesso a base de dados
    * Aerofast esta disponível e estabelecida
@@ -92,7 +110,24 @@ public class DBAeroFast {
   }
   /**
    * método para criar tabelas no banco
+     * @return Conexao
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
    */
+   public static Connection getConnection() throws ClassNotFoundException, SQLException{
+        Connection con;
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
+        return con;
+    }
+    public static Connection getConnection1() throws ClassNotFoundException, SQLException{
+        Connection con;
+        Class.forName("com.mysql.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aerofast", "DAC", "");
+        return con;
+    }
+  
+  
   public void criaTabelas(){
      /*Statement stm = con.createStatement();
      stm.executeUpdate("CREATE TABLE ROOT.Clientes ("
