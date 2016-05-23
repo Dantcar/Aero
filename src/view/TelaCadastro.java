@@ -225,7 +225,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         
         telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaCliente.setLocation(40, 5); //(ponto inicial apartir lateral,altura)
-        
+
         /* 
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setTitle(Cadastro.tituloCliente);
