@@ -17,6 +17,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBAeroFast {
  
@@ -116,20 +119,56 @@ public class DBAeroFast {
      * @throws java.sql.SQLException
    */
    public static Connection getConnection() throws ClassNotFoundException, SQLException{
-        Connection con;
+        Connection con3;
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-        con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "dac", "12345");
+        con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "dac", "12345");
         //con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
-        return con;
+        return con3;
     }
     public static Connection getConnection1() throws ClassNotFoundException, SQLException{
-        Connection con;
+        Connection con2;
         Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aerofast", "DAC", "");
-        return con;
+        con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aerofast", "DAC", "");
+        return con2;
     }
   
-  
+  /**
+     * 
+     * @param user //login do novo usuário Derby
+     * @param password  //senha do novo usuário Derby
+     * @return true se criar novo usuário
+     * @throws ClassNotFoundException 
+     */
+    public static boolean criarUsuarioDerby(String user, String password) throws ClassNotFoundException{
+        boolean resultado;
+        String propriedade;
+        resultado = false;
+        try{
+            try { 
+                Connection con1;
+                con1 = getConnection();
+            // Carregar a classe do driver cliente da rede do Derby
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            // Definir as propriedades usuário e senha
+            Properties properties = new Properties();
+            properties.put(user, password);
+            propriedade = properties.getProperty(user, url);
+            System.out.println(propriedade);
+            resultado = true;
+            } catch (SQLException ex) {
+                Logger.getLogger(DBAeroFast.class.getName()).log(Level.SEVERE, null, ex);
+            
+            }
+            
+        }
+        catch (ClassNotFoundException e){
+            
+        }    
+   
+       return resultado;
+    
+    }
+    
   public void criaTabelas(){
      /*Statement stm = con.createStatement();
      stm.executeUpdate("CREATE TABLE ROOT.Clientes ("

@@ -8,10 +8,11 @@
  */
 package view;
 
-import static Control.Util.CriarUsuarioDerby;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static model.DBAeroFast.criarUsuarioDerby;
 
 /**
  *
@@ -35,7 +36,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jscUsuario = new javax.swing.JScrollPane();
         panelUsuario = new javax.swing.JPanel();
         btnUsuarioVoltar = new javax.swing.JButton();
         btnNovoUsuarioBd = new javax.swing.JButton();
@@ -133,21 +133,21 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGap(105, 105, 105))
         );
 
-        jscUsuario.setViewportView(panelUsuario);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jscUsuario)
-                .addContainerGap())
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jscUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,16 +165,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         login = tctLogin.getText().trim();
         password = tctSenha.getText().trim();
         
+        boolean CriarUsuarioDerby = false;
         try {
-            boolean CriarUsuarioDerby = CriarUsuarioDerby(login, password);
-            if (CriarUsuarioDerby){
-            msg ="Usuário: "+login+ " inserido com sucesso";
-            JOptionPane.showMessageDialog(null, msg );
-            }
+            CriarUsuarioDerby = criarUsuarioDerby(login, password);
         } catch (ClassNotFoundException ex) {
-            msg = "Ocorreu um problema ao tentar incluir o novo usuário\n";
-            msg = msg+ex;
+            
             Logger.getLogger(TelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            msg ="Ocorreu um erro ao tentar criar novo usuário do Banco de dados \n";
+            JOptionPane.showMessageDialog(null, msg+ex );
+        }
+        if (CriarUsuarioDerby){
+            msg ="Usuário: "+login+ " inserido com sucesso";
             JOptionPane.showMessageDialog(null, msg );
         }
     }//GEN-LAST:event_btnNovoUsuarioBdActionPerformed
@@ -187,7 +188,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoUsuarioBd;
     private javax.swing.JButton btnUsuarioVoltar;
-    private javax.swing.JScrollPane jscUsuario;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblUsuarioSenha;
     private javax.swing.JPanel panelUsuario;

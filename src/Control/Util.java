@@ -9,17 +9,11 @@
 package Control;
 import br.com.parg.viacep.ViaCEP;
 import br.com.parg.viacep.ViaCEPException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -63,30 +57,7 @@ public class Util {
     }
     
     
-    /**
-     * 
-     * @param user //login do novo usuário Derby
-     * @param password  //senha do novo usuário Derby
-     * @return true se criar novo usuário
-     * @throws ClassNotFoundException 
-     */
-    public static boolean CriarUsuarioDerby(String user, String password) throws ClassNotFoundException{
-   
-    String databaseURL = "jdbc:derby://localhost:1527/Aerofast";
-    // Carregar a classe do driver cliente da rede do Derby
-    Class.forName("org.apache.derby.jdbc.ClientDriver");
-    // Definir as propriedades usuário e senha
-    Properties properties = new Properties();
-    properties.put(user, password);
-    //properties.put("password", "no12see");
-        try {
-            // Obter a conexão
-            Connection conn = DriverManager.getConnection(databaseURL, properties);
-        } catch (SQLException ex) {
-            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
+    
     
     /**
      *

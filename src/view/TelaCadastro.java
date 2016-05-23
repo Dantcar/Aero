@@ -60,9 +60,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         MenuVoo = new javax.swing.JMenu();
         MenuNovoVoo = new javax.swing.JMenuItem();
         MenuVooAeronaveCadastrar = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        menuSobreVerificaStatusBanco = new javax.swing.JMenuItem();
+        menuUtilitarioUsuario = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
         jMenuSobreTela = new javax.swing.JMenuItem();
-        menuSobreVerificaStatusBanco = new javax.swing.JMenuItem();
         jMenu1Sair = new javax.swing.JMenu();
         jMenuSairSair = new javax.swing.JMenuItem();
 
@@ -149,6 +151,31 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuVoo);
 
+        jMenu1.setText("Utilitários");
+        jMenu1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+
+        menuSobreVerificaStatusBanco.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuSobreVerificaStatusBanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen.png"))); // NOI18N
+        menuSobreVerificaStatusBanco.setText("Verifica Conexão Banco");
+        menuSobreVerificaStatusBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreVerificaStatusBancoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuSobreVerificaStatusBanco);
+
+        menuUtilitarioUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuUtilitarioUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Cliente mulher laranja 40x40.jpg"))); // NOI18N
+        menuUtilitarioUsuario.setText("Novo Usuário DB");
+        menuUtilitarioUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUtilitarioUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuUtilitarioUsuario);
+
+        jMenuBar1.add(jMenu1);
+
         jMenuSobre.setText("Sobre");
         jMenuSobre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -161,16 +188,6 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
         jMenuSobre.add(jMenuSobreTela);
-
-        menuSobreVerificaStatusBanco.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        menuSobreVerificaStatusBanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen.png"))); // NOI18N
-        menuSobreVerificaStatusBanco.setText("Verifica Conexão Banco");
-        menuSobreVerificaStatusBanco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuSobreVerificaStatusBancoActionPerformed(evt);
-            }
-        });
-        jMenuSobre.add(menuSobreVerificaStatusBanco);
 
         jMenuBar1.add(jMenuSobre);
 
@@ -197,13 +214,13 @@ public class TelaCadastro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblConexao)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 742, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblConexao)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 419, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,6 +301,21 @@ public class TelaCadastro extends javax.swing.JFrame {
         telaStatus.setLocation(50, 50);
     }//GEN-LAST:event_menuSobreVerificaStatusBancoActionPerformed
 
+    private void menuUtilitarioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUtilitarioUsuarioActionPerformed
+        // TODO add your handling code here:
+        String tituloUsuario;
+        tituloUsuario = "Incluir Novo Usuário Banco AeroFast";
+        
+        TelaUsuario telaUsuario = new TelaUsuario();
+        telaUsuario.setTitle(tituloUsuario);
+        telaUsuario.setVisible(true);
+        add(telaUsuario, JLayeredPane.DEFAULT_LAYER);
+        
+        telaUsuario.setDefaultCloseOperation(1);
+        telaUsuario.setLocation(50,5);
+
+    }//GEN-LAST:event_menuUtilitarioUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -322,6 +354,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuPassageiro;
     private javax.swing.JMenu MenuVoo;
     private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu1Sair;
     private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenuBar jMenuBar1;
@@ -331,6 +364,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSobreTela;
     public javax.swing.JLabel lblConexao;
     private javax.swing.JMenuItem menuSobreVerificaStatusBanco;
+    private javax.swing.JMenuItem menuUtilitarioUsuario;
     private javax.swing.JMenuItem novaPassagem;
     // End of variables declaration//GEN-END:variables
 }
