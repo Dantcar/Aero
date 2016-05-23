@@ -8,6 +8,8 @@
  */
 package model;
 
+import java.awt.HeadlessException;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,7 +28,7 @@ public class ClienteDAO {
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
         String sql = "INSERT INTO cliente VALUES ("
-                + "'" + cliente.getIdCliente() + "', "
+                + parseInt(cliente.getIdCliente()) +", "
                 + "'" + cliente.getNome() + "', "
                 + "'" + cliente.getNascimento() + "', "
                 + "'" + cliente.getEndereco() + "', "
@@ -40,10 +42,22 @@ public class ClienteDAO {
                 + "'" + cliente.getRg() + "', "
                 + "'" + cliente.getCpf() + "')";
         System.out.println("sql = "+sql);
-        if(stmt.executeUpdate(sql) > 0)
+        try {
+            stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados do cliente inseridos com sucesso");
-        else
+        } catch (SQLException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, "Erro de gravação no BD");
+        }
+        
+        /*
+        if(stmt.executeUpdate(sql) > 0){
+            JOptionPane.showMessageDialog(null, "Dados do cliente inseridos com sucesso");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Erro de gravação no BD");
+        }
+        */   
+         
     }
     
     
