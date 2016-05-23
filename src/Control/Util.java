@@ -45,6 +45,18 @@ public class Util {
     }
 
     /**
+     * Este método utilizara acesso ao banco para verificar pré-existência
+     * de número de cpf durante cadastro de cliente.
+     * @param cpf - do novo cliente
+     * @return fakse se não existir
+     * @return tre se existir 
+     */
+    public static boolean validaCPF2(String cpf){
+        
+        return true;
+    }
+    
+    /**
      *
      * @param arg : Data completa
      * @return String da data no padrão dd/MM/yyyy

@@ -14,7 +14,7 @@ uf VARCHAR(2)not null,
 cep VARCHAR(8)not null,
 email VARCHAR(60)not null,
 telefone VARCHAR(15)not null,
-RG VARCHAR(12),
+RG VARCHAR(12)not null,
 CPF VARCHAR(14)not null primary key
 )
 
