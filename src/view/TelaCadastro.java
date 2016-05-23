@@ -163,7 +163,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jMenuSobre.add(jMenuSobreTela);
 
         menuSobreVerificaStatusBanco.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        menuSobreVerificaStatusBanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        menuSobreVerificaStatusBanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen.png"))); // NOI18N
         menuSobreVerificaStatusBanco.setText("Verifica Conexão Banco");
         menuSobreVerificaStatusBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

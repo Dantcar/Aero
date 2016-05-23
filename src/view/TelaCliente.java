@@ -709,7 +709,7 @@ import model.Cliente;
             
         if (btnSalvarCliente.isEnabled()){
             boolean resultadoCliente = arrayCli.add(objCli);
-             try {
+            try {
                     if (resultadoCliente){
                     cCliente.receberCliente(objCli);
                     }

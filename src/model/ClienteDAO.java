@@ -11,7 +11,6 @@ package model;
 import java.awt.HeadlessException;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -25,6 +24,8 @@ public class ClienteDAO {
     Statement stmt;
     
     public void inserirNovoCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+        String msg;
+        msg="";
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
         String sql = "INSERT INTO cliente VALUES ("
@@ -44,9 +45,11 @@ public class ClienteDAO {
         System.out.println("sql = "+sql);
         try {
             stmt.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "Dados do cliente inseridos com sucesso");
+            msg ="Dados do cliente inseridos com sucesso";
+            JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Erro de gravação no BD");
+            msg = "Erro de gravação no BD \n"+e;
+            JOptionPane.showMessageDialog(null,msg );
         }
         
         /*
