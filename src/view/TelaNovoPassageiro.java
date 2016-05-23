@@ -8,6 +8,8 @@
  */
 package view;
 
+import Control.Util;
+import Control.ValidaCampos;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,15 +20,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
-import Control.ValidaCampos;
 import model.Passageiro;
-import Control.Util;
 
 /**
  *
  * @author Dac
  */
-public class TelaNovoPassageiro extends javax.swing.JFrame {
+public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
 public static ArrayList<model.Passageiro> arrayPass;
 public static boolean temPassageiro;
 /**

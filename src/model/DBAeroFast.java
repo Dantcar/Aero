@@ -31,19 +31,20 @@ public class DBAeroFast {
   public DBAeroFast(){
   
       url ="jdbc:derby://localhost:1527/Aerofast";
-      usuario ="DAC";
-      senha = "12345";
-      
+      //usuario ="DAC"; //EM CASA
+      usuario ="dac";
+      //senha = "12345";
+      senha="12345";
       try{
           System.out.println("Tentativa de conexao");
           Class.forName("org.apache.derby.jdbc.ClientDriver");
           con = DriverManager.getConnection(url, usuario, senha);
-          // System.out.println("Ok conexao com o banco: "+url +" estabelecida");
+      System.out.println("Ok conexao com o banco: "+url +" estabelecida");
           acesso=true;
       }catch (ClassNotFoundException e){ 
       
       }catch (SQLException e){
-      //System.out.println("Falhou conexao");
+      System.out.println("Falhou conexao");
             acesso=false;
       }
    
@@ -90,7 +91,7 @@ public class DBAeroFast {
   public boolean verificaConexao(){
       boolean con1=false;
       url ="jdbc:derby://localhost:1527/Aerofast";
-      usuario ="DAC";
+      usuario ="dac"; //em casa alterar para "DAC"
       senha = "12345";
       
       try{
@@ -117,7 +118,8 @@ public class DBAeroFast {
    public static Connection getConnection() throws ClassNotFoundException, SQLException{
         Connection con;
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-        con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
+        con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "dac", "12345");
+        //con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         return con;
     }
     public static Connection getConnection1() throws ClassNotFoundException, SQLException{

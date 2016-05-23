@@ -221,7 +221,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setTitle(tituloCliente);
         telaCliente.setVisible(true);
-        add(telaCliente, JLayeredPane.DEFAULT_LAYER);
+        add(telaCliente, JLayeredPane.DRAG_LAYER);
         
         telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaCliente.setLocation(40, 5); //(ponto inicial apartir lateral,altura)
@@ -240,7 +240,17 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadastroActionPerformed
 
     private void MenuPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPassageiroActionPerformed
-       Cadastro.montaTelaNovoPassageiro();
+      // Cadastro.montaTelaNovoPassageiro();
+        String tituloPassageiro ;
+        tituloPassageiro = "Gestão Passageiro";
+        
+        TelaNovoPassageiro telaPassageiro = new TelaNovoPassageiro();
+        telaPassageiro.setTitle(tituloPassageiro);
+        telaPassageiro.setVisible(true);
+        //add(telaPassageiro, JLayeredPane.DRAG_LAYER);
+        add(telaPassageiro, JLayeredPane.DEFAULT_LAYER);
+        telaPassageiro.setDefaultCloseOperation(1);
+        telaPassageiro.setLocation(40, 5);
     }//GEN-LAST:event_MenuPassageiroActionPerformed
 
     private void jMenuSobreTelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreTelaActionPerformed
