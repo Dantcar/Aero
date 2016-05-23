@@ -29,8 +29,9 @@ import model.Cliente;
  *
  * @author deciodecarvalho
  */
-public class TelaCliente extends javax.swing.JFrame {
-
+//public class TelaCliente extends javax.swing.JFrame {
+    public class TelaCliente extends javax.swing.JInternalFrame {
+        
     public static ArrayList<model.Cliente> arrayCli;
     public static boolean temCliente;
     private static String dataNascimentoCliente, dataHojeCliente;
@@ -569,7 +570,8 @@ public class TelaCliente extends javax.swing.JFrame {
       * Serializar o idCliente Provisório
       * 
       */
-      int idCliente = arrayCli.size();
+      //int idCliente = arrayCli.size();
+      int idCliente = 0;
       idCliente++;
       String id = idCliente+"";
       
@@ -577,6 +579,7 @@ public class TelaCliente extends javax.swing.JFrame {
        * Preenchimento do objCli com os valores de tela
        * 
       */
+      objCli.setIdCliente(id);
       objCli.setNome(tctNome.getText().trim());
       dataNascimentoCliente = Util.DataFormatadaS(jspNascimento.getValue().toString());
       dataIntNascimentoCliente = Util.DtAmericana(jspNascimento.getValue().toString());
@@ -629,114 +632,106 @@ public class TelaCliente extends javax.swing.JFrame {
         boolean validaCep = ValidaCampos.validaCEP(cep);
         boolean validaCidade = ValidaCampos.validaVazio(cidade);
         boolean validaUF = ValidaCampos.validaVazioComboBox(uf);    
-        
+        boolean verificaCpfBanco = Util.validaCPF2(cpf);
         if (validaNome) {
-            } else {
+        } else {
               msg = msg + "Campo Nome Vazio" + "\n";
-            }
+        }
         
-         if (validaDatajsp) {
+        if (validaDatajsp) {
         } else {
             msg = msg + "Campo Nascimento Inválido" + "\n";
         }
-         
-        
-         /*if (validaData) {
-            } else {
-              msg = msg + "Campo Nascimento inválido: "+ nasc + "\n";
-              this.tftNascimento.setText(null);
-            }
-        */
-         
-         
+                 
         if (validaEndereco) {
-            } else {
+        } else {
               msg = msg + "Campo Endereço Vazio" + "\n";
-            }
+        }
         
         if (validaNumeroEnd) {
-            } else {
+        } else {
               msg = msg + "Campo Número Endereço Vazio" + "\n";
-            }
+        }
         
         if (validaBairro){
-            }else{
+        }else{
             msg = msg + "Campo Bairro Vazio" + "\n";
         }
          
         if (validaCep) {
-            } else {
+        } else {
               msg = msg + "Campo CEP inválido: "+ cep + "\n";
               this.tftCep.setText(null);
-            }
+        }
         
         if (validaCidade) {
-            } else {
+        } else {
               msg = msg + "Campo Cidade Vazio" + "\n";
-            }
+        }
               
         if (validaUF) {
-            } else {
+        } else {
               msg = msg + "Campo UF Vazio" + "\n";
-            }
+        }
         
         if (validaEmail) {
-            } else {
+        } else {
               msg = msg +"Campo E-mail inválido: "+ email + "\n";
               this.tftEmail.setText(null);
-            }
+        }
         
         if (validaTelefone) {
-            } else {
+        } else {
               msg = msg +"Campo Telefone inválido: "+ telefone + "\n";
               this.tftTelefone.setText(null);
-            }
+        }
+        
         if (validaRG) {
-            } else {
+        } else {
               msg = msg + "Campo RG inválido: "+ rg + "\n";
               this.tftRG.setText(null);
-            }  
+        }  
         
-        if (validaCPF) {
-            } else {
+        if (validaCPF) {  
+        } else {
               msg = msg + "Campo CPF inválido: "+ cpf + "\n";
               this.tftCPF.setText(null);
-            }
-          
+        }
+        
+        if (verificaCpfBanco){ 
+        }else{
+             msg = msg + "Campo CPF: este CPF já existe no cadastrado Cliente: "+ cpf + "\n";
+              this.tftCPF.setText(null);
+        }
           
         if ("".equals(msg)){
-            msg = "Dados Enviados ao banco de dados do sistema!";
+           // msg = "Dados Enviados ao banco de dados do sistema!";
             
         if (btnSalvarCliente.isEnabled()){
-                 boolean resultadoCliente = arrayCli.add(objCli);
-                try {
-            cCliente.receberCliente(objCli);
+            boolean resultadoCliente = arrayCli.add(objCli);
+             try {
+                    if (resultadoCliente){
+                    cCliente.receberCliente(objCli);
+                    }
             } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-// System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
+            }
+
             }
             else{
-            
                 boolean flag = false;
-
                 for(int i = 0; i < arrayCli.size(); i++){
-
                     if(tftCPF.getText().trim().equals(arrayCli.get(i).getCpf())){
                         String removidoCliente = arrayCli.get(i).getNome();
                         Cliente removido = arrayCli.remove(i);
-
-                        //JOptionPane.showMessageDialog(this,"Passageiro de RG: "+removidoPassageiro+" Removido!");
                         boolean resultadoAlterouCliente = arrayCli.add(objCli);
                         btnLimparCliente.doClick(); //Limpar tela
-
                         flag = true;
-
                     }//fim do if
                 }// fim do for
            
-        }
-            JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
             //PainelCliente.requestFocus(true); 
             btnLimparCliente.doClick();
             btnSairCliente.doClick();
@@ -768,19 +763,9 @@ public class TelaCliente extends javax.swing.JFrame {
                 }
                 jspNascimento.setValue(calNascimentoCliente);
             
-            
-            /*
-            System.out.println("Estou no for do Cliente \n"
-               + "Este é o valor de tela do CPF:"+tftCPF.getText().trim()
-               + "\n"
-               + "Este é o valor dentro do Array:"+arrayCli.get(i).getCpf()
-               + "\n"
-               + "Este é o valor dentro do Array UF:"+arrayCli.get(i).getUf()
-               + "");
-            */
-            
+                        
             if(tftCPF.getText().equals(arrayCli.get(i).getCpf())){
-            System.out.println(""+i);
+            //System.out.println(""+i);
               
             tctBairro.setText(arrayCli.get(i).getBairro() );
             tftCep.setText(arrayCli.get(i).getCep());
