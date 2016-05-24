@@ -114,7 +114,8 @@ public class Util {
     public static String reduzString(String msg){
         int tamanho = msg.length();
         if (tamanho>45){
-            msg = "<html><font size='3' "+"msg.substring(0, 76)"+"\n"+"msg.substring(76, tamanho)"+"</html>";
+            msg = "<html><font size='3'><strong>"+msg.substring(0, 76)
+                    +"\n"+msg.substring(76, tamanho)+"</strong></font></html>";
         }
         return msg;
     }
