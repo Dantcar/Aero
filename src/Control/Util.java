@@ -111,6 +111,14 @@ public class Util {
         return data;
     }
     
+    public static String reduzString(String msg){
+        int tamanho = msg.length();
+        if (tamanho>45){
+            msg = "<html><font size='3' "+"msg.substring(0, 76)"+"\n"+"msg.substring(76, tamanho)"+"</html>";
+        }
+        return msg;
+    }
+    
     /**
 	 * Converte uma String para um objeto Date. Caso a String seja vazia ou nula, 
 	 * retorna null - para facilitar em casos onde formulários podem ter campos
