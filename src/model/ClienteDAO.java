@@ -11,6 +11,7 @@ package model;
 import java.awt.HeadlessException;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -22,7 +23,29 @@ import javax.swing.JOptionPane;
 public class ClienteDAO {
  Connection conexao;
     Statement stmt;
-    
+    ResultSet rs;
+      private void close() {
+        try {
+            if (rs != null) {
+            rs.close();
+            }
+            
+            if (stmt != null) {
+            stmt.close();
+            }
+            
+            if (conexao != null) {
+            conexao.close();
+            }
+        } catch (Exception e) {
+    }
+    }
+    /**
+     * Método para inserir novo Ciente ao Banco de Dados
+     * @param cliente
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */  
     public void inserirNovoCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
         String msg;
         msg="";
@@ -45,11 +68,17 @@ public class ClienteDAO {
         System.out.println("sql = "+sql);
         try {
             stmt.executeUpdate(sql);
-            msg ="Dados do cliente inseridos com sucesso";
-            JOptionPane.showMessageDialog(null, msg );
+           
+            msg = msg+"Dados do cliente inseridos com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
-            msg = "Erro de gravação no BD \n"+e;
-            JOptionPane.showMessageDialog(null,msg );
+            msg = msg+"Erro de gravação no BD \n"+e+"\n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
         }
         
         /*

@@ -14,13 +14,11 @@ import model.DBAeroFast;
 import view.TelaAbout;
 import view.TelaAeronave;
 import view.TelaCadastro;
-import view.TelaCliente;
 import view.TelaNovoVoo;
 //import view.TelaPassageiro;
 //import view.TelaPassagem;
 import view.TelaNovaPassagem;
 import view.TelaNovoPassageiro;
-import view.TelaStatusBanco;
 //import view.TelaVoo;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -74,6 +72,8 @@ public class Cadastro{
      * método para criar a tela inicial
      */
     public static void montaTelaCliente(){
+       
+        /*
         Cadastro.tituloCliente = "Cadastro de Clientes";
         
         TelaCliente telaCliente = new TelaCliente();
@@ -81,7 +81,7 @@ public class Cadastro{
         telaCliente.setVisible(true);
         telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaCliente.setLocation(50, 50);
-       
+       */
     }
      public static void montaTelaNovoPassageiro(){
         Cadastro.tituloCliente = "Cadastro de Passageiro";

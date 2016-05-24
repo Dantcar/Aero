@@ -11,15 +11,15 @@ package model;
 /**
  * @version 0.1
  * @author Décio Antonio de Carvalho
- * @since 09-abr-2016
+ * @since 22-maio-2016
  */
 public class Cliente {
    private String idCliente;
    private String nome;
    private String nascimento;
-   private String Endereco;
-   private String Numero;
-   private String Bairro;
+   private String endereco;
+   private String numero;
+   private String bairro;
    private String cidade;
    private String uf;
    private String cep;
@@ -27,6 +27,25 @@ public class Cliente {
    private String telefone;
    private String rg;
    private String cpf;
+
+    public Cliente() {
+    }
+
+    public Cliente(String idCliente, String nome, String nascimento, String endereco, String numero, String bairro, String cidade, String uf, String cep, String email, String telefone, String rg, String cpf) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.nascimento = nascimento;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+        this.email = email;
+        this.telefone = telefone;
+        this.rg = rg;
+        this.cpf = cpf;
+    }
 
     public String getIdCliente() {
         return idCliente;
@@ -53,27 +72,27 @@ public class Cliente {
     }
 
     public String getEndereco() {
-        return Endereco;
+        return endereco;
     }
 
-    public void setEndereco(String Endereco) {
-        this.Endereco = Endereco;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getNumero() {
-        return Numero;
+        return numero;
     }
 
-    public void setNumero(String Numero) {
-        this.Numero = Numero;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getBairro() {
-        return Bairro;
+        return bairro;
     }
 
-    public void setBairro(String Bairro) {
-        this.Bairro = Bairro;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getCidade() {
@@ -131,8 +150,5 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-   
-   
- 
+    
 }

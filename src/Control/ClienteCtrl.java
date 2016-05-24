@@ -20,7 +20,6 @@ public class ClienteCtrl {
     
      public void receberCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
-
         cliDAO.inserirNovoCliente(cliente);
     }
     
