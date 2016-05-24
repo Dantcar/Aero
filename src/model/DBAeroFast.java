@@ -35,7 +35,7 @@ public class DBAeroFast {
   
       url ="jdbc:derby://localhost:1527/Aerofast";
       //usuario ="DAC"; //EM CASA
-      usuario ="dac";
+      usuario ="DAC";
       //senha = "12345";
       senha="12345";
       try{
@@ -92,9 +92,11 @@ public class DBAeroFast {
    * @return true caso consiga conectar ao banco Aerofast
    */
   public boolean verificaConexao(){
+      startDerby();
+      
       boolean con1=false;
       url ="jdbc:derby://localhost:1527/Aerofast";
-      usuario ="dac"; //em casa alterar para "DAC"
+      usuario ="DAC"; //em casa alterar para "DAC"
       senha = "12345";
       
       try{
@@ -121,7 +123,7 @@ public class DBAeroFast {
    public static Connection getConnection() throws ClassNotFoundException, SQLException{
         Connection con3;
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-        con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "dac", "12345");
+        con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         //con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         return con3;
     }
@@ -168,6 +170,25 @@ public class DBAeroFast {
        return resultado;
     
     }
+    
+ public static void startDerby(){
+   //  public class start {
+    //public static void main(String[] args) {
+        try {
+            //Executa comando do windows ou linux no rt.exec("comandos");
+            Runtime rt = Runtime.getRuntime();
+            //Process proc = rt.exec("cmd /c start derby\\bin\\startNetworkServer.bat");//Envés de "derby\\bin\\startNetworkServer.bat" pode ser C:\\Tao\\Oquefor
+            Process proc = rt.exec("cmd /c start c:\\"+"Arquivosdeprogramas"+"\\Java\\jdk1.7.0_79\\db\\bin\\startNetworkServer.bat");
+            //Envés de "derby\\bin\\startNetworkServer.bat" pode ser C:\\Tao\\Oquefor
+                                                     
+            //No meu caso descompactei na pasta do meu programa e do start.jar e chamei de derby a pasta do server.
+            //proc = rt.exec("cmd.exe /c start java -jar SeuPrograma.jar");//Envés de "SeuPrograma.jar" pode ser C:\\Oquefor\\SeuPrograma.jar
+           //Process proc = rt.exec("cmd /c start derby\\bin\\stopNetworkServer.bat"); para parar o servidor.
+        } catch (Throwable t) {
+   // }
+}
+ }   
+    
     
   public void criaTabelas(){
      /*Statement stm = con.createStatement();
