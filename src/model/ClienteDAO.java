@@ -24,7 +24,7 @@ public class ClienteDAO {
  Connection conexao;
     Statement stmt;
     ResultSet rs;
-      private void close() {
+      public void close() {
         try {
             if (rs != null) {
             rs.close();
@@ -79,15 +79,20 @@ public class ClienteDAO {
             cliente.setRg(rs.getString(12));
             //cliente.cpf;
             cliente.setCpf(rs.getString(13));
+             close();
+                     
             return cliente;
+           
         } else {
            msg="Cliente não encontrado";
            JOptionPane.showMessageDialog(null, msg);
+           close();
            return null;
        }
-    }
-      
-      
+    
+        
+      }
+    
      /**
      * Método para inserir novo Ciente ao Banco de Dados
      * @param cliente
