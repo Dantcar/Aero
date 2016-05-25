@@ -137,7 +137,7 @@ public class DBAeroFast {
         msg="";
         try {
         Class.forName("org.apache.derby.jdbc.ClientDriver"); 
-        con4 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "123456");
+        con4 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         }catch (ClassNotFoundException ecl){
         msg = msg+ecl;
         JOptionPane.showMessageDialog(null,reduzString(msg) );
