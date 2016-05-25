@@ -17,10 +17,17 @@ import model.ClienteDAO;
  * @author Dac
  */
 public class ClienteCtrl {
+    private Object CliDAO;
     
      public void receberCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
         cliDAO.inserirNovoCliente(cliente);
     }
-    
+     
+     public Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
+        ClienteDAO cliDAO = new ClienteDAO();
+        Cliente cliente = cliDAO.buscarClienteCPF(cpf);
+        return cliente;
+    }
+   
 }

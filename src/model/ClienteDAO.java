@@ -40,7 +40,52 @@ public class ClienteDAO {
         } catch (Exception e) {
     }
     }
-    /**
+    
+      public Cliente buscarClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
+        Cliente cliente = new Cliente();
+        String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        stmt = conexao.createStatement();
+        rs = stmt.executeQuery("SELECT * FROM cliente WHERE cpf = '" + cpf + "'");
+       if(rs.first()){
+            //cliente.idCliente
+            cliente.setIdCliente(rs.getString(1));
+            //cliente.nome;
+            cliente.setNome(rs.getString(2));
+            //cliente.nascimento;
+            cliente.setNascimento(rs.getString(3));
+            //cliente.endereco;
+            cliente.setEndereco(rs.getString(4));
+            //clente.Numero;
+            cliente.setNumero(rs.getString(5));
+            //cliente.Bairro;
+            cliente.setBairro(rs.getString(6));
+            //cliente.cidade;
+            cliente.setCidade(rs.getString(7));
+            //cliente.uf;
+            cliente.setUf(rs.getString(8));
+            //cliente.cep;
+            cliente.setCep(rs.getString(9));
+            //cliente.email;
+            cliente.setEmail(rs.getString(10));
+            //cliente.telefone;
+            cliente.setTelefone(rs.getString(11));
+            //cliente.rg;
+            cliente.setRg(rs.getString(12));
+            //cliente.cpf;
+            cliente.setCpf(rs.getString(13));
+            return cliente;
+        } else {
+           msg="Cliente não encontrado";
+           JOptionPane.showMessageDialog(null, msg);
+           return null;
+       }
+    }
+      
+      
+     /**
      * Método para inserir novo Ciente ao Banco de Dados
      * @param cliente
      * @throws ClassNotFoundException
