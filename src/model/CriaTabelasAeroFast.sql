@@ -1,6 +1,6 @@
 
 -- CURRENT SQLID
-select * from DAC.AERONAVE;
+-- select * from DAC.AERONAVE;
 --DROP TABLE CLIENTE
 CREATE TABLE CLIENTE (
 idCliente int not null, 
