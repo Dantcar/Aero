@@ -47,7 +47,10 @@ public class ClienteDAO {
         msg="";
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
-        stmt = conexao.createStatement();
+        //stmt = conexao.createStatement();
+        stmt =conexao.createStatement(
+                       ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                       ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery("SELECT * FROM cliente WHERE cpf = '" + cpf + "'");
        if(rs.first()){
             //cliente.idCliente
@@ -112,7 +115,7 @@ public class ClienteDAO {
                 + "'" + cliente.getCpf() + "')";
         System.out.println("sql = "+sql);
         try {
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql,ResultSet.TYPE_SCROLL_INSENSITIVE);
            
             msg = msg+"Dados do cliente inseridos com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );

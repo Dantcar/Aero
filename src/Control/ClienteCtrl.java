@@ -24,7 +24,7 @@ public class ClienteCtrl {
         cliDAO.inserirNovoCliente(cliente);
     }
      
-     public Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
+     public static Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
         Cliente cliente = cliDAO.buscarClienteCPF(cpf);
         return cliente;

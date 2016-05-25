@@ -9,6 +9,7 @@
 package view;
 
 import Control.ClienteCtrl;
+import static Control.ClienteCtrl.receberClienteCPF;
 import Control.Util;
 import Control.ValidaCampos;
 import java.sql.SQLException;
@@ -749,54 +750,55 @@ import model.Cliente;
         btnAlterarCliente.setEnabled(true);
         boolean flag = false;
         
-        for(int i = 0; i < arrayCli.size(); i++){
-          
-                /**
+        //inicio
+        ClienteCtrl controller = new ClienteCtrl();
+        Cliente cliente;
+       
+        try {
+            
+            cliente = receberClienteCPF(tftCPF.getText());
+            if (cliente != null) {
+                
+                 /**
                  * Tratamento do campo tipo jSpinner
                  */
-                String sdataNascimento = arrayCli.get(i).getNascimento();
+                String sdataNascimento = cliente.getNascimento();
                 
                 try {
                     calNascimentoCliente = Util.retornaData(sdataNascimento);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jspNascimento.setValue(calNascimentoCliente);
-            
-                        
-            if(tftCPF.getText().equals(arrayCli.get(i).getCpf())){
-            //System.out.println(""+i);
-              
-            tctBairro.setText(arrayCli.get(i).getBairro() );
-            tftCep.setText(arrayCli.get(i).getCep());
-            tctCidade.setText(arrayCli.get(i).getCidade());
+            jspNascimento.setValue(calNascimentoCliente);
+           
+            tctBairro.setText(cliente.getBairro() );
+            tftCep.setText(cliente.getCep());
+            tctCidade.setText(cliente.getCidade());
             
             //Como pesquisar comboBox
-            cbxUF.setSelectedItem(arrayCli.get(i).getUf());
+            cbxUF.setSelectedItem(cliente.getUf());
            
-            tftCPF.setText(arrayCli.get(i).getCpf());
-            tftRG.setText(arrayCli.get(i).getRg());
-            tftEmail.setText(arrayCli.get(i).getEmail());
+            tftCPF.setText(cliente.getCpf());
+            tftRG.setText(cliente.getRg());
+            tftEmail.setText(cliente.getEmail());
             //tftNascimento.setText(arrayCli.get(i).getNascimento());
-            tftTelefone.setText(arrayCli.get(i).getTelefone());
-            tctNome.setText(arrayCli.get(i).getNome());
-            tctEndereco.setText(arrayCli.get(i).getEndereco());
-            tctNumeroEndCliente.setText(arrayCli.get(i).getNumero());
-              flag = true;
-          }  
+            tftTelefone.setText(cliente.getTelefone());
+            tctNome.setText(cliente.getNome());
+            tctEndereco.setText(cliente.getEndereco());
+            tctNumeroEndCliente.setText(cliente.getNumero());
+              flag = true; 
+                
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(arrayCli.isEmpty()){
-            JOptionPane.showMessageDialog(this,"Nenhum Cliente Cadastrado!!");
-            btnAlterarCliente.setEnabled(false);
-            btnSalvarCliente.setEnabled(true);
-        }
-       else if (flag == false){
-            JOptionPane.showMessageDialog(this, "Cliente não encontrado!!!, Entre com outro CPF"); 
-            btnAlterarCliente.setEnabled(false);
-            btnSalvarCliente.setEnabled(true);
-       }
-                  
+        
+        //fim
+                          
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
