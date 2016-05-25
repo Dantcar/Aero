@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import model.Cliente;
+import static model.ClienteDAO.buscarExisteClienteCPF;
 
 /**
  *
@@ -133,7 +134,7 @@ import model.Cliente;
         btnExcluirCliente = new javax.swing.JButton();
         btnAlterarCliente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         JPanelClienteTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -201,6 +202,11 @@ import model.Cliente;
             ex.printStackTrace();
         }
         tftCPF.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tftCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftCPFActionPerformed(evt);
+            }
+        });
 
         tftEmail.setForeground(new java.awt.Color(51, 51, 51));
         tftEmail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -634,6 +640,23 @@ import model.Cliente;
         boolean validaCidade = ValidaCampos.validaVazio(cidade);
         boolean validaUF = ValidaCampos.validaVazioComboBox(uf);    
         boolean verificaCpfBanco = Util.validaCPF2(cpf);
+        
+        //inicio
+            msg="";
+             try {
+            System.out.println("Estou no problema");
+            if(buscarExisteClienteCPF(tftCPF.getText())){ 
+            msg = msg + "Campo CPF: este CPF já existe no cadastrado Cliente: "+ cpf + "\n";
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            msg = msg+ex;
+        }
+         //fim
+        
+        
+        
         if (validaNome) {
         } else {
               msg = msg + "Campo Nome Vazio" + "\n";
@@ -694,7 +717,7 @@ import model.Cliente;
         }  
         
         if (validaCPF) {  
-        } else {
+         } else {
               msg = msg + "Campo CPF inválido: "+ cpf + "\n";
               this.tftCPF.setText(null);
         }
@@ -709,6 +732,7 @@ import model.Cliente;
            // msg = "Dados Enviados ao banco de dados do sistema!";
             
         if (btnSalvarCliente.isEnabled()){
+            
             boolean resultadoCliente = arrayCli.add(objCli);
             try {
                     if (resultadoCliente){
@@ -719,7 +743,8 @@ import model.Cliente;
             }
 
             }
-            else{
+           
+        else{
                 boolean flag = false;
                 for(int i = 0; i < arrayCli.size(); i++){
                     if(tftCPF.getText().trim().equals(arrayCli.get(i).getCpf())){
@@ -843,6 +868,10 @@ import model.Cliente;
         }
         
     }//GEN-LAST:event_btnPesquisarCepActionPerformed
+
+    private void tftCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftCPFActionPerformed
+        
+    }//GEN-LAST:event_tftCPFActionPerformed
 
     /**
      * @param args the command line arguments
