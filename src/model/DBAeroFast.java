@@ -9,45 +9,46 @@
 
 package model;
 
-/**
- *
- * @author Décio
- */
+import static Control.Util.reduzString;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DBAeroFast {
  
-    /**
-     *con
-     */
   public static Connection con;
   private static String url;
   private static String usuario;
   private static String senha;
   public static boolean acesso;
-  public DBAeroFast(){
   
+  public DBAeroFast(){
+      
+      String msg;
+      msg="";
       url ="jdbc:derby://localhost:1527/Aerofast";
       //usuario ="DAC"; //EM CASA
       usuario ="DAC";
-      //senha = "12345";
+      //senha = "123456";
       senha="12345";
+      
       try{
+          msg = "Ok conexao com o banco: "+url +"estabelecida";
           System.out.println("Tentativa de conexao");
           Class.forName("org.apache.derby.jdbc.ClientDriver");
           con = DriverManager.getConnection(url, usuario, senha);
-      System.out.println("Ok conexao com o banco: "+url +" estabelecida");
+          System.out.println(msg);
           acesso=true;
-      }catch (ClassNotFoundException e){ 
-      
+      }catch (ClassNotFoundException ecl){
+      msg = msg+ecl;
+      JOptionPane.showMessageDialog(null,msg );
       }catch (SQLException e){
-      System.out.println("Falhou conexao");
+      msg="Falhou a tentativa de conexao: "+e;
+      JOptionPane.showMessageDialog(null, msg);
+      //System.out.println("Falhou conexao");
             acesso=false;
       }
    
@@ -87,7 +88,7 @@ public class DBAeroFast {
   }
   
   /**
-   * Classe booleana que verifica se o acesso a base de dados
+   * Método booleano que verifica se o acesso a base de dados
    * Aerofast esta disponível e estabelecida
    * @return true caso consiga conectar ao banco Aerofast
    */
@@ -120,20 +121,44 @@ public class DBAeroFast {
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
    */
-   public static Connection getConnection() throws ClassNotFoundException, SQLException{
+   public static Connection getConnectionx() throws ClassNotFoundException, SQLException{
         Connection con3;
+        con3=null;
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         //con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         return con3;
     }
-    public static Connection getConnection1() throws ClassNotFoundException, SQLException{
+    
+    public static Connection getConnection(){
+        String msg;
+        Connection con4;
+        con4=null;
+        msg="";
+        try {
+        Class.forName("org.apache.derby.jdbc.ClientDriver"); 
+        con4 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "123456");
+        }catch (ClassNotFoundException ecl){
+        msg = msg+ecl;
+        JOptionPane.showMessageDialog(null,reduzString(msg) );
+        } catch (Exception e) {
+        msg="Falhou a tentativa de conexao: \n"+e;
+        JOptionPane.showMessageDialog(null, reduzString(msg));
+        }
+        
+        return con4;
+    }
+   
+    /*
+   public static Connection getConnection1() throws ClassNotFoundException, SQLException{
         Connection con2;
+        con2=null;
         Class.forName("com.mysql.jdbc.Driver");
         con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aerofast", "DAC", "");
         return con2;
     }
-  
+    */
+    
   /**
      * 
      * @param user //login do novo usuário Derby
@@ -142,25 +167,19 @@ public class DBAeroFast {
      * @throws ClassNotFoundException 
      */
     public static boolean criarUsuarioDerby(String user, String password) throws ClassNotFoundException{
+        Connection con1;
+        con1=null;
         boolean resultado;
         String propriedade;
         resultado = false;
         try{
-            try { 
-                Connection con1;
-                con1 = getConnection();
-            // Carregar a classe do driver cliente da rede do Derby
+            con1 = getConnection();
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            // Definir as propriedades usuário e senha
             Properties properties = new Properties();
             properties.put(user, password);
             propriedade = properties.getProperty(user, url);
             System.out.println(propriedade);
             resultado = true;
-            } catch (SQLException ex) {
-                Logger.getLogger(DBAeroFast.class.getName()).log(Level.SEVERE, null, ex);
-            
-            }
             
         }
         catch (ClassNotFoundException e){
@@ -174,11 +193,17 @@ public class DBAeroFast {
  public static void startDerby(){
    //  public class start {
     //public static void main(String[] args) {
-        try {
+     String s = "C:\\db\\bin\\startNetworkServer.bat";
+     String result = s.substring(s.lastIndexOf(System.getProperty("file.separator"))+1,s.length());
+     System.out.println("\n"+result+"\n");
+//saida:
+//nomeArquivo.ext  
+     
+     try {
             //Executa comando do windows ou linux no rt.exec("comandos");
             Runtime rt = Runtime.getRuntime();
             //Process proc = rt.exec("cmd /c start derby\\bin\\startNetworkServer.bat");//Envés de "derby\\bin\\startNetworkServer.bat" pode ser C:\\Tao\\Oquefor
-            Process proc = rt.exec("cmd /c start c:\\"+"Arquivosdeprogramas"+"\\Java\\jdk1.7.0_79\\db\\bin\\startNetworkServer.bat");
+            Process proc = rt.exec("cmd /c start c:\\db\\bin\\startNetworkServer.bat");
             //Envés de "derby\\bin\\startNetworkServer.bat" pode ser C:\\Tao\\Oquefor
                                                      
             //No meu caso descompactei na pasta do meu programa e do start.jar e chamei de derby a pasta do server.
