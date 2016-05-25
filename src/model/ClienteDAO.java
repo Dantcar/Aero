@@ -120,7 +120,7 @@ public class ClienteDAO {
                 + "'" + cliente.getCpf() + "')";
         System.out.println("sql = "+sql);
         try {
-            stmt.executeUpdate(sql,ResultSet.TYPE_SCROLL_INSENSITIVE);
+            stmt.execute(sql);
            
             msg = msg+"Dados do cliente inseridos com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
