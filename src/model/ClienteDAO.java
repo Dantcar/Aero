@@ -8,23 +8,32 @@
  */
 package model;
 
+import static Control.Util.reduzString;
 import java.awt.HeadlessException;
 import static java.lang.Integer.parseInt;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Classe Cliente DAO
  * @author deciodecarvalho
  */
 public class ClienteDAO {
- Connection conexao;
-    Statement stmt;
-    ResultSet rs;
-      public void close() {
+ public Connection conexao;
+ public Statement stmt;
+ public ResultSet rs;
+    
+    
+    /**
+     * método para encerrar Connection, Statement e ResutlSet
+     */  
+    public void close() {
         try {
             if (rs != null) {
             rs.close();
@@ -39,8 +48,61 @@ public class ClienteDAO {
             }
         } catch (Exception e) {
     }
-    }
+    }//fim close()
+     
+    /**
+     * Método que consulta se o cpf já está cadastrado no sistema Aerofast
+     * @param cpf
+     * @return boolean resposta
+     */
+    public boolean buscarExisteClienteCPF(String cpf){
+      boolean resposta = true;
+      String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+            try {
+                 stmt =conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+            } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+                 Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                rs = stmt.executeQuery("SELECT * FROM cliente WHERE cpf = '" + cpf + "'");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+     try {
+         if (rs.first()) {
+             close();
+             resposta = false;
+         }
+     } catch (SQLException ex) {
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+         msg=""+ex;
+         JOptionPane.showMessageDialog(null, reduzString(msg));
+         close();
+         resposta = false;
+     }
+        
+        return resposta;  
+    }//Fim buscarExisteClienteCPF
     
+    
+      
+    /**
+     * Método para capturar dados clientes enviando cpf dele.
+     * @param cpf
+     * @return Retorna cliente se encontrar CPF no banco Aerofast
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
       public Cliente buscarClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
         Cliente cliente = new Cliente();
         String msg;
@@ -94,7 +156,7 @@ public class ClienteDAO {
       }
     
      /**
-     * Método para inserir novo Ciente ao Banco de Dados
+     * Método para inserir novo Ciente ao Banco de Dados.
      * @param cliente
      * @throws ClassNotFoundException
      * @throws SQLException 
@@ -125,7 +187,8 @@ public class ClienteDAO {
             msg = msg+"Dados do cliente inseridos com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
-            msg = msg+"Erro de gravação no BD \n"+e+"\n";
+            msg = reduzString(msg+e);
+            msg = msg+"Erro de gravação no BD \n";
            // JOptionPane.showMessageDialog(null,msg );
         }
         close();
