@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import model.Cliente;
-import static model.ClienteDAO.buscarExisteClienteCPF;
+//import static model.ClienteDAO.buscarClienteCPF;
 
 /**
  *
@@ -633,6 +633,7 @@ import static model.ClienteDAO.buscarExisteClienteCPF;
         boolean validaNumeroEnd = ValidaCampos.validaVazio(numero);
         boolean validaBairro = ValidaCampos.validaVazio(bairro);
         boolean validaRG = ValidaCampos.validaRG(rg);
+        boolean validaCpfBanco = ClienteCtrl.receberPesquisarClienteCPF(cpf);
         boolean validaCPF = ValidaCampos.validaCPF(cpf);
         boolean validaEmail = ValidaCampos.validaEmail(email);
         boolean validaTelefone = ValidaCampos.validaTelefone(telefone);
@@ -641,6 +642,7 @@ import static model.ClienteDAO.buscarExisteClienteCPF;
         boolean validaUF = ValidaCampos.validaVazioComboBox(uf);    
         boolean verificaCpfBanco = Util.validaCPF2(cpf);
         
+        /*
         //inicio
             msg="";
              try {
@@ -649,13 +651,17 @@ import static model.ClienteDAO.buscarExisteClienteCPF;
             msg = msg + "Campo CPF: este CPF já existe no cadastrado Cliente: "+ cpf + "\n";
             }
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
             msg = msg+ex;
         }
          //fim
         
-        
+        */
+        if (validaCpfBanco) {
+        } else {
+              msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
+        }
         
         if (validaNome) {
         } else {

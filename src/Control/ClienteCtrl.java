@@ -29,5 +29,12 @@ public class ClienteCtrl {
         Cliente cliente = cliDAO.buscarClienteCPF(cpf);
         return cliente;
     }
+     
+     public static boolean receberPesquisarClienteCPF(String cpf){
+         boolean resposta = false;
+         ClienteDAO cliente = new ClienteDAO();
+         resposta = cliente.buscarExisteClienteCPF(cpf);
+        return resposta;
+    }
    
 }
