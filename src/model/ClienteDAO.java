@@ -196,17 +196,68 @@ public class ClienteDAO {
          msg = msg+"Conexão ao banco fechada";
          JOptionPane.showMessageDialog(null,msg );   
         }
-        
-        /*
-        if(stmt.executeUpdate(sql) > 0){
-            JOptionPane.showMessageDialog(null, "Dados do cliente inseridos com sucesso");
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Erro de gravação no BD");
-        }
-        */   
          
-    }
+    }//fim inserir cliente
+    
+     public void alterarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+        String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        stmt = conexao.createStatement();
+        /*
+        String sql = "INSERT INTO cliente VALUES ("
+                + parseInt(cliente.getIdCliente()) +", "
+                + "'" + cliente.getNome() + "', "
+                + "'" + cliente.getNascimento() + "', "
+                + "'" + cliente.getEndereco() + "', "
+                + "'" + cliente.getNumero() + "', "
+                + "'" + cliente.getBairro() + "', "
+                + "'" + cliente.getCidade() + "', "
+                + "'" + cliente.getUf() + "', "
+                + "'" + cliente.getCep() + "', "
+                + "'" + cliente.getEmail() + "', "
+                + "'" + cliente.getTelefone() + "', "
+                + "'" + cliente.getRg() + "', "
+                + "'" + cliente.getCpf() + "')";
+
+        //
+        idCliente int not null, 
+        nome VARCHAR(60)not null,
+        nascimento VARCHAR(10)not null,
+        endereco VARCHAR(60)not null,
+        numero VARCHAR(30)not null,
+        bairro VARCHAR(60)not null,
+        cidade VARCHAR(60)not null,
+        uf VARCHAR(2)not null,
+        cep VARCHAR(10)not null,
+        email VARCHAR(60)not null,
+        telefone VARCHAR(18)not null,
+        RG VARCHAR(16)not null,
+        CPF VARCHAR(18)not null primary key
+        */
+        
+        String sql = "UPDATE cliente SET CPF ='"+cliente.getCpf();        
+                
+        
+        
+        System.out.println("sql = "+sql);
+        try {
+            stmt.execute(sql);
+           
+            msg = msg+"Dados do cliente inseridos com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
+        } catch (SQLException | HeadlessException e) {
+            msg = reduzString(msg+e);
+            msg = msg+"Erro de gravação no BD \n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
+        }
+         
+    }//fim inserir cliente
     
     
    

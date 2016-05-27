@@ -36,5 +36,10 @@ public class ClienteCtrl {
          resposta = cliente.buscarExisteClienteCPF(cpf);
         return resposta;
     }
+     
+     public void alterarClientecTRL(Cliente cliente, String cpf) throws ClassNotFoundException, SQLException{
+        ClienteDAO cliDAO = new ClienteDAO();
+        cliDAO.alterarCliente(cliente);
+    } 
    
 }
