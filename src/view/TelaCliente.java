@@ -561,13 +561,51 @@ import model.Cliente;
       tftRG.setText(null);
       tftEmail.setText(null);
       tftTelefone.setText(null);
-      //tftNascimento.setText(null);
+      //jspNascimento.setEnabled(false);
       tctNome.setText(null);
       tctNumeroEndCliente.setText(null);
       tctEndereco.setText(null);
       
     }//GEN-LAST:event_btnLimparClienteActionPerformed
 
+    /**
+     * método para desabilitar edição dos dados 
+     * da tela cliente.
+     */
+    private void disabilitarDadosCliente(){
+      tctBairro.setEditable(false);
+      tftCep.setEditable(false);
+      tctCidade.setEditable(false);
+      cbxUF.setEnabled(false);
+      tftCPF.setEditable(false);
+      tftRG.setEditable(false);
+      tftEmail.setEditable(false);
+      tftTelefone.setEditable(false);
+      jspNascimento.setEnabled(false);
+      tctNome.setEditable(false);
+      tctNumeroEndCliente.setEditable(false);
+      tctEndereco.setEditable(false);
+    }
+    
+    /**
+     * método para desabilitar edição dos dados 
+     * da tela cliente.
+     */
+    private void abilitarDadosCliente(){
+      tctBairro.setEditable(true);
+      tftCep.setEditable(true);
+      tctCidade.setEditable(true);
+      cbxUF.setEditable(true);
+      tftCPF.setEditable(true);
+      tftRG.setEditable(true);
+      tftEmail.setEditable(true);
+      tftTelefone.setEditable(true);
+      jspNascimento.setEnabled(true);
+      tctNome.setEditable(true);
+      tctNumeroEndCliente.setEditable(true);
+      tctEndereco.setEditable(true);
+    }
+    
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
       ClienteCtrl cCliente = new ClienteCtrl();
       Cliente objCli;
@@ -661,6 +699,7 @@ import model.Cliente;
         if (validaCpfBanco) {
         } else {
               msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
+              this.tftCPF.setText(null);
         }
         
         if (validaNome) {
@@ -757,6 +796,20 @@ import model.Cliente;
                         String removidoCliente = arrayCli.get(i).getNome();
                         Cliente removido = arrayCli.remove(i);
                         boolean resultadoAlterouCliente = arrayCli.add(objCli);
+                        
+                        //Início Gravar
+                        boolean resultadoCliente = arrayCli.add(objCli);
+                        try {
+                                if (resultadoCliente){
+                                cCliente.alterarClientecTRL(objCli, cpf);
+                        }
+                        } catch (ClassNotFoundException | SQLException ex) {
+                                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //Fim Gravar
+                        
+                        
+                        
                         btnLimparCliente.doClick(); //Limpar tela
                         flag = true;
                     }//fim do if
@@ -817,6 +870,9 @@ import model.Cliente;
             tctNome.setText(cliente.getNome());
             tctEndereco.setText(cliente.getEndereco());
             tctNumeroEndCliente.setText(cliente.getNumero());
+            
+            //desabilitar edição
+            disabilitarDadosCliente();
               flag = true; 
                 
                 
@@ -858,6 +914,13 @@ import model.Cliente;
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
+       @SuppressWarnings("UnusedAssignment")
+       String msg = "";
+        if (!tctNome.isEditable()){
+         msg = "Pode realizar alterações agora";
+            abilitarDadosCliente();
+           JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+        }
         // TODO add your handling code here:
         //btnSalvarPassageiro.doClick();
         btnSalvarClienteActionPerformed(evt);
