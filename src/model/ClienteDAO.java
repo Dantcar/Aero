@@ -236,11 +236,31 @@ public class ClienteDAO {
         CPF VARCHAR(18)not null primary key
         */
         
-        String sql = "UPDATE cliente c SET CPF = "+"'cliente.getCpf()'"+" WHERE "+"'vcpf'"+" = c.CPF";        
+        //String sql = "UPDATE cliente SET " + "CPF = '"+ cliente.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
+        String sql = "UPDATE cliente SET "
+                + "idCliente = "+ parseInt(cliente.getIdCliente())+", "
+                + "nome = '" + cliente.getNome() + "', "
+                + "nascimento = '" + cliente.getNascimento() + "', "
+                + "endereco = '" + cliente.getEndereco() + "', "
+                + "numero = '" + cliente.getNumero() + "', "
+                + "bairro = '" + cliente.getBairro() + "', "
+                + "cidade = '" + cliente.getCidade() + "', "
+                + "uf = '" + cliente.getUf() + "', "
+                + "cep = '" + cliente.getCep() + "', "
+                + "email = '" + cliente.getEmail() + "', "
+                + "telefone = '"+ cliente.getTelefone() + "', "
+                + "RG = '"+ cliente.getRg() + "', "
+                + "CPF = '"+ cliente.getCpf()+ "' "
+                + " WHERE CPF = '" + vcpf + "'";
+        
+        /*
+        + "renda = " + cliente.getRenda() + ", "
+        + "ativo = " + cliente.isAtivo() 
+        + " WHERE nome = '" + nomeBusca + "'" ;
+        */
                 
-        
-        
         System.out.println("sql = "+sql);
+        
         try {
             stmt.execute(sql);
            
