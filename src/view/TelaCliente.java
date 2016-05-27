@@ -516,10 +516,10 @@ import model.Cliente;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimparCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(btnEditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSairCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -597,7 +597,7 @@ import model.Cliente;
      * método para desabilitar edição dos dados 
      * da tela cliente.
      */
-    private void disabilitarDadosCliente(){
+    private void desabilitarDadosCliente(){
       tctBairro.setEditable(false);
       tftCep.setEditable(false);
       tctCidade.setEditable(false);
@@ -870,7 +870,7 @@ import model.Cliente;
             tctNumeroEndCliente.setText(cliente.getNumero());
             
             //desabilitar edição
-            disabilitarDadosCliente();
+            desabilitarDadosCliente();
               flag = true; 
                 
                 
@@ -882,33 +882,70 @@ import model.Cliente;
         }
         
         
-        //fim
+        
+        //fim método
                           
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
+        btnSalvarCliente.setEnabled(false);
+        btnAlterarCliente.setEnabled(false);
+        btnEditarCliente.setEnabled(false);
         boolean flag = false;
-
-        for(int i = 0; i < arrayCli.size(); i++){
-
-            if(tftCPF.getText().trim().equals(arrayCli.get(i).getCpf())){
-                String removidoCliente = arrayCli.get(i).getCpf();
-                Cliente removido = arrayCli.remove(i);
-
-                JOptionPane.showMessageDialog(this,"Cliente: "+removidoCliente+" Removido!");
-                btnLimparCliente.doClick(); //Limpar tela
-
-                flag = true;
-
-            }//fim do if
-        }// fim do for
-
-        if(arrayCli.isEmpty()){
-        JOptionPane.showMessageDialog(this,"Nenhum Cliente Cadastrado!!");
+        
+        //inicio
+        //ClienteCtrl controller = new ClienteCtrl();
+        Cliente cliente;
+       
+        try {
+            
+            cliente = receberClienteCPF(tftCPF.getText());
+            if (cliente != null) {
+                oldCPF = tftCPF.getText();
+                 /**
+                 * Tratamento do campo tipo jSpinner
+                 */
+                String sdataNascimento = cliente.getNascimento();
+                
+                try {
+                    calNascimentoCliente = Util.retornaData(sdataNascimento);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            jspNascimento.setValue(calNascimentoCliente);
+           
+            tctBairro.setText(cliente.getBairro() );
+            
+            tftCep.setText(cliente.getCep());
+            tctCidade.setText(cliente.getCidade());
+            
+            //Como pesquisar comboBox
+            cbxUF.setSelectedItem(cliente.getUf());
+           
+            tftCPF.setText(cliente.getCpf());
+            tftRG.setText(cliente.getRg());
+            tftEmail.setText(cliente.getEmail());
+            //tftNascimento.setText(arrayCli.get(i).getNascimento());
+            tftTelefone.setText(cliente.getTelefone());
+            tctNome.setText(cliente.getNome());
+            tctEndereco.setText(cliente.getEndereco());
+            tctNumeroEndCliente.setText(cliente.getNumero());
+            
+            //desabilitar edição
+            desabilitarDadosCliente();
+            //chamar método em control para deletar o cliente
+            ClienteCtrl cCliente = new ClienteCtrl();
+            cCliente.deletarClienteCtrl(cliente, oldCPF);
+              flag = true; 
+                
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else if (flag == false){
-        JOptionPane.showMessageDialog(this, "Cliente não Encontrado!!!");
-        }
+    //fim método        
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed

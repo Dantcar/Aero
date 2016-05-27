@@ -1,7 +1,7 @@
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
- * Na Disciplina de Programa��o Orientada a Objetos - Avan�ada
+ * Na Disciplina de Programacao Orientada a Objetos - Avancada
  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
  * Ano 2016 - Janeiro a Junho 
  * Aluno Decio Antonio de Carvalho  * 
@@ -153,7 +153,7 @@ public class ClienteDAO {
        }
     
         
-      }
+      }// fim buscar cliente
     
      /**
      * Método para inserir novo Ciente ao Banco de Dados.
@@ -199,42 +199,18 @@ public class ClienteDAO {
          
     }//fim inserir cliente
     
+    /**
+     * método para realizar qualquer ateração no cadastro do cliente.
+     * @param cliente
+     * @param vcpf
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
      public void alterarCliente(Cliente cliente, String vcpf) throws ClassNotFoundException, SQLException{
         String msg;
         msg="";
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
-        /*
-        String sql = "INSERT INTO cliente VALUES ("
-                + parseInt(cliente.getIdCliente()) +", "
-                + "'" + cliente.getNome() + "', "
-                + "'" + cliente.getNascimento() + "', "
-                + "'" + cliente.getEndereco() + "', "
-                + "'" + cliente.getNumero() + "', "
-                + "'" + cliente.getBairro() + "', "
-                + "'" + cliente.getCidade() + "', "
-                + "'" + cliente.getUf() + "', "
-                + "'" + cliente.getCep() + "', "
-                + "'" + cliente.getEmail() + "', "
-                + "'" + cliente.getTelefone() + "', "
-                + "'" + cliente.getRg() + "', "
-                + "'" + cliente.getCpf() + "')";
-
-        //
-        idCliente int not null, 
-        nome VARCHAR(60)not null,
-        nascimento VARCHAR(10)not null,
-        endereco VARCHAR(60)not null,
-        numero VARCHAR(30)not null,
-        bairro VARCHAR(60)not null,
-        cidade VARCHAR(60)not null,
-        uf VARCHAR(2)not null,
-        cep VARCHAR(10)not null,
-        email VARCHAR(60)not null,
-        telefone VARCHAR(18)not null,
-        RG VARCHAR(16)not null,
-        CPF VARCHAR(18)not null primary key
-        */
         
         //String sql = "UPDATE cliente SET " + "CPF = '"+ cliente.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
         String sql = "UPDATE cliente SET "
@@ -253,18 +229,13 @@ public class ClienteDAO {
                 + "CPF = '"+ cliente.getCpf()+ "' "
                 + " WHERE CPF = '" + vcpf + "'";
         
-        /*
-        + "renda = " + cliente.getRenda() + ", "
-        + "ativo = " + cliente.isAtivo() 
-        + " WHERE nome = '" + nomeBusca + "'" ;
-        */
-                
-        System.out.println("sql = "+sql);
+                        
+        //System.out.println("sql = "+sql);
         
         try {
             stmt.execute(sql);
            
-            msg = msg+"Dados do cliente inseridos com sucesso \n";
+            msg = msg+"Dados do cliente alterados com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg+e);
@@ -279,7 +250,53 @@ public class ClienteDAO {
         }
          
     }//fim inserir cliente
+
+    /**
+     * método para deletar o cliente selecionado após nova confirmação.
+     * @param cliente
+     * @param cpf 
+     */
+     public void deletarCliente(Cliente cliente, String vcpf) throws SQLException {
+        String msg;
+        msg="";
+        
+        conexao = DBAeroFast.getConnection();
+     try {
+         stmt = conexao.createStatement();
+     } catch (SQLException ex) {
+         msg = msg+ex;
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+        String sql ="DELETE FROM cliente WHERE CPF = '" + vcpf + "'";
+        
+        System.out.println("sql = "+sql);
+        
+        try {
+            int n = JOptionPane.showConfirmDialog(
+            null,
+            "Confirma Deletar Cliente?",
+            "Confirmar Deletar Cliente",
+            JOptionPane.YES_NO_OPTION);
+            if(true){
+            stmt.execute(sql);
+            }
+            
+            msg = msg+"Dados do cliente excluidos com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
+        } catch (SQLException | HeadlessException e) {
+            msg = reduzString(msg+e);
+            msg = reduzString(msg);
+            msg = msg+"Erro de gravação no BD \n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
+        }
+        
+    }//fim deletar cliente
     
-    
-   
-}
+} // final da classe ClienteDAO

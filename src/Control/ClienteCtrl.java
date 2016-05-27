@@ -19,27 +19,32 @@ import model.ClienteDAO;
 public class ClienteCtrl {
     private Object CliDAO;
     
-     public void receberCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+    public void receberCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
         cliDAO.inserirNovoCliente(cliente);
     }
      
-     public static Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
+    public static Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
         Cliente cliente = cliDAO.buscarClienteCPF(cpf);
         return cliente;
     }
      
-     public static boolean receberPesquisarClienteCPF(String cpf){
+    public static boolean receberPesquisarClienteCPF(String cpf){
          boolean resposta = false;
          ClienteDAO cliente = new ClienteDAO();
          resposta = cliente.buscarExisteClienteCPF(cpf);
         return resposta;
     }
      
-     public void alterarClienteCtrl(Cliente cliente, String cpf) throws ClassNotFoundException, SQLException{
+    public void alterarClienteCtrl(Cliente cliente, String cpf) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
         cliDAO.alterarCliente(cliente, cpf);
+    } 
+     
+    public void deletarClienteCtrl(Cliente cliente, String cpf) throws ClassNotFoundException, SQLException{
+        ClienteDAO cliDAO = new ClienteDAO();
+        cliDAO.deletarCliente(cliente, cpf);
     } 
    
 }
