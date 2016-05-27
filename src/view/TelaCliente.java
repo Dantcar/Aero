@@ -11,6 +11,7 @@ package view;
 import Control.ClienteCtrl;
 import static Control.ClienteCtrl.receberClienteCPF;
 import Control.Util;
+import static Control.Util.reduzString;
 import Control.ValidaCampos;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -42,7 +43,7 @@ import model.Cliente;
     private static Date calNascimentoCliente;
     private static SimpleDateFormat sdfNascimentoCliente;
     private int dataIntNascimentoCliente;
-    
+    private static String oldCPF;
   
     /**
     * Instanciando objeto Cliente
@@ -57,7 +58,9 @@ import model.Cliente;
         
         initComponents();
         tftCep.setText(null);
-                              
+        //btnSalvarCliente.setEnabled(false);
+        //btnAlterarCliente.setEnabled(false);
+        btnEditarCliente.setEnabled(false);                     
         if(!temCliente){
             arrayCli = new ArrayList<>();
             temCliente = true;
@@ -133,6 +136,7 @@ import model.Cliente;
         btnSalvarCliente = new javax.swing.JButton();
         btnExcluirCliente = new javax.swing.JButton();
         btnAlterarCliente = new javax.swing.JButton();
+        btnEditarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -485,6 +489,21 @@ import model.Cliente;
             }
         });
 
+        btnEditarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnEditarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        btnEditarCliente.setText("Editar");
+        btnEditarCliente.setToolTipText("Salvar Alterações");
+        btnEditarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditarCliente.setIconTextGap(1);
+        btnEditarCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnEditarCliente.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnEditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JPanelClienteBotoesLayout = new javax.swing.GroupLayout(JPanelClienteBotoes);
         JPanelClienteBotoes.setLayout(JPanelClienteBotoesLayout);
         JPanelClienteBotoesLayout.setHorizontalGroup(
@@ -492,32 +511,38 @@ import model.Cliente;
             .addGroup(JPanelClienteBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSalvarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimparCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addComponent(btnExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSairCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JPanelClienteBotoesLayout.setVerticalGroup(
             JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelClienteBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSalvarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimparCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSairCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addGroup(JPanelClienteBotoesLayout.createSequentialGroup()
+                        .addGroup(JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSalvarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimparCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(67, 67, 67))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelClienteBotoesLayout.createSequentialGroup()
+                        .addGroup(JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSairCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(72, 72, 72))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -526,11 +551,11 @@ import model.Cliente;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 847, Short.MAX_VALUE)
-                    .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,8 +565,8 @@ import model.Cliente;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -591,11 +616,11 @@ import model.Cliente;
      * método para desabilitar edição dos dados 
      * da tela cliente.
      */
-    private void abilitarDadosCliente(){
+    private void habilitarDadosCliente(){
       tctBairro.setEditable(true);
       tftCep.setEditable(true);
       tctCidade.setEditable(true);
-      cbxUF.setEditable(true);
+      cbxUF.setEnabled(true);
       tftCPF.setEditable(true);
       tftRG.setEditable(true);
       tftEmail.setEditable(true);
@@ -604,6 +629,7 @@ import model.Cliente;
       tctNome.setEditable(true);
       tctNumeroEndCliente.setEditable(true);
       tctEndereco.setEditable(true);
+      btnAlterarCliente.setEnabled(true);
     }
     
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
@@ -629,8 +655,6 @@ import model.Cliente;
       dataNascimentoCliente = Util.DataFormatadaS(jspNascimento.getValue().toString());
       dataIntNascimentoCliente = Util.DtAmericana(jspNascimento.getValue().toString());
       objCli.setNascimento(dataNascimentoCliente);
-
-      //objCli.setNascimento(tftNascimento.getText());
       objCli.setEndereco(tctEndereco.getText().trim());
       objCli.setNumero(tctNumeroEndCliente.getText());
       objCli.setBairro(tctBairro.getText().trim());
@@ -678,29 +702,17 @@ import model.Cliente;
         boolean validaCep = ValidaCampos.validaCEP(cep);
         boolean validaCidade = ValidaCampos.validaVazio(cidade);
         boolean validaUF = ValidaCampos.validaVazioComboBox(uf);    
-        boolean verificaCpfBanco = Util.validaCPF2(cpf);
-        
-        /*
-        //inicio
-            msg="";
-             try {
-            System.out.println("Estou no problema");
-            if(buscarExisteClienteCPF(tftCPF.getText())){ 
-            msg = msg + "Campo CPF: este CPF já existe no cadastrado Cliente: "+ cpf + "\n";
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-            msg = msg+ex;
-        }
-         //fim
-        
-        */
-        if (validaCpfBanco) {
-        } else {
+                
+        if (btnSalvarCliente.isEnabled()){
+            if (validaCpfBanco) {
+            } else {
               msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
               this.tftCPF.setText(null);
+            }
         }
+        
+        
+        
         
         if (validaNome) {
         } else {
@@ -767,54 +779,38 @@ import model.Cliente;
               this.tftCPF.setText(null);
         }
         
-        if (verificaCpfBanco){ 
-        }else{
-             msg = msg + "Campo CPF: este CPF já existe no cadastrado Cliente: "+ cpf + "\n";
-              this.tftCPF.setText(null);
-        }
-          
+                  
         if ("".equals(msg)){
            // msg = "Dados Enviados ao banco de dados do sistema!";
             
-        if (btnSalvarCliente.isEnabled()){
+            if (btnSalvarCliente.isEnabled()){
             
-            boolean resultadoCliente = arrayCli.add(objCli);
-            try {
+                boolean resultadoCliente = arrayCli.add(objCli);
+                try {
                     if (resultadoCliente){
                     cCliente.receberCliente(objCli);
                     }
-            } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            }
-           
-        else{
-                boolean flag = false;
-                for(int i = 0; i < arrayCli.size(); i++){
-                    if(tftCPF.getText().trim().equals(arrayCli.get(i).getCpf())){
-                        String removidoCliente = arrayCli.get(i).getNome();
-                        Cliente removido = arrayCli.remove(i);
-                        boolean resultadoAlterouCliente = arrayCli.add(objCli);
-                        
-                        //Início Gravar
-                        boolean resultadoCliente = arrayCli.add(objCli);
-                        try {
-                                if (resultadoCliente){
-                                cCliente.alterarClientecTRL(objCli, cpf);
-                        }
-                        } catch (ClassNotFoundException | SQLException ex) {
+                } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                msg = msg+ex;
+                JOptionPane.showMessageDialog(null,reduzString(msg));            
+                }
+            }        
+            else{//inicio do Alterar
+                boolean flag = false; //verificar esta flag
+                //{
+                    //msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
+                    //this.tftCPF.setText(null);
+                System.out.println("Estou no problema");
+                            try {
+                                cCliente.alterarClienteCtrl(objCli, oldCPF);
+                            } catch (ClassNotFoundException | SQLException ex) {
                                 Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        //Fim Gravar
-                        
-                        
-                        
+                            }
+                //}
+                       
                         btnLimparCliente.doClick(); //Limpar tela
                         flag = true;
-                    }//fim do if
-                }// fim do for
-           
             }
             //JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
             //PainelCliente.requestFocus(true); 
@@ -831,18 +827,19 @@ import model.Cliente;
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         btnSalvarCliente.setEnabled(false);
-        btnAlterarCliente.setEnabled(true);
+        btnAlterarCliente.setEnabled(false);
+        btnEditarCliente.setEnabled(true);
         boolean flag = false;
         
         //inicio
-        ClienteCtrl controller = new ClienteCtrl();
+        //ClienteCtrl controller = new ClienteCtrl();
         Cliente cliente;
        
         try {
             
             cliente = receberClienteCPF(tftCPF.getText());
             if (cliente != null) {
-                
+                oldCPF = tftCPF.getText();
                  /**
                  * Tratamento do campo tipo jSpinner
                  */
@@ -856,6 +853,7 @@ import model.Cliente;
             jspNascimento.setValue(calNascimentoCliente);
            
             tctBairro.setText(cliente.getBairro() );
+            
             tftCep.setText(cliente.getCep());
             tctCidade.setText(cliente.getCidade());
             
@@ -916,11 +914,6 @@ import model.Cliente;
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
        @SuppressWarnings("UnusedAssignment")
        String msg = "";
-        if (!tctNome.isEditable()){
-         msg = "Pode realizar alterações agora";
-            abilitarDadosCliente();
-           JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
-        }
         // TODO add your handling code here:
         //btnSalvarPassageiro.doClick();
         btnSalvarClienteActionPerformed(evt);
@@ -941,6 +934,17 @@ import model.Cliente;
     private void tftCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftCPFActionPerformed
         
     }//GEN-LAST:event_tftCPFActionPerformed
+
+    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
+        // TODO add your handling code here:
+         if (!tctNome.isEditable()){
+         //msg = "Pode realizar alterações agora";
+            habilitarDadosCliente();
+         //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+        }
+        btnAlterarCliente.setEnabled(true);
+        btnEditarCliente.setEnabled(false);
+    }//GEN-LAST:event_btnEditarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -984,6 +988,7 @@ import model.Cliente;
     private javax.swing.JPanel JPanelClienteCadastro;
     private javax.swing.JPanel JPanelClienteTitulo;
     private static javax.swing.JButton btnAlterarCliente;
+    private javax.swing.JButton btnEditarCliente;
     private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnLimparCliente;
     private javax.swing.JButton btnPesquisarCep;

@@ -199,7 +199,7 @@ public class ClienteDAO {
          
     }//fim inserir cliente
     
-     public void alterarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+     public void alterarCliente(Cliente cliente, String vcpf) throws ClassNotFoundException, SQLException{
         String msg;
         msg="";
         conexao = DBAeroFast.getConnection();
@@ -236,7 +236,7 @@ public class ClienteDAO {
         CPF VARCHAR(18)not null primary key
         */
         
-        String sql = "UPDATE cliente SET CPF ='"+cliente.getCpf();        
+        String sql = "UPDATE cliente c SET CPF = "+"'cliente.getCpf()'"+" WHERE "+"'vcpf'"+" = c.CPF";        
                 
         
         
@@ -248,6 +248,7 @@ public class ClienteDAO {
            // JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg+e);
+            msg = reduzString(msg);
             msg = msg+"Erro de gravação no BD \n";
            // JOptionPane.showMessageDialog(null,msg );
         }

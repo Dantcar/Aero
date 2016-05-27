@@ -37,9 +37,9 @@ public class ClienteCtrl {
         return resposta;
     }
      
-     public void alterarClientecTRL(Cliente cliente, String cpf) throws ClassNotFoundException, SQLException{
+     public void alterarClienteCtrl(Cliente cliente, String cpf) throws ClassNotFoundException, SQLException{
         ClienteDAO cliDAO = new ClienteDAO();
-        cliDAO.alterarCliente(cliente);
+        cliDAO.alterarCliente(cliente, cpf);
     } 
    
 }
