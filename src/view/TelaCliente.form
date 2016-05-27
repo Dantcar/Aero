@@ -316,6 +316,10 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Escolha Dia, M&#xea;s e Ano"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jspNascimentoMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jspNascimentoMouseReleased"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspNascimento = new javax.swing.JSpinner(smIntegradaNP);&#xd;&#xa;JSpinner.DateEditor deIntegradaNP = new &#xd;&#xa;JSpinner.DateEditor(jspNascimento,&quot;dd/MM/yyyy&quot;);&#xd;&#xa;jspNascimento.setEditor(deIntegradaNP);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date dtIntegradaNP = new Date();&#xd;&#xa;&#xd;&#xa;SpinnerDateModel smIntegradaNP = new &#xd;&#xa;SpinnerDateModel(dtIntegradaNP,null,null,Calendar.MONTH + Calendar.DAY_OF_MONTH &#xd;&#xa;+ Calendar.YEAR );"/>
@@ -788,7 +792,8 @@
               <Image iconType="3" name="/Icones/inserir.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Editar"/>
-            <Property name="toolTipText" type="java.lang.String" value="Salvar Altera&#xe7;&#xf5;es"/>
+            <Property name="toolTipText" type="java.lang.String" value="Editar Altera&#xe7;&#xf5;es"/>
+            <Property name="defaultCapable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -798,6 +803,9 @@
               <Dimension value="[100, 50]"/>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Editar Altera&#xe7;&#xf5;es"/>
+          </AccessibilityProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarClienteActionPerformed"/>
           </Events>

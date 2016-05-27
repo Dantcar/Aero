@@ -13,6 +13,7 @@ import static Control.ClienteCtrl.receberClienteCPF;
 import Control.Util;
 import static Control.Util.reduzString;
 import Control.ValidaCampos;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -191,6 +192,14 @@ import model.Cliente;
 
         jspNascimento.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jspNascimento.setToolTipText("Escolha Dia, Mês e Ano");
+        jspNascimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jspNascimentoMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jspNascimentoMouseReleased(evt);
+            }
+        });
 
         lblEmail.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(102, 102, 102));
@@ -493,7 +502,8 @@ import model.Cliente;
         btnEditarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnEditarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
         btnEditarCliente.setText("Editar");
-        btnEditarCliente.setToolTipText("Salvar Alterações");
+        btnEditarCliente.setToolTipText("Editar Alterações");
+        btnEditarCliente.setDefaultCapable(false);
         btnEditarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnEditarCliente.setIconTextGap(1);
         btnEditarCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -545,6 +555,8 @@ import model.Cliente;
                         .addGap(72, 72, 72))))
         );
 
+        btnEditarCliente.getAccessibleContext().setAccessibleDescription("Editar Alterações");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -577,7 +589,10 @@ import model.Cliente;
     }//GEN-LAST:event_btnSairClienteActionPerformed
 
     private void btnLimparClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparClienteActionPerformed
-      
+      habilitarDadosCliente();
+      btnSalvarCliente.setEnabled(true);
+      btnAlterarCliente.setEnabled(false);
+      btnEditarCliente.setEnabled(false);
       tctBairro.setText(null);
       tftCep.setText(null);
       tctCidade.setText(null);
@@ -586,10 +601,17 @@ import model.Cliente;
       tftRG.setText(null);
       tftEmail.setText(null);
       tftTelefone.setText(null);
+      
       //jspNascimento.setEnabled(false);
+      jspNascimento.getEditor().setBackground(Color.yellow);  //funciona
+      jspNascimento.getEditor().setForeground(Color.red);
+      jspNascimento.setValue(dtCliente);
+       // altera a cor da fonte;
+      //jspNascimento.getEditor();
       tctNome.setText(null);
       tctNumeroEndCliente.setText(null);
       tctEndereco.setText(null);
+      
       
     }//GEN-LAST:event_btnLimparClienteActionPerformed
 
@@ -982,6 +1004,17 @@ import model.Cliente;
         btnAlterarCliente.setEnabled(true);
         btnEditarCliente.setEnabled(false);
     }//GEN-LAST:event_btnEditarClienteActionPerformed
+
+    private void jspNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseClicked
+        jspNascimento.getEditor().setBackground(Color.black);
+        jspNascimento.getEditor().setForeground(Color.black);
+    }//GEN-LAST:event_jspNascimentoMouseClicked
+
+    private void jspNascimentoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseReleased
+        // TODO add your handling code here:
+        jspNascimento.getEditor().setBackground(Color.black);
+        jspNascimento.getEditor().setForeground(Color.black);
+    }//GEN-LAST:event_jspNascimentoMouseReleased
 
     /**
      * @param args the command line arguments
