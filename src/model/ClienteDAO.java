@@ -28,6 +28,9 @@ public class ClienteDAO {
  public Connection conexao;
  public Statement stmt;
  public ResultSet rs;
+ public int idClienteNow = 0;
+    public ClienteDAO() {
+    }
     
     
     /**
@@ -50,6 +53,54 @@ public class ClienteDAO {
     }
     }//fim close()
      
+    /**
+     * Método para atualizar com o idCliente de 
+     * maior valor ao iniciar o programa
+     * @return 
+     */
+ @SuppressWarnings("null")
+    public int buscarIdClienteAtual(){
+      int resposta=0;  
+      String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+            try {
+                 stmt =conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+            } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+                 Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                rs = stmt.executeQuery("SELECT idCliente FROM cliente WHERE idCliente >" + Cliente.vidCliente );
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+     try {
+         if (rs.last()) {
+             idClienteNow = rs.getInt(1);
+             resposta = idClienteNow;
+             
+             close();
+            }
+     } catch (SQLException ex) {
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+         msg=""+ex;
+         JOptionPane.showMessageDialog(null, reduzString(msg));
+         close();
+         resposta = 0;
+     }
+     
+     return resposta;
+    }//fim buscar idClienteAtual
+    
     /**
      * Método que consulta se o cpf já está cadastrado no sistema Aerofast
      * @param cpf
@@ -163,11 +214,19 @@ public class ClienteDAO {
      */  
     public void inserirNovoCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
         String msg;
+        
+                
+        int idCliente = buscarIdClienteAtual();
+        System.out.println(idCliente);
+        idCliente = idCliente + 1;
+        
+        System.out.println("\nEste id vai pro banco :"+idCliente);
         msg="";
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
         String sql = "INSERT INTO cliente VALUES ("
-                + parseInt(cliente.getIdCliente()) +", "
+                //+ parseInt(cliente.getIdCliente()) +", "
+                + idCliente +", "
                 + "'" + cliente.getNome() + "', "
                 + "'" + cliente.getNascimento() + "', "
                 + "'" + cliente.getEndereco() + "', "
@@ -180,7 +239,7 @@ public class ClienteDAO {
                 + "'" + cliente.getTelefone() + "', "
                 + "'" + cliente.getRg() + "', "
                 + "'" + cliente.getCpf() + "')";
-        System.out.println("sql = "+sql);
+
         try {
             stmt.execute(sql);
            
@@ -229,9 +288,6 @@ public class ClienteDAO {
                 + "CPF = '"+ cliente.getCpf()+ "' "
                 + " WHERE CPF = '" + vcpf + "'";
         
-                        
-        //System.out.println("sql = "+sql);
-        
         try {
             stmt.execute(sql);
            
@@ -270,9 +326,7 @@ public class ClienteDAO {
      }
         
         String sql ="DELETE FROM cliente WHERE CPF = '" + vcpf + "'";
-        
-        System.out.println("sql = "+sql);
-        
+               
         try {
             int n = JOptionPane.showConfirmDialog(
             null,

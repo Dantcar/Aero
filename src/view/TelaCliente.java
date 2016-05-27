@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import model.Cliente;
+import model.ClienteDAO;
 //import static model.ClienteDAO.buscarClienteCPF;
 
 /**
@@ -45,7 +46,7 @@ import model.Cliente;
     private static SimpleDateFormat sdfNascimentoCliente;
     private int dataIntNascimentoCliente;
     private static String oldCPF;
-  
+    
     /**
     * Instanciando objeto Cliente
     */
@@ -59,6 +60,7 @@ import model.Cliente;
         
         initComponents();
         tftCep.setText(null);
+        
         //btnSalvarCliente.setEnabled(false);
         //btnAlterarCliente.setEnabled(false);
         btnEditarCliente.setEnabled(false);                     
@@ -664,15 +666,17 @@ import model.Cliente;
       * 
       */
       //int idCliente = arrayCli.size();
-      int idCliente = 0;
-      idCliente++;
-      String id = idCliente+"";
+      //int idCliente = ClienteDAO.buscarIdClienteAtual();
+      //idCliente++;
+      //String id = idCliente+"";
       
       /**
        * Preenchimento do objCli com os valores de tela
        * 
       */
-      objCli.setIdCliente(id);
+      
+      
+      objCli.setIdCliente("0");
       objCli.setNome(tctNome.getText().trim());
       dataNascimentoCliente = Util.DataFormatadaS(jspNascimento.getValue().toString());
       dataIntNascimentoCliente = Util.DtAmericana(jspNascimento.getValue().toString());

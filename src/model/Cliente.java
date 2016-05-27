@@ -27,7 +27,7 @@ public class Cliente {
    private String telefone;
    private String rg;
    private String cpf;
-
+   public static int vidCliente;
     public Cliente() {
     }
 
@@ -46,7 +46,8 @@ public class Cliente {
         this.rg = rg;
         this.cpf = cpf;
     }
-
+    
+       
     public String getIdCliente() {
         return idCliente;
     }
