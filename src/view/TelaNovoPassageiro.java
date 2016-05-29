@@ -711,7 +711,6 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 }// fim do for
 
             }
-            JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
             PainelPassageiro.requestFocus(true);
             btnLimparPassageiro.doClick();
             btnSairPassageiro.doClick();
