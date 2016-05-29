@@ -57,7 +57,7 @@ public class ValidaCampos {
     
     public static boolean validaNome (String texto) {
     Pattern p;
-    p = Pattern.compile("^[A-Za-zÀ-ü ]{4,50}$");
+    p = Pattern.compile("^[A-Za-zÀ-ü.-_ ]{4,50}$");
     Matcher m = p.matcher(texto);
     return m.find();
     }

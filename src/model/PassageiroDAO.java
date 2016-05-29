@@ -121,6 +121,7 @@ public class PassageiroDAO {
                 + "'" + passageiro.getTelefonePassageiro() + "', "
                 + "'" + passageiro.getEmailPassageiro() + "', "
                 + "'" + passageiro.getContatoNome() + "', "
+                + "'" + passageiro.getContatoTelefone() + "', "
                 + "'" + passageiro.getResponsavelFinanceiro() + "', "
                 + "'" + passageiro.getResponsavelCPF() + "')";
 
