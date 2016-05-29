@@ -160,7 +160,7 @@ public class PassageiroDAO {
         stmt = conexao.createStatement(
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
-        rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rg = '" + rg + "'");
+        rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rgpassageiro = '" + rg + "'");
         if (rs.first()) {
             //cliente.idCliente
             passageiro.setIdPassageiro(rs.getString(1));
@@ -213,13 +213,15 @@ public class PassageiroDAO {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
+            msg = reduzString(msg+ex);
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rg = '" + rg + "'");
+            rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rgpassageiro = '" + rg + "'");
         } catch (SQLException ex) {
+            msg = reduzString(msg+ex);
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -385,11 +385,11 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PainelResponsavelFinanceiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelResponsavelFinanceiroLayout.createSequentialGroup()
-                        .addComponent(tftCPFResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
+                        .addComponent(tftCPFResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnPesquisarCPF))
                     .addComponent(tctResponsavelFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 80, Short.MAX_VALUE))
         );
         PainelResponsavelFinanceiroLayout.setVerticalGroup(
             PainelResponsavelFinanceiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -814,109 +814,85 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAlterarPassageiroActionPerformed
 
     private void btnPesquisarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCPFActionPerformed
-        String msg="";
+        String msg = "";
         PassageiroCtrl cPassageiro = new PassageiroCtrl();
-        Cliente clienteRG = new Cliente();
+        Cliente clienteCPF = new Cliente();
         boolean flag = false;
-        
+
         try {
-            clienteRG = PassageiroCtrl.receberClienteRG(tftRGPassageiro.getText());
-            if(Integer.parseInt(clienteRG.getIdCliente())>0){
-              String vcpf = clienteRG.getCpf().trim();
-              String vnomeRespFinanceiro = clienteRG.getNome();
-              tftCPFResponsavel.setText(vcpf);
-              tctResponsavelFinanceiro.setText(vnomeRespFinanceiro); 
-              flag = true;
+            clienteCPF = PassageiroCtrl.receberClienteCPF(tftCPFResponsavel.getText());
+
+            if (Integer.parseInt(clienteCPF.getIdCliente()) > 0) {
+                String vcpf = clienteCPF.getCpf().trim();
+                String vnomeRespFinanceiro;
+                vnomeRespFinanceiro = clienteCPF.getNome();
+                tctResponsavelFinanceiro.setText(vnomeRespFinanceiro);
+                flag = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+                flag = true;
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-        if (TelaCliente.arrayCli.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhum Responsável Financeiro Cadastrado!!");
-        } else if (flag == false) {
             JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
         }
 
+        if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Nenhum Responsável Financeiro Cadastrado!!");
+            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+        }
 
     }//GEN-LAST:event_btnPesquisarCPFActionPerformed
 
     private void btnPesquisarRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarRGActionPerformed
-       String msg="";
+        String msg = "";
         PassageiroCtrl cPassageiro = new PassageiroCtrl();
         Cliente clienteRG = new Cliente();
         boolean flag = false;
-        
+
         try {
             clienteRG = PassageiroCtrl.receberClienteRG(tftRGPassageiro.getText());
             int vCheck = Integer.parseInt(clienteRG.getIdCliente());
-            
+
             String vsCheck = clienteRG.getIdCliente();
-            System.out.println("Estamos no método btnPesquisarRGActionPerformed em: TelaNovoPassageiro ");
-            System.out.println("nome " +clienteRG.getNome()+"\n");
-            System.out.println("Nascimento " +clienteRG.getNascimento()+"\n");
-            System.out.println("vCheck " +vCheck+"\n");
-            System.out.println("vsCheck " +vsCheck+"\n");
-            
-            if(vCheck>0){
-              String vnome = clienteRG.getNome().trim();
-              tctPassageiro.setText(vnome); 
-              flag = true;
-            }
-            else{
-            JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro RG");
-            flag = true; 
-           }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-        if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Nenhum Responsável Financeiro Cadastrado!!"); 
-            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
-        }
-        
-        /*
-        for (int i = 0; i < TelaCliente.arrayCli.size(); i++) {
 
-            if (tftRGPassageiro.getText().equals(TelaCliente.arrayCli.get(i).getRg())) {
-
-                tctPassageiro.setText(TelaCliente.arrayCli.get(i).getNome());
-
-         */       /**
+            if (vCheck > 0) {
+                String vnome = clienteRG.getNome().trim();
+                tctPassageiro.setText(vnome);
+                /**
                  * Tratamento do campo tipo jSpinner
                  */
-        /*
-                String sdataNascimento = TelaCliente.arrayCli.get(i).getNascimento();
 
-                SimpleDateFormat sdfNascimento = new SimpleDateFormat("dd/MM/yyyyy");
+                String sdataNascimento = clienteRG.getNascimento();
+                //SimpleDateFormat sdfNascimento = new SimpleDateFormat("dd/MM/yyyyy");
                 try {
                     calNascimento = Util.retornaData(sdataNascimento);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jspNascimentoPassageiro.setValue(calNascimento);
-               */ /*Final do tratamento do campo tipo jSpinner*//*
 
-                tftRGPassageiro.setText(TelaCliente.arrayCli.get(i).getRg());
-                System.out.println(TelaCliente.arrayCli.get(i).getTelefone());
-                tftTelefonePassageiro.setText(TelaCliente.arrayCli.get(i).getTelefone());
-                tftEmail.setText(TelaCliente.arrayCli.get(i).getEmail());
+                tftTelefonePassageiro.setText(clienteRG.getTelefone());
+                tftEmail.setText(clienteRG.getEmail());
+                flag = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado!!!, Entre com outro RG");
                 flag = true;
             }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (TelaCliente.arrayCli.isEmpty()) {
+        if (flag == false) {
             JOptionPane.showMessageDialog(this, "Nenhum Cliente Cadastrado!!");
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Cliente não encontrado!!!, Entre com outro RG");
+            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
         }
 
-*/
     }//GEN-LAST:event_btnPesquisarRGActionPerformed
 
     private void btnEditarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPassageiroActionPerformed

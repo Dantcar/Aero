@@ -22,6 +22,13 @@ public class PassageiroCtrl {
         resposta = passageiro.buscarExistePassageiroRG(rg);
         return resposta;
     }
+
+    public static Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException {
+        ClienteDAO cliDAO = new ClienteDAO();
+        Cliente cliente = cliDAO.buscarClienteCPF(cpf);
+        
+        return cliente;
+    }
     private Object passDAO;
 
     public void receberPassageiro(Passageiro passageiro) throws ClassNotFoundException, SQLException {
