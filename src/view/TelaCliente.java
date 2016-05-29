@@ -142,6 +142,11 @@ import model.ClienteDAO;
         btnEditarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         JPanelClienteTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -556,8 +561,6 @@ import model.ClienteDAO;
                             .addComponent(btnSairCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(72, 72, 72))))
         );
-
-        btnEditarCliente.getAccessibleContext().setAccessibleDescription("Editar Alterações");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1018,6 +1021,11 @@ import model.ClienteDAO;
         jspNascimento.getEditor().setBackground(Color.black);
         jspNascimento.getEditor().setForeground(Color.black);
     }//GEN-LAST:event_jspNascimentoMouseReleased
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here
+        this.moveToFront();
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
