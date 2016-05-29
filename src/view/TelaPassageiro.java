@@ -77,6 +77,8 @@ public class TelaPassageiro extends javax.swing.JFrame {
         btnSairPassageiro = new javax.swing.JButton();
         btnLimparPassageiro = new javax.swing.JButton();
         btnExcluirPassageiro = new javax.swing.JButton();
+        btnAlterarCPassageiro = new javax.swing.JButton();
+        btnEditarCliente = new javax.swing.JButton();
         JPanelClienteTitulo = new javax.swing.JPanel();
         lblTituloTelaPassageiro = new javax.swing.JLabel();
         lblTelaPassageiro = new javax.swing.JLabel();
@@ -170,8 +172,8 @@ public class TelaPassageiro extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblNascimentoPassageiro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tftNascimentoPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(39, Short.MAX_VALUE))))))
+                                .addComponent(tftNascimentoPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         PainelPassageiroLayout.setVerticalGroup(
             PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,12 +285,12 @@ public class TelaPassageiro extends javax.swing.JFrame {
                     .addGroup(PainelResponsavelFinanceiroLayout.createSequentialGroup()
                         .addComponent(lblResponsavelFinanceiro)
                         .addGap(18, 18, 18)
-                        .addComponent(tctResponsavelFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tctResponsavelFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PainelResponsavelFinanceiroLayout.createSequentialGroup()
                         .addComponent(lblCpfResponsável)
                         .addGap(18, 18, 18)
                         .addComponent(tftCPFResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelResponsavelFinanceiroLayout.setVerticalGroup(
             PainelResponsavelFinanceiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,13 +307,13 @@ public class TelaPassageiro extends javax.swing.JFrame {
         );
 
         btnSalvarPassageiro.setBackground(new java.awt.Color(204, 204, 204));
-        btnSalvarPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnSalvarPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnSalvarPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen_1.png"))); // NOI18N
         btnSalvarPassageiro.setText("Salvar");
         btnSalvarPassageiro.setToolTipText("Salvar Alterações");
         btnSalvarPassageiro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSalvarPassageiro.setIconTextGap(2);
-        btnSalvarPassageiro.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnSalvarPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnSalvarPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
         btnSalvarPassageiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,11 +322,11 @@ public class TelaPassageiro extends javax.swing.JFrame {
         });
 
         btnPesquisarPassageiro.setBackground(new java.awt.Color(204, 204, 204));
-        btnPesquisarPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnPesquisarPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnPesquisarPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/lupaVermelha 40x40.png"))); // NOI18N
         btnPesquisarPassageiro.setText("Pesquisar");
         btnPesquisarPassageiro.setToolTipText("Entre com o RG do Passageiro");
-        btnPesquisarPassageiro.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnPesquisarPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnPesquisarPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
         btnPesquisarPassageiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,10 +335,10 @@ public class TelaPassageiro extends javax.swing.JFrame {
         });
 
         btnSairPassageiro.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnSairPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnSairPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
         btnSairPassageiro.setText("Voltar");
-        btnSairPassageiro.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnSairPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnSairPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
         btnSairPassageiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,10 +347,10 @@ public class TelaPassageiro extends javax.swing.JFrame {
         });
 
         btnLimparPassageiro.setBackground(new java.awt.Color(204, 204, 204));
-        btnLimparPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnLimparPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnLimparPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/oopsRed.png"))); // NOI18N
         btnLimparPassageiro.setText("Limpar");
-        btnLimparPassageiro.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnLimparPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnLimparPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
         btnLimparPassageiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,14 +359,45 @@ public class TelaPassageiro extends javax.swing.JFrame {
         });
 
         btnExcluirPassageiro.setBackground(new java.awt.Color(204, 204, 204));
-        btnExcluirPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnExcluirPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnExcluirPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/excluir 40x40 vermelho.png"))); // NOI18N
         btnExcluirPassageiro.setText("Excluir");
-        btnExcluirPassageiro.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnExcluirPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnExcluirPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
         btnExcluirPassageiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirPassageiroActionPerformed(evt);
+            }
+        });
+
+        btnAlterarCPassageiro.setBackground(new java.awt.Color(204, 204, 204));
+        btnAlterarCPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnAlterarCPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarRed.png"))); // NOI18N
+        btnAlterarCPassageiro.setText("Alterar");
+        btnAlterarCPassageiro.setToolTipText("Alterar Dados");
+        btnAlterarCPassageiro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAlterarCPassageiro.setIconTextGap(2);
+        btnAlterarCPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnAlterarCPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnAlterarCPassageiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarCPassageiroActionPerformed(evt);
+            }
+        });
+
+        btnEditarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnEditarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        btnEditarCliente.setText("Editar");
+        btnEditarCliente.setToolTipText("Editar Alterações");
+        btnEditarCliente.setDefaultCapable(false);
+        btnEditarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditarCliente.setIconTextGap(1);
+        btnEditarCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnEditarCliente.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnEditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarClienteActionPerformed(evt);
             }
         });
 
@@ -374,16 +407,20 @@ public class TelaPassageiro extends javax.swing.JFrame {
             JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelClienteBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSalvarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btnPesquisarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalvarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPesquisarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAlterarCPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnEditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         JPanelClienteBotoesLayout.setVerticalGroup(
             JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,9 +429,12 @@ public class TelaPassageiro extends javax.swing.JFrame {
                 .addGroup(JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAlterarCPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -403,29 +443,20 @@ public class TelaPassageiro extends javax.swing.JFrame {
         JPanelPassageiroCadastroLayout.setHorizontalGroup(
             JPanelPassageiroCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelPassageiroCadastroLayout.createSequentialGroup()
-                .addGroup(JPanelPassageiroCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPanelPassageiroCadastroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(JPanelPassageiroCadastroLayout.createSequentialGroup()
-                        .addGroup(JPanelPassageiroCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPanelPassageiroCadastroLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(PainelResponsavelFinanceiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(JPanelPassageiroCadastroLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(JPanelPassageiroCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(PainelPassageiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(PainelPassageiroContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(JPanelPassageiroCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PainelResponsavelFinanceiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PainelPassageiroContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PainelPassageiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JPanelPassageiroCadastroLayout.setVerticalGroup(
             JPanelPassageiroCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelPassageiroCadastroLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(PainelPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(PainelPassageiroContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PainelResponsavelFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,7 +481,7 @@ public class TelaPassageiro extends javax.swing.JFrame {
                 .addComponent(lblTelaPassageiro)
                 .addGap(18, 18, 18)
                 .addComponent(lblTituloTelaPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         JPanelClienteTituloLayout.setVerticalGroup(
             JPanelClienteTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,18 +502,19 @@ public class TelaPassageiro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(JPanelPassageiroCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JPanelPassageiroCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JPanelPassageiroCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -663,6 +695,25 @@ public class TelaPassageiro extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnExcluirPassageiroActionPerformed
 
+    private void btnAlterarCPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarCPassageiroActionPerformed
+        @SuppressWarnings("UnusedAssignment")
+        String msg = "";
+        // TODO add your handling code here:
+        //btnSalvarPassageiro.doClick();
+        //btnSalvarPassageiroActionPerformed(evt);
+    }//GEN-LAST:event_btnAlterarCPassageiroActionPerformed
+
+    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
+        // TODO add your handling code here:
+        if (!tctPassageiro.isEditable()){
+            //msg = "Pode realizar alterações agora";
+            //habilitarDadosPassageiro();
+            //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+        }
+        btnAlterarCPassageiro.setEnabled(true);
+        btnEditarCliente.setEnabled(false);
+    }//GEN-LAST:event_btnEditarClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -713,6 +764,8 @@ public class TelaPassageiro extends javax.swing.JFrame {
     private javax.swing.JPanel PainelPassageiro;
     private javax.swing.JPanel PainelPassageiroContato;
     private javax.swing.JPanel PainelResponsavelFinanceiro;
+    private static javax.swing.JButton btnAlterarCPassageiro;
+    private javax.swing.JButton btnEditarCliente;
     private javax.swing.JButton btnExcluirPassageiro;
     private javax.swing.JButton btnLimparPassageiro;
     private javax.swing.JButton btnPesquisarPassageiro;

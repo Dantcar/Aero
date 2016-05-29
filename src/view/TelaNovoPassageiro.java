@@ -114,8 +114,9 @@ private int dataAtual, dataIntNascimento;
         btnLimparPassageiro = new javax.swing.JButton();
         btnExcluirPassageiro = new javax.swing.JButton();
         btnAlterarPassageiro = new javax.swing.JButton();
+        btnEditarPassageiro = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         JPanelClienteTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -476,6 +477,22 @@ private int dataAtual, dataIntNascimento;
             }
         });
 
+        btnEditarPassageiro.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnEditarPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        btnEditarPassageiro.setText("Editar");
+        btnEditarPassageiro.setToolTipText("Editar Alterações");
+        btnEditarPassageiro.setDefaultCapable(false);
+        btnEditarPassageiro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditarPassageiro.setIconTextGap(1);
+        btnEditarPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnEditarPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnEditarPassageiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarPassageiroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JPanelClienteBotoesLayout = new javax.swing.GroupLayout(JPanelClienteBotoes);
         JPanelClienteBotoes.setLayout(JPanelClienteBotoesLayout);
         JPanelClienteBotoesLayout.setHorizontalGroup(
@@ -484,16 +501,18 @@ private int dataAtual, dataIntNascimento;
                 .addContainerGap()
                 .addComponent(btnSalvarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAlterarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAlterarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnEditarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPesquisarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnPesquisarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         JPanelClienteBotoesLayout.setVerticalGroup(
             JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,7 +524,8 @@ private int dataAtual, dataIntNascimento;
                     .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluirPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAlterarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAlterarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditarPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -830,6 +850,17 @@ private int dataAtual, dataIntNascimento;
         
     }//GEN-LAST:event_btnPesquisarRGActionPerformed
 
+    private void btnEditarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPassageiroActionPerformed
+        // TODO add your handling code here:
+        if (!tctPassageiro.isEditable()){
+            //msg = "Pode realizar alterações agora";
+            //habilitarDadosPassageiro();
+            //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+        }
+        btnAlterarCPassageiro.setEnabled(true);
+        btnEditarPassageiro.setEnabled(false);
+    }//GEN-LAST:event_btnEditarPassageiroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -872,6 +903,7 @@ private int dataAtual, dataIntNascimento;
     private javax.swing.JPanel PainelPassageiroContato;
     private javax.swing.JPanel PainelResponsavelFinanceiro;
     private static javax.swing.JButton btnAlterarPassageiro;
+    private javax.swing.JButton btnEditarPassageiro;
     private javax.swing.JButton btnExcluirPassageiro;
     private javax.swing.JButton btnLimparPassageiro;
     private static javax.swing.JButton btnPesquisarCPF;

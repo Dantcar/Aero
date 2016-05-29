@@ -25,9 +25,9 @@ import javax.swing.JOptionPane;
  * @author deciodecarvalho
  */
 public class ClienteDAO {
- public Connection conexao;
- public Statement stmt;
- public ResultSet rs;
+ private Connection conexao;
+ private Statement stmt;
+ private ResultSet rs;
  public int idClienteNow = 0;
     public ClienteDAO() {
     }
@@ -36,7 +36,7 @@ public class ClienteDAO {
     /**
      * método para encerrar Connection, Statement e ResutlSet
      */  
-    public void close() {
+    private void close() {
         try {
             if (rs != null) {
             rs.close();
@@ -76,7 +76,7 @@ public class ClienteDAO {
             }
             
             try {
-                rs = stmt.executeQuery("SELECT idCliente FROM cliente WHERE idCliente >" + Cliente.vidCliente );
+                rs = stmt.executeQuery("SELECT * FROM cliente ORDER BY 1 DESC"); //select * from DAC.CLIENTE order BY 1 DESC
                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, reduzString(msg + ex));
@@ -84,7 +84,7 @@ public class ClienteDAO {
             }
             
      try {
-         if (rs.last()) {
+         if (rs.first()) {
              idClienteNow = rs.getInt(1);
              resposta = idClienteNow;
              

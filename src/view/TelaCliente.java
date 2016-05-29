@@ -824,16 +824,13 @@ import model.ClienteDAO;
             }        
             else{//inicio do Alterar
                 boolean flag = false; //verificar esta flag
-                //{
-                    //msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
-                    //this.tftCPF.setText(null);
-                System.out.println("Estou no problema");
+               
                             try {
                                 cCliente.alterarClienteCtrl(objCli, oldCPF);
                             } catch (ClassNotFoundException | SQLException ex) {
                                 Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                //}
+                
                        
                         btnLimparCliente.doClick(); //Limpar tela
                         flag = true;
@@ -962,7 +959,8 @@ import model.ClienteDAO;
             //chamar método em control para deletar o cliente
             ClienteCtrl cCliente = new ClienteCtrl();
             cCliente.deletarClienteCtrl(cliente, oldCPF);
-              flag = true; 
+            btnLimparCliente.doClick(); //Limpar tela
+            flag = true; 
                 
                 
             }
@@ -971,6 +969,7 @@ import model.ClienteDAO;
         } catch (SQLException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     //fim método        
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
