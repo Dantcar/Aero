@@ -242,5 +242,49 @@ public class PassageiroDAO {
 
         return resposta;
     }//Fim buscarExistePassageiroRG
+    
+    public void alterarPassageiro(Passageiro passageiro, String vrg) throws ClassNotFoundException, SQLException{
+        String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        stmt = conexao.createStatement();
+        
+        //String sql = "UPDATE cliente SET " + "CPF = '"+ cliente.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
+        String sql = "UPDATE passageiro SET "
+                + "idCliente = "+ parseInt(cliente.getIdCliente())+", "
+                + "nome = '" + cliente.getNome() + "', "
+                + "nascimento = '" + cliente.getNascimento() + "', "
+                + "endereco = '" + cliente.getEndereco() + "', "
+                + "numero = '" + cliente.getNumero() + "', "
+                + "bairro = '" + cliente.getBairro() + "', "
+                + "cidade = '" + cliente.getCidade() + "', "
+                + "uf = '" + cliente.getUf() + "', "
+                + "cep = '" + cliente.getCep() + "', "
+                + "email = '" + cliente.getEmail() + "', "
+                + "telefone = '"+ cliente.getTelefone() + "', "
+                + "RG = '"+ cliente.getRg() + "', "
+                + "CPF = '"+ cliente.getCpf()+ "' "
+                + " WHERE CPF = '" + vcpf + "'";
+        
+        try {
+            stmt.execute(sql);
+           
+            msg = msg+"Dados do cliente alterados com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
+        } catch (SQLException | HeadlessException e) {
+            msg = reduzString(msg+e);
+            msg = reduzString(msg);
+            msg = msg+"Erro de gravação no BD \n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
+        }
+         
+    }//fim inserir cliente
+    
+    
 
 }
