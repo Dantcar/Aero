@@ -24,6 +24,7 @@ private String contatoNome;
 private String contatoTelefone;
 private String responsavelFinanceiro;
 private String responsavelCPF;
+public static int vidCliente;
 
     public Passageiro() {
     }
@@ -133,9 +134,6 @@ private String responsavelCPF;
     public void setResponsavelCPF(String responsavelCPF) {
         this.responsavelCPF = responsavelCPF;
     }
-
-    
-    
    
 }
 

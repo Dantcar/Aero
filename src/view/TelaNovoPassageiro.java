@@ -8,8 +8,12 @@
  */
 package view;
 
+import Control.ClienteCtrl;
+import static Control.Util.reduzString;
+import Control.PassageiroCtrl;
 import Control.Util;
 import Control.ValidaCampos;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import model.Cliente;
 import model.Passageiro;
 
 /**
@@ -27,40 +32,41 @@ import model.Passageiro;
  * @author Dac
  */
 public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
-public static ArrayList<model.Passageiro> arrayPass;
-public static boolean temPassageiro;
-/**
- * data nascimento
- * 
- */
-private static String dataNascimento, dataHojePassageiro;
-private static Date dataNasc, dt;
-private static Date hojePassageiro;
-private static Date calNascimento;
-private static SimpleDateFormat sdfNascimentoPassageiro;
-private int dataAtual, dataIntNascimento;
 
-/**
+    public static ArrayList<model.Passageiro> arrayPass;
+    public static boolean temPassageiro;
+    /**
+     * data nascimento
+     *
+     */
+    private static String dataNascimento, dataHojePassageiro;
+    private static Date dataNasc, dt;
+    private static Date hojePassageiro;
+    private static Date calNascimento;
+    private static SimpleDateFormat sdfNascimentoPassageiro;
+    private int dataAtual, dataIntNascimento;
+
+    /**
      * Creates new form TelaNovoPassageiro
      */
     public TelaNovoPassageiro() {
         initComponents();
-    if(!temPassageiro){
+        if (!temPassageiro) {
             arrayPass = new ArrayList<>();
             temPassageiro = true;
         }
         btnAlterarPassageiro.setEnabled(false);
         dt = new Date();
-        jspNascimentoPassageiro.setValue(dt);    
+        jspNascimentoPassageiro.setValue(dt);
         hojePassageiro = new Date();
         dataHojePassageiro = Util.DataFormatada(hojePassageiro);
         sdfNascimentoPassageiro = new SimpleDateFormat("dd/MM/yyyy");
-    try { 
-        hojePassageiro = sdfNascimentoPassageiro.parse(dataHojePassageiro);
-    } catch (ParseException ex) {
-        Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
+        try {
+            hojePassageiro = sdfNascimentoPassageiro.parse(dataHojePassageiro);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -215,7 +221,7 @@ private int dataAtual, dataIntNascimento;
 
         btnPesquisarRG.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnPesquisarRG.setText("Pesquisar em Clientes");
-        btnPesquisarRG.setToolTipText("Pesquisar CPF");
+        btnPesquisarRG.setToolTipText("Pesquisar RG");
         btnPesquisarRG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarRGActionPerformed(evt);
@@ -276,6 +282,8 @@ private int dataAtual, dataIntNascimento;
                     .addComponent(tftEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        btnPesquisarRG.getAccessibleContext().setAccessibleDescription("Pesquisar RG");
 
         jTabPassageiro.addTab("Passageiro", PainelPassageiro);
 
@@ -570,26 +578,19 @@ private int dataAtual, dataIntNascimento;
     }//GEN-LAST:event_tftTelefoneContatoActionPerformed
 
     private void btnSalvarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarPassageiroActionPerformed
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
         Passageiro objPass;
         objPass = new Passageiro();
-        
+
         String msg = "";
-        
-        int id1 = arrayPass.size();
-        id1++;
-        String id = id1+"";
-        
-        
-        objPass.setIdPassageiro(id);
+        objPass.setIdPassageiro("0");
         objPass.setNomePassageiro(tctPassageiro.getText());
-        
-        
+
         /**
          * DataNascimento
          */
         dataNascimento = Util.DataFormatadaS(jspNascimentoPassageiro.getValue().toString());
         dataIntNascimento = Util.DtAmericana(jspNascimentoPassageiro.getValue().toString());
-
         objPass.setNascimentoPassageiro(dataNascimento);
         objPass.setRgPassageiro(tftRGPassageiro.getText());
         objPass.setTelefonePassageiro(tftTelefonePassageiro.getText());
@@ -598,7 +599,7 @@ private int dataAtual, dataIntNascimento;
         objPass.setContatoTelefone(tftTelefoneContato.getText());
         objPass.setResponsavelFinanceiro(tctResponsavelFinanceiro.getText());
         objPass.setResponsavelCPF(tftCPFResponsavel.getText());
-               
+
         boolean validaNomePassageiro = ValidaCampos.validaNome(tctPassageiro.getText());
         boolean validaDtNascimento = ValidaCampos.validaDataNascimento(dataIntNascimento);
         boolean validaRG = ValidaCampos.validaRG(tftRGPassageiro.getText());
@@ -608,72 +609,95 @@ private int dataAtual, dataIntNascimento;
         boolean validaTelefoneContato = ValidaCampos.validaTelefone(tftTelefoneContato.getText());
         boolean validaResponsavel = ValidaCampos.validaNome(tctResponsavelFinanceiro.getText());
         boolean validaCPF = ValidaCampos.validaCPF(tftCPFResponsavel.getText());
+        boolean validaRgBanco = PassageiroCtrl.receberPesquisarPassageiroRG(tftRGPassageiro.getText());
+
+        if (btnSalvarPassageiro.isEnabled()) {
+            if (validaRgBanco) {
+            } else {
+                msg = msg + "Campo RG do passageiro já existe na base de dados Aerofast" + "\n";
+                this.tftRGPassageiro.setText(null);
+            }
+        }
 
         if (validaNomePassageiro) {
         } else {
             msg = msg + "Campo Passageiro Vazio" + "\n";
         }
-        
+
         if (validaDtNascimento) {
         } else {
             msg = msg + "Campo Nascimento Inválido" + "\n";
         }
-        
+
         if (validaRG) {
         } else {
-            msg = msg + "Campo RG invalido: "+ tftRGPassageiro.getText() + "\n";
+            msg = msg + "Campo RG invalido: " + tftRGPassageiro.getText() + "\n";
             this.tftRGPassageiro.setText(null);
         }
-        if (validaTelefonePassageiro){
+        if (validaTelefonePassageiro) {
 
-        }else{
-            msg = msg + "Campo Telefone Passageiro inválido: "+ tftTelefonePassageiro.getText() + "\n";
+        } else {
+            msg = msg + "Campo Telefone Passageiro inválido: " + tftTelefonePassageiro.getText() + "\n";
             this.tftTelefonePassageiro.setText(null);
         }
         if (validaEmail) {
         } else {
-            msg = msg +"Campo E-mail invalido: "+ tftEmail.getText() + "\n";
+            msg = msg + "Campo E-mail invalido: " + tftEmail.getText() + "\n";
             this.tftEmail.setText(null);
         }
 
         if (validaContato) {
         } else {
-            msg = msg + "Campo Contato vazio: "+ tctContato.getText() + "\n";
+            msg = msg + "Campo Contato vazio: " + tctContato.getText() + "\n";
         }
 
-        if (validaTelefoneContato){
+        if (validaTelefoneContato) {
 
-        }else{
-            msg = msg + "Campo Telefone Contato inválido: "+ tftTelefoneContato.getText() + "\n";
+        } else {
+            msg = msg + "Campo Telefone Contato inválido: " + tftTelefoneContato.getText() + "\n";
             this.tftTelefoneContato.setText(null);
         }
 
         if (validaResponsavel) {
         } else {
-            msg = msg + "Campo Responsável Financeiro vazio: "+ tctResponsavelFinanceiro.getText() + "\n";
+            msg = msg + "Campo Responsável Financeiro vazio: " + tctResponsavelFinanceiro.getText() + "\n";
         }
 
         if (validaCPF) {
         } else {
-            msg = msg + "Campo CPF invalido: "+ tftCPFResponsavel.getText() + "\n";
+            msg = msg + "Campo CPF invalido: " + tftCPFResponsavel.getText() + "\n";
             this.tftCPFResponsavel.setText(null);
         }
 
         //msg = msg +"oi oi oi \n";
+        if ("".equals(msg)) {
+            //msg = "Dados Enviados ao banco de dados do sistema!";
 
-        if ("".equals(msg)){
-            msg = "Dados Enviados ao banco de dados do sistema!";
-            if (btnSalvarPassageiro.isEnabled()){
-                 boolean resultadoPassageiro = arrayPass.add(objPass);
+            if (btnSalvarPassageiro.isEnabled()) {
+
+                boolean resultadoPassageiro = arrayPass.add(objPass);
+                try {
+                    if (resultadoPassageiro) {
+                        try {
+                            cPassageiro.receberPassageiro(objPass);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    msg = msg + ex;
+                    JOptionPane.showMessageDialog(null, reduzString(msg));
+                }
+                //
                 // System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
-            }
-            else{
-            
+            } else {
+
                 boolean flag = false;
 
-                for(int i = 0; i < arrayPass.size(); i++){
+                for (int i = 0; i < arrayPass.size(); i++) {
 
-                    if(tftRGPassageiro.getText().trim().equals(arrayPass.get(i).getRgPassageiro())){
+                    if (tftRGPassageiro.getText().trim().equals(arrayPass.get(i).getRgPassageiro())) {
                         String removidoPassageiro = arrayPass.get(i).getRgPassageiro();
                         Passageiro removido = arrayPass.remove(i);
 
@@ -685,16 +709,15 @@ private int dataAtual, dataIntNascimento;
 
                     }//fim do if
                 }// fim do for
-             
+
             }
-            JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
-            PainelPassageiro.requestFocus(true); 
+            JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
+            PainelPassageiro.requestFocus(true);
             btnLimparPassageiro.doClick();
             btnSairPassageiro.doClick();
-            
-        }
-        else{
-            JOptionPane.showMessageDialog(this, msg,"Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE );
+
+        } else {
+            JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarPassageiroActionPerformed
 
@@ -703,27 +726,25 @@ private int dataAtual, dataIntNascimento;
         btnAlterarPassageiro.setEnabled(true);
         boolean flag = false;
 
-        for(int i = 0; i < arrayPass.size(); i++){
-            if(tftRGPassageiro.getText().equals(arrayPass.get(i).getRgPassageiro())){
+        for (int i = 0; i < arrayPass.size(); i++) {
+            if (tftRGPassageiro.getText().equals(arrayPass.get(i).getRgPassageiro())) {
 
                 tctPassageiro.setText(arrayPass.get(i).getNomePassageiro());
-                
+
                 /**
                  * Tratamento do campo tipo jSpinner
                  */
-                
                 String sdataNascimento = arrayPass.get(i).getNascimentoPassageiro();
-                
+
                 try {
                     calNascimento = Util.retornaData(sdataNascimento);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 jspNascimentoPassageiro.setValue(calNascimento);
-               
+
                 //jspNascimentoPassageiro.getEditor();
-                
                 tftRGPassageiro.setText(arrayPass.get(i).getRgPassageiro());
                 tftTelefonePassageiro.setText(arrayPass.get(i).getTelefonePassageiro());
                 tftEmail.setText(arrayPass.get(i).getEmailPassageiro());
@@ -734,15 +755,14 @@ private int dataAtual, dataIntNascimento;
                 flag = true;
             }//fim do if
         }// fim do for
-        if(arrayPass.isEmpty()){
-        JOptionPane.showMessageDialog(this,"Nenhum Passageiro Cadastrado!!");
-        btnSalvarPassageiro.setEnabled(true);
-        btnAlterarPassageiro.setEnabled(false);
-        }
-        else if (flag == false){
-        JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!, Entre com outro RG");
-        btnSalvarPassageiro.setEnabled(true);
-        btnAlterarPassageiro.setEnabled(false);
+        if (arrayPass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum Passageiro Cadastrado!!");
+            btnSalvarPassageiro.setEnabled(true);
+            btnAlterarPassageiro.setEnabled(false);
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!, Entre com outro RG");
+            btnSalvarPassageiro.setEnabled(true);
+            btnAlterarPassageiro.setEnabled(false);
         }
     }//GEN-LAST:event_btnPesquisarPassageiroActionPerformed
 
@@ -765,13 +785,13 @@ private int dataAtual, dataIntNascimento;
 
         boolean flag = false;
 
-        for(int i = 0; i < arrayPass.size(); i++){
+        for (int i = 0; i < arrayPass.size(); i++) {
 
-            if(tftRGPassageiro.getText().trim().equals(arrayPass.get(i).getRgPassageiro())){
+            if (tftRGPassageiro.getText().trim().equals(arrayPass.get(i).getRgPassageiro())) {
                 String removidoPassageiro = arrayPass.get(i).getRgPassageiro();
                 Passageiro removido = arrayPass.remove(i);
 
-                JOptionPane.showMessageDialog(this,"Passageiro de RG: "+removidoPassageiro+" Removido!");
+                JOptionPane.showMessageDialog(this, "Passageiro de RG: " + removidoPassageiro + " Removido!");
                 btnLimparPassageiro.doClick(); //Limpar tela
 
                 flag = true;
@@ -779,10 +799,11 @@ private int dataAtual, dataIntNascimento;
             }//fim do if
         }// fim do for
 
-        if(arrayPass.isEmpty())
-        JOptionPane.showMessageDialog(this,"Nenhum Passageiro Cadastrado!!");
-        else if (flag == false)
-        JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!");
+        if (arrayPass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum Passageiro Cadastrado!!");
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!");
+        }
 
     }//GEN-LAST:event_btnExcluirPassageiroActionPerformed
 
@@ -793,71 +814,114 @@ private int dataAtual, dataIntNascimento;
     }//GEN-LAST:event_btnAlterarPassageiroActionPerformed
 
     private void btnPesquisarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCPFActionPerformed
-      
+        String msg="";
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        Cliente clienteRG = new Cliente();
         boolean flag = false;
         
-        for(int i = 0; i < TelaCliente.arrayCli.size(); i++){
-                      
-            if(tftCPFResponsavel.getText().equals(TelaCliente.arrayCli.get(i).getCpf())){
-                         
-            tctResponsavelFinanceiro.setText(TelaCliente.arrayCli.get(i).getNome() );
-            
+        try {
+            clienteRG = PassageiroCtrl.receberClienteRG(tftRGPassageiro.getText());
+            if(Integer.parseInt(clienteRG.getIdCliente())>0){
+              String vcpf = clienteRG.getCpf().trim();
+              String vnomeRespFinanceiro = clienteRG.getNome();
+              tftCPFResponsavel.setText(vcpf);
+              tctResponsavelFinanceiro.setText(vnomeRespFinanceiro); 
               flag = true;
-          }  
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(TelaCliente.arrayCli.isEmpty())
-            JOptionPane.showMessageDialog(this,"Nenhum Responsável Financeiro Cadastrado!!");
-       else if (flag == false)
-            JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF"); 
-        
-        
+                
+        if (TelaCliente.arrayCli.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum Responsável Financeiro Cadastrado!!");
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+        }
+
+
     }//GEN-LAST:event_btnPesquisarCPFActionPerformed
 
     private void btnPesquisarRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarRGActionPerformed
-        // TODO add your handling code here:
-        
+       String msg="";
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        Cliente clienteRG = new Cliente();
         boolean flag = false;
         
-        for(int i = 0; i < TelaCliente.arrayCli.size(); i++){
-                      
-            if(tftRGPassageiro.getText().equals(TelaCliente.arrayCli.get(i).getRg())){
-                         
-            tctPassageiro.setText(TelaCliente.arrayCli.get(i).getNome() );
+        try {
+            clienteRG = PassageiroCtrl.receberClienteRG(tftRGPassageiro.getText());
+            int vCheck = Integer.parseInt(clienteRG.getIdCliente());
             
-            /**
-            * Tratamento do campo tipo jSpinner
-            */
-            String sdataNascimento = TelaCliente.arrayCli.get(i).getNascimento();
+            String vsCheck = clienteRG.getIdCliente();
+            System.out.println("Estamos no método btnPesquisarRGActionPerformed em: TelaNovoPassageiro ");
+            System.out.println("nome " +clienteRG.getNome()+"\n");
+            System.out.println("Nascimento " +clienteRG.getNascimento()+"\n");
+            System.out.println("vCheck " +vCheck+"\n");
+            System.out.println("vsCheck " +vsCheck+"\n");
             
-            SimpleDateFormat sdfNascimento = new SimpleDateFormat("dd/MM/yyyyy");
-            try {
+            if(vCheck>0){
+              String vnome = clienteRG.getNome().trim();
+              tctPassageiro.setText(vnome); 
+              flag = true;
+            }
+            else{
+            JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro RG");
+            flag = true; 
+           }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Nenhum Responsável Financeiro Cadastrado!!"); 
+            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+        }
+        
+        /*
+        for (int i = 0; i < TelaCliente.arrayCli.size(); i++) {
+
+            if (tftRGPassageiro.getText().equals(TelaCliente.arrayCli.get(i).getRg())) {
+
+                tctPassageiro.setText(TelaCliente.arrayCli.get(i).getNome());
+
+         */       /**
+                 * Tratamento do campo tipo jSpinner
+                 */
+        /*
+                String sdataNascimento = TelaCliente.arrayCli.get(i).getNascimento();
+
+                SimpleDateFormat sdfNascimento = new SimpleDateFormat("dd/MM/yyyyy");
+                try {
                     calNascimento = Util.retornaData(sdataNascimento);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            jspNascimentoPassageiro.setValue(calNascimento);
-            /*Final do tratamento do campo tipo jSpinner*/
-            
-            
-            tftRGPassageiro.setText(TelaCliente.arrayCli.get(i).getRg() );
-            System.out.println(TelaCliente.arrayCli.get(i).getTelefone());
-            tftTelefonePassageiro.setText(TelaCliente.arrayCli.get(i).getTelefone() );
-            tftEmail.setText(TelaCliente.arrayCli.get(i).getEmail() );
-              flag = true;
-          }  
+                jspNascimentoPassageiro.setValue(calNascimento);
+               */ /*Final do tratamento do campo tipo jSpinner*//*
+
+                tftRGPassageiro.setText(TelaCliente.arrayCli.get(i).getRg());
+                System.out.println(TelaCliente.arrayCli.get(i).getTelefone());
+                tftTelefonePassageiro.setText(TelaCliente.arrayCli.get(i).getTelefone());
+                tftEmail.setText(TelaCliente.arrayCli.get(i).getEmail());
+                flag = true;
+            }
         }
-        
-        if(TelaCliente.arrayCli.isEmpty())
-            JOptionPane.showMessageDialog(this,"Nenhum Cliente Cadastrado!!");
-       else if (flag == false)
-            JOptionPane.showMessageDialog(this, "Cliente não encontrado!!!, Entre com outro RG"); 
-        
+
+        if (TelaCliente.arrayCli.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum Cliente Cadastrado!!");
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado!!!, Entre com outro RG");
+        }
+
+*/
     }//GEN-LAST:event_btnPesquisarRGActionPerformed
 
     private void btnEditarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPassageiroActionPerformed
         // TODO add your handling code here:
-        if (!tctPassageiro.isEditable()){
+        if (!tctPassageiro.isEditable()) {
             //msg = "Pode realizar alterações agora";
             //habilitarDadosPassageiro();
             //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
@@ -868,7 +932,7 @@ private int dataAtual, dataIntNascimento;
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-      this.moveToFront();
+        this.moveToFront();
     }//GEN-LAST:event_formMouseClicked
 
     /**

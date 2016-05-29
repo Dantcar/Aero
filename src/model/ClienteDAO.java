@@ -145,8 +145,7 @@ public class ClienteDAO {
         return resposta;  
     }//Fim buscarExisteClienteCPF
     
-    
-      
+        
     /**
      * Método para capturar dados clientes enviando cpf dele.
      * @param cpf
@@ -204,8 +203,64 @@ public class ClienteDAO {
        }
     
         
-      }// fim buscar cliente
+      }// fim buscar cliente CPF
     
+      
+       public Cliente buscarClienteRG(String rg) throws ClassNotFoundException, SQLException{
+        Cliente cliente = new Cliente();
+        String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        //stmt = conexao.createStatement();
+        stmt =conexao.createStatement(
+                       ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                       ResultSet.CONCUR_READ_ONLY);
+        rs = stmt.executeQuery("SELECT * FROM cliente WHERE rg = '" + rg + "'");
+       if(rs.first()){
+           //cliente.idCliente
+            cliente.setIdCliente(rs.getString(1));
+            //cliente.nome;
+            cliente.setNome(rs.getString(2));
+            //cliente.nascimento;
+            cliente.setNascimento(rs.getString(3));
+            //cliente.endereco;
+            cliente.setEndereco(rs.getString(4));
+            //clente.Numero;
+            cliente.setNumero(rs.getString(5));
+            //cliente.Bairro;
+            cliente.setBairro(rs.getString(6));
+            //cliente.cidade;
+            cliente.setCidade(rs.getString(7));
+            //cliente.uf;
+            cliente.setUf(rs.getString(8));
+            //cliente.cep;
+            cliente.setCep(rs.getString(9));
+            //cliente.email;
+            cliente.setEmail(rs.getString(10));
+            //cliente.telefone;
+            cliente.setTelefone(rs.getString(11));
+            //cliente.rg;
+            cliente.setRg(rs.getString(12));
+            //cliente.cpf;
+            cliente.setCpf(rs.getString(13));
+             close();
+            
+            System.out.println("Estamos no método buscarClienteRG em clienteDAO " +rg+"\n");
+            System.out.println("nome " +cliente.getNome()+"\n");
+            System.out.println("Nascimento " +cliente.getNascimento()+"\n");
+            
+            return cliente;
+           
+        } else {
+           msg="Cliente não encontrado";
+           JOptionPane.showMessageDialog(null, msg);
+           close();
+           return null;
+       }
+    
+        
+      }// fim buscar cliente
      /**
      * Método para inserir novo Ciente ao Banco de Dados.
      * @param cliente

@@ -331,8 +331,11 @@
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar em Clientes"/>
-                <Property name="toolTipText" type="java.lang.String" value="Pesquisar CPF"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisar RG"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Pesquisar RG"/>
+              </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarRGActionPerformed"/>
               </Events>

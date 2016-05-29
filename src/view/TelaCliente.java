@@ -35,8 +35,8 @@ import model.ClienteDAO;
  * @author deciodecarvalho
  */
 //public class TelaCliente extends javax.swing.JFrame {
-    public class TelaCliente extends javax.swing.JInternalFrame {
-        
+public class TelaCliente extends javax.swing.JInternalFrame {
+
     public static ArrayList<model.Cliente> arrayCli;
     public static boolean temCliente;
     private static String dataNascimentoCliente, dataHojeCliente;
@@ -46,43 +46,40 @@ import model.ClienteDAO;
     private static SimpleDateFormat sdfNascimentoCliente;
     private int dataIntNascimentoCliente;
     private static String oldCPF;
-    
+
     /**
-    * Instanciando objeto Cliente
-    */
-    
-    
+     * Instanciando objeto Cliente
+     */
     /**
      * Creates new form TelaCliente
      */
-       public TelaCliente() {
-        
-        
+    public TelaCliente() {
+
         initComponents();
         tftCep.setText(null);
-        
+
         //btnSalvarCliente.setEnabled(false);
         //btnAlterarCliente.setEnabled(false);
-        btnEditarCliente.setEnabled(false);                     
-        if(!temCliente){
+        btnEditarCliente.setEnabled(false);
+        if (!temCliente) {
             arrayCli = new ArrayList<>();
             temCliente = true;
         }
-        
-       //inicalizando valores de variáveis de tela
+
+        //inicalizando valores de variáveis de tela
         cbxUF.setSelectedIndex(-1);
         btnAlterarCliente.setEnabled(false);
         dtCliente = new Date();
-        
-        jspNascimento.setValue(dtCliente);    
+
+        jspNascimento.setValue(dtCliente);
         hojeCliente = new Date();
         dataHojeCliente = Util.DataFormatada(hojeCliente);
         sdfNascimentoCliente = new SimpleDateFormat("dd/MM/yyyy");
-    try { 
-        hojeCliente = sdfNascimentoCliente.parse(dataHojeCliente);
-    } catch (ParseException ex) {
-        Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            hojeCliente = sdfNascimentoCliente.parse(dataHojeCliente);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -594,130 +591,111 @@ import model.ClienteDAO;
     }//GEN-LAST:event_btnSairClienteActionPerformed
 
     private void btnLimparClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparClienteActionPerformed
-      habilitarDadosCliente();
-      btnSalvarCliente.setEnabled(true);
-      btnAlterarCliente.setEnabled(false);
-      btnEditarCliente.setEnabled(false);
-      tctBairro.setText(null);
-      tftCep.setText(null);
-      tctCidade.setText(null);
-      cbxUF.setSelectedIndex(-1);
-      tftCPF.setText(null);
-      tftRG.setText(null);
-      tftEmail.setText(null);
-      tftTelefone.setText(null);
-      
-      //jspNascimento.setEnabled(false);
-      jspNascimento.getEditor().setBackground(Color.yellow);  //funciona
-      jspNascimento.getEditor().setForeground(Color.red);
-      jspNascimento.setValue(dtCliente);
+        habilitarDadosCliente();
+        btnSalvarCliente.setEnabled(true);
+        btnAlterarCliente.setEnabled(false);
+        btnEditarCliente.setEnabled(false);
+        tctBairro.setText(null);
+        tftCep.setText(null);
+        tctCidade.setText(null);
+        cbxUF.setSelectedIndex(-1);
+        tftCPF.setText(null);
+        tftRG.setText(null);
+        tftEmail.setText(null);
+        tftTelefone.setText(null);
+
+        //jspNascimento.setEnabled(false);
+        jspNascimento.getEditor().setBackground(Color.yellow);  //funciona
+        jspNascimento.getEditor().setForeground(Color.red);
+        jspNascimento.setValue(dtCliente);
        // altera a cor da fonte;
-      //jspNascimento.getEditor();
-      tctNome.setText(null);
-      tctNumeroEndCliente.setText(null);
-      tctEndereco.setText(null);
-      
-      
+        //jspNascimento.getEditor();
+        tctNome.setText(null);
+        tctNumeroEndCliente.setText(null);
+        tctEndereco.setText(null);
+
+
     }//GEN-LAST:event_btnLimparClienteActionPerformed
 
-    /**
-     * método para desabilitar edição dos dados 
-     * da tela cliente.
-     */
-    private void desabilitarDadosCliente(){
-      tctBairro.setEditable(false);
-      tftCep.setEditable(false);
-      tctCidade.setEditable(false);
-      cbxUF.setEnabled(false);
-      tftCPF.setEditable(false);
-      tftRG.setEditable(false);
-      tftEmail.setEditable(false);
-      tftTelefone.setEditable(false);
-      jspNascimento.setEnabled(false);
-      tctNome.setEditable(false);
-      tctNumeroEndCliente.setEditable(false);
-      tctEndereco.setEditable(false);
-    }
-    
-    /**
-     * método para desabilitar edição dos dados 
-     * da tela cliente.
-     */
-    private void habilitarDadosCliente(){
-      tctBairro.setEditable(true);
-      tftCep.setEditable(true);
-      tctCidade.setEditable(true);
-      cbxUF.setEnabled(true);
-      tftCPF.setEditable(true);
-      tftRG.setEditable(true);
-      tftEmail.setEditable(true);
-      tftTelefone.setEditable(true);
-      jspNascimento.setEnabled(true);
-      tctNome.setEditable(true);
-      tctNumeroEndCliente.setEditable(true);
-      tctEndereco.setEditable(true);
-      btnAlterarCliente.setEnabled(true);
-    }
-    
-    private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
-      ClienteCtrl cCliente = new ClienteCtrl();
-      Cliente objCli;
-      objCli = new Cliente();
-      
-      /**
-      * Serializar o idCliente Provisório
-      * 
-      */
-      //int idCliente = arrayCli.size();
-      //int idCliente = ClienteDAO.buscarIdClienteAtual();
-      //idCliente++;
-      //String id = idCliente+"";
-      
-      /**
-       * Preenchimento do objCli com os valores de tela
-       * 
-      */
-      
-      
-      objCli.setIdCliente("0");
-      objCli.setNome(tctNome.getText().trim());
-      dataNascimentoCliente = Util.DataFormatadaS(jspNascimento.getValue().toString());
-      dataIntNascimentoCliente = Util.DtAmericana(jspNascimento.getValue().toString());
-      objCli.setNascimento(dataNascimentoCliente);
-      objCli.setEndereco(tctEndereco.getText().trim());
-      objCli.setNumero(tctNumeroEndCliente.getText());
-      objCli.setBairro(tctBairro.getText().trim());
-      objCli.setEmail(tftEmail.getText().trim());
-      objCli.setCep(tftCep.getText());
-      objCli.setTelefone(tftTelefone.getText());
-      objCli.setRg(tftRG.getText());
-      objCli.setCpf(tftCPF.getText());
-      objCli.setCidade(tctCidade.getText().trim());
-      
-      //objCli.setUf(Arrays.toString(cbxUF.getSelectedObjects()));
-      objCli.setUf((String)cbxUF.getSelectedItem());
-      //objCli.setUf(cbxUF.getSelectedObjects());
-      
-      String nome = tctNome.getText().trim();
-      //String nasc = tftNascimento.getText();
-      String end = tctEndereco.getText().trim();
-      String numero = tctNumeroEndCliente.getText();
-      String bairro = tctBairro.getText().trim();
-      String email = tftEmail.getText().trim();
-      
-      String telefone = tftTelefone.getText();
-      String rg = tftRG.getText();
-      String cpf = tftCPF.getText();
-      String cep = tftCep.getText();
-      String cidade = tctCidade.getText().trim();
-      String uf = Arrays.toString(cbxUF.getSelectedObjects());
-       
-      //int i = arrayCli.indexOf(tctNome.getText ());
+        /**
+         * método para desabilitar edição dos dados da tela cliente.
+         */
+        private void desabilitarDadosCliente() {
+            tctBairro.setEditable(false);
+            tftCep.setEditable(false);
+            tctCidade.setEditable(false);
+            cbxUF.setEnabled(false);
+            tftCPF.setEditable(false);
+            tftRG.setEditable(false);
+            tftEmail.setEditable(false);
+            tftTelefone.setEditable(false);
+            jspNascimento.setEnabled(false);
+            tctNome.setEditable(false);
+            tctNumeroEndCliente.setEditable(false);
+            tctEndereco.setEditable(false);
+        }
 
-      String msg;
+        /**
+         * método para desabilitar edição dos dados da tela cliente.
+         */
+        private void habilitarDadosCliente() {
+            tctBairro.setEditable(true);
+            tftCep.setEditable(true);
+            tctCidade.setEditable(true);
+            cbxUF.setEnabled(true);
+            tftCPF.setEditable(true);
+            tftRG.setEditable(true);
+            tftEmail.setEditable(true);
+            tftTelefone.setEditable(true);
+            jspNascimento.setEnabled(true);
+            tctNome.setEditable(true);
+            tctNumeroEndCliente.setEditable(true);
+            tctEndereco.setEditable(true);
+            btnAlterarCliente.setEnabled(true);
+        }
+
+    private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
+        ClienteCtrl cCliente = new ClienteCtrl();
+        Cliente objCli;
+        objCli = new Cliente();
+
+        objCli.setIdCliente("0");
+        objCli.setNome(tctNome.getText().trim());
+        dataNascimentoCliente = Util.DataFormatadaS(jspNascimento.getValue().toString());
+        dataIntNascimentoCliente = Util.DtAmericana(jspNascimento.getValue().toString());
+        objCli.setNascimento(dataNascimentoCliente);
+        objCli.setEndereco(tctEndereco.getText().trim());
+        objCli.setNumero(tctNumeroEndCliente.getText());
+        objCli.setBairro(tctBairro.getText().trim());
+        objCli.setEmail(tftEmail.getText().trim());
+        objCli.setCep(tftCep.getText());
+        objCli.setTelefone(tftTelefone.getText());
+        objCli.setRg(tftRG.getText());
+        objCli.setCpf(tftCPF.getText());
+        objCli.setCidade(tctCidade.getText().trim());
+        //objCli.setUf(Arrays.toString(cbxUF.getSelectedObjects()));
+        objCli.setUf((String) cbxUF.getSelectedItem());
+      //objCli.setUf(cbxUF.getSelectedObjects());
+
+        String nome = tctNome.getText().trim();
+        //String nasc = tftNascimento.getText();
+        String end = tctEndereco.getText().trim();
+        String numero = tctNumeroEndCliente.getText();
+        String bairro = tctBairro.getText().trim();
+        String email = tftEmail.getText().trim();
+
+        String telefone = tftTelefone.getText();
+        String rg = tftRG.getText();
+        String cpf = tftCPF.getText();
+        String cep = tftCep.getText();
+        String cidade = tctCidade.getText().trim();
+        String uf = Arrays.toString(cbxUF.getSelectedObjects());
+
+      //int i = arrayCli.indexOf(tctNome.getText ());
+        String msg;
         msg = "";
-              
-        boolean validaNome = ValidaCampos.validaVazio(nome); 
+
+        boolean validaNome = ValidaCampos.validaVazio(nome);
         //boolean validaData = ValidaCampos.validaData(nasc);
         boolean validaDatajsp = ValidaCampos.validaDataNascimento(dataIntNascimentoCliente);
         boolean validaEndereco = ValidaCampos.validaVazio(end);
@@ -730,125 +708,118 @@ import model.ClienteDAO;
         boolean validaTelefone = ValidaCampos.validaTelefone(telefone);
         boolean validaCep = ValidaCampos.validaCEP(cep);
         boolean validaCidade = ValidaCampos.validaVazio(cidade);
-        boolean validaUF = ValidaCampos.validaVazioComboBox(uf);    
-                
-        if (btnSalvarCliente.isEnabled()){
+        boolean validaUF = ValidaCampos.validaVazioComboBox(uf);
+
+        if (btnSalvarCliente.isEnabled()) {
             if (validaCpfBanco) {
             } else {
-              msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
-              this.tftCPF.setText(null);
+                msg = msg + "Campo CPF já existe na base de dados Aerofast" + "\n";
+                this.tftCPF.setText(null);
             }
         }
-        
-        
-        
-        
+
         if (validaNome) {
         } else {
-              msg = msg + "Campo Nome Vazio" + "\n";
+            msg = msg + "Campo Nome Vazio" + "\n";
         }
-        
+
         if (validaDatajsp) {
         } else {
             msg = msg + "Campo Nascimento Inválido" + "\n";
         }
-                 
+
         if (validaEndereco) {
         } else {
-              msg = msg + "Campo Endereço Vazio" + "\n";
+            msg = msg + "Campo Endereço Vazio" + "\n";
         }
-        
+
         if (validaNumeroEnd) {
         } else {
-              msg = msg + "Campo Número Endereço Vazio" + "\n";
+            msg = msg + "Campo Número Endereço Vazio" + "\n";
         }
-        
-        if (validaBairro){
-        }else{
+
+        if (validaBairro) {
+        } else {
             msg = msg + "Campo Bairro Vazio" + "\n";
         }
-         
+
         if (validaCep) {
         } else {
-              msg = msg + "Campo CEP inválido: "+ cep + "\n";
-              this.tftCep.setText(null);
+            msg = msg + "Campo CEP inválido: " + cep + "\n";
+            this.tftCep.setText(null);
         }
-        
+
         if (validaCidade) {
         } else {
-              msg = msg + "Campo Cidade Vazio" + "\n";
+            msg = msg + "Campo Cidade Vazio" + "\n";
         }
-              
+
         if (validaUF) {
         } else {
-              msg = msg + "Campo UF Vazio" + "\n";
+            msg = msg + "Campo UF Vazio" + "\n";
         }
-        
+
         if (validaEmail) {
         } else {
-              msg = msg +"Campo E-mail inválido: "+ email + "\n";
-              this.tftEmail.setText(null);
+            msg = msg + "Campo E-mail inválido: " + email + "\n";
+            this.tftEmail.setText(null);
         }
-        
+
         if (validaTelefone) {
         } else {
-              msg = msg +"Campo Telefone inválido: "+ telefone + "\n";
-              this.tftTelefone.setText(null);
+            msg = msg + "Campo Telefone inválido: " + telefone + "\n";
+            this.tftTelefone.setText(null);
         }
-        
+
         if (validaRG) {
         } else {
-              msg = msg + "Campo RG inválido: "+ rg + "\n";
-              this.tftRG.setText(null);
-        }  
-        
-        if (validaCPF) {  
-         } else {
-              msg = msg + "Campo CPF inválido: "+ cpf + "\n";
-              this.tftCPF.setText(null);
+            msg = msg + "Campo RG inválido: " + rg + "\n";
+            this.tftRG.setText(null);
         }
-        
-                  
-        if ("".equals(msg)){
+
+        if (validaCPF) {
+        } else {
+            msg = msg + "Campo CPF inválido: " + cpf + "\n";
+            this.tftCPF.setText(null);
+        }
+
+        if ("".equals(msg)) {
            // msg = "Dados Enviados ao banco de dados do sistema!";
-            
-            if (btnSalvarCliente.isEnabled()){
-            
+
+            if (btnSalvarCliente.isEnabled()) {
+
                 boolean resultadoCliente = arrayCli.add(objCli);
                 try {
-                    if (resultadoCliente){
-                    cCliente.receberCliente(objCli);
+                    if (resultadoCliente) {
+                        cCliente.receberCliente(objCli);
                     }
                 } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-                msg = msg+ex;
-                JOptionPane.showMessageDialog(null,reduzString(msg));            
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    msg = msg + ex;
+                    JOptionPane.showMessageDialog(null, reduzString(msg));
                 }
-            }        
-            else{//inicio do Alterar
+            } else {//inicio do Alterar
                 boolean flag = false; //verificar esta flag
-               
-                            try {
-                                cCliente.alterarClienteCtrl(objCli, oldCPF);
-                            } catch (ClassNotFoundException | SQLException ex) {
-                                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                
-                       
-                        btnLimparCliente.doClick(); //Limpar tela
-                        flag = true;
+
+                try {
+                    cCliente.alterarClienteCtrl(objCli, oldCPF);
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                btnLimparCliente.doClick(); //Limpar tela
+                flag = true;
             }
             //JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
             //PainelCliente.requestFocus(true); 
             btnLimparCliente.doClick();
             btnSairCliente.doClick();
-        
-         }
-        else{
-            JOptionPane.showMessageDialog(this, msg,"Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE );
+
+        } else {
+            JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
         }
-         
-         
+
+
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
@@ -856,61 +827,58 @@ import model.ClienteDAO;
         btnAlterarCliente.setEnabled(false);
         btnEditarCliente.setEnabled(true);
         boolean flag = false;
-        
+
         //inicio
         //ClienteCtrl controller = new ClienteCtrl();
         Cliente cliente;
-       
+
         try {
-            
+
             cliente = receberClienteCPF(tftCPF.getText());
             if (cliente != null) {
                 oldCPF = tftCPF.getText();
-                 /**
+                /**
                  * Tratamento do campo tipo jSpinner
                  */
                 String sdataNascimento = cliente.getNascimento();
-                
+
                 try {
                     calNascimentoCliente = Util.retornaData(sdataNascimento);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            jspNascimento.setValue(calNascimentoCliente);
-           
-            tctBairro.setText(cliente.getBairro() );
-            
-            tftCep.setText(cliente.getCep());
-            tctCidade.setText(cliente.getCidade());
-            
-            //Como pesquisar comboBox
-            cbxUF.setSelectedItem(cliente.getUf());
-           
-            tftCPF.setText(cliente.getCpf());
-            tftRG.setText(cliente.getRg());
-            tftEmail.setText(cliente.getEmail());
-            //tftNascimento.setText(arrayCli.get(i).getNascimento());
-            tftTelefone.setText(cliente.getTelefone());
-            tctNome.setText(cliente.getNome());
-            tctEndereco.setText(cliente.getEndereco());
-            tctNumeroEndCliente.setText(cliente.getNumero());
-            
-            //desabilitar edição
-            desabilitarDadosCliente();
-              flag = true; 
-                
-                
+                jspNascimento.setValue(calNascimentoCliente);
+
+                tctBairro.setText(cliente.getBairro());
+
+                tftCep.setText(cliente.getCep());
+                tctCidade.setText(cliente.getCidade());
+
+                //Como pesquisar comboBox
+                cbxUF.setSelectedItem(cliente.getUf());
+
+                tftCPF.setText(cliente.getCpf());
+                tftRG.setText(cliente.getRg());
+                tftEmail.setText(cliente.getEmail());
+                //tftNascimento.setText(arrayCli.get(i).getNascimento());
+                tftTelefone.setText(cliente.getTelefone());
+                tctNome.setText(cliente.getNome());
+                tctEndereco.setText(cliente.getEndereco());
+                tctNumeroEndCliente.setText(cliente.getNumero());
+
+                //desabilitar edição
+                desabilitarDadosCliente();
+                flag = true;
+
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
         //fim método
-                          
+
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
@@ -918,67 +886,66 @@ import model.ClienteDAO;
         btnAlterarCliente.setEnabled(false);
         btnEditarCliente.setEnabled(false);
         boolean flag = false;
-        
+
         //inicio
         //ClienteCtrl controller = new ClienteCtrl();
         Cliente cliente;
-       
+
         try {
-            
+
             cliente = receberClienteCPF(tftCPF.getText());
             if (cliente != null) {
                 oldCPF = tftCPF.getText();
-                 /**
+                /**
                  * Tratamento do campo tipo jSpinner
                  */
                 String sdataNascimento = cliente.getNascimento();
-                
+
                 try {
                     calNascimentoCliente = Util.retornaData(sdataNascimento);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            jspNascimento.setValue(calNascimentoCliente);
-           
-            tctBairro.setText(cliente.getBairro() );
-            
-            tftCep.setText(cliente.getCep());
-            tctCidade.setText(cliente.getCidade());
-            
-            //Como pesquisar comboBox
-            cbxUF.setSelectedItem(cliente.getUf());
-           
-            tftCPF.setText(cliente.getCpf());
-            tftRG.setText(cliente.getRg());
-            tftEmail.setText(cliente.getEmail());
-            //tftNascimento.setText(arrayCli.get(i).getNascimento());
-            tftTelefone.setText(cliente.getTelefone());
-            tctNome.setText(cliente.getNome());
-            tctEndereco.setText(cliente.getEndereco());
-            tctNumeroEndCliente.setText(cliente.getNumero());
-            
-            //desabilitar edição
-            desabilitarDadosCliente();
-            //chamar método em control para deletar o cliente
-            ClienteCtrl cCliente = new ClienteCtrl();
-            cCliente.deletarClienteCtrl(cliente, oldCPF);
-            btnLimparCliente.doClick(); //Limpar tela
-            flag = true; 
-                
-                
+                jspNascimento.setValue(calNascimentoCliente);
+
+                tctBairro.setText(cliente.getBairro());
+
+                tftCep.setText(cliente.getCep());
+                tctCidade.setText(cliente.getCidade());
+
+                //Como pesquisar comboBox
+                cbxUF.setSelectedItem(cliente.getUf());
+
+                tftCPF.setText(cliente.getCpf());
+                tftRG.setText(cliente.getRg());
+                tftEmail.setText(cliente.getEmail());
+                //tftNascimento.setText(arrayCli.get(i).getNascimento());
+                tftTelefone.setText(cliente.getTelefone());
+                tctNome.setText(cliente.getNome());
+                tctEndereco.setText(cliente.getEndereco());
+                tctNumeroEndCliente.setText(cliente.getNumero());
+
+                //desabilitar edição
+                desabilitarDadosCliente();
+                //chamar método em control para deletar o cliente
+                ClienteCtrl cCliente = new ClienteCtrl();
+                cCliente.deletarClienteCtrl(cliente, oldCPF);
+                btnLimparCliente.doClick(); //Limpar tela
+                flag = true;
+
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    //fim método        
+
+        //fim método        
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
-       @SuppressWarnings("UnusedAssignment")
-       String msg = "";
+        @SuppressWarnings("UnusedAssignment")
+        String msg = "";
         // TODO add your handling code here:
         //btnSalvarPassageiro.doClick();
         btnSalvarClienteActionPerformed(evt);
@@ -986,26 +953,26 @@ import model.ClienteDAO;
 
     private void btnPesquisarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCepActionPerformed
         // TODO add your handling code here:
-        if(Util.VerificaEndereco(tftCep.getText())){
+        if (Util.VerificaEndereco(tftCep.getText())) {
             tctEndereco.setText(Util.vEnd);
             tctBairro.setText(Util.vBairro);
             tctCidade.setText(Util.vCidade);
             cbxUF.setSelectedItem(Util.vUf);
             tctNumeroEndCliente.grabFocus(); //coloca foco no campo numero endereço após buscar cep.
         }
-        
+
     }//GEN-LAST:event_btnPesquisarCepActionPerformed
 
     private void tftCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftCPFActionPerformed
-        
+
     }//GEN-LAST:event_tftCPFActionPerformed
 
     private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
         // TODO add your handling code here:
-         if (!tctNome.isEditable()){
-         //msg = "Pode realizar alterações agora";
+        if (!tctNome.isEditable()) {
+            //msg = "Pode realizar alterações agora";
             habilitarDadosCliente();
-         //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+            //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
         }
         btnAlterarCliente.setEnabled(true);
         btnEditarCliente.setEnabled(false);
@@ -1027,42 +994,42 @@ import model.ClienteDAO;
         this.moveToFront();
     }//GEN-LAST:event_formMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
         //</editor-fold>
-        //</editor-fold>
+            //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TelaCliente().setVisible(true);
-            }
-        });
-    }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new TelaCliente().setVisible(true);
+                }
+            });
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanelClienteBotoes;
@@ -1104,5 +1071,4 @@ import model.ClienteDAO;
     private javax.swing.JFormattedTextField tftTelefone;
     // End of variables declaration//GEN-END:variables
 
-    
 }
