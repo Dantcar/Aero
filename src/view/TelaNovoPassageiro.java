@@ -721,19 +721,29 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarPassageiroActionPerformed
 
     private void btnPesquisarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassageiroActionPerformed
+        //habilitar e desabilitar botoes
         btnSalvarPassageiro.setEnabled(false);
         btnAlterarPassageiro.setEnabled(true);
+
+        //controle da mensagem true se encontrou e false se não
         boolean flag = false;
 
-        for (int i = 0; i < arrayPass.size(); i++) {
-            if (tftRGPassageiro.getText().equals(arrayPass.get(i).getRgPassageiro())) {
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        Passageiro passageiro;
+        passageiro = new Passageiro();
 
-                tctPassageiro.setText(arrayPass.get(i).getNomePassageiro());
+        String msg = "";
+
+        try {
+            passageiro = cPassageiro.receberPassageiroRG(tftRGPassageiro.getText());
+            if (Integer.parseInt(passageiro.getIdPassageiro()) > 0) {
+
+                tctPassageiro.setText(passageiro.getNomePassageiro());
 
                 /**
                  * Tratamento do campo tipo jSpinner
                  */
-                String sdataNascimento = arrayPass.get(i).getNascimentoPassageiro();
+                String sdataNascimento = passageiro.getNascimentoPassageiro();
 
                 try {
                     calNascimento = Util.retornaData(sdataNascimento);
@@ -742,27 +752,31 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 }
 
                 jspNascimentoPassageiro.setValue(calNascimento);
-
                 //jspNascimentoPassageiro.getEditor();
-                tftRGPassageiro.setText(arrayPass.get(i).getRgPassageiro());
-                tftTelefonePassageiro.setText(arrayPass.get(i).getTelefonePassageiro());
-                tftEmail.setText(arrayPass.get(i).getEmailPassageiro());
-                tctContato.setText(arrayPass.get(i).getContatoNome());
-                tftTelefoneContato.setText(arrayPass.get(i).getContatoTelefone());
-                tctResponsavelFinanceiro.setText(arrayPass.get(i).getResponsavelFinanceiro());
-                tftCPFResponsavel.setText(arrayPass.get(i).getResponsavelCPF());
+                tftRGPassageiro.setText(passageiro.getRgPassageiro());
+                tftTelefonePassageiro.setText(passageiro.getTelefonePassageiro());
+                tftEmail.setText(passageiro.getEmailPassageiro());
+                tctContato.setText(passageiro.getContatoNome());
+                tftTelefoneContato.setText(passageiro.getContatoTelefone());
+                tctResponsavelFinanceiro.setText(passageiro.getResponsavelFinanceiro());
+                tftCPFResponsavel.setText(passageiro.getResponsavelCPF());
+                msg = msg;
                 flag = true;
             }//fim do if
-        }// fim do for
-        if (arrayPass.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhum Passageiro Cadastrado!!");
-            btnSalvarPassageiro.setEnabled(true);
-            btnAlterarPassageiro.setEnabled(false);
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!, Entre com outro RG");
-            btnSalvarPassageiro.setEnabled(true);
-            btnAlterarPassageiro.setEnabled(false);
+            else{
+             msg = msg+"Passageiro não encontrado!!!, Entre com outro RG";   
+            JOptionPane.showMessageDialog(this, msg);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            msg = reduzString(msg+ex);
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (flag == false) {
+            msg=msg+"Nenhum Cliente Cadastrado!!" ;
+            JOptionPane.showMessageDialog(this,msg );
+            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+        }
+        
     }//GEN-LAST:event_btnPesquisarPassageiroActionPerformed
 
     private void btnSairPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassageiroActionPerformed
