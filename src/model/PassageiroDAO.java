@@ -10,6 +10,7 @@ package model;
 
 import static Control.Util.reduzString;
 import java.awt.HeadlessException;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -163,25 +164,25 @@ public class PassageiroDAO {
                 ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rgpassageiro = '" + rg + "'");
         if (rs.first()) {
-            //cliente.idCliente
+            //passageiro.idCliente
             passageiro.setIdPassageiro(rs.getString(1));
-            //cliente.nome;
+            //passageiro.nome;
             passageiro.setNomePassageiro(rs.getString(2));
-            //cliente.nascimento;
+            //passageiro.nascimento;
             passageiro.setNascimentoPassageiro(rs.getString(3));
-            //cliente.endereco;
+            //passageiro.endereco;
             passageiro.setRgPassageiro(rs.getString(4));
             //clente.Numero;
             passageiro.setTelefonePassageiro(rs.getString(5));
-            //cliente.Bairro;
+            //passageiro.Bairro;
             passageiro.setEmailPassageiro(rs.getString(6));
-            //cliente.cidade;
+            //passageiro.cidade;
             passageiro.setContatoNome(rs.getString(7));
-            //cliente.uf;
+            //passageiro.uf;
             passageiro.setContatoTelefone(rs.getString(8));
-            //cliente.cep;
+            //passageiro.cep;
             passageiro.setResponsavelFinanceiro(rs.getString(9));
-            //cliente.email;
+            //passageiro.email;
             passageiro.setResponsavelCPF(rs.getString(10));
 
             close();
@@ -243,33 +244,37 @@ public class PassageiroDAO {
         return resposta;
     }//Fim buscarExistePassageiroRG
     
+    /**
+     * Método para realizar alterações na tabela passageiro,
+     * enviando o parametro passageiro e rg.
+     * @param passageiro
+     * @param vrg
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void alterarPassageiro(Passageiro passageiro, String vrg) throws ClassNotFoundException, SQLException{
         String msg;
         msg="";
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
         
-        //String sql = "UPDATE cliente SET " + "CPF = '"+ cliente.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
+        //String sql = "UPDATE passageiro SET " + "CPF = '"+ passageiro.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
         String sql = "UPDATE passageiro SET "
-                + "idCliente = "+ parseInt(cliente.getIdCliente())+", "
-                + "nome = '" + cliente.getNome() + "', "
-                + "nascimento = '" + cliente.getNascimento() + "', "
-                + "endereco = '" + cliente.getEndereco() + "', "
-                + "numero = '" + cliente.getNumero() + "', "
-                + "bairro = '" + cliente.getBairro() + "', "
-                + "cidade = '" + cliente.getCidade() + "', "
-                + "uf = '" + cliente.getUf() + "', "
-                + "cep = '" + cliente.getCep() + "', "
-                + "email = '" + cliente.getEmail() + "', "
-                + "telefone = '"+ cliente.getTelefone() + "', "
-                + "RG = '"+ cliente.getRg() + "', "
-                + "CPF = '"+ cliente.getCpf()+ "' "
-                + " WHERE CPF = '" + vcpf + "'";
-        
+                + "idPassageiro = "+ parseInt(passageiro.getIdPassageiro())+", "
+                + "nomePassageiro = '" + passageiro.getNomePassageiro() + "', "
+                + "nascimentoPassageiro = '" + passageiro.getNascimentoPassageiro() + "', "
+                + "rgPassageiro = '" + passageiro.getRgPassageiro() + "', "
+                + "telefonePassageiro = '" + passageiro.getTelefonePassageiro() + "', "
+                + "emailPassageiro = '" + passageiro.getEmailPassageiro() + "', "
+                + "contatoNome = '" + passageiro.getContatoNome() + "', "
+                + "contatoTelefone = '" + passageiro.getContatoTelefone() + "', "
+                + "responsavelFinanceiro = '" + passageiro.getResponsavelFinanceiro() + "', "
+                + "responsavelCPF = '" + passageiro.getResponsavelCPF() + "'";
+             
         try {
             stmt.execute(sql);
            
-            msg = msg+"Dados do cliente alterados com sucesso \n";
+            msg = msg+"Dados do passageiro alterados com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg+e);
@@ -283,7 +288,7 @@ public class PassageiroDAO {
          JOptionPane.showMessageDialog(null,msg );   
         }
          
-    }//fim inserir cliente
+    }//fim alterar passageiro
     
     
 

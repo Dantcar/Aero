@@ -691,7 +691,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 }
                 //
                 // System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
-            } else {
+            } else { //Alteração do passageiro
 
                 boolean flag = false;
 

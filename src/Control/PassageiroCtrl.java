@@ -49,6 +49,10 @@ public class PassageiroCtrl {
         System.out.println("nome " + cliente.getNome() + "\n");
         System.out.println("Nascimento " + cliente.getNascimento() + "\n");
         return cliente;
-
     }
+    
+    public void alterarPassageiroCtrl(Passageiro passageiro, String rg) throws ClassNotFoundException, SQLException{
+        PassageiroDAO passDAO = new PassageiroDAO();
+        passDAO.alterarPassageiro(passageiro, rg);
+    } 
 }
