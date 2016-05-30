@@ -20,6 +20,10 @@ import javax.swing.JOptionPane;
 public class DBAeroFast {
  
   public static Connection con;
+  public static Connection con1;
+  public static Connection con2;
+  public static Connection con3;
+  public static Connection con4;
   private static String url;
   private static String usuario;
   private static String senha;
@@ -122,7 +126,7 @@ public class DBAeroFast {
      * @throws java.sql.SQLException
    */
    public static Connection getConnectionx() throws ClassNotFoundException, SQLException{
-        Connection con3;
+        //Connection con3;
         con3=null;
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
@@ -132,7 +136,7 @@ public class DBAeroFast {
     
     public static Connection getConnection(){
         String msg;
-        Connection con4;
+        //Connection con4;
         con4=null;
         msg="";
         try {

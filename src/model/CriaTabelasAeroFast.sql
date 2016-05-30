@@ -1,4 +1,4 @@
-
+-- REVISÃO 30-MAIO-2016
 -- CURRENT SQLID
 -- select * from DAC.AERONAVE;
 --DROP TABLE CLIENTE       --Tabela 1

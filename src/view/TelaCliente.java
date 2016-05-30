@@ -27,8 +27,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import model.Cliente;
-import model.ClienteDAO;
-//import static model.ClienteDAO.buscarClienteCPF;
 
 /**
  *
@@ -967,9 +965,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
         // TODO add your handling code here:
         if (!tctNome.isEditable()) {
-            //msg = "Pode realizar alterações agora";
+            
             habilitarDadosCliente();
-            //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+            
         }
         btnAlterarCliente.setEnabled(true);
         btnEditarCliente.setEnabled(false);
