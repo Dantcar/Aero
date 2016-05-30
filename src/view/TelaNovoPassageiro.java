@@ -8,10 +8,9 @@
  */
 package view;
 
-import Control.ClienteCtrl;
-import static Control.Util.reduzString;
 import Control.PassageiroCtrl;
 import Control.Util;
+import static Control.Util.reduzString;
 import Control.ValidaCampos;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -55,7 +54,11 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
             arrayPass = new ArrayList<>();
             temPassageiro = true;
         }
+        //Status dos botões 
         btnAlterarPassageiro.setEnabled(false);
+        btnSalvarPassageiro.setEnabled(true);
+        btnEditarPassageiro.setEnabled(false);
+        
         dt = new Date();
         jspNascimentoPassageiro.setValue(dt);
         hojePassageiro = new Date();
@@ -678,29 +681,29 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 boolean resultadoPassageiro = arrayPass.add(objPass);
                 try {
                     if (resultadoPassageiro) {
-                        try {
-                            cPassageiro.receberPassageiro(objPass);
-                        } catch (SQLException ex) {
-                            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
+                        cPassageiro.receberPassageiro(objPass);
+                     }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                     msg = msg + ex;
                     JOptionPane.showMessageDialog(null, reduzString(msg));
+                } catch (SQLException ex) {
+                    msg = msg + ex;
+                    JOptionPane.showMessageDialog(null, reduzString(msg));
+                    Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //
                 // System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
             } else { //Alteração do passageiro
                 boolean flag = false; //ainda nao alterou
-                oldRG =  tftRGPassageiro.getText();
+                //oldRG =  tftRGPassageiro.getText();
+                
                 try {
                     cPassageiro.alterarPassageiroCtrl(objPass, oldRG);
                 } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-
+                btnLimparPassageiro.doClick();
+                flag = true;
             }
             PainelPassageiro.requestFocus(true);
             btnLimparPassageiro.doClick();
@@ -712,9 +715,10 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarPassageiroActionPerformed
 
     private void btnPesquisarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassageiroActionPerformed
-        //habilitar e desabilitar botoes
+        //Status dos botões 
+        btnAlterarPassageiro.setEnabled(false);
         btnSalvarPassageiro.setEnabled(false);
-        btnAlterarPassageiro.setEnabled(true);
+        btnEditarPassageiro.setEnabled(true);
         
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
@@ -751,7 +755,10 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 tftTelefoneContato.setText(passageiro.getContatoTelefone());
                 tctResponsavelFinanceiro.setText(passageiro.getResponsavelFinanceiro());
                 tftCPFResponsavel.setText(passageiro.getResponsavelCPF());
-                msg = msg;
+                
+                
+                //desabilitar edição passageiro
+                desabilitarDadosPassageiro();
                 flag = true;
             }//fim do if
             else{
@@ -784,7 +791,41 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         tctResponsavelFinanceiro.setText(null);
         tftCPFResponsavel.setText(null);
     }//GEN-LAST:event_btnLimparPassageiroActionPerformed
-
+    /**
+    * Método para desabilitar edição dos dados da tela passageiro.
+    */
+    private void desabilitarDadosPassageiro(){
+        tctPassageiro.setEditable(false);
+        jspNascimentoPassageiro.setEnabled(false);  //setEnabled
+        tftRGPassageiro.setEditable(false);
+        tftTelefonePassageiro.setEditable(false);
+        tftEmail.setEditable(false);
+        tctContato.setEditable(false);
+        tftTelefoneContato.setEditable(false);
+        tctResponsavelFinanceiro.setEditable(false);
+        tftCPFResponsavel.setEditable(false);
+        //botoes
+        btnPesquisarRG.setEnabled(false);
+        btnPesquisarCPF.setEnabled(false);
+    }
+    
+    /**
+    * Método para desabilitar edição dos dados da tela passageiro.
+    */
+    private void habilitarDadosPassageiro(){
+        tctPassageiro.setEditable(true);
+        jspNascimentoPassageiro.setEnabled(true);  //setEnabled
+        tftRGPassageiro.setEditable(true);
+        tftTelefonePassageiro.setEditable(true);
+        tftEmail.setEditable(true);
+        tctContato.setEditable(true);
+        tftTelefoneContato.setEditable(true);
+        tctResponsavelFinanceiro.setEditable(true);
+        tftCPFResponsavel.setEditable(true);
+        //botoes
+        btnPesquisarRG.setEnabled(true);
+        btnPesquisarCPF.setEnabled(true);
+    }
     private void btnExcluirPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPassageiroActionPerformed
 
         boolean flag = false;
@@ -901,9 +942,14 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
 
     private void btnEditarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPassageiroActionPerformed
         // TODO add your handling code here:
+        //Status dos botões 
+        btnAlterarPassageiro.setEnabled(true);
+        btnSalvarPassageiro.setEnabled(false);
+        btnEditarPassageiro.setEnabled(false);
+        
         if (!tctPassageiro.isEditable()) {
             //msg = "Pode realizar alterações agora";
-            //habilitarDadosPassageiro();
+            habilitarDadosPassageiro();
             //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
         }
         btnAlterarPassageiro.setEnabled(true);
