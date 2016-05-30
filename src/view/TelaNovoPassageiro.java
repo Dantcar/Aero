@@ -734,7 +734,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
             //if (Integer.parseInt(passageiro.getIdPassageiro()) > 0) {
                 if (passageiro != null) {
                 tctPassageiro.setText(passageiro.getNomePassageiro());
-                //oldRG =  tftRGPassageiro.getText();
+                oldRG =  tftRGPassageiro.getText();
                 /**
                  * Tratamento do campo tipo jSpinner
                  */
