@@ -55,4 +55,10 @@ public class PassageiroCtrl {
         PassageiroDAO passDAO = new PassageiroDAO();
         passDAO.alterarPassageiro(passageiro, rg);
     } 
+    
+     public void deletarPassageiroCtrl(Passageiro passageiro, String rg) throws ClassNotFoundException, SQLException{
+        PassageiroDAO passDAO = new PassageiroDAO();
+        passDAO.deletarPassageiro(passageiro, rg);
+    } 
+    
 }

@@ -98,6 +98,7 @@ CREATE TABLE VOO(
     idVoo  int not null,
     numeroVoo  VARCHAR(14) not null,
     ciaAerea  VARCHAR(20) not null,
+    prefixoAeronaveVoo VARCHAR(12) not null,
     dataPartida  VARCHAR(10) not null,
     horaPartida  VARCHAR(10) not null,
     aeroportoPartida  VARCHAR(30) not null,

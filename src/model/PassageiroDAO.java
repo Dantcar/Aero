@@ -10,7 +10,6 @@ package model;
 
 import static Control.Util.reduzString;
 import java.awt.HeadlessException;
-import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -288,9 +287,56 @@ public class PassageiroDAO {
          msg = msg+"Conexão ao banco fechada";
          JOptionPane.showMessageDialog(null,msg );   
         }
+        
+   
          
     }//fim alterar passageiro
     
-    
+     /**
+     * 
+     * @param passageiro
+     * @param vrg
+     * @throws SQLException 
+     */
+     public void deletarPassageiro(Passageiro passageiro, String vrg) throws SQLException {
+        String msg;
+        msg="";
+        
+        conexao = DBAeroFast.getConnection();
+     try {
+         stmt = conexao.createStatement();
+     } catch (SQLException ex) {
+         msg = msg+ex;
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+        String sql ="DELETE FROM passageiro WHERE RGPASSAGEIRO = '" + vrg + "'";
+               
+        try {
+            int n = JOptionPane.showConfirmDialog(
+            null,
+            "Confirma Deletar Passageiro?",
+            "Confirmar Deletar Passageiro",
+            JOptionPane.YES_NO_OPTION);
+            if(true){
+            stmt.execute(sql);
+            }
+            
+            msg = msg+"Dados do passageiro excluidos com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
+        } catch (SQLException | HeadlessException e) {
+            msg = reduzString(msg+e);
+            msg = reduzString(msg);
+            msg = msg+"Erro de gravação no BD \n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
+        }
+        
+    }//fim deletar passageiro
 
 }

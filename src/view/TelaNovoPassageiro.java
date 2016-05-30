@@ -9,6 +9,7 @@
 package view;
 
 import Control.PassageiroCtrl;
+import static Control.PassageiroCtrl.receberPassageiroRG;
 import Control.Util;
 import static Control.Util.reduzString;
 import Control.ValidaCampos;
@@ -827,29 +828,58 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnPesquisarCPF.setEnabled(true);
     }
     private void btnExcluirPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPassageiroActionPerformed
-
+        btnSalvarPassageiro.setEnabled(false);
+        btnAlterarPassageiro.setEnabled(false);
+        btnEditarPassageiro.setEnabled(false);
         boolean flag = false;
+            
+            //inicio
+            
+            Passageiro passageiro;
+            
+        try {
+            passageiro = receberPassageiroRG(tftRGPassageiro.getText());
+            if (passageiro != null) {
+               oldRG =   tftRGPassageiro.getText();
+            /**
+                 * Tratamento do campo tipo jSpinner
+                 */
+                String sdataNascimento = passageiro.getNascimentoPassageiro();
 
-        for (int i = 0; i < arrayPass.size(); i++) {
+                try {
+                    calNascimento = Util.retornaData(sdataNascimento);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            if (tftRGPassageiro.getText().trim().equals(arrayPass.get(i).getRgPassageiro())) {
-                String removidoPassageiro = arrayPass.get(i).getRgPassageiro();
-                Passageiro removido = arrayPass.remove(i);
-
-                JOptionPane.showMessageDialog(this, "Passageiro de RG: " + removidoPassageiro + " Removido!");
-                btnLimparPassageiro.doClick(); //Limpar tela
-
+                jspNascimentoPassageiro.setValue(calNascimento);
+                //jspNascimentoPassageiro.getEditor();
+                tftRGPassageiro.setText(passageiro.getRgPassageiro());
+                tftTelefonePassageiro.setText(passageiro.getTelefonePassageiro());
+                tftEmail.setText(passageiro.getEmailPassageiro());
+                tctContato.setText(passageiro.getContatoNome());
+                tftTelefoneContato.setText(passageiro.getContatoTelefone());
+                tctResponsavelFinanceiro.setText(passageiro.getResponsavelFinanceiro());
+                tftCPFResponsavel.setText(passageiro.getResponsavelCPF());
+                
+                
+                //desabilitar edição passageiro
+                desabilitarDadosPassageiro();
+                PassageiroCtrl cPassageiro = new PassageiroCtrl();
+                cPassageiro.deletarPassageiroCtrl(passageiro, oldRG);
+                btnLimparPassageiro.doClick(); //Limpar tela Passageiro
+                                
                 flag = true;
-
-            }//fim do if
-        }// fim do for
-
-        if (arrayPass.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhum Passageiro Cadastrado!!");
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!");
+            
+            }
+        
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+                    
+        //fim do método excluirPassageiro
     }//GEN-LAST:event_btnExcluirPassageiroActionPerformed
 
     private void btnAlterarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarPassageiroActionPerformed

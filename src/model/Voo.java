@@ -9,9 +9,9 @@
 package model;
 
 /**
- * @version 0.1
+ * @version 0.4
  * @author Décio Antonio de Carvalho
- * @since 09-abr-2016
+ * @since 23-Maio-2016
  */
 
 
@@ -19,6 +19,7 @@ public class Voo {
   private String idVoo;
   private String numeroVoo;
   private String ciaAerea;
+  private String prefixoAeronaveVoo;
   private String dataPartida;
   private String horaPartida;
   private String aeroportoPartida;
@@ -35,29 +36,33 @@ public class Voo {
   private String tarifaF;
     public Voo() {
     }
-/**
- * 
- * @param idVoo
- * @param numeroVoo
- * @param ciaAerea
- * @param dataPartida
- * @param horaPartida
- * @param aeroportoPartida
- * @param aeroportoPartidaSigla
- * @param portaoPartida
- * @param dataChegada
- * @param horaChegada
- * @param aeroportoChegada
- * @param aeroportoChegadaSigla
- * @param portaoChegada
- * @param escalasVoo
- * @param tarifaE
- * @param tarifaB 
- */
-    public Voo(String idVoo, String numeroVoo, String ciaAerea, String dataPartida, String horaPartida, String aeroportoPartida, String aeroportoPartidaSigla, String portaoPartida, String dataChegada, String horaChegada, String aeroportoChegada, String aeroportoChegadaSigla, String portaoChegada, String escalasVoo, String tarifaE, String tarifaB) {
+
+    /**
+     * Método Construtor VOO
+     * @param idVoo
+     * @param numeroVoo
+     * @param ciaAerea
+     * @param prefixoAeronaveVoo
+     * @param dataPartida
+     * @param horaPartida
+     * @param aeroportoPartida
+     * @param aeroportoPartidaSigla
+     * @param portaoPartida
+     * @param dataChegada
+     * @param horaChegada
+     * @param aeroportoChegada
+     * @param aeroportoChegadaSigla
+     * @param portaoChegada
+     * @param escalasVoo
+     * @param tarifaE
+     * @param tarifaB
+     * @param tarifaF 
+     */
+    public Voo(String idVoo, String numeroVoo, String ciaAerea, String prefixoAeronaveVoo, String dataPartida, String horaPartida, String aeroportoPartida, String aeroportoPartidaSigla, String portaoPartida, String dataChegada, String horaChegada, String aeroportoChegada, String aeroportoChegadaSigla, String portaoChegada, String escalasVoo, String tarifaE, String tarifaB, String tarifaF) {
         this.idVoo = idVoo;
         this.numeroVoo = numeroVoo;
         this.ciaAerea = ciaAerea;
+        this.prefixoAeronaveVoo = prefixoAeronaveVoo;
         this.dataPartida = dataPartida;
         this.horaPartida = horaPartida;
         this.aeroportoPartida = aeroportoPartida;
@@ -71,6 +76,7 @@ public class Voo {
         this.escalasVoo = escalasVoo;
         this.tarifaE = tarifaE;
         this.tarifaB = tarifaB;
+        this.tarifaF = tarifaF;
     }
 
     public String getIdVoo() {
@@ -95,6 +101,14 @@ public class Voo {
 
     public void setCiaAerea(String ciaAerea) {
         this.ciaAerea = ciaAerea;
+    }
+
+    public String getPrefixoAeronaveVoo() {
+        return prefixoAeronaveVoo;
+    }
+
+    public void setPrefixoAeronaveVoo(String prefixoAeronaveVoo) {
+        this.prefixoAeronaveVoo = prefixoAeronaveVoo;
     }
 
     public String getDataPartida() {
@@ -209,5 +223,6 @@ public class Voo {
         this.tarifaF = tarifaF;
     }
 
+    
     
 }

@@ -46,6 +46,5 @@ public class ClienteCtrl {
         ClienteDAO cliDAO = new ClienteDAO();
         cliDAO.deletarCliente(cliente, cpf);
     } 
-    
-       
+        
 }
