@@ -328,7 +328,7 @@ public class ClienteDAO {
         
         //String sql = "UPDATE cliente SET " + "CPF = '"+ cliente.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
         String sql = "UPDATE cliente SET "
-                + "idCliente = "+ parseInt(cliente.getIdCliente())+", "
+                //+ "idCliente = "+ parseInt(cliente.getIdCliente())+", "
                 + "nome = '" + cliente.getNome() + "', "
                 + "nascimento = '" + cliente.getNascimento() + "', "
                 + "endereco = '" + cliente.getEndereco() + "', "

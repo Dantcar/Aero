@@ -798,7 +798,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     msg = msg + ex;
                     JOptionPane.showMessageDialog(null, reduzString(msg));
                 }
-            } else {//inicio do Alterar
+            } else {//inicio do Alterar Cliente
                 boolean flag = false; //verificar esta flag
 
                 try {
@@ -810,15 +810,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 btnLimparCliente.doClick(); //Limpar tela
                 flag = true;
             }
-            //JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
-            //PainelCliente.requestFocus(true); 
             btnLimparCliente.doClick();
             btnSairCliente.doClick();
 
         } else {
             JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
         }
-
 
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 

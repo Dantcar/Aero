@@ -45,7 +45,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
     private static Date calNascimento;
     private static SimpleDateFormat sdfNascimentoPassageiro;
     private int dataAtual, dataIntNascimento;
-
+    private static String oldRG; //utilizar na alteração inclusive do rgPassageiro
     /**
      * Creates new form TelaNovoPassageiro
      */
@@ -692,23 +692,14 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 //
                 // System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
             } else { //Alteração do passageiro
-
-                boolean flag = false;
-
-                for (int i = 0; i < arrayPass.size(); i++) {
-
-                    if (tftRGPassageiro.getText().trim().equals(arrayPass.get(i).getRgPassageiro())) {
-                        String removidoPassageiro = arrayPass.get(i).getRgPassageiro();
-                        Passageiro removido = arrayPass.remove(i);
-
-                        //JOptionPane.showMessageDialog(this,"Passageiro de RG: "+removidoPassageiro+" Removido!");
-                        boolean resultadoAlterouPassageiro = arrayPass.add(objPass);
-                        btnLimparPassageiro.doClick(); //Limpar tela
-
-                        flag = true;
-
-                    }//fim do if
-                }// fim do for
+                boolean flag = false; //ainda nao alterou
+                oldRG =  tftRGPassageiro.getText();
+                try {
+                    cPassageiro.alterarPassageiroCtrl(objPass, oldRG);
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
 
             }
             PainelPassageiro.requestFocus(true);
@@ -724,7 +715,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         //habilitar e desabilitar botoes
         btnSalvarPassageiro.setEnabled(false);
         btnAlterarPassageiro.setEnabled(true);
-
+        
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
 
@@ -736,10 +727,10 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
 
         try {
             passageiro = cPassageiro.receberPassageiroRG(tftRGPassageiro.getText());
-            if (Integer.parseInt(passageiro.getIdPassageiro()) > 0) {
-
+            //if (Integer.parseInt(passageiro.getIdPassageiro()) > 0) {
+                if (passageiro != null) {
                 tctPassageiro.setText(passageiro.getNomePassageiro());
-
+                //oldRG =  tftRGPassageiro.getText();
                 /**
                  * Tratamento do campo tipo jSpinner
                  */

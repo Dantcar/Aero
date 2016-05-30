@@ -260,7 +260,7 @@ public class PassageiroDAO {
         
         //String sql = "UPDATE passageiro SET " + "CPF = '"+ passageiro.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
         String sql = "UPDATE passageiro SET "
-                + "idPassageiro = "+ parseInt(passageiro.getIdPassageiro())+", "
+                //+ "idPassageiro = "+ parseInt(passageiro.getIdPassageiro())+", "
                 + "nomePassageiro = '" + passageiro.getNomePassageiro() + "', "
                 + "nascimentoPassageiro = '" + passageiro.getNascimentoPassageiro() + "', "
                 + "rgPassageiro = '" + passageiro.getRgPassageiro() + "', "
@@ -269,8 +269,9 @@ public class PassageiroDAO {
                 + "contatoNome = '" + passageiro.getContatoNome() + "', "
                 + "contatoTelefone = '" + passageiro.getContatoTelefone() + "', "
                 + "responsavelFinanceiro = '" + passageiro.getResponsavelFinanceiro() + "', "
-                + "responsavelCPF = '" + passageiro.getResponsavelCPF() + "'";
-             
+                + "responsavelCPF = '" + passageiro.getResponsavelCPF() + "' "
+                + " WHERE RGPASSAGEIRO = '" + vrg +"'";
+        System.out.println(sql);
         try {
             stmt.execute(sql);
            
