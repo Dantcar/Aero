@@ -287,9 +287,7 @@ public class PassageiroDAO {
          msg = msg+"Conexão ao banco fechada";
          JOptionPane.showMessageDialog(null,msg );   
         }
-        
-   
-         
+            
     }//fim alterar passageiro
     
      /**
@@ -324,12 +322,12 @@ public class PassageiroDAO {
             }
             
             msg = msg+"Dados do passageiro excluidos com sucesso \n";
-           // JOptionPane.showMessageDialog(null, msg );
+          
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg+e);
             msg = reduzString(msg);
             msg = msg+"Erro de gravação no BD \n";
-           // JOptionPane.showMessageDialog(null,msg );
+          
         }
         close();
         if (conexao.isClosed()){
