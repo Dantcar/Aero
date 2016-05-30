@@ -59,6 +59,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnAlterarPassageiro.setEnabled(false);
         btnSalvarPassageiro.setEnabled(true);
         btnEditarPassageiro.setEnabled(false);
+        btnExcluirPassageiro.setEnabled(false);
         
         dt = new Date();
         jspNascimentoPassageiro.setValue(dt);
@@ -720,7 +721,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnAlterarPassageiro.setEnabled(false);
         btnSalvarPassageiro.setEnabled(false);
         btnEditarPassageiro.setEnabled(true);
-        
+        btnExcluirPassageiro.setEnabled(true);
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
 
@@ -868,7 +869,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 PassageiroCtrl cPassageiro = new PassageiroCtrl();
                 cPassageiro.deletarPassageiroCtrl(passageiro, oldRG);
                 btnLimparPassageiro.doClick(); //Limpar tela Passageiro
-                                
+                btnExcluirPassageiro.setEnabled(false);
                 flag = true;
             
             }
