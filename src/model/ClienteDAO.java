@@ -10,8 +10,6 @@ package model;
 
 import static Control.Util.reduzString;
 import java.awt.HeadlessException;
-import static java.lang.Integer.parseInt;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Classe Cliente DAO
+ * 
  * @author deciodecarvalho
  */
 public class ClienteDAO {

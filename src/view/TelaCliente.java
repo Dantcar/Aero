@@ -67,6 +67,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         //inicalizando valores de variáveis de tela
         cbxUF.setSelectedIndex(-1);
         btnAlterarCliente.setEnabled(false);
+        btnExcluirCliente.setEnabled(false);
         dtCliente = new Date();
 
         jspNascimento.setValue(dtCliente);
@@ -593,6 +594,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         btnSalvarCliente.setEnabled(true);
         btnAlterarCliente.setEnabled(false);
         btnEditarCliente.setEnabled(false);
+        btnExcluirCliente.setEnabled(false);
         tctBairro.setText(null);
         tftCep.setText(null);
         tctCidade.setText(null);
@@ -821,6 +823,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         btnSalvarCliente.setEnabled(false);
         btnAlterarCliente.setEnabled(false);
         btnEditarCliente.setEnabled(true);
+        btnExcluirCliente.setEnabled(true);
+        btnPesquisarCep.setEnabled(false);
         boolean flag = false;
 
         //inicio
@@ -971,6 +975,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
         btnAlterarCliente.setEnabled(true);
         btnEditarCliente.setEnabled(false);
+        btnPesquisarCep.setEnabled(true);
     }//GEN-LAST:event_btnEditarClienteActionPerformed
 
     private void jspNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseClicked

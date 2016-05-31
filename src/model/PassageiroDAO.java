@@ -216,7 +216,7 @@ public class PassageiroDAO {
         } catch (SQLException ex) {
             msg = reduzString(msg+ex);
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -224,7 +224,7 @@ public class PassageiroDAO {
         } catch (SQLException ex) {
             msg = reduzString(msg+ex);
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -306,7 +306,7 @@ public class PassageiroDAO {
      } catch (SQLException ex) {
          msg = msg+ex;
          msg = reduzString(msg);
-         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
      }
         
         String sql ="DELETE FROM passageiro WHERE RGPASSAGEIRO = '" + vrg + "'";
