@@ -23,6 +23,7 @@ import model.EndCep;
 
 
 public class Util {
+    private static String resultado="<html><font color='Red'size='4'><strong>";
     private static String vdia, vmes, vano;
     private static Date vhoje;
     public static ArrayList<model.EndCep> arrayEnd;
@@ -112,6 +113,20 @@ public class Util {
     }
     
     public static String reduzString(String msg){
+              
+        int tamanho = msg.length();
+        if (tamanho<80){
+        resultado = resultado+ msg;
+        }else
+       {
+       resultado = resultado+msg.substring(0,69)+"\n";
+       msg = msg.substring(69,tamanho);
+       reduzString(msg);
+       }
+        return resultado;
+    }
+    
+    public static String myString(String msg){
         int tamanho = msg.length();
         if (tamanho>75){
             msg = "<html><font color='Red'size='3'><strong>"+msg.substring(0, 76)+"</strong></font></html>"+"\n"
