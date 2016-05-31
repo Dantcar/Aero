@@ -49,6 +49,10 @@ public class AeronaveDAO {
         }
     }//fim close()
 
+    /**
+     * Método para buscar ultimo idAeronave
+     * @return 
+     */
     public int buscarIdAeronaveAtual() {
         int resposta = 0;
         String msg;
@@ -91,6 +95,11 @@ public class AeronaveDAO {
 
     }//fim buscar idAeronaveAtual
 
+    /**
+     * Método para verificar se existe a aernovae pelo prefixo
+     * @param prefixo
+     * @return 
+     */
     public boolean buscarExisteAeronavePrefixo(String prefixo) {
         boolean resposta = true;
         String msg = "";
@@ -128,5 +137,36 @@ public class AeronaveDAO {
 
         return resposta;
     }
+    
+    /**
+     * Método para buscar uma aeronave enviando o prefixo
+     * @param prefixo
+     * @return
+     * @throws SQLException 
+     */
+    public Aeronave buscarAeronavePrefixo(String prefixo) throws SQLException{
+        Aeronave aeronave = new Aeronave();
+        String msg;
+        msg="";
+        
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        //stmt = conexao.createStatement();
+        
+        stmt = conexao.createStatement(
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+        rs = stmt.executeQuery("SELECT * FROM aeronave WHERE prefixo = '" + prefixo +"'");
+        if(rs.first()){
+          aeronave.setIdAeronave(rs.getString(1));
+          aeronave.setPrefixo(rs.getString(2));
+          aeronave.setSeatEconomyClasse(rs.getInt(3));
+          aeronave.setSeatFirstClasse(rs.getInt(4));
+          aeronave.setSeatBusinesClasse(rs.getInt(5));
+          aeronave.setModelo(rs.getString(6));
+          aeronave.setFabricante(rs.getString(7));
+        }
+        return aeronave;
+    }//fim buscarAeronavePrefixo
 
 }

@@ -224,7 +224,7 @@ public class PassageiroDAO {
                 resposta = false;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
             msg = "" + ex;
             JOptionPane.showMessageDialog(null, reduzString(msg));
             close();
