@@ -216,38 +216,22 @@ public class ClienteDAO {
                        ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery("SELECT * FROM cliente WHERE rg = '" + rg + "'");
        if(rs.first()){
-           //cliente.idCliente
+        
             cliente.setIdCliente(rs.getString(1));
-            //cliente.nome;
             cliente.setNome(rs.getString(2));
-            //cliente.nascimento;
             cliente.setNascimento(rs.getString(3));
-            //cliente.endereco;
             cliente.setEndereco(rs.getString(4));
-            //clente.Numero;
             cliente.setNumero(rs.getString(5));
-            //cliente.Bairro;
             cliente.setBairro(rs.getString(6));
-            //cliente.cidade;
             cliente.setCidade(rs.getString(7));
-            //cliente.uf;
             cliente.setUf(rs.getString(8));
-            //cliente.cep;
             cliente.setCep(rs.getString(9));
-            //cliente.email;
             cliente.setEmail(rs.getString(10));
-            //cliente.telefone;
             cliente.setTelefone(rs.getString(11));
-            //cliente.rg;
             cliente.setRg(rs.getString(12));
-            //cliente.cpf;
             cliente.setCpf(rs.getString(13));
              close();
-            
-            System.out.println("Estamos no método buscarClienteRG em clienteDAO " +rg+"\n");
-            System.out.println("nome " +cliente.getNome()+"\n");
-            System.out.println("Nascimento " +cliente.getNascimento()+"\n");
-            
+                        
             return cliente;
            
         } else {
@@ -268,12 +252,11 @@ public class ClienteDAO {
     public void inserirNovoCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
         String msg;
         
-                
         int idCliente = buscarIdClienteAtual();
-        System.out.println(idCliente);
+        //System.out.println(idCliente);
         idCliente = idCliente + 1;
         
-        System.out.println("\nEste id vai pro banco :"+idCliente);
+        //System.out.println("\nEste id vai pro banco :"+idCliente);
         msg="";
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
@@ -358,7 +341,7 @@ public class ClienteDAO {
          JOptionPane.showMessageDialog(null,msg );   
         }
          
-    }//fim inserir cliente
+    }//fim alterar cliente
 
     /**
      * método para deletar o cliente selecionado após nova confirmação.

@@ -9,6 +9,7 @@
 package model;
 
 import static Control.Util.reduzString;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -213,8 +214,85 @@ public class AeronaveDAO {
 
     } //fim inserirAeronave
 
-    public void alterarAeronave(Aeronave aeronave, String vprefixo) {
-
+    /**
+     * Método para realizar alterações na Base dados Aeronave
+     * @param aeronave 
+     * @param vprefixo
+     * @throws SQLException 
+     */
+    public void alterarAeronave(Aeronave aeronave, String vprefixo) throws SQLException {
+        String msg;
+        msg="";
+        conexao = DBAeroFast.getConnection();
+        stmt = conexao.createStatement();
+        
+        String sql = "UPDATE aeronave SET "
+                //+ "idCliente = "+ parseInt(cliente.getIdCliente())+", "
+                + "prefixo = '" + aeronave.getPrefixo() + "', "
+                + "seateconomyclasse = '" + aeronave.getSeatEconomyClasse() + "', "
+                + "seatfirstclasse = '" + aeronave.getSeatFirstClasse() + "', "
+                + "seatbusinesclasse = '" + aeronave.getSeatBusinesClasse() + "', "
+                + "modelo = '" + aeronave.getModelo() + "', "
+                + "fabricante = '" + aeronave.getFabricante() + "', "
+                + " WHERE prefixo = '" + vprefixo + "'";
+        
+        try {
+            stmt.execute(sql);
+           
+            msg = msg+"Dados da aeronave alterados com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
+        } catch (SQLException | HeadlessException e) {
+            msg = reduzString(msg+e);
+            msg = reduzString(msg);
+            msg = msg+"Erro de gravação no BD \n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
+        }
+    
     }//fim método alterarAeronave
+    
+    public void deletarAeronave(Aeronave aeronave, String vprefixo) throws SQLException{
+        String msg;
+        msg="";
+        
+        conexao = DBAeroFast.getConnection();
+     try {
+         stmt = conexao.createStatement();
+     } catch (SQLException ex) {
+         msg = msg+ex;
+         msg = reduzString(msg);
+         Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+        String sql ="DELETE FROM aeronave WHERE prefixo = '" + vprefixo + "'";
+               
+        try {
+            int n = JOptionPane.showConfirmDialog(
+            null,
+            "Confirma Deletar Aeronave?",
+            "Confirmar Deletar Aeronave",
+            JOptionPane.YES_NO_OPTION);
+            if(true){
+            stmt.execute(sql);
+            }
+            
+            msg = msg+"Dados da aeronave excluidos com sucesso \n";
+           // JOptionPane.showMessageDialog(null, msg );
+        } catch (SQLException | HeadlessException e) {
+            msg = reduzString(msg+e);
+            msg = reduzString(msg);
+            msg = msg+"Erro de gravação no BD \n";
+           // JOptionPane.showMessageDialog(null,msg );
+        }
+        close();
+        if (conexao.isClosed()){
+         msg = msg+"Conexão ao banco fechada";
+         JOptionPane.showMessageDialog(null,msg );   
+        } 
+    }//fim deletarAeronave
 
 }
