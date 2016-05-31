@@ -51,7 +51,8 @@ public class AeronaveDAO {
 
     /**
      * Método para buscar ultimo idAeronave
-     * @return 
+     *
+     * @return
      */
     public int buscarIdAeronaveAtual() {
         int resposta = 0;
@@ -97,8 +98,9 @@ public class AeronaveDAO {
 
     /**
      * Método para verificar se existe a aernovae pelo prefixo
+     *
      * @param prefixo
-     * @return 
+     * @return
      */
     public boolean buscarExisteAeronavePrefixo(String prefixo) {
         boolean resposta = true;
@@ -136,37 +138,83 @@ public class AeronaveDAO {
         }
 
         return resposta;
-    }
-    
+    }// fim buscarExisteAeronavePrefixo
+
     /**
      * Método para buscar uma aeronave enviando o prefixo
+     *
      * @param prefixo
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public Aeronave buscarAeronavePrefixo(String prefixo) throws SQLException{
+    public Aeronave buscarAeronavePrefixo(String prefixo) throws SQLException {
         Aeronave aeronave = new Aeronave();
         String msg;
-        msg="";
-        
+        msg = "";
+
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         //stmt = conexao.createStatement();
-        
+
         stmt = conexao.createStatement(
-                        ResultSet.TYPE_SCROLL_INSENSITIVE,
-                        ResultSet.CONCUR_READ_ONLY);
-        rs = stmt.executeQuery("SELECT * FROM aeronave WHERE prefixo = '" + prefixo +"'");
-        if(rs.first()){
-          aeronave.setIdAeronave(rs.getString(1));
-          aeronave.setPrefixo(rs.getString(2));
-          aeronave.setSeatEconomyClasse(rs.getInt(3));
-          aeronave.setSeatFirstClasse(rs.getInt(4));
-          aeronave.setSeatBusinesClasse(rs.getInt(5));
-          aeronave.setModelo(rs.getString(6));
-          aeronave.setFabricante(rs.getString(7));
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        rs = stmt.executeQuery("SELECT * FROM aeronave WHERE prefixo = '" + prefixo + "'");
+        if (rs.first()) {
+            aeronave.setIdAeronave(rs.getString(1));
+            aeronave.setPrefixo(rs.getString(2));
+            aeronave.setSeatEconomyClasse(rs.getInt(3));
+            aeronave.setSeatFirstClasse(rs.getInt(4));
+            aeronave.setSeatBusinesClasse(rs.getInt(5));
+            aeronave.setModelo(rs.getString(6));
+            aeronave.setFabricante(rs.getString(7));
         }
         return aeronave;
     }//fim buscarAeronavePrefixo
+
+    /**
+     * Método para inserir nova aeronave na base de dados Aerofast
+     *
+     * @param aeronave
+     * @throws SQLException
+     */
+    public void inserirNovaAeronave(Aeronave aeronave) throws SQLException {
+        String msg;
+        msg = "";
+
+        int idAeronave = buscarIdAeronaveAtual();
+        System.out.println(idAeronave);
+        idAeronave = idAeronave + 1;
+
+        System.out.println("\nEste id vai pro banco:" + idAeronave);
+
+        conexao = DBAeroFast.getConnection();
+        stmt = conexao.createStatement();
+        String sql = "INSERT INTO aeronave VALUES ("
+                + idAeronave + ", "
+                + "'" + aeronave.getPrefixo() + "', "
+                + "'" + aeronave.getSeatEconomyClasse() + "', "
+                + "'" + aeronave.getSeatFirstClasse() + "', "
+                + "'" + aeronave.getSeatBusinesClasse() + "', "
+                + "'" + aeronave.getModelo() + "', "
+                + "'" + aeronave.getFabricante() + "')";
+
+        try {
+            stmt.execute(sql);
+            msg = msg + "Dados do cliente inseridos com sucesso \n";
+        } catch (SQLException e) {
+            msg = msg + "Erro de gravação no BD \n";
+        }
+        close();
+        if (conexao.isClosed()) {
+            msg = msg + "Conexão ao banco fechada";
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+    } //fim inserirAeronave
+
+    public void alterarAeronave(Aeronave aeronave, String vprefixo) {
+
+    }//fim método alterarAeronave
 
 }
