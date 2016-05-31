@@ -69,7 +69,7 @@ public class PassageiroDAO {
         }
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM passageiro ORDER BY 1 DESC"); //select * from DAC.CLIENTE order BY 1 DESC
+            rs = stmt.executeQuery("SELECT * FROM passageiro ORDER BY 1 DESC"); 
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
@@ -113,7 +113,7 @@ public class PassageiroDAO {
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
         String sql = "INSERT INTO passageiro VALUES ("
-                //+ parseInt(passageiro.getIdCliente()) +", "
+                
                 + idPassageiro + ", "
                 + "'" + passageiro.getNomePassageiro() + "', "
                 + "'" + passageiro.getNascimentoPassageiro() + "', "
@@ -163,25 +163,16 @@ public class PassageiroDAO {
                 ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rgpassageiro = '" + rg + "'");
         if (rs.first()) {
-            //passageiro.idCliente
+            
             passageiro.setIdPassageiro(rs.getString(1));
-            //passageiro.nome;
             passageiro.setNomePassageiro(rs.getString(2));
-            //passageiro.nascimento;
             passageiro.setNascimentoPassageiro(rs.getString(3));
-            //passageiro.endereco;
             passageiro.setRgPassageiro(rs.getString(4));
-            //clente.Numero;
             passageiro.setTelefonePassageiro(rs.getString(5));
-            //passageiro.Bairro;
             passageiro.setEmailPassageiro(rs.getString(6));
-            //passageiro.cidade;
             passageiro.setContatoNome(rs.getString(7));
-            //passageiro.uf;
             passageiro.setContatoTelefone(rs.getString(8));
-            //passageiro.cep;
             passageiro.setResponsavelFinanceiro(rs.getString(9));
-            //passageiro.email;
             passageiro.setResponsavelCPF(rs.getString(10));
 
             close();
