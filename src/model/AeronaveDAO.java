@@ -62,7 +62,7 @@ public class AeronaveDAO {
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -81,7 +81,7 @@ public class AeronaveDAO {
                 close();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
             msg = "" + ex;
             JOptionPane.showMessageDialog(null, reduzString(msg));
             close();
@@ -90,25 +90,43 @@ public class AeronaveDAO {
         return resposta;
 
     }//fim buscar idAeronaveAtual
-    
-    public boolean buscarExisteAeronavePrefixo(String prefixo){
+
+    public boolean buscarExisteAeronavePrefixo(String prefixo) {
         boolean resposta = true;
-        String msg;
-        
+        String msg = "";
+
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
-            try {
-                 stmt =conexao.createStatement(
-                 ResultSet.TYPE_SCROLL_INSENSITIVE,
-                 ResultSet.CONCUR_READ_ONLY);
-            } catch (SQLException ex) {
-                 JOptionPane.showMessageDialog(null, reduzString(msg + ex));
-                 Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            
-            
-            return resposta;
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            rs = stmt.executeQuery("SELECT * FROM aeronave WHERE prefixo = '" + prefixo + "'");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            if (rs.first()) {
+                close();
+                resposta = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+            msg = "" + ex;
+            JOptionPane.showMessageDialog(null, reduzString(msg));
+            close();
+            resposta = false;
+        }
+
+        return resposta;
     }
-    
+
 }
