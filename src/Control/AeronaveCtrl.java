@@ -44,5 +44,11 @@ public class AeronaveCtrl {
         return aeronave;
     }
     
+    public void deletarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException{
+       AeronaveDAO aeroDAO = new AeronaveDAO();
+       aeroDAO.deletarAeronave(aeronave, prefixo);
+        
+    }
+    
 }
 

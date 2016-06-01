@@ -8,10 +8,16 @@
  */
 package view;
 
+import Control.AeronaveCtrl;
+import static Control.Util.reduzString;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Aeronave;
 import Control.ValidaCampos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author deciodecarvalho
@@ -20,32 +26,33 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
 
     public static ArrayList<model.Aeronave> arrayAero;
     public static boolean temAero;
-    
+    private static String oldPrefixo; //utilizar na alteração inclusive do prefixo
+
     /**
-    * Instanciando objeto Cliente
-    */
-    
-    
-    /**
-     * Creates new form TelaCliente
+     * Instanciando objeto Aeronave
      */
-       public TelaAeronave() {
-        
-        
+    /**
+     * Creates new form TelaAeronave
+     */
+    public TelaAeronave() {
+
         initComponents();
-        if (!temAero){
+        if (!temAero) {
             arrayAero = new ArrayList<>();
             temAero = true;
         }
-        
+        //Status dos botões 
+        btnAlterarAeronave.setEnabled(false);
+        btnSalvarAeronave.setEnabled(true);
+        btnEditarAeronave.setEnabled(false);
+        btnExcluirAeronave.setEnabled(false);
+        //controle da mensagem true se encontrou e false se não
         //inicalizando valores de variáveis de tela
         tftClasseEconomica.setText("0");
         tftClasseEmpresarial.setText("0");
         tftPrimeiraClasse.setText("0");
-               
-    }
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -406,40 +413,58 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairPassageiroActionPerformed
 
     private void btnPesquisarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarAeronaveActionPerformed
+        //Status dos botões 
+        btnAlterarAeronave.setEnabled(false);
+        btnSalvarAeronave.setEnabled(false);
+        btnEditarAeronave.setEnabled(true);
+        btnExcluirAeronave.setEnabled(true);
+        //controle da mensagem true se encontrou e false se não
         boolean flag = false;
+
+        AeronaveCtrl cAeronave = new AeronaveCtrl();
+        Aeronave aeronave;
+        aeronave = new Aeronave();
+
+        String msg = "";
+
+        try {
+            aeronave = cAeronave.receberAeronavePrefixo(tftPrefixoAeronave.getText());
+            if (aeronave != null) {
+                oldPrefixo = tftPrefixoAeronave.getText(); //valor a ser utilizado na alteração
+
+                tctModeloAeronave.setText(aeronave.getModelo());
+                tftPrefixoAeronave.setText(aeronave.getPrefixo());
+                tftClasseEconomica.setText(aeronave.getSeatEconomyClasse() + "");
+                tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
+                tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
+                tctFabricanteAeronave.setText(aeronave.getFabricante());
+                flag = true;
+            }//fim do if
+            else {
+                msg = msg + "Aeronave não encontrada!!!, Entre com outro prefixo";
+                JOptionPane.showMessageDialog(this, msg);
+            }
+
+        } catch (ClassNotFoundException ex) {
+            msg = reduzString(msg+ex);
+            Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            msg=msg+"Nenhum Cliente Cadastrado!!" ;
+            Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (flag == false) {
+            msg=msg+"Nenhuma Aeronave Cadastrada!!" ;
+            JOptionPane.showMessageDialog(this,msg );
+        }
         
-       for(int i = 0; i < arrayAero.size(); i++){
-       System.out.println("Estou no for da Aeronave \n"
-               + "Este é o valor de tela do modelo:"+tftPrefixoAeronave.getText().trim()
-               + "\n"
-               + "Este é o valor dentro do Array:"+arrayAero.get(i).getPrefixo()
-               + "");
-       if(tftPrefixoAeronave.getText().trim().equals(arrayAero.get(i).getPrefixo())){
-       //if(tctModeloAeronave.getText().trim().equals(arrayAero.get(i).getModelo())){
-       tctModeloAeronave.setText(arrayAero.get(i).getModelo());
-       tftPrefixoAeronave.setText(arrayAero.get(i).getPrefixo());
-       tftClasseEconomica.setText(arrayAero.get(i).getSeatEconomyClasse()+"");
-       tftClasseEmpresarial.setText(arrayAero.get(i).getSeatBusinesClasse()+"");
-       tftPrimeiraClasse.setText(arrayAero.get(i).getSeatFirstClasse()+"");
-       tctFabricanteAeronave.setText(arrayAero.get(i).getFabricante());
-       
-       flag = true;
-       
-        }//fim do if
-       }// fim do for
-       
-       if(arrayAero.isEmpty())
-            JOptionPane.showMessageDialog(this,"Nenhum Aeronave Cadastrada!!");
-       else if (flag == false)
-            JOptionPane.showMessageDialog(this, "Aeronave não encontrada!!!");   
-       
+        
     }//GEN-LAST:event_btnPesquisarAeronaveActionPerformed
 
     private void btnSalvarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAeronaveActionPerformed
 
         int id1 = arrayAero.size();
         id1++;
-        String id = id1+"";
+        String id = id1 + "";
         Aeronave objAero;
         objAero = new Aeronave();
 
@@ -453,14 +478,14 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         objAero.setSeatBusinesClasse(Integer.parseInt(tftClasseEmpresarial.getText()));
         objAero.setModelo(tctModeloAeronave.getText());
         objAero.setFabricante(tctFabricanteAeronave.getText());
-        
+
         String msg;
         msg = "";
 
         /**
-         * 
+         *
          * Validações para o Form Aeronave (objAero)
-         * 
+         *
          */
         boolean validaModelo = ValidaCampos.validaVazio(tctModeloAeronave.getText().trim());
         boolean validaPrefixo = ValidaCampos.validaVazio(tftPrefixoAeronave.getText().trim());
@@ -468,7 +493,6 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         boolean validaClasseP = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftPrimeiraClasse.getText().trim()));
         boolean validaClasseB = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEmpresarial.getText().trim()));
         boolean validaFabricante = ValidaCampos.validaVazio(tctFabricanteAeronave.getText());
-        
 
         if (validaModelo) {
         } else {
@@ -479,40 +503,38 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         } else {
             msg = msg + "Campo Prefixo Vazio" + "\n";
         }
-        
+
         if (validaClasseE) {
         } else {
-            msg = msg + "Campo Classe Economica invalido: "+ tftClasseEconomica.getText() + "\n";
+            msg = msg + "Campo Classe Economica invalido: " + tftClasseEconomica.getText() + "\n";
             this.tftClasseEconomica.setText(null);
         }
-        
+
         if (validaClasseP) {
         } else {
-            msg = msg + "Campo Classe Primeira invalido: "+ tftPrimeiraClasse.getText() + "\n";
+            msg = msg + "Campo Classe Primeira invalido: " + tftPrimeiraClasse.getText() + "\n";
             this.tftPrimeiraClasse.setText(null);
         }
-        
+
         if (validaClasseB) {
         } else {
-            msg = msg + "Campo Classe Empresarial invalido: "+ tftClasseEmpresarial.getText() + "\n";
+            msg = msg + "Campo Classe Empresarial invalido: " + tftClasseEmpresarial.getText() + "\n";
             this.tftClasseEmpresarial.setText(null);
         }
-        
+
         if (validaFabricante) {
         } else {
             msg = msg + "Campo Fabricante Vazio" + "\n";
         }
-        
-                
-        if ("".equals(msg)){
+
+        if ("".equals(msg)) {
             msg = "Dados Enviados ao banco de dados do sistema!";
             boolean resultadoAeronave = arrayAero.add(objAero);
-            JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Resposta se adcionou nova Aeronave? "+resultadoAeronave+" id:"+id);
+            JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Resposta se adcionou nova Aeronave? " + resultadoAeronave + " id:" + id);
             btnLimparAeronave.doClick();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, msg,"Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE );
+        } else {
+            JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarAeronaveActionPerformed
 
@@ -521,12 +543,12 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tftClasseEconomicaActionPerformed
 
     private void btnLimparAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparAeronaveActionPerformed
-       tctModeloAeronave.setText(null);
-       tftPrefixoAeronave.setText(null);
-       tctFabricanteAeronave.setText(null);
-       tftClasseEconomica.setText("0");
-       tftClasseEmpresarial.setText("0");
-       tftPrimeiraClasse.setText("0");
+        tctModeloAeronave.setText(null);
+        tftPrefixoAeronave.setText(null);
+        tctFabricanteAeronave.setText(null);
+        tftClasseEconomica.setText("0");
+        tftClasseEmpresarial.setText("0");
+        tftPrimeiraClasse.setText("0");
     }//GEN-LAST:event_btnLimparAeronaveActionPerformed
 
     private void tftClasseEmpresarialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEmpresarialActionPerformed
@@ -538,26 +560,27 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tftPrimeiraClasseActionPerformed
 
     private void btnExcluirAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirAeronaveActionPerformed
-       boolean flag = false;
-        
-       for(int i = 0; i < arrayAero.size(); i++){
-       
-       if(tftPrefixoAeronave.getText().trim().equals(arrayAero.get(i).getPrefixo())){
-           String removidaAeronave = arrayAero.get(i).getPrefixo();
-           Aeronave removida = arrayAero.remove(i);
-           
-       JOptionPane.showMessageDialog(this,"Aeronave: "+removidaAeronave+" Removida!");
-       btnLimparAeronave.doClick(); //Limpar tela
-            
-       flag = true;
-       
-        }//fim do if
-       }// fim do for
-       
-       if(arrayAero.isEmpty())
-            JOptionPane.showMessageDialog(this,"Nenhum Aeronave Cadastrada!!");
-       else if (flag == false)
-            JOptionPane.showMessageDialog(this, "Aeronave não encontrada!!!, Entre com outro prefixo.");   
+        boolean flag = false;
+
+        for (int i = 0; i < arrayAero.size(); i++) {
+
+            if (tftPrefixoAeronave.getText().trim().equals(arrayAero.get(i).getPrefixo())) {
+                String removidaAeronave = arrayAero.get(i).getPrefixo();
+                Aeronave removida = arrayAero.remove(i);
+
+                JOptionPane.showMessageDialog(this, "Aeronave: " + removidaAeronave + " Removida!");
+                btnLimparAeronave.doClick(); //Limpar tela
+
+                flag = true;
+
+            }//fim do if
+        }// fim do for
+
+        if (arrayAero.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum Aeronave Cadastrada!!");
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Aeronave não encontrada!!!, Entre com outro prefixo.");
+        }
     }//GEN-LAST:event_btnExcluirAeronaveActionPerformed
 
     private void btnEditarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAeronaveActionPerformed
@@ -607,7 +630,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -651,5 +674,4 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField tftPrimeiraClasse;
     // End of variables declaration//GEN-END:variables
 
-    
 }
