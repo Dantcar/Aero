@@ -16,13 +16,25 @@ import model.PassageiroDAO;
 
 public class PassageiroCtrl {
 
+    /**
+     * Método para controlar busca de passageiro enviando rg.
+     * @param rg
+     * @return 
+     */
     public static boolean receberPesquisarPassageiroRG(String rg) {
         boolean resposta = false;
         PassageiroDAO passageiro = new PassageiroDAO();
         resposta = passageiro.buscarExistePassageiroRG(rg);
         return resposta;
     }
-
+    
+    /**
+     * Método para controlar busca de cliente fornecendo um cpf.
+     * @param cpf
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public static Cliente receberClienteCPF(String cpf) throws ClassNotFoundException, SQLException {
         ClienteDAO cliDAO = new ClienteDAO();
         Cliente cliente = cliDAO.buscarClienteCPF(cpf);
@@ -30,33 +42,64 @@ public class PassageiroCtrl {
         return cliente;
     }
     private Object passDAO;
-
+    
+    /*
+     * Método para controlar o recebimento de passageiro a ser incluido na base.
+     * @param passageiro
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void receberPassageiro(Passageiro passageiro) throws ClassNotFoundException, SQLException {
         PassageiroDAO passDAO = new PassageiroDAO();
         passDAO.inserirNovoPassageiro(passageiro);
     }
-
+    
+    /**
+     * Método de controle para receber um passageiro ao enviar seu rg.
+     * @param rg
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public static Passageiro receberPassageiroRG(String rg) throws ClassNotFoundException, SQLException {
         PassageiroDAO passDAO = new PassageiroDAO();
         Passageiro passageiro = passDAO.buscarPassageiroRG(rg);
         return passageiro;
     }
-
+    
+    /**
+     * Método de controle para receber os dados de cliente ao enviar seu rg.
+     * @param rg
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public static Cliente receberClienteRG(String rg) throws ClassNotFoundException, SQLException {
         ClienteDAO cliDAO = new ClienteDAO();
         Cliente cliente = cliDAO.buscarClienteRG(rg);
-        System.out.println("Estamos no método do controle receberClienteRG em PassageiroCtrl " + rg + "\n");
-        System.out.println("nome " + cliente.getNome() + "\n");
-        System.out.println("Nascimento " + cliente.getNascimento() + "\n");
         return cliente;
     }
     
+    /**
+     * Método de controle da alteração de um passageiro passando o seu rg.
+     * @param passageiro
+     * @param rg
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void alterarPassageiroCtrl(Passageiro passageiro, String rg) throws ClassNotFoundException, SQLException{
         PassageiroDAO passDAO = new PassageiroDAO();
         passDAO.alterarPassageiro(passageiro, rg);
     } 
     
-     public void deletarPassageiroCtrl(Passageiro passageiro, String rg) throws ClassNotFoundException, SQLException{
+    /**
+     * Método de controle para exclusão de um passageiro ao enviar seu rg.
+     * @param passageiro
+     * @param rg
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
+    public void deletarPassageiroCtrl(Passageiro passageiro, String rg) throws ClassNotFoundException, SQLException{
         PassageiroDAO passDAO = new PassageiroDAO();
         passDAO.deletarPassageiro(passageiro, rg);
     } 

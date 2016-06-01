@@ -202,7 +202,7 @@ public class AeronaveDAO {
 
         try {
             stmt.execute(sql);
-            msg = msg + "Dados do cliente inseridos com sucesso \n";
+            msg = msg + "Dados da aeronave inseridos com sucesso \n";
         } catch (SQLException e) {
             msg = msg + "Erro de gravação no BD \n";
         }
@@ -227,7 +227,7 @@ public class AeronaveDAO {
         stmt = conexao.createStatement();
         
         String sql = "UPDATE aeronave SET "
-                //+ "idCliente = "+ parseInt(cliente.getIdCliente())+", "
+                
                 + "prefixo = '" + aeronave.getPrefixo() + "', "
                 + "seateconomyclasse = '" + aeronave.getSeatEconomyClasse() + "', "
                 + "seatfirstclasse = '" + aeronave.getSeatFirstClasse() + "', "
@@ -255,6 +255,12 @@ public class AeronaveDAO {
     
     }//fim método alterarAeronave
     
+    /**
+     * Método para deletar uma aeronave do banco Aerofast enviando o seu prefixo
+     * @param aeronave
+     * @param vprefixo
+     * @throws SQLException 
+     */
     public void deletarAeronave(Aeronave aeronave, String vprefixo) throws SQLException{
         String msg;
         msg="";
