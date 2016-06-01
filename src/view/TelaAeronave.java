@@ -481,6 +481,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         objAero = new Aeronave();
         boolean flag = false; //ainda não alterou
         String msg = "";
+        String tituloMsg = ""; 
         objAero.setIdAeronave("0");
 
         /**
@@ -510,7 +511,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             } else {
                 msg = msg + "Campo Prefixo da aeronave já existe na base de dados Aerofast" + "\n";
             }
-            this.tftPrefixoAeronave.setText(null);
+            TelaAeronave.tftPrefixoAeronave.setText(null);
         }
 
         if (validaModelo) {
@@ -548,7 +549,6 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
 
         if ("".equals(msg)) {
            
-
             if (btnSalvarAeronave.isEnabled()) {
 
                 boolean resultadoAeronave = arrayAero.add(objAero);
@@ -562,10 +562,12 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
                         msg = msg + ex;
-                        JOptionPane.showMessageDialog(null, reduzString(msg));
+                        flag = false;
+                        //JOptionPane.showMessageDialog(null, reduzString(msg));
                     } catch (SQLException ex) {
                         msg = msg + ex;
-                        JOptionPane.showMessageDialog(null, reduzString(msg));
+                        flag = false;
+                        //JOptionPane.showMessageDialog(null, reduzString(msg));
                         Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -573,12 +575,13 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 btnLimparAeronave.doClick();
 
             } else {//Alteração Aeronave
-               
                 try {
                     cAeronave.alterarAeronaveCtrl(objAero, oldPrefixo);
                     msg = "Dados da Aeronave alterados com Sucesso";
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+                    flag = false;
                 }
                 btnLimparAeronave.doClick();
                 flag = true;
@@ -586,9 +589,13 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             btnLimparAeronave.doClick();
             btnSairAeronave.doClick();
         }else {
-            msg = "Campo Inválido ou vazio";
+            tituloMsg = "Campo Inválido ou vazio";
+            flag = false;
         }
-        JOptionPane.showMessageDialog(this, msg, "Tela Aeronave", JOptionPane.INFORMATION_MESSAGE);
+        if (flag==false){
+        JOptionPane.showMessageDialog(null, msg,tituloMsg,JOptionPane.WARNING_MESSAGE);
+        //JOptionPane.showMessageDialog(this, msg, "Tela Aeronave", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnSalvarAeronaveActionPerformed
 
     private void tftClasseEconomicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEconomicaActionPerformed

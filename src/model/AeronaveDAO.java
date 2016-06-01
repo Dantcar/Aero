@@ -192,7 +192,7 @@ public class AeronaveDAO {
         int fc = aeronave.getSeatFirstClasse();
         int ec = aeronave.getSeatEconomyClasse();
 
-        System.out.println("\nEste id vai pro banco:" + idAeronave + "bc: "+ bc+"fc: "+fc+"ec: "+ec);
+        //System.out.println("\nEste id vai pro banco:" + idAeronave + "bc: "+ bc+"fc: "+fc+"ec: "+ec);
 
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
@@ -206,7 +206,7 @@ public class AeronaveDAO {
                 + "'" + aeronave.getFabricante() + "')";
 
         try {
-            System.out.println("Esta é minha SQL: " + sql);
+            //System.out.println("Esta é minha SQL: " + sql);
             if (stmt.execute(sql));
             msg = msg + "Dados da aeronave inseridos com sucesso \n";
         } catch (SQLException e) {
@@ -233,22 +233,26 @@ public class AeronaveDAO {
         String msg;
         msg = "";
         conexao = DBAeroFast.getConnection();
-        stmt = conexao.createStatement();
+        stmt = conexao.createStatement(
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
 
         String sql = "UPDATE aeronave SET "
                 + "prefixo = '" + aeronave.getPrefixo() + "', "
-                + "seateconomyclasse = '" + aeronave.getSeatEconomyClasse() + "', "
-                + "seatfirstclasse = '" + aeronave.getSeatFirstClasse() + "', "
-                + "seatbusinesclasse = '" + aeronave.getSeatBusinesClasse() + "', "
+                + "seateconomyclasse = " + aeronave.getSeatEconomyClasse() + ", "
+                + "seatfirstclasse = " + aeronave.getSeatFirstClasse() + ", "
+                + "seatbusinesclasse = " + aeronave.getSeatBusinesClasse() + ", "
                 + "modelo = '" + aeronave.getModelo() + "', "
-                + "fabricante = '" + aeronave.getFabricante() + "', "
+                + "fabricante = '" + aeronave.getFabricante() + "' "
                 + " WHERE prefixo = '" + vprefixo + "'";
 
         try {
+           
             stmt.execute(sql);
-
+            System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso \n";
-            // JOptionPane.showMessageDialog(null, msg );
+            // JOptionPane.showMessageDialog(null, msg ); 
+           
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg + e);
             msg = reduzString(msg);
