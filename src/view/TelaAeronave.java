@@ -10,13 +10,13 @@ package view;
 
 import Control.AeronaveCtrl;
 import static Control.Util.reduzString;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import model.Aeronave;
 import Control.ValidaCampos;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Aeronave;
 
 /**
  *
@@ -69,7 +69,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         JPanelClienteBotoes = new javax.swing.JPanel();
         btnSalvarAeronave = new javax.swing.JButton();
         btnPesquisarAeronave = new javax.swing.JButton();
-        btnSairPassageiro = new javax.swing.JButton();
+        btnSairAeronave = new javax.swing.JButton();
         btnLimparAeronave = new javax.swing.JButton();
         btnExcluirAeronave = new javax.swing.JButton();
         btnEditarAeronave = new javax.swing.JButton();
@@ -88,7 +88,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         tftPrimeiraClasse = new javax.swing.JFormattedTextField();
         tftPrefixoAeronave = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         JPanelClienteTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -155,17 +155,17 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSairPassageiro.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairPassageiro.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnSairPassageiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
-        btnSairPassageiro.setText("Voltar");
-        btnSairPassageiro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSairPassageiro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnSairPassageiro.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnSairPassageiro.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnSairPassageiro.addActionListener(new java.awt.event.ActionListener() {
+        btnSairAeronave.setBackground(new java.awt.Color(204, 204, 204));
+        btnSairAeronave.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnSairAeronave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
+        btnSairAeronave.setText("Voltar");
+        btnSairAeronave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSairAeronave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSairAeronave.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnSairAeronave.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnSairAeronave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairPassageiroActionPerformed(evt);
+                btnSairAeronaveActionPerformed(evt);
             }
         });
 
@@ -248,7 +248,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluirAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSairAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         JPanelClienteBotoesLayout.setVerticalGroup(
             JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +257,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 .addGroup(JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisarAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSairPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSairAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluirAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditarAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,9 +408,9 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSairPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassageiroActionPerformed
+    private void btnSairAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairAeronaveActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnSairPassageiroActionPerformed
+    }//GEN-LAST:event_btnSairAeronaveActionPerformed
 
     private void btnPesquisarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarAeronaveActionPerformed
         //Status dos botões 
@@ -430,7 +430,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
 
         try {
             aeronave = cAeronave.receberAeronavePrefixo(tftPrefixoAeronave.getText());
-            if (aeronave != null ) {
+            if (aeronave != null) {
                 oldPrefixo = tftPrefixoAeronave.getText(); //valor a ser utilizado na alteração
 
                 tctModeloAeronave.setText(aeronave.getModelo());
@@ -449,8 +449,11 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, msg);
                 //desabilitar edição
                 habilitarDadosAeronave();
+                btnExcluirAeronave.setEnabled(false);
+                btnSalvarAeronave.setEnabled(true);
                 btnEditarAeronave.setEnabled(false);
-                 flag = true;
+                btnLimparAeronave.setEnabled(true);
+                flag = true;
             }
 
         } catch (ClassNotFoundException ex) {
@@ -463,33 +466,32 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         if (flag == false) {
             msg = msg + "Nenhuma Aeronave Cadastrada!!";
             JOptionPane.showMessageDialog(this, msg);
+            btnExcluirAeronave.setEnabled(false);
+            btnSalvarAeronave.setEnabled(true);
             btnEditarAeronave.setEnabled(false);
+            btnLimparAeronave.setEnabled(true);
         }
-        
+
 
     }//GEN-LAST:event_btnPesquisarAeronaveActionPerformed
 
     private void btnSalvarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAeronaveActionPerformed
-
-        int id1 = arrayAero.size();
-        id1++;
-        String id = id1 + "";
+        AeronaveCtrl cAeronave = new AeronaveCtrl();
         Aeronave objAero;
         objAero = new Aeronave();
+        boolean flag = false; //ainda não alterou
+        String msg = "";
+        objAero.setIdAeronave("0");
 
         /**
          * Preenchimento objeto objAero (Aeronave)
          */
-        objAero.setIdAeronave(id);
         objAero.setPrefixo(tftPrefixoAeronave.getText());
         objAero.setSeatEconomyClasse(Integer.parseInt(tftClasseEconomica.getText()));
         objAero.setSeatFirstClasse(Integer.parseInt(tftPrimeiraClasse.getText()));
         objAero.setSeatBusinesClasse(Integer.parseInt(tftClasseEmpresarial.getText()));
         objAero.setModelo(tctModeloAeronave.getText());
         objAero.setFabricante(tctFabricanteAeronave.getText());
-
-        String msg;
-        msg = "";
 
         /**
          *
@@ -502,6 +504,14 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         boolean validaClasseP = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftPrimeiraClasse.getText().trim()));
         boolean validaClasseB = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEmpresarial.getText().trim()));
         boolean validaFabricante = ValidaCampos.validaVazio(tctFabricanteAeronave.getText());
+        boolean validaPrefixoExiste = AeronaveCtrl.receberPesquisarAeronavePrefixo(tftPrefixoAeronave.getText());
+        if (btnSalvarAeronave.isEnabled()) {
+            if (validaPrefixoExiste) {
+            } else {
+                msg = msg + "Campo Prefixo da aeronave já existe na base de dados Aerofast" + "\n";
+            }
+            this.tftPrefixoAeronave.setText(null);
+        }
 
         if (validaModelo) {
         } else {
@@ -537,14 +547,48 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         }
 
         if ("".equals(msg)) {
-            msg = "Dados Enviados ao banco de dados do sistema!";
-            boolean resultadoAeronave = arrayAero.add(objAero);
-            JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Resposta se adcionou nova Aeronave? " + resultadoAeronave + " id:" + id);
+           
+
+            if (btnSalvarAeronave.isEnabled()) {
+
+                boolean resultadoAeronave = arrayAero.add(objAero);
+                if (resultadoAeronave) {
+                    try {
+                        cAeronave.receberAeronave(objAero);
+                        
+                         msg = "Dados Enviados ao banco de dados do sistema!";
+                         //JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
+                         flag =true;
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+                        msg = msg + ex;
+                        JOptionPane.showMessageDialog(null, reduzString(msg));
+                    } catch (SQLException ex) {
+                        msg = msg + ex;
+                        JOptionPane.showMessageDialog(null, reduzString(msg));
+                        Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                //JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
+                btnLimparAeronave.doClick();
+
+            } else {//Alteração Aeronave
+               
+                try {
+                    cAeronave.alterarAeronaveCtrl(objAero, oldPrefixo);
+                    msg = "Dados da Aeronave alterados com Sucesso";
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnLimparAeronave.doClick();
+                flag = true;
+            }
             btnLimparAeronave.doClick();
-        } else {
-            JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
+            btnSairAeronave.doClick();
+        }else {
+            msg = "Campo Inválido ou vazio";
         }
+        JOptionPane.showMessageDialog(this, msg, "Tela Aeronave", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSalvarAeronaveActionPerformed
 
     private void tftClasseEconomicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEconomicaActionPerformed
@@ -598,7 +642,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         btnAlterarAeronave.setEnabled(true);
         btnSalvarAeronave.setEnabled(false);
         btnEditarAeronave.setEnabled(false);
-        
+
         if (!tctModeloAeronave.isEditable()) {
             //msg = "Pode realizar alterações agora";
             habilitarDadosAeronave();
@@ -665,7 +709,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluirAeronave;
     private javax.swing.JButton btnLimparAeronave;
     private javax.swing.JButton btnPesquisarAeronave;
-    private javax.swing.JButton btnSairPassageiro;
+    private javax.swing.JButton btnSairAeronave;
     private javax.swing.JButton btnSalvarAeronave;
     private javax.swing.JLabel lblClasse1;
     private javax.swing.JLabel lblClasse2;
@@ -692,7 +736,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         tftPrimeiraClasse.setEditable(true);
 
     }
-    
+
     private void desabilitarDadosAeronave() {
         tctModeloAeronave.setEditable(false);
         tftPrefixoAeronave.setEditable(false);

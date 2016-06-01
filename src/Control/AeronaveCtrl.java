@@ -29,7 +29,8 @@ public class AeronaveCtrl {
         resposta = aeronave.buscarExisteAeronavePrefixo(prefixo);
         return resposta;
     }
-    
+
+       
      public void receberAeronave(Aeronave aeronave) throws ClassNotFoundException, SQLException {
         AeronaveDAO aeroDAO = new AeronaveDAO();
         aeroDAO.inserirNovaAeronave(aeronave);
@@ -42,6 +43,11 @@ public class AeronaveCtrl {
         //System.out.println("nome " + cliente.getNome() + "\n");
         //System.out.println("Nascimento " + cliente.getNascimento() + "\n");
         return aeronave;
+    }
+    
+    public void alterarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException{
+        AeronaveDAO aeroDAO = new AeronaveDAO();
+        aeroDAO.alterarAeronave(aeronave, prefixo);
     }
     
     public void deletarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException{

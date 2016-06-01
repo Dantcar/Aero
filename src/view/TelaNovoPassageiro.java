@@ -46,6 +46,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
     private static SimpleDateFormat sdfNascimentoPassageiro;
     private int dataAtual, dataIntNascimento;
     private static String oldRG; //utilizar na alteração inclusive do rgPassageiro
+
     /**
      * Creates new form TelaNovoPassageiro
      */
@@ -60,7 +61,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnSalvarPassageiro.setEnabled(true);
         btnEditarPassageiro.setEnabled(false);
         btnExcluirPassageiro.setEnabled(false);
-        
+
         dt = new Date();
         jspNascimentoPassageiro.setValue(dt);
         hojePassageiro = new Date();
@@ -674,9 +675,8 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
             this.tftCPFResponsavel.setText(null);
         }
 
-        //msg = msg +"oi oi oi \n";
         if ("".equals(msg)) {
-            //msg = "Dados Enviados ao banco de dados do sistema!";
+            msg = "Dados Enviados ao banco de dados do sistema!";
 
             if (btnSalvarPassageiro.isEnabled()) {
 
@@ -684,7 +684,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 try {
                     if (resultadoPassageiro) {
                         cPassageiro.receberPassageiro(objPass);
-                     }
+                    }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                     msg = msg + ex;
@@ -694,11 +694,11 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, reduzString(msg));
                     Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                // System.out.println("Resposta se adicionou novo Passageiro? "+resultadoPassageiro+" id:"+id);
+
             } else { //Alteração do passageiro
                 boolean flag = false; //ainda nao alterou
                 //oldRG =  tftRGPassageiro.getText();
-                
+
                 try {
                     cPassageiro.alterarPassageiroCtrl(objPass, oldRG);
                 } catch (ClassNotFoundException | SQLException ex) {
@@ -734,9 +734,9 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         try {
             passageiro = cPassageiro.receberPassageiroRG(tftRGPassageiro.getText());
             //if (Integer.parseInt(passageiro.getIdPassageiro()) > 0) {
-                if (passageiro != null) {
+            if (passageiro != null) {
                 tctPassageiro.setText(passageiro.getNomePassageiro());
-                oldRG =  tftRGPassageiro.getText();
+                oldRG = tftRGPassageiro.getText();
                 /**
                  * Tratamento do campo tipo jSpinner
                  */
@@ -757,26 +757,25 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 tftTelefoneContato.setText(passageiro.getContatoTelefone());
                 tctResponsavelFinanceiro.setText(passageiro.getResponsavelFinanceiro());
                 tftCPFResponsavel.setText(passageiro.getResponsavelCPF());
-                
-                
+
                 //desabilitar edição passageiro
                 desabilitarDadosPassageiro();
                 flag = true;
             }//fim do if
-            else{
-             msg = msg+"Passageiro não encontrado!!!, Entre com outro RG";   
-            JOptionPane.showMessageDialog(this, msg);
+            else {
+                msg = msg + "Passageiro não encontrado!!!, Entre com outro RG";
+                JOptionPane.showMessageDialog(this, msg);
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            msg = reduzString(msg+ex);
+            msg = reduzString(msg + ex);
             Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (flag == false) {
-            msg=msg+"Nenhum Cliente Cadastrado!!" ;
-            JOptionPane.showMessageDialog(this,msg );
+            msg = msg + "Nenhum Cliente Cadastrado!!";
+            JOptionPane.showMessageDialog(this, msg);
             //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
         }
-        
+
     }//GEN-LAST:event_btnPesquisarPassageiroActionPerformed
 
     private void btnSairPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassageiroActionPerformed
@@ -794,9 +793,9 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         tftCPFResponsavel.setText(null);
     }//GEN-LAST:event_btnLimparPassageiroActionPerformed
     /**
-    * Método para desabilitar edição dos dados da tela passageiro.
-    */
-    private void desabilitarDadosPassageiro(){
+     * Método para desabilitar edição dos dados da tela passageiro.
+     */
+    private void desabilitarDadosPassageiro() {
         tctPassageiro.setEditable(false);
         jspNascimentoPassageiro.setEnabled(false);  //setEnabled
         tftRGPassageiro.setEditable(false);
@@ -810,11 +809,11 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnPesquisarRG.setEnabled(false);
         btnPesquisarCPF.setEnabled(false);
     }
-    
+
     /**
-    * Método para desabilitar edição dos dados da tela passageiro.
-    */
-    private void habilitarDadosPassageiro(){
+     * Método para desabilitar edição dos dados da tela passageiro.
+     */
+    private void habilitarDadosPassageiro() {
         tctPassageiro.setEditable(true);
         jspNascimentoPassageiro.setEnabled(true);  //setEnabled
         tftRGPassageiro.setEditable(true);
@@ -833,16 +832,15 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnAlterarPassageiro.setEnabled(false);
         btnEditarPassageiro.setEnabled(false);
         boolean flag = false;
-            
+
             //inicio
-            
-            Passageiro passageiro;
-            
+        Passageiro passageiro;
+
         try {
             passageiro = receberPassageiroRG(tftRGPassageiro.getText());
             if (passageiro != null) {
-               oldRG =   tftRGPassageiro.getText();
-            /**
+                oldRG = tftRGPassageiro.getText();
+                /**
                  * Tratamento do campo tipo jSpinner
                  */
                 String sdataNascimento = passageiro.getNascimentoPassageiro();
@@ -862,8 +860,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 tftTelefoneContato.setText(passageiro.getContatoTelefone());
                 tctResponsavelFinanceiro.setText(passageiro.getResponsavelFinanceiro());
                 tftCPFResponsavel.setText(passageiro.getResponsavelCPF());
-                
-                
+
                 //desabilitar edição passageiro
                 desabilitarDadosPassageiro();
                 PassageiroCtrl cPassageiro = new PassageiroCtrl();
@@ -871,15 +868,15 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
                 btnLimparPassageiro.doClick(); //Limpar tela Passageiro
                 btnExcluirPassageiro.setEnabled(false);
                 flag = true;
-            
+
             }
-        
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
         }
-                    
+
         //fim do método excluirPassageiro
     }//GEN-LAST:event_btnExcluirPassageiroActionPerformed
 
@@ -977,7 +974,7 @@ public class TelaNovoPassageiro extends javax.swing.JInternalFrame {
         btnAlterarPassageiro.setEnabled(true);
         btnSalvarPassageiro.setEnabled(false);
         btnEditarPassageiro.setEnabled(false);
-        
+
         if (!tctPassageiro.isEditable()) {
             //msg = "Pode realizar alterações agora";
             habilitarDadosPassageiro();

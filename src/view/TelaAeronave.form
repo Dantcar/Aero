@@ -134,7 +134,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnExcluirAeronave" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnSairPassageiro" min="-2" pref="112" max="-2" attributes="0"/>
+                  <Component id="btnSairAeronave" min="-2" pref="112" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -145,7 +145,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSalvarAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnPesquisarAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSairPassageiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSairAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLimparAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnExcluirAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEditarAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -210,7 +210,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarAeronaveActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSairPassageiro">
+        <Component class="javax.swing.JButton" name="btnSairAeronave">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -232,7 +232,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairPassageiroActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairAeronaveActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLimparAeronave">
