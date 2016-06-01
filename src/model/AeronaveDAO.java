@@ -197,17 +197,19 @@ public class AeronaveDAO {
         String sql = "INSERT INTO aeronave VALUES ("
                 + idAeronave + ", "
                 + "'" + aeronave.getPrefixo() + "', "
-                + "'" + aeronave.getSeatEconomyClasse() + "', "
-                + "'" + aeronave.getSeatFirstClasse() + "', "
-                + "'" + aeronave.getSeatBusinesClasse() + "', "
+                + "' + Integer.parseInt(aeronave.getSeatEconomyClasse()) + ', "
+                + "' + Integer.parseInt(aeronave.getSeatFirstClasse()) + ', "
+                + "' + Integer.parseInt(aeronave.getSeatBusinesClasse()) + ', "
                 + "'" + aeronave.getModelo() + "', "
                 + "'" + aeronave.getFabricante() + "')";
 
         try {
-            stmt.execute(sql);
+            if(stmt.execute(sql));
             msg = msg + "Dados da aeronave inseridos com sucesso \n";
         } catch (SQLException e) {
+            msg = msg + e;
             msg = msg + "Erro de gravação no BD \n";
+            msg = reduzString(msg);
         }
         close();
         if (conexao.isClosed()) {
