@@ -141,7 +141,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         MenuVooAeronaveCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         MenuVooAeronaveCadastrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         MenuVooAeronaveCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/aeronave 40x40.jpg"))); // NOI18N
-        MenuVooAeronaveCadastrar.setText("Cadastrar Aeronave");
+        MenuVooAeronaveCadastrar.setText("Aeronave");
         MenuVooAeronaveCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuVooAeronaveCadastrarActionPerformed(evt);
@@ -276,11 +276,22 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSobreTelaActionPerformed
 
     private void MenuVooAeronaveCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuVooAeronaveCadastrarActionPerformed
-        Cadastro.montaTelaAeronave();
+        //Cadastro.montaTelaAeronave();
+        String tituloAeronave;
+        tituloAeronave = "Gestão Aeronave";
+        
+        TelaAeronave telaAeronave = new TelaAeronave();
+        telaAeronave.setTitle(tituloAeronave);
+        telaAeronave.setVisible(true);
+        add(telaAeronave, JLayeredPane.DEFAULT_LAYER);      
+        telaAeronave.setDefaultCloseOperation(1);
+        telaAeronave.setLocation(40, 5);
     }//GEN-LAST:event_MenuVooAeronaveCadastrarActionPerformed
 
     private void novaPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaPassagemActionPerformed
-        Cadastro.montaTelaNovaPassagem();
+       Cadastro.montaTelaNovaPassagem();
+        
+        
     }//GEN-LAST:event_novaPassagemActionPerformed
 
     private void MenuNovoVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuNovoVooActionPerformed
