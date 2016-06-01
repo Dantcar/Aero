@@ -170,6 +170,9 @@ public class AeronaveDAO {
             aeronave.setModelo(rs.getString(6));
             aeronave.setFabricante(rs.getString(7));
         }
+        else{
+            aeronave=null;
+        }
         return aeronave;
     }//fim buscarAeronavePrefixo
 

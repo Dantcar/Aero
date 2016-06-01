@@ -416,7 +416,8 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         //Status dos botões 
         btnAlterarAeronave.setEnabled(false);
         btnSalvarAeronave.setEnabled(false);
-        btnEditarAeronave.setEnabled(true);
+        btnEditarAeronave.setEnabled(false);
+        btnLimparAeronave.setEnabled(false);
         btnExcluirAeronave.setEnabled(true);
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
@@ -429,7 +430,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
 
         try {
             aeronave = cAeronave.receberAeronavePrefixo(tftPrefixoAeronave.getText());
-            if (aeronave != null) {
+            if (aeronave != null ) {
                 oldPrefixo = tftPrefixoAeronave.getText(); //valor a ser utilizado na alteração
 
                 tctModeloAeronave.setText(aeronave.getModelo());
@@ -438,26 +439,34 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
                 tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
                 tctFabricanteAeronave.setText(aeronave.getFabricante());
+                //desabilitar edição
+                desabilitarDadosAeronave();
+                btnEditarAeronave.setEnabled(true);
                 flag = true;
             }//fim do if
             else {
                 msg = msg + "Aeronave não encontrada!!!, Entre com outro prefixo";
                 JOptionPane.showMessageDialog(this, msg);
+                //desabilitar edição
+                habilitarDadosAeronave();
+                btnEditarAeronave.setEnabled(false);
+                 flag = true;
             }
 
         } catch (ClassNotFoundException ex) {
-            msg = reduzString(msg+ex);
+            msg = reduzString(msg + ex);
             Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            msg=msg+"Nenhum Cliente Cadastrado!!" ;
+            msg = msg + "Nenhum Aeronave Cadastrada!!";
             Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (flag == false) {
-            msg=msg+"Nenhuma Aeronave Cadastrada!!" ;
-            JOptionPane.showMessageDialog(this,msg );
+            msg = msg + "Nenhuma Aeronave Cadastrada!!";
+            JOptionPane.showMessageDialog(this, msg);
+            btnEditarAeronave.setEnabled(false);
         }
         
-        
+
     }//GEN-LAST:event_btnPesquisarAeronaveActionPerformed
 
     private void btnSalvarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAeronaveActionPerformed
@@ -589,10 +598,10 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         btnAlterarAeronave.setEnabled(true);
         btnSalvarAeronave.setEnabled(false);
         btnEditarAeronave.setEnabled(false);
-
+        
         if (!tctModeloAeronave.isEditable()) {
             //msg = "Pode realizar alterações agora";
-            ////habilitarDadosAeronave();
+            habilitarDadosAeronave();
             //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
         }
         btnAlterarAeronave.setEnabled(true);
@@ -674,4 +683,23 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField tftPrimeiraClasse;
     // End of variables declaration//GEN-END:variables
 
+    private void habilitarDadosAeronave() {
+        tctModeloAeronave.setEditable(true);
+        tftPrefixoAeronave.setEditable(true);
+        tctFabricanteAeronave.setEditable(true);
+        tftClasseEconomica.setEditable(true);
+        tftClasseEmpresarial.setEditable(true);
+        tftPrimeiraClasse.setEditable(true);
+
+    }
+    
+    private void desabilitarDadosAeronave() {
+        tctModeloAeronave.setEditable(false);
+        tftPrefixoAeronave.setEditable(false);
+        tctFabricanteAeronave.setEditable(false);
+        tftClasseEconomica.setEditable(false);
+        tftClasseEmpresarial.setEditable(false);
+        tftPrimeiraClasse.setEditable(false);
+
+    }
 }
