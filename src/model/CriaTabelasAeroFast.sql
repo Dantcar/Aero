@@ -22,11 +22,11 @@ CPF VARCHAR(18)not null primary key
 CREATE TABLE AERONAVE(
 idAeronave int not null,
 prefixo VARCHAR(12)not null primary key,
-seatEconomyClasse int,
-seatFirstClasse int,
-seatBusinesClasse int,
-modelo VARCHAR(50),
-fabricante VARCHAR(50)
+seatEconomyClasse int not null,
+seatFirstClasse int not null,
+seatBusinesClasse int not null,
+modelo VARCHAR(50) not null,
+fabricante VARCHAR(50) not null
 )
 
 

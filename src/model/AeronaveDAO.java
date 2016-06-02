@@ -47,6 +47,8 @@ public class AeronaveDAO {
                 conexao.close();
             }
         } catch (Exception e) {
+            String msg = "" + e;
+            JOptionPane.showMessageDialog(null, reduzString(msg));
         }
     }//fim close()
 
@@ -227,16 +229,20 @@ public class AeronaveDAO {
      *
      * @param aeronave
      * @param vprefixo
+     * @throws java.lang.ClassNotFoundException
      * @throws SQLException
      */
-    public void alterarAeronave(Aeronave aeronave, String vprefixo) throws SQLException {
+    public void alterarAeronave(Aeronave aeronave, String vprefixo) throws ClassNotFoundException, SQLException {
         String msg;
         msg = "";
         conexao = DBAeroFast.getConnection();
-        stmt = conexao.createStatement(
-                ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
-
+        stmt = conexao.createStatement();
+        
+        String sql = "UPDATE AERONAVE SET "
+                + "prefixo = '" + aeronave.getPrefixo() + "', "
+                + "fabricante = '" + aeronave.getFabricante() + "' "
+                + " WHERE prefixo = '" + vprefixo + "'";
+        /*
         String sql = "UPDATE aeronave SET "
                 + "prefixo = '" + aeronave.getPrefixo() + "', "
                 + "seateconomyclasse = " + aeronave.getSeatEconomyClasse() + ", "
@@ -245,9 +251,8 @@ public class AeronaveDAO {
                 + "modelo = '" + aeronave.getModelo() + "', "
                 + "fabricante = '" + aeronave.getFabricante() + "' "
                 + " WHERE prefixo = '" + vprefixo + "'";
-
+        */
         try {
-           
             stmt.execute(sql);
             System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso \n";

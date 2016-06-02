@@ -48,6 +48,8 @@ public class ClienteDAO {
             conexao.close();
             }
         } catch (Exception e) {
+          String msg = "" + e;
+          JOptionPane.showMessageDialog(null, reduzString(msg));
     }
     }//fim close()
      

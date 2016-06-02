@@ -45,7 +45,7 @@ public class AeronaveCtrl {
         return aeronave;
     }
     
-    public void alterarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException{
+    public void alterarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException, ClassNotFoundException{
         AeronaveDAO aeroDAO = new AeronaveDAO();
         aeroDAO.alterarAeronave(aeronave, prefixo);
     }
