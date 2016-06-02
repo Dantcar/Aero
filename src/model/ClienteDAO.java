@@ -279,7 +279,7 @@ public class ClienteDAO {
                 + "'" + cliente.getCpf() + "')";
 
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
            
             msg = msg+"Dados do cliente inseridos com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
@@ -327,7 +327,7 @@ public class ClienteDAO {
                 + " WHERE CPF = '" + vcpf + "'";
         
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
            
             msg = msg+"Dados do cliente alterados com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
@@ -372,7 +372,7 @@ public class ClienteDAO {
             "Confirmar Deletar Cliente",
             JOptionPane.YES_NO_OPTION);
             if(true){
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
             }
             
             msg = msg+"Dados do cliente excluidos com sucesso \n";

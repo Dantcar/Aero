@@ -126,7 +126,7 @@ public class PassageiroDAO {
                 + "'" + passageiro.getResponsavelCPF() + "')";
 
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
 
             msg = msg + "Dados do passageiro inseridos com sucesso \n";
             // JOptionPane.showMessageDialog(null, msg );
@@ -263,7 +263,7 @@ public class PassageiroDAO {
                 + " WHERE RGPASSAGEIRO = '" + vrg +"'";
         System.out.println(sql);
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
            
             msg = msg+"Dados do passageiro alterados com sucesso \n";
            // JOptionPane.showMessageDialog(null, msg );
@@ -309,7 +309,7 @@ public class PassageiroDAO {
             "Confirmar Deletar Passageiro",
             JOptionPane.YES_NO_OPTION);
             if(true){
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
             }
             
             msg = msg+"Dados do passageiro excluidos com sucesso \n";

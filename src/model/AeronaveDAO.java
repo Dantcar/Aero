@@ -253,7 +253,7 @@ public class AeronaveDAO {
                 + " WHERE prefixo = '" + vprefixo + "'";
         */
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
             System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso \n";
             // JOptionPane.showMessageDialog(null, msg ); 
