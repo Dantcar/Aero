@@ -677,7 +677,8 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 desabilitarDadosAeronave();
                 AeronaveCtrl cAeronave = new AeronaveCtrl();
                 cAeronave.deletarAeronaveCtrl(aeronave, oldPrefixo);
-                btnLimparAeronave.doClick();
+                //btnLimparAeronave.doClick();
+                btnLimparAeronaveActionPerformed(evt);
                 flag = true;
             }//fim if
 
