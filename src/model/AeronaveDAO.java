@@ -301,7 +301,7 @@ public class AeronaveDAO {
                     "Confirmar Deletar Aeronave",
                     JOptionPane.YES_NO_OPTION);
             if (true) {
-                stmt.execute(sql);
+                stmt.executeUpdate(sql);
             }
 
             msg = msg + "Dados da aeronave excluidos com sucesso \n";
