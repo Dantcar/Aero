@@ -137,6 +137,12 @@ public class VooDAO {
       return resposta;
     }//fim do método BuscarIdVooNumero
     
+    /**
+     * Método para enviar um voo através da entrada de seu número.
+     * @param vooNumero
+     * @return
+     * @throws SQLException 
+     */
     public Voo buscarVooNumero(String vooNumero) throws SQLException{
         Voo voo = new Voo();
         String msg = "";
@@ -169,6 +175,62 @@ public class VooDAO {
         }
         
         return voo;
+    }// fim método buscarVooNumero
+    
+    public void inserirVoo(Voo voo){
+        String msg="";
+        String sql;
+        
+        int idVoo = buscarIdVooAtual();
+        System.out.println(idVoo);
+        
+        idVoo = idVoo + 1;
+        
+        conexao = DBAeroFast.getConnection();
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        sql = "INSERT INTO voo VALUES ("
+                + idVoo + ", "
+                + "'" + voo.getNumeroVoo() + "', "
+                + "'" + voo.getCiaAerea()+ "', "
+                + "'" + voo.getPrefixoAeronaveVoo() + "', "
+                + "'" + voo.getDataPartida() + "', "
+                + "'" + voo.getHoraPartida() + "', "
+                + "'" + voo.getAeroportoPartida() + "', "
+                + "'" + voo.getAeroportoPartidaSigla() + "', "
+                + "'" + voo.getPortaoPartida() + "', "
+                + "'" + voo.getDataChegada() + "', "
+                + "'" + voo.getHoraChegada() + "', "
+                + "'" + voo.getAeroportoChegada() + "', "
+                + "'" + voo.getAeroportoChegadaSigla() + "', "
+                + "'" + voo.getPortaoChegada() + "', "
+                + "'" + voo.getEscalasVoo() + "', " 
+                + "'" + voo.getTarifaE() + "', "
+                + "'" + voo.getTarifaB() + "', "
+                + "'" + voo.getTarifaF() + "')";
+        
+        try {
+            if(stmt.execute(sql)){
+                msg = msg +"Dados do Voo inseridos com sucesso \n"; 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        close();
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada";
+                JOptionPane.showMessageDialog(null, msg);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
     }
     
     

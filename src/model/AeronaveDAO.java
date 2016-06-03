@@ -140,6 +140,16 @@ public class AeronaveDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));  
         }
         close();
+
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada";
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, reduzString(msg));  
         return resposta;
     }// fim buscarExisteAeronavePrefixo
 
@@ -183,7 +193,7 @@ public class AeronaveDAO {
      * @param aeronave
      * @throws SQLException
      */
-    public void inserirNovaAeronave(Aeronave aeronave) throws SQLException {
+    public void inserirNovaAeronave(Aeronave aeronave) {
         String msg;
         msg = "";
 
@@ -197,7 +207,12 @@ public class AeronaveDAO {
         //System.out.println("\nEste id vai pro banco:" + idAeronave + "bc: "+ bc+"fc: "+fc+"ec: "+ec);
 
         conexao = DBAeroFast.getConnection();
-        stmt = conexao.createStatement();
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+             msg = msg + ex + "\n";
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String sql = "INSERT INTO aeronave VALUES ("
                 + idAeronave + ", "
                 + "'" + aeronave.getPrefixo() + "', "
@@ -217,10 +232,16 @@ public class AeronaveDAO {
             msg = reduzString(msg);
         }
         close();
-        if (conexao.isClosed()) {
-            msg = msg + "Conexão ao banco fechada";
-            JOptionPane.showMessageDialog(null, msg);
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada";
+                JOptionPane.showMessageDialog(null, msg);
+            }
+        } catch (SQLException ex) {
+                msg = msg + ex;
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
     } //fim inserirAeronave
 
