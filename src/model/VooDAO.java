@@ -242,6 +242,12 @@ public class VooDAO {
 
     }//fim do método inserirVoo
 
+    /**
+     * Método para alterar um voo existente encontrando pelo número do voo.
+     *
+     * @param voo
+     * @param vooNumero
+     */
     public void alterarVoo(Voo voo, String vooNumero) {
         String msg = "";
         String sql;
@@ -286,7 +292,7 @@ public class VooDAO {
         try {
             if (conexao.isClosed()) {
                 msg = msg + "Conexão ao banco fechada";
-                
+
             }
         } catch (SQLException ex) {
             msg = msg + ex;
@@ -294,5 +300,49 @@ public class VooDAO {
         }
         JOptionPane.showMessageDialog(null, msg);
     }// fim alterarVoo
+
+    public void deletarVoo(Voo voo, String vooNumero) {
+        String msg = "";
+        String sql = "DELETE FROM voo WHERE numerovoo = '" + vooNumero + "'";
+
+        conexao = DBAeroFast.getConnection();
+
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int n = JOptionPane.showConfirmDialog(
+                null,
+                "Confirma Deletar Voo?",
+                "Confirmar Deletar Voo",
+                JOptionPane.YES_NO_OPTION);
+        
+        if (true) {
+            try {
+                stmt.executeUpdate(sql);
+            } catch (SQLException ex) {
+                msg = reduzString(msg + ex);
+                msg = reduzString(msg);
+                msg = msg + "Erro de gravação no BD \n";
+                Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        close();
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada";   
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, msg);
+        
+    }//fim do método deletarVoo
 
 }//fim classe VooDAO
