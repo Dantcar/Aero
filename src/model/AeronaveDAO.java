@@ -90,7 +90,14 @@ public class AeronaveDAO {
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
             msg = msg + ex + "\n";
         }
-        
+        close();
+        try {
+            if(conexao.isClosed()){   
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JOptionPane.showMessageDialog(null, reduzString(msg));
         
         return resposta;
