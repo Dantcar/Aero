@@ -61,6 +61,7 @@ public class AeronaveDAO {
         int resposta = 0;
         String msg;
         msg = "";
+        String sql = "SELECT * FROM aeronave ORDER BY 1 DESC";
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
@@ -74,7 +75,7 @@ public class AeronaveDAO {
         }
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM aeronave ORDER BY 1 DESC"); //select * from DAC.AERONAVE order BY 1 DESC
+            rs = stmt.executeQuery(sql); //select * from DAC.AERONAVE order BY 1 DESC
 
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
@@ -98,6 +99,7 @@ public class AeronaveDAO {
             msg = msg + ex + "\n";
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         JOptionPane.showMessageDialog(null, reduzString(msg));
         
         return resposta;
