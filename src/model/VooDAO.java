@@ -22,10 +22,11 @@ import javax.swing.JOptionPane;
  * @author deciodecarvalho
  */
 public class VooDAO {
+
     private Connection conexao;
     private Statement stmt;
     private ResultSet rs;
-    public int idVooNow=0;
+    public int idVooNow = 0;
 
     /**
      * método para encerrar Connection, Statement e ResutlSet
@@ -48,19 +49,20 @@ public class VooDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));
         }
     }//fim close()
-    
+
     /**
      * Método para buscar o último id de voo para usar na inclusão de voo
-     * @return 
+     *
+     * @return
      */
-    public int buscarIdVooAtual(){
+    public int buscarIdVooAtual() {
         int resposta = 0;
-        String msg="";
+        String msg = "";
         String sql = "SELECT * FROM voo ORDER BY 1 DESC";
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
-        
+
         try {
             stmt = conexao.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -70,7 +72,7 @@ public class VooDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
@@ -78,11 +80,11 @@ public class VooDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
-            if (rs.first()){
+            if (rs.first()) {
                 idVooNow = rs.getInt("voo");
-                resposta = idVooNow;                
+                resposta = idVooNow;
             }
         } catch (SQLException ex) {
             msg = msg + ex;
@@ -92,20 +94,21 @@ public class VooDAO {
         close();
         return resposta;
     }// fim método buscarIdVooAtual
-    
+
     /**
      * Consultar se existe um determinado numero de voo.
+     *
      * @param vooNumero
-     * @return 
+     * @return
      */
-    public boolean buscarIdVooNumero(String vooNumero){
-      boolean resposta = true;
-      String msg = "";
-      String sql ="SELECT * FROM voo WHERE numerovoo = '" + vooNumero + "'";
-      conexao = DBAeroFast.getConnection();
-      ResultSet rs;
-      rs = null;
-      
+    public boolean buscarIdVooNumero(String vooNumero) {
+        boolean resposta = true;
+        String msg = "";
+        String sql = "SELECT * FROM voo WHERE numerovoo = '" + vooNumero + "'";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
         try {
             stmt = conexao.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -115,7 +118,7 @@ public class VooDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
@@ -123,9 +126,9 @@ public class VooDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
         try {
-            if(rs.first()){ 
+            if (rs.first()) {
                 resposta = false;
             }
         } catch (SQLException ex) {
@@ -133,70 +136,76 @@ public class VooDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-      return resposta;
+
+        return resposta;
     }//fim do método BuscarIdVooNumero
-    
+
     /**
      * Método para enviar um voo através da entrada de seu número.
+     *
      * @param vooNumero
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public Voo buscarVooNumero(String vooNumero) throws SQLException{
+    public Voo buscarVooNumero(String vooNumero) throws SQLException {
         Voo voo = new Voo();
         String msg = "";
         String sql = "SELECT * FROM voo WHERE numerovoo = '" + vooNumero + "'";
-        
+
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         stmt = conexao.createStatement(
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery(sql);
-                
-        if(rs.first()){
-         voo.setIdVoo(rs.getString("idvoo"));
-         voo.setNumeroVoo(rs.getString("numerovoo"));
-         voo.setCiaAerea(rs.getString("ciaaerea"));
-         voo.setPrefixoAeronaveVoo(rs.getString("prefixoaeronavevoo"));
-         voo.setDataPartida(rs.getString("datapartida"));
-         voo.setHoraPartida(rs.getString("horaPartida"));
-         voo.setAeroportoPartida(rs.getString("aeroportopartida"));
-         voo.setAeroportoPartidaSigla(rs.getString("aeroportopartidasigla"));
-         voo.setPortaoPartida(rs.getString("portaopartida"));
-         voo.setDataChegada(rs.getString("datachegada"));
-         voo.setHoraChegada(rs.getString("horachegada"));
-         voo.setAeroportoPartida(rs.getString("aeroportochegada"));
-         voo.setAeroportoChegadaSigla(rs.getString("aeroportochegadasigla"));
-         voo.setPortaoPartida(rs.getString("portaochegada"));
-        }else {
+
+        if (rs.first()) {
+            voo.setIdVoo(rs.getString("idvoo"));
+            voo.setNumeroVoo(rs.getString("numerovoo"));
+            voo.setCiaAerea(rs.getString("ciaaerea"));
+            voo.setPrefixoAeronaveVoo(rs.getString("prefixoaeronavevoo"));
+            voo.setDataPartida(rs.getString("datapartida"));
+            voo.setHoraPartida(rs.getString("horaPartida"));
+            voo.setAeroportoPartida(rs.getString("aeroportopartida"));
+            voo.setAeroportoPartidaSigla(rs.getString("aeroportopartidasigla"));
+            voo.setPortaoPartida(rs.getString("portaopartida"));
+            voo.setDataChegada(rs.getString("datachegada"));
+            voo.setHoraChegada(rs.getString("horachegada"));
+            voo.setAeroportoPartida(rs.getString("aeroportochegada"));
+            voo.setAeroportoChegadaSigla(rs.getString("aeroportochegadasigla"));
+            voo.setPortaoPartida(rs.getString("portaochegada"));
+        } else {
             voo = null;
         }
-        
+
         return voo;
     }// fim método buscarVooNumero
-    
-    public void inserirVoo(Voo voo){
-        String msg="";
+
+    /**
+     * Método para inserir novo voo na base de dados AeroFast
+     *
+     * @param voo
+     */
+    public void inserirVoo(Voo voo) {
+        String msg = "";
         String sql;
-        
+
         int idVoo = buscarIdVooAtual();
         System.out.println(idVoo);
-        
+
         idVoo = idVoo + 1;
-        
+
         conexao = DBAeroFast.getConnection();
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         sql = "INSERT INTO voo VALUES ("
                 + idVoo + ", "
                 + "'" + voo.getNumeroVoo() + "', "
-                + "'" + voo.getCiaAerea()+ "', "
+                + "'" + voo.getCiaAerea() + "', "
                 + "'" + voo.getPrefixoAeronaveVoo() + "', "
                 + "'" + voo.getDataPartida() + "', "
                 + "'" + voo.getHoraPartida() + "', "
@@ -208,19 +217,19 @@ public class VooDAO {
                 + "'" + voo.getAeroportoChegada() + "', "
                 + "'" + voo.getAeroportoChegadaSigla() + "', "
                 + "'" + voo.getPortaoChegada() + "', "
-                + "'" + voo.getEscalasVoo() + "', " 
+                + "'" + voo.getEscalasVoo() + "', "
                 + "'" + voo.getTarifaE() + "', "
                 + "'" + voo.getTarifaB() + "', "
                 + "'" + voo.getTarifaF() + "')";
-        
+
         try {
-            if(stmt.execute(sql)){
-                msg = msg +"Dados do Voo inseridos com sucesso \n"; 
+            if (stmt.execute(sql)) {
+                msg = msg + "Dados do Voo inseridos com sucesso \n";
             }
         } catch (SQLException ex) {
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         close();
         try {
             if (conexao.isClosed()) {
@@ -230,10 +239,60 @@ public class VooDAO {
         } catch (SQLException ex) {
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }//fim do método inserirVoo
+
+    public void alterarVoo(Voo voo, String vooNumero) {
+        String msg = "";
+        String sql;
+        conexao = DBAeroFast.getConnection();
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        sql = "UPDATE voo SET "
+                + "numerovoo = '" + voo.getNumeroVoo() + "', "
+                + "ciaaerea = '" + voo.getCiaAerea() + "', "
+                + "prefixoaeronavevoo = '" + voo.getPrefixoAeronaveVoo() + "', "
+                + "datapartida = '" + voo.getDataPartida() + "', "
+                + "horapartida = '" + voo.getHoraPartida() + "', "
+                + "aeroportopartida = '" + voo.getAeroportoPartida() + "', "
+                + "aeroportopartidasigla = '" + voo.getAeroportoPartidaSigla() + "', "
+                + "portaopartida = '" + voo.getPortaoPartida() + "', "
+                + "datachegada = '" + voo.getDataChegada() + "', "
+                + "aeroportochegada = '" + voo.getAeroportoChegada() + "', "
+                + "aeroportochegadasigla = '" + voo.getAeroportoChegadaSigla() + "', "
+                + "portaochegada = '" + voo.getPortaoChegada() + "', "
+                + "escalasvoo = '" + voo.getEscalasVoo() + "', "
+                + "tarifae = '" + voo.getTarifaE() + "', "
+                + "tarifab = '" + voo.getTarifaB() + "', "
+                + "tarifaf = '" + voo.getTarifaF() + "', "
+                + " WHERE numerovoo = '" + vooNumero + "'";
+
+        try {
+            stmt.executeQuery(sql);
+            System.out.println("Esta é minha SQL: " + sql);
+            msg = msg + "Dados da aeronave alterados com sucesso \n";
+        } catch (SQLException ex) {
+            msg = reduzString(msg + ex);
+            msg = reduzString(msg);
+            msg = msg + "Erro de gravação no BD \n";
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        close();
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada";
                 
-    }
-    
-    
-    
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, msg);
+    }// fim alterarVoo
 
 }//fim classe VooDAO
