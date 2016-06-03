@@ -117,29 +117,29 @@ public class AeronaveDAO {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            msg = msg + ex;
+            JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             rs = stmt.executeQuery("SELECT * FROM aeronave WHERE prefixo = '" + prefixo + "'");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            msg = msg + ex;
+            JOptionPane.showMessageDialog(null, reduzString(msg));
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             if (rs.first()) {
-                close();
+                
                 resposta = false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
             msg = "" + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
-            close();
-            resposta = false;
+            JOptionPane.showMessageDialog(null, reduzString(msg));  
         }
-
+        close();
         return resposta;
     }// fim buscarExisteAeronavePrefixo
 
