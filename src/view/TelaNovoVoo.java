@@ -21,6 +21,7 @@ import javax.swing.SpinnerDateModel;
 import model.Voo;
 import Control.Util;
 import Control.ValidaCampos;
+import Control.VooCtrl;
 /**
  * Datepicker
  */
@@ -953,9 +954,13 @@ public class TelaNovoVoo extends javax.swing.JFrame {
     }//GEN-LAST:event_tftTarifaFActionPerformed
 
     private void btnSalvarVoo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarVoo1ActionPerformed
-        Voo objVoo;
-        objVoo = new Voo();
-
+        VooCtrl cVoo = new VooCtrl();
+        Voo objVoo = new Voo();
+        
+        boolean flag = false;
+        String msg = "";
+        String tituloMsg = "";
+        
         int id1 = arrayNewVoo.size();
         id1++;
         String id = id1+"";
@@ -992,8 +997,7 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         objVoo.setAeroportoChegadaSigla(tctSiglaAeroportoChegada.getText());
         objVoo.setPortaoChegada(tctPortaoAeroportoChegada.getText());
         objVoo.setEscalasVoo(tctEscalas.getText());
-
-        String msg;
+        
         msg = "";
 
         boolean validaVoo = ValidaCampos.validaVazio(tctNumeroVoo.getText());

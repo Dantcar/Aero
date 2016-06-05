@@ -11,13 +11,14 @@ package Control;
 import java.sql.SQLException;
 import model.Aeronave;
 import model.AeronaveDAO;
+import model.VooDAO;
 
 /**
  *
  * @author Dac
  */
 public class AeronaveCtrl {
- 
+    
   /**
    * Método controle receber consulta Aeronave atravéz do envio do prefixo.
    * @param prefixo

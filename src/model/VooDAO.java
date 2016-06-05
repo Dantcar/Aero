@@ -56,6 +56,64 @@ public class VooDAO {
         msg = "";
     }//fim close()
 
+    public int buscarNumeroVoo(){
+        int resposta = 0;
+        String msg = "";
+        String sql = "SELECT numerovoo FROM voo ORDER BY 1 DESC";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            if (rs.first()) {
+                idVooNow = rs.getInt("voo");
+                resposta = idVooNow+1;
+            }else{
+                resposta = 1000;
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        close();
+        try {
+            if (conexao.isClosed()) {
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        msg = "";
+            
+        
+        return resposta;     
+    }// fim método buscarNuemroVoo
+    
+    
     /**
      * Método para buscar o último id de voo para usar na inclusão de voo
      *
