@@ -615,7 +615,6 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         }
         if (flag == false) {
             JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
-            //JOptionPane.showMessageDialog(this, msg, "Tela Aeronave", JOptionPane.INFORMATION_MESSAGE);
         }
 
         /**
