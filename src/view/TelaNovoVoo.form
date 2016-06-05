@@ -29,7 +29,7 @@
                   <Component id="PanelVooTitulo" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="PainelGuiasVoo" alignment="0" max="32767" attributes="0"/>
-                      <Component id="PanelVooBotoes1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="PanelVooBotoes" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -43,7 +43,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="PainelGuiasVoo" min="-2" pref="271" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="PanelVooBotoes1" min="-2" max="-2" attributes="0"/>
+              <Component id="PanelVooBotoes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -2635,36 +2635,23 @@
                                       <Component id="tctAeroportoChegada" min="-2" pref="500" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblHoraChegada" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jspHoraChegada" min="-2" pref="124" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblPortaoChegada" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="tctPortaoAeroportoChegada" min="-2" pref="127" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblHoraChegada" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jspHoraChegada" min="-2" pref="124" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblDataChegada" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jdpVooDataChegada" min="-2" pref="148" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="lblDataChegada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPortaoChegada" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                              <Component id="tftHoraChegada" min="-2" pref="126" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                              <Component id="jspDataIntegrada" min="-2" pref="124" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="PainelDataChegada" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tctPortaoAeroportoChegada" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <Component id="jdpVooDataChegada" min="-2" pref="148" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="212" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -2684,35 +2671,22 @@
                           <Component id="lblAeroportoChegada" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tctAeroportoChegada" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblPortaoChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tctPortaoAeroportoChegada" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblDataChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jdpVooDataChegada" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="PainelDataChegada" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblPortaoChegada" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tctPortaoAeroportoChegada" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblDataChegada" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jdpVooDataChegada" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblHoraChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jspHoraChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="tftHoraChegada" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jspDataIntegrada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblHoraChegada" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jspHoraChegada" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2727,16 +2701,6 @@
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Hora Chegada: "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="tftHoraChegada">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format subtype="1" type="2"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="18" style="1"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDataChegada">
@@ -4865,135 +4829,6 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date2 = new Date();&#xd;&#xa;SpinnerDateModel sm2 = new &#xd;&#xa;SpinnerDateModel(date,null,null,Calendar.HOUR_OF_DAY);"/>
               </AuxValues>
             </Component>
-            <Container class="javax.swing.JPanel" name="PainelDataChegada">
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jspDiaChegada" min="-2" pref="73" max="-2" attributes="0"/>
-                              <Component id="lblDiaChegada" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jspMesChegada" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
-                              <Component id="lblMesChegada" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblAnoChegada" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jspAnoChegada" min="-2" pref="94" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblDiaChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblMesChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblAnoChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jspDiaChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jspMesChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jspAnoChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JSpinner" name="jspMesChegada">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="18" style="1"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Escolha a Hora e os Minutos"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspMesChegada = new javax.swing.JSpinner(sm4);&#xd;&#xa;JSpinner.DateEditor de4 = new &#xd;&#xa;JSpinner.DateEditor(jspMesChegada,&quot;MM&quot;);&#xd;&#xa;jspMesChegada.setEditor(de4);"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date4 = new Date();&#xd;&#xa;SpinnerDateModel sm4 = new &#xd;&#xa;SpinnerDateModel(date,null,null,Calendar.MONTH);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jspDiaChegada">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="18" style="1"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Escolha a Hora e os Minutos"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspDiaChegada = new javax.swing.JSpinner(sm5);&#xd;&#xa;JSpinner.DateEditor de5 = new &#xd;&#xa;JSpinner.DateEditor(jspDiaChegada,&quot;dd&quot;);&#xd;&#xa;jspDiaChegada.setEditor(de5);"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date5 = new Date();&#xd;&#xa;SpinnerDateModel sm5 = new &#xd;&#xa;SpinnerDateModel(date,null,null,Calendar.DAY_OF_MONTH);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jspAnoChegada">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="18" style="1"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Escolha a Hora e os Minutos"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspAnoChegada = new javax.swing.JSpinner(sm3);&#xd;&#xa;JSpinner.DateEditor de3 = new &#xd;&#xa;JSpinner.DateEditor(jspAnoChegada,&quot;yyyy&quot;);&#xd;&#xa;jspAnoChegada.setEditor(de3);"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date3 = new Date();&#xd;&#xa;SpinnerDateModel sm3 = new &#xd;&#xa;SpinnerDateModel(date,null,null,Calendar.DAY_OF_YEAR);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblDiaChegada">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="3"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Dia:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblMesChegada">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="3"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Mes:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblAnoChegada">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="3"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Ano:"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Component class="javax.swing.JSpinner" name="jspDataIntegrada">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="18" style="1"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Escolha Dia, M&#xea;s e Ano"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspDataIntegrada = new javax.swing.JSpinner(smIntegrada);&#xd;&#xa;JSpinner.DateEditor deIntegrada = new &#xd;&#xa;JSpinner.DateEditor(jspDataIntegrada,&quot;dd/MM/yyyy&quot;);&#xd;&#xa;jspDataIntegrada.setEditor(deIntegrada);"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date dtIntegrada = new Date();&#xd;&#xa;SpinnerDateModel smIntegrada = new &#xd;&#xa;SpinnerDateModel(dtIntegrada,null,null,Calendar.MONTH + Calendar.DAY_OF_MONTH + Calendar.YEAR );"/>
-              </AuxValues>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PainelVooEscalas">
@@ -5017,14 +4852,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblEscalas" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="tctEscalas" min="-2" pref="615" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="PainelDataNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblEscalas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="tctEscalas" min="-2" pref="615" max="-2" attributes="0"/>
                       <EmptySpace pref="152" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -5037,9 +4867,7 @@
                           <Component id="lblEscalas" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tctEscalas" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="PainelDataNascimento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -5070,117 +4898,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
-            <Container class="javax.swing.JPanel" name="PainelDataNascimento">
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDiaNascimento" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jspDiaNascimento" min="-2" pref="73" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblMesNascimento" min="-2" pref="36" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jspMesNascimento" min="-2" pref="73" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblAnoNascimento" min="-2" pref="36" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jspAnoNascimento" min="-2" pref="94" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jspDiaNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jspMesNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jspAnoNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDiaNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblMesNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblAnoNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JSpinner" name="jspMesNascimento">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="18" style="1"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Escolha a Hora e os Minutos"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspMesNascimento = new javax.swing.JSpinner(smMnp);&#xd;&#xa;JSpinner.DateEditor deMnp = new &#xd;&#xa;JSpinner.DateEditor(jspMesNascimento,&quot;MM&quot;);&#xd;&#xa;jspMesNascimento.setEditor(deMnp);"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date mesNascimentoPassageiro = new Date();&#xd;&#xa;SpinnerDateModel smMnp = new &#xd;&#xa;SpinnerDateModel(mesNascimentoPassageiro,null,null,Calendar.MONTH);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jspDiaNascimento">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="18" style="1"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Escolha a Hora e os Minutos"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspDiaNascimento = new javax.swing.JSpinner(smDnp);&#xd;&#xa;JSpinner.DateEditor deDnp = new &#xd;&#xa;JSpinner.DateEditor(jspDiaNascimento,&quot;dd&quot;);&#xd;&#xa;jspDiaNascimento.setEditor(deDnp);"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date diaNascimentoPassageiro = new Date();&#xd;&#xa;SpinnerDateModel smDnp = new &#xd;&#xa;SpinnerDateModel(diaNascimentoPassageiro,null,null,Calendar.DAY_OF_MONTH);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="jspAnoNascimento">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="18" style="1"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Escolha a Hora e os Minutos"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xd;&#xa;jspAnoNascimento = new javax.swing.JSpinner(smAnp);&#xd;&#xa;JSpinner.DateEditor deAnp = new &#xd;&#xa;JSpinner.DateEditor(jspAnoNascimento,&quot;yyyy&quot;);&#xd;&#xa;jspAnoNascimento.setEditor(deAnp);"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date anoNascimentoPassageiro = new Date();&#xd;&#xa;SpinnerDateModel smAnp = new &#xd;&#xa;SpinnerDateModel(anoNascimentoPassageiro,null,null,Calendar.DAY_OF_YEAR);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblDiaNascimento">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="3"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Dia:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblMesNascimento">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="3"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Mes:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblAnoNascimento">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="3"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Ano:"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -5241,7 +4958,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="PanelVooBotoes1">
+    <Container class="javax.swing.JPanel" name="PanelVooBotoes">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -5255,15 +4972,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSalvarVoo1" max="32767" attributes="0"/>
+                  <Component id="btnSalvarVoo" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnPesquisarVoo1" min="-2" pref="157" max="-2" attributes="0"/>
+                  <Component id="btnPesquisarVoo" min="-2" pref="157" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnExcluirVoo1" max="32767" attributes="0"/>
+                  <Component id="btnExcluirVoo" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnLimparVoo1" max="32767" attributes="0"/>
+                  <Component id="btnLimparVoo" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="btnSairVoo1" max="32767" attributes="0"/>
+                  <Component id="btnSairVoo" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -5273,11 +4990,11 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSalvarVoo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnPesquisarVoo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSairVoo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnLimparVoo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnExcluirVoo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSalvarVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPesquisarVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSairVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLimparVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluirVoo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -5285,7 +5002,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnSalvarVoo1">
+        <Component class="javax.swing.JButton" name="btnSalvarVoo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -5308,10 +5025,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarVoo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarVooActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnPesquisarVoo1">
+        <Component class="javax.swing.JButton" name="btnPesquisarVoo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -5332,10 +5049,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarVoo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarVooActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSairVoo1">
+        <Component class="javax.swing.JButton" name="btnSairVoo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -5355,10 +5072,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairVoo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairVooActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLimparVoo1">
+        <Component class="javax.swing.JButton" name="btnLimparVoo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -5378,10 +5095,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparVoo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparVooActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnExcluirVoo1">
+        <Component class="javax.swing.JButton" name="btnExcluirVoo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -5401,7 +5118,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirVoo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirVooActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
