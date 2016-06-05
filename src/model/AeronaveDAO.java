@@ -34,6 +34,7 @@ public class AeronaveDAO {
      * método para encerrar Connection, Statement e ResutlSet
      */
     private void close() {
+        String msg ="";
         try {
             if (rs != null) {
                 rs.close();
@@ -47,8 +48,8 @@ public class AeronaveDAO {
                 conexao.close();
             }
         } catch (Exception e) {
-            String msg = "" + e;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = msg + e + "\n";
+            //JOptionPane.showMessageDialog(null, reduzString(msg));
         }
     }//fim close()
 
@@ -59,8 +60,7 @@ public class AeronaveDAO {
      */
     public int buscarIdAeronaveAtual() {
         int resposta = 0;
-        String msg;
-        msg = "";
+        String msg = "";
         String sql = "SELECT * FROM aeronave ORDER BY 1 DESC";
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
@@ -100,7 +100,8 @@ public class AeronaveDAO {
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        JOptionPane.showMessageDialog(null, reduzString(msg));
+        //JOptionPane.showMessageDialog(null, reduzString(msg));
+        
         
         return resposta;
 
@@ -149,14 +150,18 @@ public class AeronaveDAO {
         close();
 
         try {
-            if (conexao.isClosed()) {
-                msg = msg + "Conexão ao banco fechada";
+            if (!conexao.isClosed()) {
+                msg = msg + "Conexão ao banco nao  fechada";
             }
         } catch (SQLException ex) {
             msg = msg + ex;
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, reduzString(msg));  
+        if ("".equals(msg)){
+        }else{
+            JOptionPane.showMessageDialog(null, reduzString(msg)); 
+        }
+        
         return resposta;
     }// fim buscarExisteAeronavePrefixo
 
@@ -169,8 +174,7 @@ public class AeronaveDAO {
      */
     public Aeronave buscarAeronavePrefixo(String prefixo) {
         Aeronave aeronave = new Aeronave();
-        String msg;
-        msg = "";
+        String msg = "";
 
         conexao = DBAeroFast.getConnection();
         ResultSet rs = null;
@@ -212,6 +216,7 @@ public class AeronaveDAO {
             JOptionPane.showMessageDialog(null, msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        msg="";
         return aeronave;
     }//fim buscarAeronavePrefixo
 
@@ -222,8 +227,7 @@ public class AeronaveDAO {
      * @throws SQLException
      */
     public void inserirNovaAeronave(Aeronave aeronave) {
-        String msg;
-        msg = "";
+        String msg = "";
 
         int idAeronave = buscarIdAeronaveAtual();
         System.out.println(idAeronave);
@@ -235,6 +239,7 @@ public class AeronaveDAO {
         //System.out.println("\nEste id vai pro banco:" + idAeronave + "bc: "+ bc+"fc: "+fc+"ec: "+ec);
 
         conexao = DBAeroFast.getConnection();
+        
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {
@@ -270,28 +275,26 @@ public class AeronaveDAO {
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-
+        msg="";
     } //fim inserirAeronave
 
     /**
      * Método para realizar alterações na Base dados Aeronave
-     *
+     * @versao 0.1
      * @param aeronave
      * @param vprefixo
-     * @throws java.lang.ClassNotFoundException
      * @throws SQLException
      */
-    public void alterarAeronave(Aeronave aeronave, String vprefixo) throws ClassNotFoundException, SQLException {
-        String msg;
-        msg = "";
+    public void alterarAeronave(Aeronave aeronave, String vprefixo)  {
+        String msg = "";
         conexao = DBAeroFast.getConnection();
-        stmt = conexao.createStatement();
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        String sql = "UPDATE AERONAVE SET "
-                + "prefixo = '" + aeronave.getPrefixo() + "', "
-                + "fabricante = '" + aeronave.getFabricante() + "' "
-                + " WHERE prefixo = '" + vprefixo + "'";
-        /*
         String sql = "UPDATE aeronave SET "
                 + "prefixo = '" + aeronave.getPrefixo() + "', "
                 + "seateconomyclasse = " + aeronave.getSeatEconomyClasse() + ", "
@@ -300,7 +303,7 @@ public class AeronaveDAO {
                 + "modelo = '" + aeronave.getModelo() + "', "
                 + "fabricante = '" + aeronave.getFabricante() + "' "
                 + " WHERE prefixo = '" + vprefixo + "'";
-        */
+
         try {
             stmt.executeUpdate(sql);
             System.out.println("Esta é minha SQL: " + sql);
@@ -314,12 +317,17 @@ public class AeronaveDAO {
             // JOptionPane.showMessageDialog(null,msg );
         }
         close();
-        if (conexao.isClosed()) {
-            msg = msg + "Conexão ao banco fechada";
-            JOptionPane.showMessageDialog(null, msg);
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada" +"\n";
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//fim método alterarAeronave
+        JOptionPane.showMessageDialog(null, msg );
+        msg = "";
+    }//fim método alterarAeronave v0.1
 
     /**
      * Método para deletar uma aeronave do banco Aerofast enviando o seu prefixo
@@ -328,8 +336,7 @@ public class AeronaveDAO {
      * @param vprefixo
      */
     public void deletarAeronave(Aeronave aeronave, String vprefixo) {
-        String msg;
-        msg = "";
+        String msg = "";
         String sql = "DELETE FROM aeronave WHERE prefixo = '" + vprefixo + "'";
                           
         if ((JOptionPane.showConfirmDialog(
@@ -373,7 +380,7 @@ public class AeronaveDAO {
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
          JOptionPane.showMessageDialog(null, msg);
-        
+         msg = "";
     }//fim deletarAeronave
 
 }

@@ -78,7 +78,7 @@ public class ValidaCampos {
     
     public static boolean validaNumeroVazio(int texto) {
     Pattern p;
-    p = Pattern.compile("[^[0-9]{1,3}$]");
+    p = Pattern.compile("[^[0-9][0-9][0-9]$]");
     Matcher m = p.matcher(texto+"");
     return m.find();
     }

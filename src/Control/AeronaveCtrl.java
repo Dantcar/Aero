@@ -31,12 +31,12 @@ public class AeronaveCtrl {
     }
 
        
-     public void receberAeronave(Aeronave aeronave) throws ClassNotFoundException, SQLException {
+     public void receberAeronave(Aeronave aeronave){
         AeronaveDAO aeroDAO = new AeronaveDAO();
         aeroDAO.inserirNovaAeronave(aeronave);
     }
     
-    public static Aeronave receberAeronavePrefixo(String prefixo) throws ClassNotFoundException, SQLException {
+    public static Aeronave receberAeronavePrefixo(String prefixo){
         AeronaveDAO aeroDAO = new AeronaveDAO();
         Aeronave aeronave = aeroDAO.buscarAeronavePrefixo(prefixo);
         //System.out.println("Estamos no método do controle receberClienteRG em PassageiroCtrl " + rg + "\n");
@@ -45,12 +45,12 @@ public class AeronaveCtrl {
         return aeronave;
     }
     
-    public void alterarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException, ClassNotFoundException{
+    public void alterarAeronaveCtrl(Aeronave aeronave, String prefixo){
         AeronaveDAO aeroDAO = new AeronaveDAO();
         aeroDAO.alterarAeronave(aeronave, prefixo);
     }
     
-    public void deletarAeronaveCtrl(Aeronave aeronave, String prefixo) throws SQLException{
+    public void deletarAeronaveCtrl(Aeronave aeronave, String prefixo){
        AeronaveDAO aeroDAO = new AeronaveDAO();
        aeroDAO.deletarAeronave(aeronave, prefixo);
         

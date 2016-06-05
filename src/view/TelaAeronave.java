@@ -295,7 +295,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblClasse1.setForeground(new java.awt.Color(102, 102, 102));
         lblClasse1.setText("Classe Economica: ");
 
-        tftClasseEconomica.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("##0"))));
+        tftClasseEconomica.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         tftClasseEconomica.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tftClasseEconomica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +307,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblClasse2.setForeground(new java.awt.Color(102, 102, 102));
         lblClasse2.setText("Classe Empresarial:  ");
 
-        tftClasseEmpresarial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
+        tftClasseEmpresarial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         tftClasseEmpresarial.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tftClasseEmpresarial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,7 +319,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblClasse3.setForeground(new java.awt.Color(102, 102, 102));
         lblClasse3.setText("Classe Primeira: ");
 
-        tftPrimeiraClasse.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("##0"))));
+        tftPrimeiraClasse.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         tftPrimeiraClasse.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tftPrimeiraClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,58 +454,59 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         btnExcluirAeronave.setEnabled(true);
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
-
+        String tituloMsg = "";
+        String vAeronave = tftPrefixoAeronave.getText();
         AeronaveCtrl cAeronave = new AeronaveCtrl();
         Aeronave aeronave;
         aeronave = new Aeronave();
 
         String msg = "";
 
-        try {
-            aeronave = cAeronave.receberAeronavePrefixo(tftPrefixoAeronave.getText());
-            if (aeronave != null) {
-                oldPrefixo = tftPrefixoAeronave.getText(); //valor a ser utilizado na alteração
+        aeronave = cAeronave.receberAeronavePrefixo(vAeronave);
 
-                tctModeloAeronave.setText(aeronave.getModelo());
-                tftPrefixoAeronave.setText(aeronave.getPrefixo());
-                tftClasseEconomica.setText(aeronave.getSeatEconomyClasse() + "");
-                tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
-                tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
-                tctFabricanteAeronave.setText(aeronave.getFabricante());
-                //desabilitar edição
-                desabilitarDadosAeronave();
-                btnEditarAeronave.setEnabled(true);
-                flag = true;
-            }//fim do if
-            else {
-                msg = msg + "Aeronave não encontrada!!!, Entre com outro prefixo";
-                JOptionPane.showMessageDialog(this, msg);
-                //desabilitar edição
-                habilitarDadosAeronave();
-                btnExcluirAeronave.setEnabled(false);
-                btnSalvarAeronave.setEnabled(true);
-                btnEditarAeronave.setEnabled(false);
-                btnLimparAeronave.setEnabled(true);
-                flag = true;
-            }
+        if (aeronave != null) {
+            oldPrefixo = tftPrefixoAeronave.getText(); //valor a ser utilizado na alteração
 
-        } catch (ClassNotFoundException ex) {
-            msg = reduzString(msg + ex);
-            Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            msg = msg + "Nenhum Aeronave Cadastrada!!";
-            Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
+            tctModeloAeronave.setText(aeronave.getModelo());
+            tftPrefixoAeronave.setText(aeronave.getPrefixo());
+            tftClasseEconomica.setText(aeronave.getSeatEconomyClasse() + "");
+            tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
+            tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
+            tctFabricanteAeronave.setText(aeronave.getFabricante());
+            //desabilitar edição
+            desabilitarDadosAeronave();
+            btnEditarAeronave.setEnabled(true);
+            tituloMsg = "Pesquisar Aeronave";
+            msg = msg + "Aeronave Localizada na base de dados!!!, Prefixo: " + vAeronave + "\n";
+
+            flag = true;
+        }//fim do if
+        else {
+            tituloMsg = "Pesquisar Aeronave";
+            msg = msg + "Aeronave não encontrada!!! " + vAeronave + " "
+                    + ", Por favor entre com outro prefixo\n";
+
+            limparAeronave();
+            habilitarDadosAeronave();
+            btnExcluirAeronave.setEnabled(false);
+            btnSalvarAeronave.setEnabled(true);
+            btnEditarAeronave.setEnabled(false);
+            btnLimparAeronave.setEnabled(true);
+            flag = true;
         }
+
         if (flag == false) {
-            msg = msg + "Nenhuma Aeronave Cadastrada!!";
-            JOptionPane.showMessageDialog(this, msg);
+            // tituloMsg = "Alteração Aeronave";
+            //msg = msg + "Aeronave não encontrada!!!, Entre com outro prefixo\n" ;
+            //msg = msg + "Nenhuma Aeronave Cadastrada!!\n";
+            //JOptionPane.showMessageDialog(this, msg);
             btnExcluirAeronave.setEnabled(false);
             btnSalvarAeronave.setEnabled(true);
             btnEditarAeronave.setEnabled(false);
             btnLimparAeronave.setEnabled(true);
         }
-
-
+        JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+        msg = "";
     }//GEN-LAST:event_btnPesquisarAeronaveActionPerformed
 
     private void btnSalvarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAeronaveActionPerformed
@@ -534,17 +535,19 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
          */
         boolean validaModelo = ValidaCampos.validaVazio(tctModeloAeronave.getText().trim());
         boolean validaPrefixo = ValidaCampos.validaVazio(tftPrefixoAeronave.getText().trim());
-        boolean validaClasseE = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEconomica.getText().trim()));
-        boolean validaClasseP = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftPrimeiraClasse.getText().trim()));
-        boolean validaClasseB = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEmpresarial.getText().trim()));
+        boolean validaClasseE = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEconomica.getText()));
+        boolean validaClasseP = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftPrimeiraClasse.getText()));
+        boolean validaClasseB = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEmpresarial.getText()));
         boolean validaFabricante = ValidaCampos.validaVazio(tctFabricanteAeronave.getText());
         boolean validaPrefixoExiste = AeronaveCtrl.receberPesquisarAeronavePrefixo(tftPrefixoAeronave.getText());
+
         if (btnSalvarAeronave.isEnabled()) {
             if (validaPrefixoExiste) {
             } else {
                 msg = msg + "Campo Prefixo da aeronave já existe na base de dados Aerofast" + "\n";
+                TelaAeronave.tftPrefixoAeronave.setText(null);
             }
-            TelaAeronave.tftPrefixoAeronave.setText(null);
+            
         }
 
         if (validaModelo) {
@@ -586,38 +589,21 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
 
                 boolean resultadoAeronave = arrayAero.add(objAero);
                 if (resultadoAeronave) {
-                    try {
-                        cAeronave.receberAeronave(objAero);
 
-                        msg = "Dados Enviados ao banco de dados do sistema!";
-                        //JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
-                        flag = true;
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-                        msg = msg + ex;
-                        flag = false;
-                        //JOptionPane.showMessageDialog(null, reduzString(msg));
-                    } catch (SQLException ex) {
-                        msg = msg + ex;
-                        flag = false;
-                        //JOptionPane.showMessageDialog(null, reduzString(msg));
-                        Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    cAeronave.receberAeronave(objAero);
+                    tituloMsg = "Inclusão Aeronave";
+                    msg = "Dados Enviados ao banco de dados do sistema!";
+                    //JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
+                    flag = true;
                 }
                 //JOptionPane.showMessageDialog(this, msg, "Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
                 btnLimparAeronave.doClick();
 
             } else {//Alteração Aeronave
-                try {
-                    cAeronave.alterarAeronaveCtrl(objAero, oldPrefixo);
-                    msg = "Dados da Aeronave alterados com Sucesso";
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-                    flag = false;
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                cAeronave.alterarAeronaveCtrl(objAero, oldPrefixo);
+                tituloMsg = "Alteração Aeronave";
+                msg = "Dados da Aeronave alterados com Sucesso";
                 btnLimparAeronave.doClick();
                 flag = true;
             }
@@ -628,9 +614,14 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             flag = false;
         }
         if (flag == false) {
-            JOptionPane.showMessageDialog(null, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
             //JOptionPane.showMessageDialog(this, msg, "Tela Aeronave", JOptionPane.INFORMATION_MESSAGE);
         }
+
+        /**
+         * final btnSalvarAeronaveActionPerformed*
+         */
+
     }//GEN-LAST:event_btnSalvarAeronaveActionPerformed
 
     private void tftClasseEconomicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEconomicaActionPerformed
@@ -638,12 +629,16 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tftClasseEconomicaActionPerformed
 
     private void btnLimparAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparAeronaveActionPerformed
+        limparAeronave();
+        
+        /*
         tctModeloAeronave.setText(null);
         tftPrefixoAeronave.setText(null);
         tctFabricanteAeronave.setText(null);
         tftClasseEconomica.setText("0");
         tftClasseEmpresarial.setText("0");
         tftPrimeiraClasse.setText("0");
+        */
     }//GEN-LAST:event_btnLimparAeronaveActionPerformed
 
     private void tftClasseEmpresarialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEmpresarialActionPerformed
@@ -663,32 +658,25 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         //início
         Aeronave aeronave;
 
-        try {
-            aeronave = AeronaveCtrl.receberAeronavePrefixo(tftPrefixoAeronave.getText());
-            if (aeronave != null) {
-                oldPrefixo = tftPrefixoAeronave.getText();
-                tctModeloAeronave.setText(aeronave.getModelo());
-                tftPrefixoAeronave.setText(aeronave.getPrefixo());
-                tftClasseEconomica.setText(aeronave.getSeatEconomyClasse() + "");
-                tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
-                tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
-                tctFabricanteAeronave.setText(aeronave.getFabricante());
-                //desabilitar edição
-                desabilitarDadosAeronave();
-                AeronaveCtrl cAeronave = new AeronaveCtrl();
-                cAeronave.deletarAeronaveCtrl(aeronave, oldPrefixo);
-                //btnLimparAeronave.doClick();
-                btnLimparAeronaveActionPerformed(evt);
-                flag = true;
-            }//fim if
+        aeronave = AeronaveCtrl.receberAeronavePrefixo(tftPrefixoAeronave.getText());
+        if (aeronave != null) {
+            oldPrefixo = tftPrefixoAeronave.getText();
+            tctModeloAeronave.setText(aeronave.getModelo());
+            tftPrefixoAeronave.setText(aeronave.getPrefixo());
+            tftClasseEconomica.setText(aeronave.getSeatEconomyClasse() + "");
+            tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
+            tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
+            tctFabricanteAeronave.setText(aeronave.getFabricante());
+            //desabilitar edição
+            desabilitarDadosAeronave();
+            AeronaveCtrl cAeronave = new AeronaveCtrl();
+            cAeronave.deletarAeronaveCtrl(aeronave, oldPrefixo);
+            btnLimparAeronaveActionPerformed(evt);
+            habilitarDadosAeronave();
+            flag = true;
+        }//fim if
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaAeronave.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-      
     }//GEN-LAST:event_btnExcluirAeronaveActionPerformed
 
     private void btnEditarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAeronaveActionPerformed
@@ -785,6 +773,21 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField tftPrimeiraClasse;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método para Limpar os dados de edição da tela Aeronave
+     */
+    private void limparAeronave() {
+        tctModeloAeronave.setText(null);
+        tftPrefixoAeronave.setText(null);
+        tctFabricanteAeronave.setText(null);
+        tftClasseEconomica.setText("0");
+        tftClasseEmpresarial.setText("0");
+        tftPrimeiraClasse.setText("0");
+    }
+
+    /**
+     * Método para habilitar a edição da tela Aeronave
+     */
     private void habilitarDadosAeronave() {
         tctModeloAeronave.setEditable(true);
         tftPrefixoAeronave.setEditable(true);
@@ -795,6 +798,9 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
 
     }
 
+    /**
+     * Método para desabilitar a edição da tela Aeronave
+     */
     private void desabilitarDadosAeronave() {
         tctModeloAeronave.setEditable(false);
         tftPrefixoAeronave.setEditable(false);
