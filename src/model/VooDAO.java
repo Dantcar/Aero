@@ -32,6 +32,7 @@ public class VooDAO {
      * método para encerrar Connection, Statement e ResutlSet
      */
     private void close() {
+        String msg = "";
         try {
             if (rs != null) {
                 rs.close();
@@ -45,9 +46,14 @@ public class VooDAO {
                 conexao.close();
             }
         } catch (Exception e) {
-            String msg = "" + e;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = "" + e + "\n";
+            msg = reduzString(msg);
         }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        msg = "";
     }//fim close()
 
     /**
@@ -68,16 +74,16 @@ public class VooDAO {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
-            msg = msg + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
-            msg = msg + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -87,11 +93,24 @@ public class VooDAO {
                 resposta = idVooNow;
             }
         } catch (SQLException ex) {
-            msg = msg + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         close();
+        try {
+            if (conexao.isClosed()) {
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        msg = "";
         return resposta;
     }// fim método buscarIdVooAtual
 
@@ -101,29 +120,29 @@ public class VooDAO {
      * @param vooNumero
      * @return
      */
-    public boolean buscarIdVooNumero(String vooNumero) {
+    public boolean buscarExisteVooNumero(String vooNumero) {
         boolean resposta = true;
         String msg = "";
         String sql = "SELECT * FROM voo WHERE numerovoo = '" + vooNumero + "'";
+
         conexao = DBAeroFast.getConnection();
-        ResultSet rs;
-        rs = null;
+        ResultSet rs = null;
 
         try {
             stmt = conexao.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
-            msg = msg + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
-            msg = msg + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+             msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -132,52 +151,102 @@ public class VooDAO {
                 resposta = false;
             }
         } catch (SQLException ex) {
-            msg = msg + ex;
-            JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = "" + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        close();
 
+        try {
+            if (!conexao.isClosed()) {
+                msg = msg + "Conexão ao banco nao  fechada.\n";
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, reduzString(msg));
+        }
         return resposta;
-    }//fim do método BuscarIdVooNumero
+    }//fim do método BuscarExisteVooNumero
 
     /**
      * Método para enviar um voo através da entrada de seu número.
      *
      * @param vooNumero
      * @return
-     * @throws SQLException
      */
-    public Voo buscarVooNumero(String vooNumero) throws SQLException {
+    public Voo buscarVooNumero(String vooNumero){
         Voo voo = new Voo();
         String msg = "";
         String sql = "SELECT * FROM voo WHERE numerovoo = '" + vooNumero + "'";
 
         conexao = DBAeroFast.getConnection();
-        ResultSet rs;
-        stmt = conexao.createStatement(
-                ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
-        rs = stmt.executeQuery(sql);
-
-        if (rs.first()) {
-            voo.setIdVoo(rs.getString("idvoo"));
-            voo.setNumeroVoo(rs.getString("numerovoo"));
-            voo.setCiaAerea(rs.getString("ciaaerea"));
-            voo.setPrefixoAeronaveVoo(rs.getString("prefixoaeronavevoo"));
-            voo.setDataPartida(rs.getString("datapartida"));
-            voo.setHoraPartida(rs.getString("horaPartida"));
-            voo.setAeroportoPartida(rs.getString("aeroportopartida"));
-            voo.setAeroportoPartidaSigla(rs.getString("aeroportopartidasigla"));
-            voo.setPortaoPartida(rs.getString("portaopartida"));
-            voo.setDataChegada(rs.getString("datachegada"));
-            voo.setHoraChegada(rs.getString("horachegada"));
-            voo.setAeroportoPartida(rs.getString("aeroportochegada"));
-            voo.setAeroportoChegadaSigla(rs.getString("aeroportochegadasigla"));
-            voo.setPortaoPartida(rs.getString("portaochegada"));
-        } else {
-            voo = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        try {
+            if (rs.first()) {
+                voo.setIdVoo(rs.getString("idvoo"));
+                voo.setNumeroVoo(rs.getString("numerovoo"));
+                voo.setCiaAerea(rs.getString("ciaaerea"));
+                voo.setPrefixoAeronaveVoo(rs.getString("prefixoaeronavevoo"));
+                voo.setDataPartida(rs.getString("datapartida"));
+                voo.setHoraPartida(rs.getString("horaPartida"));
+                voo.setAeroportoPartida(rs.getString("aeroportopartida"));
+                voo.setAeroportoPartidaSigla(rs.getString("aeroportopartidasigla"));
+                voo.setPortaoPartida(rs.getString("portaopartida"));
+                voo.setDataChegada(rs.getString("datachegada"));
+                voo.setHoraChegada(rs.getString("horachegada"));
+                voo.setAeroportoPartida(rs.getString("aeroportochegada"));
+                voo.setAeroportoChegadaSigla(rs.getString("aeroportochegadasigla"));
+                voo.setPortaoPartida(rs.getString("portaochegada"));
+            } else {
+                voo = null;
+            }
+            
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        close();
+        try {
+            if (conexao.isClosed()) {   
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if ("".equals(msg)){
+        }else{
+            JOptionPane.showMessageDialog(null, msg); 
+        }
+        
+        msg="";
         return voo;
     }// fim método buscarVooNumero
 
@@ -192,13 +261,15 @@ public class VooDAO {
 
         int idVoo = buscarIdVooAtual();
         System.out.println(idVoo);
-
         idVoo = idVoo + 1;
 
         conexao = DBAeroFast.getConnection();
+        
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+             msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -224,22 +295,31 @@ public class VooDAO {
 
         try {
             if (stmt.execute(sql)) {
-                msg = msg + "Dados do Voo inseridos com sucesso \n";
+                msg = msg + "Dados do Voo inseridos com sucesso. \n";
             }
         } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = msg + "Erro de gravação no BD. \n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         close();
         try {
             if (conexao.isClosed()) {
-                msg = msg + "Conexão ao banco fechada";
-                JOptionPane.showMessageDialog(null, msg);
+                msg = msg + "Conexão ao banco fechada.\n";
+                
             }
         } catch (SQLException ex) {
+                msg = msg + ex;
+                msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        if ("".equals(msg)){
+        }else{
+            JOptionPane.showMessageDialog(null, msg); 
+        }
+        msg="";
     }//fim do método inserirVoo
 
     /**
@@ -255,7 +335,8 @@ public class VooDAO {
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {
-            msg = msg + ex;
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -281,11 +362,11 @@ public class VooDAO {
         try {
             stmt.executeQuery(sql);
             System.out.println("Esta é minha SQL: " + sql);
-            msg = msg + "Dados da aeronave alterados com sucesso \n";
+            msg = msg + "Dados da aeronave alterados com sucesso. \n";
         } catch (SQLException ex) {
             msg = reduzString(msg + ex);
             msg = reduzString(msg);
-            msg = msg + "Erro de gravação no BD \n";
+            msg = msg + "Erro de gravação no BD. \n";
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         close();
@@ -295,17 +376,35 @@ public class VooDAO {
 
             }
         } catch (SQLException ex) {
-            msg = msg + ex;
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, msg);
+        if ("".equals(msg)){
+        }else{
+            JOptionPane.showMessageDialog(null, msg); 
+        }
+        msg = "";
     }// fim alterarVoo
 
+    /**
+     * Método para excluir um Voo da base de dados Aerofast
+     * enviando um número de voo como parametro
+     * @param voo
+     * @param vooNumero 
+     */
     public void deletarVoo(Voo voo, String vooNumero) {
         String msg = "";
         String sql = "DELETE FROM voo WHERE numerovoo = '" + vooNumero + "'";
-
-        conexao = DBAeroFast.getConnection();
+        
+        if ((JOptionPane.showConfirmDialog(
+                    null,
+                    "Confirma Deletar Este Voo: "+ vooNumero +"?",
+                    "Confirmar Deletar Voo",
+                    JOptionPane.YES_NO_OPTION))          
+            == JOptionPane.YES_OPTION){
+            
+            conexao = DBAeroFast.getConnection();
 
         try {
             stmt = conexao.createStatement();
@@ -315,34 +414,36 @@ public class VooDAO {
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        int n = JOptionPane.showConfirmDialog(
-                null,
-                "Confirma Deletar Voo?",
-                "Confirmar Deletar Voo",
-                JOptionPane.YES_NO_OPTION);
-        
-        if (true) {
-            try {
-                stmt.executeUpdate(sql);
+        try {
+              stmt.executeUpdate(sql);
+              msg = msg + "Dados do voo excluidos com sucesso \n";
+              
             } catch (SQLException ex) {
-                msg = reduzString(msg + ex);
+                msg = msg + ex;
                 msg = reduzString(msg);
-                msg = msg + "Erro de gravação no BD \n";
+                msg = msg + "Erro de gravação no BD. \n";
                 Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else{
+
         }
         
         close();
         try {
             if (conexao.isClosed()) {
-                msg = msg + "Conexão ao banco fechada";   
+                msg = msg + "Conexão ao banco fechada\n";
             }
         } catch (SQLException ex) {
             msg = msg + ex;
-            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, msg);
-        
+        if ("".equals(msg)){
+        }else{
+            JOptionPane.showMessageDialog(null, msg); 
+        }
+         msg = "";
     }//fim do método deletarVoo
 
 }//fim classe VooDAO
+
