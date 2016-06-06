@@ -86,7 +86,7 @@ public class VooDAO {
         
         try {
             if (rs.first()) {
-                idVooNow = rs.getInt("voo");
+                idVooNow = rs.getInt("numerovoo");
                 resposta = idVooNow+1;
             }else{
                 resposta = 1000;

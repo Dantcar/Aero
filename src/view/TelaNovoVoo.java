@@ -8,6 +8,7 @@
  */
 package view;
 
+import Control.AeronaveCtrl;
 import Control.Util;
 import Control.ValidaCampos;
 import Control.VooCtrl;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import model.Aeronave;
 import model.Voo;
 
 /**
@@ -95,6 +97,9 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         tctCiaAerea = new javax.swing.JTextField();
         lblNumeroVoo = new javax.swing.JLabel();
         tctNumeroVoo = new javax.swing.JTextField();
+        lblPrefixoAeronaveVoo = new javax.swing.JLabel();
+        tftPrefixoAeronaveVoo = new javax.swing.JTextField();
+        btnPesquisarAeronavePrefixo = new javax.swing.JButton();
         PainelTarifasVoos = new javax.swing.JPanel();
         tftTarifaE = new javax.swing.JFormattedTextField();
         lblTarifaE = new javax.swing.JLabel();
@@ -182,30 +187,57 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             }
         });
 
+        lblPrefixoAeronaveVoo.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblPrefixoAeronaveVoo.setForeground(new java.awt.Color(102, 102, 102));
+        lblPrefixoAeronaveVoo.setText("Prefixo :");
+
+        tftPrefixoAeronaveVoo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tftPrefixoAeronaveVoo.setForeground(new java.awt.Color(51, 51, 51));
+        tftPrefixoAeronaveVoo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        btnPesquisarAeronavePrefixo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnPesquisarAeronavePrefixo.setText("Pesquisar em Aeronave");
+        btnPesquisarAeronavePrefixo.setToolTipText("Pesquisar RG");
+        btnPesquisarAeronavePrefixo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarAeronavePrefixoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelEmpresaVooLayout = new javax.swing.GroupLayout(PanelEmpresaVoo);
         PanelEmpresaVoo.setLayout(PanelEmpresaVooLayout);
         PanelEmpresaVooLayout.setHorizontalGroup(
             PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEmpresaVooLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelEmpresaVooLayout.createSequentialGroup()
                         .addComponent(lblNumeroVoo)
                         .addGap(18, 18, 18)
-                        .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPrefixoAeronaveVoo)
+                        .addGap(27, 27, 27)
+                        .addComponent(tftPrefixoAeronaveVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelEmpresaVooLayout.createSequentialGroup()
                         .addComponent(lblCiaAerea)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tctCiaAerea, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPesquisarAeronavePrefixo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelEmpresaVooLayout.setVerticalGroup(
             PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEmpresaVooLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumeroVoo)
-                    .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblNumeroVoo)
+                        .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPrefixoAeronaveVoo)
+                        .addComponent(tftPrefixoAeronaveVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisarAeronavePrefixo))
                 .addGap(58, 58, 58)
                 .addGroup(PanelEmpresaVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCiaAerea)
@@ -278,7 +310,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                             .addComponent(tftTarifaE, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                             .addComponent(tftTarifaB)
                             .addComponent(tftTarifaF))))
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addContainerGap(501, Short.MAX_VALUE))
         );
         PainelTarifasVoosLayout.setVerticalGroup(
             PainelTarifasVoosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +402,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                         .addComponent(tctSiglaAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)
                         .addComponent(cbxAeroportosPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 160, Short.MAX_VALUE))
+                        .addGap(0, 173, Short.MAX_VALUE))
                     .addGroup(PainelVooPartidaLayout.createSequentialGroup()
                         .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PainelVooPartidaLayout.createSequentialGroup()
@@ -495,7 +527,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                         .addComponent(lblSiglaAeroportoChegada)
                         .addGap(18, 18, 18)
                         .addComponent(tctSiglaAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                         .addComponent(cbxAeroportosChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47))
                     .addGroup(PainelVooChegadaLayout.createSequentialGroup()
@@ -516,7 +548,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                                 .addGroup(PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tctPortaoAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jdpVooDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(212, Short.MAX_VALUE))))
+                        .addContainerGap(225, Short.MAX_VALUE))))
         );
         PainelVooChegadaLayout.setVerticalGroup(
             PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,7 +598,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 .addComponent(lblEscalas)
                 .addGap(18, 18, 18)
                 .addComponent(tctEscalas, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         PainelVooEscalasLayout.setVerticalGroup(
             PainelVooEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1115,6 +1147,38 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jdpVooDataPartidaActionPerformed
 
+    private void btnPesquisarAeronavePrefixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarAeronavePrefixoActionPerformed
+        String msg = "";
+        AeronaveCtrl cAeronave = new AeronaveCtrl();
+        Aeronave vooAeronave = new Aeronave();
+        boolean flag = false;
+
+        
+            vooAeronave = AeronaveCtrl.receberAeronavePrefixo(tftPrefixoAeronaveVoo.getText());
+            int vCheck = Integer.parseInt(vooAeronave.getIdAeronave());
+
+            String vsCheck = vooAeronave.getIdAeronave();
+
+            if (vCheck > 0) {
+                String vfabricante = vooAeronave.getFabricante().trim();
+                tctCiaAerea.setText(vfabricante);
+                /**
+                * Tratamento do campo tipo jSpinner
+                */
+                flag = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Aeronave não encontrada!!!, Entre com outro Prefixo");
+                flag = true;
+            }
+
+       
+
+        if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Nenhuma Aeronave Cadastrada!!");
+            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+        }
+    }//GEN-LAST:event_btnPesquisarAeronavePrefixoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1159,6 +1223,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PanelVooTitulo;
     private javax.swing.JButton btnExcluirVoo;
     private javax.swing.JButton btnLimparVoo;
+    private static javax.swing.JButton btnPesquisarAeronavePrefixo;
     private javax.swing.JButton btnPesquisarVoo;
     private javax.swing.JButton btnSairVoo;
     private javax.swing.JButton btnSalvarVoo;
@@ -1180,6 +1245,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNumeroVoo;
     private javax.swing.JLabel lblPortaoChegada;
     private javax.swing.JLabel lblPortaoPartida;
+    private javax.swing.JLabel lblPrefixoAeronaveVoo;
     private javax.swing.JLabel lblSiglaAeroportoChegada;
     private javax.swing.JLabel lblSiglaAeroportoPartida;
     private javax.swing.JLabel lblTarifaB;
@@ -1197,6 +1263,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private static javax.swing.JTextField tctPortaoAeroportoPartida;
     private static javax.swing.JTextField tctSiglaAeroportoChegada;
     private static javax.swing.JTextField tctSiglaAeroportoPartida;
+    private static javax.swing.JTextField tftPrefixoAeronaveVoo;
     private javax.swing.JFormattedTextField tftTarifaB;
     private javax.swing.JFormattedTextField tftTarifaE;
     private javax.swing.JFormattedTextField tftTarifaF;

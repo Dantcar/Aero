@@ -80,19 +80,25 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="lblNumeroVoo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="tctNumeroVoo" min="-2" pref="153" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblPrefixoAeronaveVoo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="tftPrefixoAeronaveVoo" min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="lblCiaAerea" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="tctCiaAerea" min="-2" pref="536" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="176" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnPesquisarAeronavePrefixo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -100,9 +106,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNumeroVoo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tctNumeroVoo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblNumeroVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tctNumeroVoo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="lblPrefixoAeronaveVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tftPrefixoAeronaveVoo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnPesquisarAeronavePrefixo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -168,6 +179,46 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JLabel" name="lblPrefixoAeronaveVoo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="3"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Prefixo :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tftPrefixoAeronaveVoo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="33" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnPesquisarAeronavePrefixo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Pesquisar em Aeronave"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisar RG"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarAeronavePrefixoActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PainelTarifasVoos">
@@ -207,7 +258,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="488" max="32767" attributes="0"/>
+                      <EmptySpace pref="501" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -354,7 +405,7 @@
                               <Component id="tctSiglaAeroportoPartida" min="-2" pref="142" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                               <Component id="cbxAeroportosPartida" min="-2" pref="321" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="160" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="173" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -2610,7 +2661,7 @@
                               <Component id="lblSiglaAeroportoChegada" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="tctSiglaAeroportoChegada" min="-2" pref="137" max="-2" attributes="0"/>
-                              <EmptySpace pref="167" max="32767" attributes="0"/>
+                              <EmptySpace pref="180" max="32767" attributes="0"/>
                               <Component id="cbxAeroportosChegada" min="-2" pref="321" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           </Group>
@@ -2638,7 +2689,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="212" max="32767" attributes="0"/>
+                              <EmptySpace pref="225" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -4842,7 +4893,7 @@
                       <Component id="lblEscalas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tctEscalas" min="-2" pref="615" max="-2" attributes="0"/>
-                      <EmptySpace pref="152" max="32767" attributes="0"/>
+                      <EmptySpace pref="165" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
