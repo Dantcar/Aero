@@ -295,7 +295,17 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_novaPassagemActionPerformed
 
     private void MenuNovoVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuNovoVooActionPerformed
-       Cadastro.montaTelaNewVoo();
+      //Cadastro.montaTelaNewVoo();
+        
+        String tituloStatus;
+        tituloStatus ="Gestão Voo";
+        
+        TelaNovoVoo telaVoo = new TelaNovoVoo();
+        telaVoo.setTitle(tituloStatus);
+        telaVoo.setVisible(true);
+        add(telaVoo, JLayeredPane.DEFAULT_LAYER);
+        telaVoo.setDefaultCloseOperation(1);
+        telaVoo.setLocation(40, 5);
     }//GEN-LAST:event_MenuNovoVooActionPerformed
 
     private void menuSobreVerificaStatusBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreVerificaStatusBancoActionPerformed

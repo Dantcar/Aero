@@ -8,6 +8,10 @@
  */
 package view;
 
+import Control.Util;
+import Control.ValidaCampos;
+import Control.VooCtrl;
+import static Control.VooCtrl.receberNumeroVoo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,10 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import model.Voo;
-import Control.Util;
-import Control.ValidaCampos;
-import Control.VooCtrl;
-import static Control.VooCtrl.receberNumeroVoo;
 
 /**
  * Datepicker
@@ -34,13 +34,15 @@ import static Control.VooCtrl.receberNumeroVoo;
  *
  * @author deciodecarvalho
  */
-public class TelaNovoVoo extends javax.swing.JFrame {
+public class TelaNovoVoo extends javax.swing.JInternalFrame {
 
     public static ArrayList<model.Voo> arrayNewVoo;
     public static boolean temNewVoo;
     private static String dataPartida, dataChegada, dataHoje, dataDeHoje;
+    private static String horaPartida, horaChegada;
     private static Date hoje;
     private static Date datap, datac;
+    private static Date horap, horac;
     private static SimpleDateFormat sdfHoje, sdfPartida, sdfChegada;
 
     /**
@@ -49,6 +51,9 @@ public class TelaNovoVoo extends javax.swing.JFrame {
     public TelaNovoVoo() {
         try {
             initComponents();
+            String numVoo = receberNumeroVoo() + "";
+            tctNumeroVoo.setEditable(false);
+            tctNumeroVoo.setText(numVoo);
             jdpVooDataChegada.setDate(Calendar.getInstance().getTime());
             jdpVooDataChegada.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
 
@@ -100,7 +105,6 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         lblTarifaCategoria = new javax.swing.JLabel();
         PainelVooPartida = new javax.swing.JPanel();
         lblHoraPartida = new javax.swing.JLabel();
-        tftHoraPartida = new javax.swing.JFormattedTextField();
         lblDataPartida = new javax.swing.JLabel();
         lblAeroportoPartida = new javax.swing.JLabel();
         tctAeroportoPartida = new javax.swing.JTextField();
@@ -305,9 +309,6 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         lblHoraPartida.setForeground(new java.awt.Color(102, 102, 102));
         lblHoraPartida.setText("Hora Partida: ");
 
-        tftHoraPartida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        tftHoraPartida.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
         lblDataPartida.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblDataPartida.setForeground(new java.awt.Color(102, 102, 102));
         lblDataPartida.setText("Data Partida: ");
@@ -390,9 +391,7 @@ public class TelaNovoVoo extends javax.swing.JFrame {
                                         .addComponent(lblPortaoPartida)
                                         .addGap(18, 18, 18)
                                         .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(83, 83, 83)
-                                .addComponent(tftHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(213, 213, 213)
                                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -422,9 +421,8 @@ public class TelaNovoVoo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblHoraPartida)
-                            .addComponent(tftHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(16, Short.MAX_VALUE))
+                        .addContainerGap(18, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelVooPartidaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -754,7 +752,17 @@ public class TelaNovoVoo extends javax.swing.JFrame {
     private void btnSalvarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarVooActionPerformed
         VooCtrl cVoo = new VooCtrl();
         Voo objVoo = new Voo();
-
+        
+        Date dateClear = new Date();
+        SpinnerDateModel clearHora = new SpinnerDateModel(
+                dateClear, 
+                null, 
+                null,
+                Calendar.HOUR_OF_DAY );
+        //jspHoraPartida = new javax.swing.JSpinner(clearHora);
+        JSpinner.DateEditor clearp = new JSpinner.DateEditor(jspHoraPartida,"HH:mm");
+        JSpinner.DateEditor clearc = new JSpinner.DateEditor(jspHoraChegada,"HH:mm");
+        
         boolean flag = false;
         String msg = "";
         String tituloMsg = "";
@@ -762,9 +770,11 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         int id1 = arrayNewVoo.size();
         id1++;
         String id = id1 + "";
-        String numVoo = receberNumeroVoo() + "";
-        tctNumeroVoo.setEditable(false);
-        tctNumeroVoo.setText(numVoo);
+        //String numVoo = receberNumeroVoo() + "";
+        //tctNumeroVoo.setEditable(false);
+        //tctNumeroVoo.setText(numVoo);
+        String numVoo = tctNumeroVoo.getText();
+        
         objVoo.setIdVoo(id);
         objVoo.setNumeroVoo(numVoo);
         objVoo.setCiaAerea(tctCiaAerea.getText());
@@ -778,8 +788,11 @@ public class TelaNovoVoo extends javax.swing.JFrame {
          */
         dataPartida = jdpVooDataPartida.getEditor().getText();
         objVoo.setDataPartida(dataPartida);
-
-        objVoo.setHoraPartida(tftHoraPartida.getText());
+        
+        horaPartida = jspHoraPartida.getValue().toString();
+        horaPartida = Util.retiraHora(horaPartida);
+        objVoo.setHoraPartida(horaPartida);
+        
         objVoo.setAeroportoPartida(tctAeroportoPartida.getText());
         objVoo.setAeroportoPartidaSigla(tctSiglaAeroportoPartida.getText());
         objVoo.setPortaoPartida(tctPortaoAeroportoPartida.getText());
@@ -790,23 +803,30 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         dataChegada = jdpVooDataChegada.getEditor().getText();
         objVoo.setDataChegada(dataChegada);
 
-        //objVoo.setHoraChegada(jspHoraChegada.getText());
+        //objVoo.setHoraChegada(jspHoraChegada.getValue().toString());
+        horaChegada = jspHoraChegada.getValue().toString();
+        horaChegada = Util.retiraHora(horaChegada);
+        objVoo.setHoraChegada(horaPartida);
+        
         objVoo.setAeroportoChegada(tctAeroportoChegada.getText());
         objVoo.setAeroportoChegadaSigla(tctSiglaAeroportoChegada.getText());
         objVoo.setPortaoChegada(tctPortaoAeroportoChegada.getText());
         objVoo.setEscalasVoo(tctEscalas.getText());
 
+        
+        System.out.println("Data/Hora Partida: "+ dataPartida +"/"+horaPartida +
+                    "\nData/Hora Chegada "+ dataChegada+"/"+horaChegada +"\n");
+        
         msg = "";
 
         boolean validaVoo = ValidaCampos.validaVazio(tctNumeroVoo.getText());
         boolean validaCia = ValidaCampos.validaVazio(tctCiaAerea.getText());
         //boolean validaDataP = ValidaCampos.validaData(dataPartida);
-        boolean validaHoraP = ValidaCampos.validaHora(tftHoraPartida.getText());
+        boolean validaHoraP = ValidaCampos.validaHora(horaPartida);
         boolean validaAeroportoP = ValidaCampos.validaVazio(tctAeroportoPartida.getText());
         boolean validaPrefixoExiste = VooCtrl.receberExisteVooNumero(numVoo);
         //boolean validaDataC = ValidaCampos.validaData(dataChegada);
-
-        ///boolean validaHoraC = ValidaCampos.validaHora(jspHoraChegada.getText());
+        boolean validaHoraC = ValidaCampos.validaHora(horaChegada);
         boolean validaAeroportoC = ValidaCampos.validaVazio(tctAeroportoChegada.getText());
 
         /**
@@ -837,10 +857,17 @@ public class TelaNovoVoo extends javax.swing.JFrame {
 
         if (validaHoraP) {
         } else {
-            msg = msg + "Campo Hora Partida invalido: " + tftHoraPartida.getText() + "\n";
-            this.tftHoraPartida.setText(null);
+            
+            msg = msg + "Campo Hora Partida invalido: " + horaPartida + "\n";
+            this.jspHoraPartida.setEditor(clearp);
         }
-
+        
+         if (validaHoraC) {
+        } else {
+            msg = msg + "Campo Hora Chegada invalido: " + horaPartida + "\n";
+            this.jspHoraChegada.setEditor(clearc);
+        }
+        
         if (validaAeroportoC) {
         } else {
             msg = msg + "Campo Aeroporto Chegada Vazio" + "\n";
@@ -883,20 +910,14 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         }
         //fim validacao dataChegada
 
-        /*
-         if (validaHoraC) {
-         } else {
-         msg = msg + "Campo Hora Chegada invalido: " + jspHoraChegada.getText() + "\n";
-         this.jspHoraChegada.setText(null);
-         }
-         */
+       
         if ("".equals(msg)) {
 
             if (btnSalvarVoo.isEnabled()) {
 
                 boolean resultadoVoo = arrayNewVoo.add(objVoo);
                 if (resultadoVoo) {
-                    cVoo.receberVooNumero(numVoo);
+                    cVoo.enviarNovoVoo(objVoo);
                     tituloMsg = "Inclusão Voo";
                     msg = "Dados Enviados ao banco de dados do sistema!";
                     flag = true;
@@ -953,7 +974,7 @@ public class TelaNovoVoo extends javax.swing.JFrame {
                 }
                 //fim do tratamento campo JDatePicker
 
-                tftHoraPartida.setText(arrayNewVoo.get(i).getHoraPartida());
+                jspHoraPartida.setValue(arrayNewVoo.get(i).getHoraPartida());
                 tctAeroportoPartida.setText(arrayNewVoo.get(i).getAeroportoPartida());
                 tctSiglaAeroportoPartida.setText(arrayNewVoo.get(i).getAeroportoPartidaSigla());
                 tctPortaoAeroportoPartida.setText(arrayNewVoo.get(i).getPortaoPartida());
@@ -994,7 +1015,34 @@ public class TelaNovoVoo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairVooActionPerformed
 
     private void btnLimparVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparVooActionPerformed
-        tctNumeroVoo.setText(null);
+        //tctNumeroVoo.setText(null);
+        //SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
+        Date hora = null; 
+        try {
+            //data = fmt.parse("17/12/2007 19:30:20");
+            hora = fmt.parse("00:00");
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //String str = fmt.format(data);   // isto faz com que mostre do jeito que você quer
+        
+       
+        Date dateClear = new Date();
+        SpinnerDateModel clearHora = new SpinnerDateModel(
+                hora, 
+                null, 
+                null,
+                Calendar.HOUR_OF_DAY );
+        
+        jspHoraPartida.setValue(hora); //coloca o valor definido em hora
+        
+        //jspHoraPartida = new javax.swing.JSpinner(clearHora);
+        //JSpinner.DateEditor clear = new JSpinner.DateEditor(jspHoraPartida,"HH:mm");
+        //jspHoraChegada = new javax.swing.JSpinner(clearHora);
+        //jspHoraPartida = fmt.parse("00:00");
+        
+        
         tctCiaAerea.setText(null);
         tftTarifaE.setText(null);
         tftTarifaB.setText(null);
@@ -1002,12 +1050,14 @@ public class TelaNovoVoo extends javax.swing.JFrame {
         tctAeroportoPartida.setText(null);
         tctSiglaAeroportoPartida.setText(null);
         dataPartida = null;
-        tftHoraPartida.setText(null);
         tctPortaoAeroportoPartida.setText(null);
         tctAeroportoChegada.setText(null);
         tctSiglaAeroportoChegada.setText(null);
         dataChegada = null;
-        //tftHoraChegada.setText(null);
+        
+        /* Tratamento hora Chegada */
+        jspHoraChegada.setValue(hora); //coloca o valor definido em hora
+
         tctPortaoAeroportoChegada.setText(null);
         tctEscalas.setText(null);
 
@@ -1147,7 +1197,6 @@ public class TelaNovoVoo extends javax.swing.JFrame {
     private static javax.swing.JTextField tctPortaoAeroportoPartida;
     private static javax.swing.JTextField tctSiglaAeroportoChegada;
     private static javax.swing.JTextField tctSiglaAeroportoPartida;
-    private javax.swing.JFormattedTextField tftHoraPartida;
     private javax.swing.JFormattedTextField tftTarifaB;
     private javax.swing.JFormattedTextField tftTarifaE;
     private javax.swing.JFormattedTextField tftTarifaF;

@@ -33,6 +33,25 @@ public class Util {
      */
     public static boolean temCep;
     private static ViaCEP vCEP;
+
+    public static String retiraHora(String arg) {
+       //int data;
+       //int inicio, fim;
+       String horaFormatada=null;
+        
+        if (!arg.equals(null)){
+            //fim = arg.length();
+            //inicio = fim-4;
+            //data = null;
+            
+            horaFormatada = arg.substring(11,16);
+            //horaFormatada = vhora+":"+vminuto;
+            
+        } else {
+                 horaFormatada = null;
+        }
+        return horaFormatada;
+    }
     
     public Util() {
     vCEP = null;
