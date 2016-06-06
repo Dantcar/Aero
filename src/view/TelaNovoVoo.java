@@ -217,7 +217,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
 
         PainelTarifasVoos.setBorder(javax.swing.BorderFactory.createTitledBorder("Voo Tarifas"));
 
-        tftTarifaE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tftTarifaE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
         tftTarifaE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tftTarifaE.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tftTarifaE.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +230,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         lblTarifaE.setForeground(new java.awt.Color(102, 102, 102));
         lblTarifaE.setText("Economica:");
 
-        tftTarifaB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tftTarifaB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
         tftTarifaB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tftTarifaB.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tftTarifaB.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         lblTarifaB.setForeground(new java.awt.Color(102, 102, 102));
         lblTarifaB.setText("Empresarial: ");
 
-        tftTarifaF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tftTarifaF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
         tftTarifaF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tftTarifaF.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tftTarifaF.addActionListener(new java.awt.event.ActionListener() {

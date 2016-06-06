@@ -8,7 +8,9 @@
  */
 package model;
 
+import Control.Util;
 import static Control.Util.reduzString;
+import static java.lang.Float.parseFloat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -330,7 +332,15 @@ public class VooDAO {
              msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        String starifae, starifab, starifaf;
+        float tarifaE, tarifaB, tarifaF;
+        starifae = Util.retiraPonto(voo.getTarifaE().trim());
+        starifab = Util.retiraPonto(voo.getTarifaB().trim());
+        starifaf = Util.retiraPonto(voo.getTarifaF().trim());
+        
+        tarifaE = parseFloat(starifae);
+        tarifaB = parseFloat(starifab);
+        tarifaF = parseFloat(starifaf);
         sql = "INSERT INTO voo VALUES ("
                 + idVoo + ", "
                 + "'" + voo.getNumeroVoo() + "', "
@@ -347,10 +357,10 @@ public class VooDAO {
                 + "'" + voo.getAeroportoChegadaSigla() + "', "
                 + "'" + voo.getPortaoChegada() + "', "
                 + "'" + voo.getEscalasVoo() + "', "
-                + "'" + voo.getTarifaE() + "', "
-                + "'" + voo.getTarifaB() + "', "
-                + "'" + voo.getTarifaF() + "')";
-
+                + tarifaE + ", "
+                + tarifaB + ", "
+                + tarifaF + ")";
+        System.out.println(sql);
         try {
             if (stmt.execute(sql)) {
                 msg = msg + "Dados do Voo inseridos com sucesso. \n";
