@@ -90,6 +90,8 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblNumAssentosEconomica = new javax.swing.JLabel();
         lblNumAssentosEmpresarial = new javax.swing.JLabel();
         lblNumAssentosPrimeira = new javax.swing.JLabel();
+        tctOperadoraAeronave = new javax.swing.JTextField();
+        lblOperadoraAeronave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -343,6 +345,14 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblNumAssentosPrimeira.setForeground(new java.awt.Color(102, 102, 102));
         lblNumAssentosPrimeira.setText("número de Assentos.");
 
+        tctOperadoraAeronave.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctOperadoraAeronave.setForeground(new java.awt.Color(51, 51, 51));
+        tctOperadoraAeronave.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        lblOperadoraAeronave.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblOperadoraAeronave.setForeground(new java.awt.Color(102, 102, 102));
+        lblOperadoraAeronave.setText("Operadora:");
+
         javax.swing.GroupLayout PainelAeronaveVooLayout = new javax.swing.GroupLayout(PainelAeronaveVoo);
         PainelAeronaveVoo.setLayout(PainelAeronaveVooLayout);
         PainelAeronaveVooLayout.setHorizontalGroup(
@@ -355,7 +365,8 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                             .addComponent(lblModeloAeronave)
                             .addComponent(lblClasse1)
                             .addComponent(lblFabricanteAeronave)
-                            .addComponent(lblPrefixoAeronave))
+                            .addComponent(lblPrefixoAeronave)
+                            .addComponent(lblOperadoraAeronave))
                         .addGap(27, 27, 27)
                         .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tftPrefixoAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,7 +375,8 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                                 .addComponent(tftClasseEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblNumAssentosEconomica))
-                            .addComponent(tctFabricanteAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tctFabricanteAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tctOperadoraAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PainelAeronaveVooLayout.createSequentialGroup()
                         .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblClasse2)
@@ -390,6 +402,10 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFabricanteAeronave)
                     .addComponent(tctFabricanteAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblOperadoraAeronave)
+                    .addComponent(tctOperadoraAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrefixoAeronave)
@@ -409,7 +425,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                     .addComponent(lblClasse3)
                     .addComponent(tftPrimeiraClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNumAssentosPrimeira))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -473,6 +489,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
             tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
             tctFabricanteAeronave.setText(aeronave.getFabricante());
+            tctOperadoraAeronave.setText(aeronave.getOperadora());
             //desabilitar edição
             desabilitarDadosAeronave();
             btnEditarAeronave.setEnabled(true);
@@ -527,7 +544,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         objAero.setSeatBusinesClasse(Integer.parseInt(tftClasseEmpresarial.getText()));
         objAero.setModelo(tctModeloAeronave.getText());
         objAero.setFabricante(tctFabricanteAeronave.getText());
-
+        objAero.setOperadora(tctOperadoraAeronave.getText());
         /**
          *
          * Validações para o Form Aeronave (objAero)
@@ -539,6 +556,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         boolean validaClasseP = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftPrimeiraClasse.getText()));
         boolean validaClasseB = ValidaCampos.validaNumeroVazio(Integer.parseInt(tftClasseEmpresarial.getText()));
         boolean validaFabricante = ValidaCampos.validaVazio(tctFabricanteAeronave.getText());
+        boolean validaOperadora = ValidaCampos.validaVazio(tctOperadoraAeronave.getText());
         boolean validaPrefixoExiste = AeronaveCtrl.receberPesquisarAeronavePrefixo(tftPrefixoAeronave.getText());
 
         if (btnSalvarAeronave.isEnabled()) {
@@ -582,7 +600,12 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         } else {
             msg = msg + "Campo Fabricante Vazio" + "\n";
         }
-
+        
+        if (validaOperadora) {
+        } else {
+            msg = msg + "Campo Operadora Vazio" + "\n";
+        }
+        
         if ("".equals(msg)) {
 
             if (btnSalvarAeronave.isEnabled()) {
@@ -666,6 +689,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             tftClasseEmpresarial.setText(aeronave.getSeatBusinesClasse() + "");
             tftPrimeiraClasse.setText(aeronave.getSeatFirstClasse() + "");
             tctFabricanteAeronave.setText(aeronave.getFabricante());
+            tctOperadoraAeronave.setText(aeronave.getOperadora());
             //desabilitar edição
             desabilitarDadosAeronave();
             AeronaveCtrl cAeronave = new AeronaveCtrl();
@@ -761,11 +785,13 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNumAssentosEconomica;
     private javax.swing.JLabel lblNumAssentosEmpresarial;
     private javax.swing.JLabel lblNumAssentosPrimeira;
+    private javax.swing.JLabel lblOperadoraAeronave;
     private javax.swing.JLabel lblPrefixoAeronave;
     private javax.swing.JLabel lblTelaAeronave;
     private javax.swing.JLabel lblTituloTelaPassageiro;
     private static javax.swing.JTextField tctFabricanteAeronave;
     private static javax.swing.JTextField tctModeloAeronave;
+    private static javax.swing.JTextField tctOperadoraAeronave;
     private javax.swing.JFormattedTextField tftClasseEconomica;
     private javax.swing.JFormattedTextField tftClasseEmpresarial;
     private static javax.swing.JTextField tftPrefixoAeronave;
@@ -779,6 +805,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         tctModeloAeronave.setText(null);
         tftPrefixoAeronave.setText(null);
         tctFabricanteAeronave.setText(null);
+        tctOperadoraAeronave.setText(null);
         tftClasseEconomica.setText("0");
         tftClasseEmpresarial.setText("0");
         tftPrimeiraClasse.setText("0");
@@ -791,6 +818,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         tctModeloAeronave.setEditable(true);
         tftPrefixoAeronave.setEditable(true);
         tctFabricanteAeronave.setEditable(true);
+        tctOperadoraAeronave.setEditable(true);
         tftClasseEconomica.setEditable(true);
         tftClasseEmpresarial.setEditable(true);
         tftPrimeiraClasse.setEditable(true);
@@ -804,6 +832,7 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         tctModeloAeronave.setEditable(false);
         tftPrefixoAeronave.setEditable(false);
         tctFabricanteAeronave.setEditable(false);
+        tctOperadoraAeronave.setEditable(false);
         tftClasseEconomica.setEditable(false);
         tftClasseEmpresarial.setEditable(false);
         tftPrimeiraClasse.setEditable(false);

@@ -41,9 +41,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="JPanelClienteTitulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="PainelAeronaveVoo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="PainelAeronaveVoo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="JPanelClienteBotoes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -369,6 +369,7 @@
                               <Component id="lblClasse1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblFabricanteAeronave" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPrefixoAeronave" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblOperadoraAeronave" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -380,6 +381,7 @@
                                   <Component id="lblNumAssentosEconomica" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="tctFabricanteAeronave" alignment="0" min="-2" pref="519" max="-2" attributes="0"/>
+                              <Component id="tctOperadoraAeronave" alignment="0" min="-2" pref="519" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -416,6 +418,11 @@
                       <Component id="lblFabricanteAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tctFabricanteAeronave" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblOperadoraAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tctOperadoraAeronave" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblPrefixoAeronave" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -439,7 +446,7 @@
                       <Component id="tftPrimeiraClasse" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="lblNumAssentosPrimeira" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="130" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -623,6 +630,31 @@
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="n&#xfa;mero de Assentos."/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tctOperadoraAeronave">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblOperadoraAeronave">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="14" style="3"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Operadora:"/>
           </Properties>
         </Component>
       </SubComponents>
