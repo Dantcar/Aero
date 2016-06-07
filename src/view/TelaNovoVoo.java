@@ -46,6 +46,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private static Date datap, datac;
     private static Date horap, horac;
     private static SimpleDateFormat sdfHoje, sdfPartida, sdfChegada;
+    private static String oldVoo; //utilizar na alteração inclusive do voo
 
     /**
      * Creates new form TelaNewVoo
@@ -820,17 +821,17 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private void btnSalvarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarVooActionPerformed
         VooCtrl cVoo = new VooCtrl();
         Voo objVoo = new Voo();
-        
+
         Date dateClear = new Date();
         SpinnerDateModel clearHora = new SpinnerDateModel(
-                dateClear, 
-                null, 
+                dateClear,
                 null,
-                Calendar.HOUR_OF_DAY );
+                null,
+                Calendar.HOUR_OF_DAY);
         //jspHoraPartida = new javax.swing.JSpinner(clearHora);
-        JSpinner.DateEditor clearp = new JSpinner.DateEditor(jspHoraPartida,"HH:mm");
-        JSpinner.DateEditor clearc = new JSpinner.DateEditor(jspHoraChegada,"HH:mm");
-        
+        JSpinner.DateEditor clearp = new JSpinner.DateEditor(jspHoraPartida, "HH:mm");
+        JSpinner.DateEditor clearc = new JSpinner.DateEditor(jspHoraChegada, "HH:mm");
+
         boolean flag = false;
         String msg = "";
         String tituloMsg = "";
@@ -842,7 +843,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         //tctNumeroVoo.setEditable(false);
         //tctNumeroVoo.setText(numVoo);
         String numVoo = tctNumeroVoo.getText();
-        
+
         objVoo.setIdVoo(id);
         objVoo.setNumeroVoo(numVoo);
         objVoo.setCiaAerea(tctCiaAerea.getText());
@@ -856,11 +857,11 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
          */
         dataPartida = jdpVooDataPartida.getEditor().getText();
         objVoo.setDataPartida(dataPartida);
-        
+
         horaPartida = jspHoraPartida.getValue().toString();
         horaPartida = Util.retiraHora(horaPartida);
         objVoo.setHoraPartida(horaPartida);
-        
+
         objVoo.setAeroportoPartida(tctAeroportoPartida.getText());
         objVoo.setAeroportoPartidaSigla(tctSiglaAeroportoPartida.getText());
         objVoo.setPortaoPartida(tctPortaoAeroportoPartida.getText());
@@ -875,16 +876,15 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         horaChegada = jspHoraChegada.getValue().toString();
         horaChegada = Util.retiraHora(horaChegada);
         objVoo.setHoraChegada(horaPartida);
-        
+
         objVoo.setAeroportoChegada(tctAeroportoChegada.getText());
         objVoo.setAeroportoChegadaSigla(tctSiglaAeroportoChegada.getText());
         objVoo.setPortaoChegada(tctPortaoAeroportoChegada.getText());
         objVoo.setEscalasVoo(tctEscalas.getText());
 
-        
-        System.out.println("Data/Hora Partida: "+ dataPartida +"/"+horaPartida +
-                    "\nData/Hora Chegada "+ dataChegada+"/"+horaChegada +"\n");
-        
+        System.out.println("Data/Hora Partida: " + dataPartida + "/" + horaPartida
+                + "\nData/Hora Chegada " + dataChegada + "/" + horaChegada + "\n");
+
         msg = "";
 
         boolean validaVoo = ValidaCampos.validaVazio(tctNumeroVoo.getText());
@@ -925,17 +925,17 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
 
         if (validaHoraP) {
         } else {
-            
+
             msg = msg + "Campo Hora Partida invalido: " + horaPartida + "\n";
             this.jspHoraPartida.setEditor(clearp);
         }
-        
-         if (validaHoraC) {
+
+        if (validaHoraC) {
         } else {
             msg = msg + "Campo Hora Chegada invalido: " + horaPartida + "\n";
             this.jspHoraChegada.setEditor(clearc);
         }
-        
+
         if (validaAeroportoC) {
         } else {
             msg = msg + "Campo Aeroporto Chegada Vazio" + "\n";
@@ -978,7 +978,6 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         }
         //fim validacao dataChegada
 
-       
         if ("".equals(msg)) {
 
             if (btnSalvarVoo.isEnabled()) {
@@ -990,10 +989,10 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                     msg = "Dados Enviados ao banco de dados do sistema!";
                     flag = true;
                 }
-                
+
                 btnLimparVoo.doClick();
             } else {//Alteração Voo
-                
+
                 cVoo.alterarVooCtrl(objVoo, numVoo);
                 tituloMsg = "Alteração Voo";
                 msg = "Dados do Voo alterados com Sucesso";
@@ -1004,78 +1003,127 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             btnSairVoo.doClick();
         } else {
             tituloMsg = "Campo Inválido ou vazio";
-            flag = false;    
+            flag = false;
         }
         if (flag == false) {
             JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
         }
-        
+
         /**
          * final btnSalvarAeronaveActionPerformed*
          */
-        
+
     }//GEN-LAST:event_btnSalvarVooActionPerformed
 
     private void btnPesquisarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarVooActionPerformed
+        //Status dos botões 
+        btnAlterarVoo.setEnabled(false);
+        btnSalvarVoo.setEnabled(false);
+        btnEditarVoo.setEnabled(false);
+        btnLimparVoo.setEnabled(false);
+        btnExcluirVoo.setEnabled(true);
+
+        //controle da mensagem true se encontrou e false se não
         boolean flag = false;
 
-        for (int i = 0; i < arrayNewVoo.size(); i++) {
-            if (tctNumeroVoo.getText().trim().equals(arrayNewVoo.get(i).getNumeroVoo())) {
+        String msg = "";
+        String tituloMsg = "";
+        String vNumVoo = tctNumeroVoo.getText();
+        VooCtrl cVoo = new VooCtrl();
+        Voo voo;
+        voo = new Voo();
 
-                tctNumeroVoo.setText(arrayNewVoo.get(i).getNumeroVoo());
-                tctCiaAerea.setText(arrayNewVoo.get(i).getCiaAerea());
-                tftTarifaE.setText(arrayNewVoo.get(i).getTarifaE());
-                tftTarifaB.setText(arrayNewVoo.get(i).getTarifaB());
-                tftTarifaF.setText(arrayNewVoo.get(i).getTarifaF());
+        voo = cVoo.receberVooNumero(vNumVoo);
 
-                /**
-                 * Tratamento do campo tipo jDatePicker
-                 */
-                String sdataPartida = arrayNewVoo.get(i).getDataPartida();
-                // Date dtPartida = new Date();
-                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyyy");
-                try {
-                    Date dtPartida = sdf2.parse(sdataPartida);
-                    jdpVooDataPartida.setDate(dtPartida);
-                } catch (ParseException ex) {
-                    Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (voo != null) {
+
+            oldVoo = tctNumeroVoo.getText();
+            //PainelEmpresaVoo
+            tctCiaAerea.setText(voo.getCiaAerea());
+            tctNumeroVoo.setText(voo.getNumeroVoo());
+            tftPrefixoAeronaveVoo.setText(voo.getPrefixoAeronaveVoo());
+
+            //PainelTarifasVoos
+            tftTarifaE.setText(voo.getTarifaE());
+            tftTarifaB.setText(voo.getTarifaB());
+            tftTarifaF.setText(voo.getTarifaF());
+
+            //PainelVooPartida
+            
+            tctAeroportoPartida.setText(voo.getAeroportoPartida());
+            tctSiglaAeroportoPartida.setText(voo.getAeroportoPartidaSigla());
+            tctPortaoAeroportoPartida.setText(voo.getPortaoPartida());
+            cbxAeroportosPartida.setSelectedItem(voo.getAeroportoPartida());
+            
+            /**
+             * Tratamento do campo tipo jDatePicker
+             */
+            String sdataPartida = voo.getDataPartida();
+            // Date dtPartida = new Date();
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyyy");
+            try {
+                Date dtPartida = sdf2.parse(sdataPartida);
+                jdpVooDataPartida.setDate(dtPartida);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //fim do tratamento campo JDatePicker
+            
+            //jdpVooDataPartida.setEditable(true);
+            
+            jspHoraPartida.setEnabled(true);
+
+            //PainelVooChegada
+            tctAeroportoChegada.setText(voo.getAeroportoChegada());
+            System.out.println(voo.getAeroportoChegadaSigla()+"\n");
+            System.out.println(voo.getAeroportoPartidaSigla()+"\n");
+            tctSiglaAeroportoChegada.setText(voo.getAeroportoChegadaSigla());
+            tctPortaoAeroportoChegada.setText(voo.getPortaoChegada());
+            cbxAeroportosChegada.setSelectedItem(voo.getAeroportoChegada());
+             /**
+             * Tratamento do campo tipo jDatePicker
+             */
+            String sdataChegada = voo.getDataChegada();
+            //Date dtChegada = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy");
+
+            try {
+                Date dtChegada = sdf.parse(sdataChegada);
+                jdpVooDataChegada.setDate(dtChegada);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 //fim do tratamento campo JDatePicker
+            
+            jspHoraChegada.setEnabled(true);
 
-                jspHoraPartida.setValue(arrayNewVoo.get(i).getHoraPartida());
-                tctAeroportoPartida.setText(arrayNewVoo.get(i).getAeroportoPartida());
-                tctSiglaAeroportoPartida.setText(arrayNewVoo.get(i).getAeroportoPartidaSigla());
-                tctPortaoAeroportoPartida.setText(arrayNewVoo.get(i).getPortaoPartida());
+            //PainelVooEscalas
+            tctEscalas.setText(voo.getEscalasVoo());
+           
 
-                /**
-                 * Tratamento do campo tipo jDatePicker
-                 */
-                String sdataChegada = arrayNewVoo.get(i).getDataChegada();
-                //Date dtChegada = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy");
+            flag = true;
+        } else {
+            tituloMsg = "Pesquisar Voo";
+            msg = msg + "Voo não encontrado!!! " + vNumVoo + " "
+                    + ", Por favor entre com outro Voo\n";
 
-                try {
-                    Date dtChegada = sdf.parse(sdataChegada);
-                    jdpVooDataChegada.setDate(dtChegada);
-                } catch (ParseException ex) {
-                    Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //fim do tratamento campo JDatePicker
+            limparVoo();
+            habilitarDadosVoo();
+            btnExcluirVoo.setEnabled(false);
+            btnSalvarVoo.setEnabled(true);
+            btnEditarVoo.setEnabled(false);
+            btnLimparVoo.setEnabled(true);
+            flag = true;
 
-                //jspHoraChegada.setText(arrayNewVoo.get(i).getHoraChegada());
-                tctAeroportoChegada.setText(arrayNewVoo.get(i).getAeroportoChegada());
-                tctSiglaAeroportoChegada.setText(arrayNewVoo.get(i).getAeroportoChegadaSigla());
-                tctPortaoAeroportoChegada.setText(arrayNewVoo.get(i).getPortaoChegada());
-                tctEscalas.setText(arrayNewVoo.get(i).getEscalasVoo());
-                flag = true;
-            }//fim do if
-        }// fim do for
-
-        if (arrayNewVoo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhum Voo Cadastrado!!");
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Voo não encontrado!!!");
+        }// fim else
+        if (flag == false) {
+            btnExcluirVoo.setEnabled(false);
+            btnSalvarVoo.setEnabled(true);
+            btnEditarVoo.setEnabled(false);
+            btnLimparVoo.setEnabled(true);
         }
+        JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+
     }//GEN-LAST:event_btnPesquisarVooActionPerformed
 
     private void btnSairVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairVooActionPerformed
@@ -1083,7 +1131,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairVooActionPerformed
 
     private void btnLimparVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparVooActionPerformed
-       limparVoo();
+        limparVoo();
 
     }//GEN-LAST:event_btnLimparVooActionPerformed
 
@@ -1143,23 +1191,22 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         String msg = "";
         AeronaveCtrl cAeronave = new AeronaveCtrl();
         Aeronave vooAeronave = new Aeronave();
-       
+
         boolean flag = false;
 
-        
-            vooAeronave = AeronaveCtrl.receberAeronavePrefixo(tftPrefixoAeronaveVoo.getText());
-            
-            if (vooAeronave == null) {
-                JOptionPane.showMessageDialog(this, "Aeronave não encontrada!!!, Entre com outro Prefixo");
-                flag = true;
-            } else {
-                String voperadora = vooAeronave.getOperadora().trim();
-                tctCiaAerea.setText(voperadora);
-                /**
-                 * Tratamento do campo tipo jSpinner
-                 */
-                flag = true;
-            }
+        vooAeronave = AeronaveCtrl.receberAeronavePrefixo(tftPrefixoAeronaveVoo.getText());
+
+        if (vooAeronave == null) {
+            JOptionPane.showMessageDialog(this, "Aeronave não encontrada!!!, Entre com outro Prefixo");
+            flag = true;
+        } else {
+            String voperadora = vooAeronave.getOperadora().trim();
+            tctCiaAerea.setText(voperadora);
+            /**
+             * Tratamento do campo tipo jSpinner
+             */
+            flag = true;
+        }
 
         if (flag == false) {
             JOptionPane.showMessageDialog(this, "Nenhuma Aeronave Cadastrada!!");
@@ -1279,14 +1326,14 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField tftTarifaE;
     private javax.swing.JFormattedTextField tftTarifaF;
     // End of variables declaration//GEN-END:variables
-    
+
     /**
      * Método para limpar os campos da telaVoo.
      */
-    private void limparVoo(){
+    private void limparVoo() {
         //SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
-        Date hora = null; 
+        Date hora = null;
         try {
             //data = fmt.parse("17/12/2007 19:30:20");
             hora = fmt.parse("00:00");
@@ -1294,23 +1341,20 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String str = fmt.format(data);   // isto faz com que mostre do jeito que você quer
-        
-       
+
         Date dateClear = new Date();
         SpinnerDateModel clearHora = new SpinnerDateModel(
-                hora, 
-                null, 
+                hora,
                 null,
-                Calendar.HOUR_OF_DAY );
-        
+                null,
+                Calendar.HOUR_OF_DAY);
+
         jspHoraPartida.setValue(hora); //coloca o valor definido em hora
-        
+
         //jspHoraPartida = new javax.swing.JSpinner(clearHora);
         //JSpinner.DateEditor clear = new JSpinner.DateEditor(jspHoraPartida,"HH:mm");
         //jspHoraChegada = new javax.swing.JSpinner(clearHora);
         //jspHoraPartida = fmt.parse("00:00");
-        
-        
         tctCiaAerea.setText(null);
         tftTarifaE.setText("0");
         tftTarifaB.setText("0");
@@ -1322,27 +1366,27 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         tctAeroportoChegada.setText(null);
         tctSiglaAeroportoChegada.setText(null);
         dataChegada = null;
-        
+
         /* Tratamento hora Chegada */
         jspHoraChegada.setValue(hora); //coloca o valor definido em hora
 
         tctPortaoAeroportoChegada.setText(null);
         tctEscalas.setText(null);
-  
+
     }
-    
-    private void habilitarDadosVoo(){
-        
+
+    private void habilitarDadosVoo() {
+
         //PainelEmpresaVoo
         tctCiaAerea.setEditable(true);
         tctNumeroVoo.setEditable(true);
         tftPrefixoAeronaveVoo.setEditable(true);
-                
+
         //PainelTarifasVoos
         tftTarifaE.setEditable(true);
         tftTarifaB.setEditable(true);
         tftTarifaF.setEditable(true);
-                
+
         //PainelVooPartida
         tctAeroportoPartida.setEditable(true);
         tctSiglaAeroportoPartida.setEditable(true);
@@ -1350,7 +1394,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         cbxAeroportosPartida.setEditable(true);
         jdpVooDataPartida.setEditable(true);
         jspHoraPartida.setEnabled(true);
-        
+
         //PainelVooChegada
         tctAeroportoChegada.setEditable(true);
         tctSiglaAeroportoChegada.setEditable(true);
@@ -1358,24 +1402,24 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         cbxAeroportosChegada.setEditable(true);
         jdpVooDataChegada.setEditable(true);
         jspHoraChegada.setEnabled(true);
-        
+
         //PainelVooEscalas
-         tctEscalas.setEnabled(true);
-         
+        tctEscalas.setEnabled(true);
+
     }
-    
-    private void desabilitarDadosVoo(){
-        
+
+    private void desabilitarDadosVoo() {
+
         //PainelEmpresaVoo
         tctCiaAerea.setEditable(false);
         tctNumeroVoo.setEditable(false);
         tftPrefixoAeronaveVoo.setEditable(false);
-                
+
         //PainelTarifasVoos
         tftTarifaE.setEditable(false);
         tftTarifaB.setEditable(false);
         tftTarifaF.setEditable(false);
-                
+
         //PainelVooPartida
         tctAeroportoPartida.setEditable(false);
         tctSiglaAeroportoPartida.setEditable(false);
@@ -1383,7 +1427,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         cbxAeroportosPartida.setEditable(false);
         jdpVooDataPartida.setEditable(false);
         jspHoraPartida.setEnabled(false);
-        
+
         //PainelVooChegada
         tctAeroportoChegada.setEditable(false);
         tctSiglaAeroportoChegada.setEditable(false);
@@ -1391,10 +1435,10 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         cbxAeroportosChegada.setEditable(false);
         jdpVooDataChegada.setEditable(false);
         jspHoraChegada.setEnabled(false);
-        
+
         //PainelVooEscalas
-         tctEscalas.setEnabled(false);
-         
+        tctEscalas.setEnabled(false);
+
     }
-    
+
 }
