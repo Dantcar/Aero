@@ -56,7 +56,7 @@ public class Util {
     public static String retiraPonto(String arg) {
         //arg = arg.replace( " " , ""); //tira espaço em branco
         arg = arg.replace( "." , ""); //tira ponto
-         arg = arg.replace( "," , "."); //tira ponto
+         arg = arg.replace( "," , "."); //troca virgula por ponto
         //arg = arg.replace( "/" , ""); //tira barra
         //arg = arg.replace( "-" , ""); //tira hífen
         return arg;

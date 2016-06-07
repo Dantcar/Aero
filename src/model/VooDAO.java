@@ -149,7 +149,7 @@ public class VooDAO {
 
         try {
             if (rs.first()) {
-                idVooNow = rs.getInt("voo");
+                idVooNow = rs.getInt("numerovoo");
                 resposta = idVooNow;
             }
         } catch (SQLException ex) {
@@ -333,14 +333,38 @@ public class VooDAO {
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         String starifae, starifab, starifaf;
+        
         float tarifaE, tarifaB, tarifaF;
+        tarifaE = 0;
+        tarifaB = 0;
+        tarifaF = 0;
         starifae = Util.retiraPonto(voo.getTarifaE().trim());
         starifab = Util.retiraPonto(voo.getTarifaB().trim());
         starifaf = Util.retiraPonto(voo.getTarifaF().trim());
         
-        tarifaE = parseFloat(starifae);
-        tarifaB = parseFloat(starifab);
-        tarifaF = parseFloat(starifaf);
+        if(starifae != null){
+        tarifaE = tarifaE + Float.parseFloat(starifae);    
+        }
+        else {
+         tarifaE = 0;   
+        }
+        
+        if(starifab != null){
+        tarifaB = tarifaB + Float.parseFloat(starifab);
+        }
+        else {
+         tarifaB = 0;   
+        }
+        
+        if(starifaf != null){
+        tarifaF = tarifaF + Float.parseFloat(starifaf);
+        }
+        else {
+         tarifaF = 0;   
+        }
+        
+         System.out.println(tarifaE + " - " + tarifaB + " - " + tarifaF);
+         
         sql = "INSERT INTO voo VALUES ("
                 + idVoo + ", "
                 + "'" + voo.getNumeroVoo() + "', "

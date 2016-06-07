@@ -90,12 +90,11 @@ CREATE TABLE PASSAGEM(
     chegadaPortao VARCHAR(10) not null,   
     EscalasVoo VARCHAR(60) not null
 )
-
--- DROP TABLE VOO
 CREATE TABLE VOO(
     idVoo  int not null,
-    numeroVoo  VARCHAR(12) not null,
+    numeroVoo  VARCHAR(12) not null primary key,
     ciaAerea  VARCHAR(15) not null,
+    prefixo VARCHAR(8)not null,
     dataPartida  VARCHAR(8) not null,
     horaPartida  VARCHAR(8) not null,
     aeroportoPartida  VARCHAR(60) not null,
@@ -111,3 +110,5 @@ CREATE TABLE VOO(
     tarifaB  float,
     tarifaF  float
 )
+
+-- DROP TABLE VOO
