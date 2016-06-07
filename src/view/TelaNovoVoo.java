@@ -122,7 +122,6 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         tctPortaoAeroportoPartida = new javax.swing.JTextField();
         cbxAeroportosPartida = new javax.swing.JComboBox();
         jdpVooDataPartida = new org.jdesktop.swingx.JXDatePicker();
-        jToolBar1 = new javax.swing.JToolBar();
         Date date = new Date();
         SpinnerDateModel sm = new 
         SpinnerDateModel(date,null,null,Calendar.HOUR_OF_DAY);
@@ -389,8 +388,6 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             }
         });
 
-        jToolBar1.setRollover(true);
-
         jspHoraPartida.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jspHoraPartida.setToolTipText("Escolha a Hora e os Minutos");
 
@@ -414,22 +411,19 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                                 .addComponent(lblAeroportoPartida)
                                 .addGap(18, 18, 18)
                                 .addComponent(tctAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                        .addComponent(lblDataPartida)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jdpVooDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                        .addComponent(lblHoraPartida)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                        .addComponent(lblPortaoPartida)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(213, 213, 213)
-                                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(PainelVooPartidaLayout.createSequentialGroup()
+                                    .addComponent(lblDataPartida)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jdpVooDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PainelVooPartidaLayout.createSequentialGroup()
+                                    .addComponent(lblHoraPartida)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PainelVooPartidaLayout.createSequentialGroup()
+                                    .addComponent(lblPortaoPartida)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PainelVooPartidaLayout.setVerticalGroup(
@@ -449,21 +443,15 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPortaoPartida)
                     .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDataPartida)
-                            .addComponent(jdpVooDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblHoraPartida)
-                            .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(18, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelVooPartidaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDataPartida)
+                    .addComponent(jdpVooDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHoraPartida)
+                    .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         PainelGuiasVoo.addTab("Partida", PainelVooPartida);
@@ -1253,7 +1241,6 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalvarVoo;
     private javax.swing.JComboBox cbxAeroportosChegada;
     private javax.swing.JComboBox cbxAeroportosPartida;
-    private javax.swing.JToolBar jToolBar1;
     private org.jdesktop.swingx.JXDatePicker jdpVooDataChegada;
     private org.jdesktop.swingx.JXDatePicker jdpVooDataPartida;
     private javax.swing.JSpinner jspHoraChegada;
@@ -1359,38 +1346,55 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         //PainelVooPartida
         tctAeroportoPartida.setEditable(true);
         tctSiglaAeroportoPartida.setEditable(true);
+        tctPortaoAeroportoPartida.setEditable(true);
+        cbxAeroportosPartida.setEditable(true);
+        jdpVooDataPartida.setEditable(true);
+        jspHoraPartida.setEnabled(true);
         
-        
-        //PainelVooPartida
-        
-        
-        //PAinelVooChegada
-        
+        //PainelVooChegada
+        tctAeroportoChegada.setEditable(true);
+        tctSiglaAeroportoChegada.setEditable(true);
+        tctPortaoAeroportoChegada.setEditable(true);
+        cbxAeroportosChegada.setEditable(true);
+        jdpVooDataChegada.setEditable(true);
+        jspHoraChegada.setEnabled(true);
         
         //PainelVooEscalas
-        
-        
-        
-        
-        tctCiaAerea.setEditable(true);
-        tftTarifaE.setEditable(true);
-        tftTarifaB.setEditable(true);
-        tftTarifaF.setEditable(true);
-        
-        tctAeroportoPartida.setText(null);
-        tctSiglaAeroportoPartida.setText(null);
-        dataPartida = null;
-        tctPortaoAeroportoPartida.setText(null);
-        tctAeroportoChegada.setText(null);
-        tctSiglaAeroportoChegada.setText(null);
-        dataChegada = null;
-        
-        /* Tratamento hora Chegada */
-        jspHoraChegada.setValue(hora); //coloca o valor definido em hora
-
-        tctPortaoAeroportoChegada.setText(null);
-        tctEscalas.setText(null); 
+         tctEscalas.setEnabled(true);
+         
     }
     
+    private void desabilitarDadosVoo(){
+        
+        //PainelEmpresaVoo
+        tctCiaAerea.setEditable(false);
+        tctNumeroVoo.setEditable(false);
+        tftPrefixoAeronaveVoo.setEditable(false);
+                
+        //PainelTarifasVoos
+        tftTarifaE.setEditable(false);
+        tftTarifaB.setEditable(false);
+        tftTarifaF.setEditable(false);
+                
+        //PainelVooPartida
+        tctAeroportoPartida.setEditable(false);
+        tctSiglaAeroportoPartida.setEditable(false);
+        tctPortaoAeroportoPartida.setEditable(false);
+        cbxAeroportosPartida.setEditable(false);
+        jdpVooDataPartida.setEditable(false);
+        jspHoraPartida.setEnabled(false);
+        
+        //PainelVooChegada
+        tctAeroportoChegada.setEditable(false);
+        tctSiglaAeroportoChegada.setEditable(false);
+        tctPortaoAeroportoChegada.setEditable(false);
+        cbxAeroportosChegada.setEditable(false);
+        jdpVooDataChegada.setEditable(false);
+        jspHoraChegada.setEnabled(false);
+        
+        //PainelVooEscalas
+         tctEscalas.setEnabled(false);
+         
+    }
     
 }

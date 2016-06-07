@@ -132,11 +132,11 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnEditarAeronave" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnPesquisarAeronave" pref="129" max="32767" attributes="0"/>
+                  <Component id="btnPesquisarAeronave" min="-2" pref="129" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnExcluirAeronave" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnSairAeronave" min="-2" pref="112" max="-2" attributes="0"/>
+                  <Component id="btnSairAeronave" pref="112" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

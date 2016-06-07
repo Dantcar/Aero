@@ -9,12 +9,8 @@
 package view;
 
 import Control.AeronaveCtrl;
-import static Control.Util.reduzString;
 import Control.ValidaCampos;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Aeronave;
 
@@ -249,11 +245,11 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditarAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisarAeronave, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(btnPesquisarAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluirAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSairAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSairAeronave, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
         );
         JPanelClienteBotoesLayout.setVerticalGroup(
             JPanelClienteBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
