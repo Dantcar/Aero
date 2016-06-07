@@ -9,44 +9,52 @@
 package model;
 
 /**
- * @version 0.1
+ * @version 0.2
  * @author Décio Antonio de Carvalho
- * @since 09-abr-2016
+ * @since 06-Junho-2016
+ */
+
+/**
+ * Método construtor
+ * @author Dac
  */
 public class Aeronave {
-    String idAeronave;
-    String prefixo;
-    int seatEconomyClasse;
-    int seatFirstClasse;
-    int seatBusinesClasse;
-    String modelo;
-    String fabricante;
+    private String idAeronave;
+    private String prefixo;
+    private Integer seatEconomyClasse;
+    private Integer seatFirstClasse;
+    private Integer seatBusinesClasse;
+    private String modelo;
+    private String fabricante;
+    private String operadora;
 
+    /**
+     * Construtor padrão
+     */
     public Aeronave() {
     }
-
-    
-    /**
-     *
+     
+     /**
+     * Método construtor 
      * @param idAeronave
      * @param prefixo
      * @param seatEconomyClasse
      * @param seatFirstClasse
      * @param seatBusinesClasse
-     * @param Modelo
+     * @param modelo
      * @param fabricante
+     * @param operadora 
      */
-    public Aeronave(String idAeronave, String prefixo, int seatEconomyClasse, int seatFirstClasse, int seatBusinesClasse, String Modelo, String fabricante) {
+    public Aeronave(String idAeronave, String prefixo, Integer seatEconomyClasse, Integer seatFirstClasse, Integer seatBusinesClasse, String modelo, String fabricante, String operadora) {
         this.idAeronave = idAeronave;
         this.prefixo = prefixo;
         this.seatEconomyClasse = seatEconomyClasse;
         this.seatFirstClasse = seatFirstClasse;
         this.seatBusinesClasse = seatBusinesClasse;
-        this.modelo = Modelo;
+        this.modelo = modelo;
         this.fabricante = fabricante;
+        this.operadora = operadora;
     }
-
-    
 
     public String getIdAeronave() {
         return idAeronave;
@@ -64,27 +72,27 @@ public class Aeronave {
         this.prefixo = prefixo;
     }
 
-    public int getSeatEconomyClasse() {
+    public Integer getSeatEconomyClasse() {
         return seatEconomyClasse;
     }
 
-    public void setSeatEconomyClasse(int seatEconomyClasse) {
+    public void setSeatEconomyClasse(Integer seatEconomyClasse) {
         this.seatEconomyClasse = seatEconomyClasse;
     }
 
-    public int getSeatFirstClasse() {
+    public Integer getSeatFirstClasse() {
         return seatFirstClasse;
     }
 
-    public void setSeatFirstClasse(int seatFirstClasse) {
+    public void setSeatFirstClasse(Integer seatFirstClasse) {
         this.seatFirstClasse = seatFirstClasse;
     }
 
-    public int getSeatBusinesClasse() {
+    public Integer getSeatBusinesClasse() {
         return seatBusinesClasse;
     }
 
-    public void setSeatBusinesClasse(int seatBusinesClasse) {
+    public void setSeatBusinesClasse(Integer seatBusinesClasse) {
         this.seatBusinesClasse = seatBusinesClasse;
     }
 
@@ -92,8 +100,8 @@ public class Aeronave {
         return modelo;
     }
 
-    public void setModelo(String Modelo) {
-        this.modelo = Modelo;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public String getFabricante() {
@@ -103,6 +111,15 @@ public class Aeronave {
     public void setFabricante(String fabricante) {
         this.fabricante = fabricante;
     }
+
+    public String getOperadora() {
+        return operadora;
+    }
+
+    public void setOperadora(String operadora) {
+        this.operadora = operadora;
+    }
+
+     
     
-          
 }//fim classe Aeronave

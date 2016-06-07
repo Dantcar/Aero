@@ -25,7 +25,7 @@ seatFirstClasse int,
 seatBusinesClasse int,
 modelo VARCHAR(50),
 fabricante VARCHAR(50),
-operadora VARCHAR(50)
+operadora VARCHAR(60)
 )
 
 -- DROP TABLE ENDCEP
@@ -73,34 +73,36 @@ CREATE TABLE PASSAGEM(
     rgPassageiro VARCHAR(12) not null,
     reserva VARCHAR(12) not null,
     vooNumero VARCHAR(12) not null,
-    CiaAerea VARCHAR(15) not null,
+    CiaAerea VARCHAR(60) not null,
     assentoNumero VARCHAR(4) not null,
     classe VARCHAR(17) not null,
     tarifa float,
     dataPassagem VARCHAR(8) not null,
     partidaAeroporto VARCHAR(60) not null,
     partidaSiglaAeroporto VARCHAR(10) not null,
-    partidaData VARCHAR(8) not null,
+    partidaData VARCHAR(10) not null,
     partidaHora VARCHAR(8) not null,
     partidaPortao VARCHAR(10) not null,
     chegadaAeroporto VARCHAR(8) not null,
     chegadaSiglaAeroporto VARCHAR(60) not null,
-    chegadaData VARCHAR(8) not null,
+    chegadaData VARCHAR(10) not null,
     chegadaHora VARCHAR(8) not null,
     chegadaPortao VARCHAR(10) not null,   
     EscalasVoo VARCHAR(60) not null
 )
+
+-- DROP TABLE VOO
 CREATE TABLE VOO(
     idVoo  int not null,
     numeroVoo  VARCHAR(12) not null primary key,
-    ciaAerea  VARCHAR(15) not null,
+    ciaAerea  VARCHAR(60) not null,
     prefixo VARCHAR(8)not null,
-    dataPartida  VARCHAR(8) not null,
+    dataPartida  VARCHAR(10) not null,
     horaPartida  VARCHAR(8) not null,
     aeroportoPartida  VARCHAR(60) not null,
     aeroportoPartidaSigla  VARCHAR(10) not null,
     portaoPartida  VARCHAR(10),
-    dataChegada  VARCHAR(8) not null,
+    dataChegada  VARCHAR(10) not null,
     horaChegada  VARCHAR(8) not null,
     aeroportoChegada  VARCHAR(60) not null,
     aeroportoChegadaSigla  VARCHAR(10) not null,
@@ -111,4 +113,4 @@ CREATE TABLE VOO(
     tarifaF  float
 )
 
--- DROP TABLE VOO
+

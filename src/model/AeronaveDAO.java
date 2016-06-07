@@ -219,6 +219,7 @@ public class AeronaveDAO {
                 aeronave.setSeatBusinesClasse(rs.getInt(5));
                 aeronave.setModelo(rs.getString(6));
                 aeronave.setFabricante(rs.getString(7));
+                aeronave.setOperadora(rs.getString(8));
             } else {
                 aeronave = null;
             }
@@ -283,7 +284,8 @@ public class AeronaveDAO {
                 +  fc + ", "
                 +  bc + ", "
                 + "'" + aeronave.getModelo() + "', "
-                + "'" + aeronave.getFabricante() + "')";
+                + "'" + aeronave.getFabricante() + "', "
+                + "'" + aeronave.getOperadora() + "')";
 
         try {
             //System.out.println("Esta é minha SQL: " + sql);
@@ -336,7 +338,8 @@ public class AeronaveDAO {
                 + "seatfirstclasse = " + aeronave.getSeatFirstClasse() + ", "
                 + "seatbusinesclasse = " + aeronave.getSeatBusinesClasse() + ", "
                 + "modelo = '" + aeronave.getModelo() + "', "
-                + "fabricante = '" + aeronave.getFabricante() + "' "
+                + "fabricante = '" + aeronave.getFabricante() + "', "
+                + "operadora = '" + aeronave.getOperadora() + "' "
                 + " WHERE prefixo = '" + vprefixo + "'";
 
         try {
