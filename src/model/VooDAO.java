@@ -10,7 +10,6 @@ package model;
 
 import Control.Util;
 import static Control.Util.reduzString;
-import static java.lang.Float.parseFloat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -265,7 +264,7 @@ public class VooDAO {
                 voo.setIdVoo(rs.getString("idvoo"));
                 voo.setNumeroVoo(rs.getString("numerovoo"));
                 voo.setCiaAerea(rs.getString("ciaaerea"));
-                voo.setPrefixoAeronaveVoo(rs.getString("prefixoaeronavevoo"));
+                voo.setPrefixoAeronaveVoo(rs.getString("prefixo"));
                 voo.setDataPartida(rs.getString("datapartida"));
                 voo.setHoraPartida(rs.getString("horaPartida"));
                 voo.setAeroportoPartida(rs.getString("aeroportopartida"));
@@ -273,9 +272,15 @@ public class VooDAO {
                 voo.setPortaoPartida(rs.getString("portaopartida"));
                 voo.setDataChegada(rs.getString("datachegada"));
                 voo.setHoraChegada(rs.getString("horachegada"));
-                voo.setAeroportoPartida(rs.getString("aeroportochegada"));
+                voo.setAeroportoChegada(rs.getString("aeroportochegada"));
                 voo.setAeroportoChegadaSigla(rs.getString("aeroportochegadasigla"));
-                voo.setPortaoPartida(rs.getString("portaochegada"));
+                voo.setPortaoChegada(rs.getString("portaochegada"));
+                voo.setEscalasVoo(rs.getString("escalasvoo"));
+                voo.setTarifaE(rs.getString("tarifae"));
+                voo.setTarifaB(rs.getString("tarifab"));
+                voo.setTarifaF(rs.getString("tarifaf"));
+                
+                
             } else {
                 voo = null;
             }
