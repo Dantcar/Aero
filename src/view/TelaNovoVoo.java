@@ -81,9 +81,15 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 arrayNewVoo = new ArrayList<>();
                 temNewVoo = true;
             }
+            
         } catch (ParseException ex) {
             Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Status dos botões 
+        btnAlterarVoo.setEnabled(false);
+        btnSalvarVoo.setEnabled(true);
+        btnEditarVoo.setEnabled(false);
+        btnExcluirVoo.setEnabled(false);
     }
 
     /**
@@ -1022,7 +1028,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         btnEditarVoo.setEnabled(false);
         btnLimparVoo.setEnabled(false);
         btnExcluirVoo.setEnabled(true);
-
+        tctNumeroVoo.setEditable(true);
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
 
@@ -1049,12 +1055,13 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             tftTarifaF.setText(voo.getTarifaF());
 
             //PainelVooPartida
-            
             tctAeroportoPartida.setText(voo.getAeroportoPartida());
-            tctSiglaAeroportoPartida.setText(voo.getAeroportoPartidaSigla());
-            tctPortaoAeroportoPartida.setText(voo.getPortaoPartida());
+            String siglaPartida = voo.getAeroportoPartidaSigla();
             cbxAeroportosPartida.setSelectedItem(voo.getAeroportoPartida());
+            tctSiglaAeroportoPartida.setText(siglaPartida);
+            tctPortaoAeroportoPartida.setText(voo.getPortaoPartida());
             
+
             /**
              * Tratamento do campo tipo jDatePicker
              */
@@ -1068,19 +1075,19 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
             }
             //fim do tratamento campo JDatePicker
-            
+
             //jdpVooDataPartida.setEditable(true);
-            
-            jspHoraPartida.setEnabled(true);
+            //jspHoraPartida.setEnabled(true);
 
             //PainelVooChegada
             tctAeroportoChegada.setText(voo.getAeroportoChegada());
-            System.out.println(voo.getAeroportoChegadaSigla()+"\n");
-            System.out.println(voo.getAeroportoPartidaSigla()+"\n");
-            tctSiglaAeroportoChegada.setText(voo.getAeroportoChegadaSigla());
+            
+            String siglaChegada = voo.getAeroportoChegadaSigla();
+            cbxAeroportosChegada.setSelectedItem(voo.getAeroportoChegada());           
+            tctSiglaAeroportoChegada.setText(siglaChegada);
             tctPortaoAeroportoChegada.setText(voo.getPortaoChegada());
-            cbxAeroportosChegada.setSelectedItem(voo.getAeroportoChegada());
-             /**
+            
+            /**
              * Tratamento do campo tipo jDatePicker
              */
             String sdataChegada = voo.getDataChegada();
@@ -1094,13 +1101,12 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
             }
                 //fim do tratamento campo JDatePicker
-            
+
             jspHoraChegada.setEnabled(true);
 
             //PainelVooEscalas
             tctEscalas.setText(voo.getEscalasVoo());
-           
-
+            desabilitarDadosVoo();
             flag = true;
         } else {
             tituloMsg = "Pesquisar Voo";
@@ -1122,7 +1128,11 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             btnEditarVoo.setEnabled(false);
             btnLimparVoo.setEnabled(true);
         }
-        JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+        if (msg.equals("")) {
+
+        } else {
+            JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnPesquisarVooActionPerformed
 
@@ -1136,27 +1146,29 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimparVooActionPerformed
 
     private void btnExcluirVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirVooActionPerformed
+        btnSalvarVoo.setEnabled(false);
+        btnAlterarVoo.setEnabled(false);
+        btnEditarVoo.setEnabled(false);
         boolean flag = false;
+        
+        Voo voo;
+        voo = new Voo();
+        VooCtrl cVoo;
+        cVoo = new VooCtrl();
+        voo = cVoo.receberVooNumero(tctNumeroVoo.getText());
 
-        for (int i = 0; i < arrayNewVoo.size(); i++) {
-
-            if (tctNumeroVoo.getText().trim().equals(arrayNewVoo.get(i).getNumeroVoo())) {
-                String removidoVoo = arrayNewVoo.get(i).getNumeroVoo();
-                Voo removido = arrayNewVoo.remove(i);
-
-                JOptionPane.showMessageDialog(this, "Voo: " + removidoVoo + " Removido!");
-                btnLimparVoo.doClick(); //Limpar tela
-
-                flag = true;
-
-            }//fim do if
-        }// fim do for
-
-        if (arrayNewVoo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhum Voo Cadastrado!!");
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Número de Voo não Encontrado!!!, Entre com outro numero de Voo");
+        if (voo != null){
+         //desabilitar edição
+            desabilitarDadosVoo();
+            
+            cVoo.deletarVooCtrl(voo, oldVoo);
+            btnLimparVooActionPerformed(evt);
+            habilitarDadosVoo();
+            flag = true;   
+        }else{
+            
         }
+
     }//GEN-LAST:event_btnExcluirVooActionPerformed
 
     private void cbxAeroportosPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAeroportosPartidaActionPerformed
@@ -1404,7 +1416,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         jspHoraChegada.setEnabled(true);
 
         //PainelVooEscalas
-        tctEscalas.setEnabled(true);
+        tctEscalas.setEditable(true);
 
     }
 
@@ -1437,7 +1449,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         jspHoraChegada.setEnabled(false);
 
         //PainelVooEscalas
-        tctEscalas.setEnabled(false);
+        tctEscalas.setEditable(false);
 
     }
 

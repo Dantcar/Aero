@@ -518,8 +518,11 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
             btnEditarAeronave.setEnabled(false);
             btnLimparAeronave.setEnabled(true);
         }
-        JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
-        msg = "";
+        if (msg.equals("")) {
+
+        } else {
+            JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnPesquisarAeronaveActionPerformed
 
     private void btnSalvarAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAeronaveActionPerformed
