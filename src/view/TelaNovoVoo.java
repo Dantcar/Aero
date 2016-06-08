@@ -418,19 +418,18 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                                 .addComponent(lblAeroportoPartida)
                                 .addGap(18, 18, 18)
                                 .addComponent(tctAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                    .addComponent(lblDataPartida)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jdpVooDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                    .addComponent(lblHoraPartida)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PainelVooPartidaLayout.createSequentialGroup()
-                                    .addComponent(lblPortaoPartida)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(PainelVooPartidaLayout.createSequentialGroup()
+                                .addComponent(lblDataPartida)
+                                .addGap(18, 18, 18)
+                                .addComponent(jdpVooDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PainelVooPartidaLayout.createSequentialGroup()
+                                .addComponent(lblHoraPartida)
+                                .addGap(18, 18, 18)
+                                .addComponent(jspHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PainelVooPartidaLayout.createSequentialGroup()
+                                .addComponent(lblPortaoPartida)
+                                .addGap(18, 18, 18)
+                                .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PainelVooPartidaLayout.setVerticalGroup(
@@ -791,7 +790,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                     .addComponent(PainelGuiasVoo)
                     .addComponent(PanelVooBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelVooTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -881,7 +880,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         //objVoo.setHoraChegada(jspHoraChegada.getValue().toString());
         horaChegada = jspHoraChegada.getValue().toString();
         horaChegada = Util.retiraHora(horaChegada);
-        objVoo.setHoraChegada(horaPartida);
+        objVoo.setHoraChegada(horaChegada);
 
         objVoo.setAeroportoChegada(tctAeroportoChegada.getText());
         objVoo.setAeroportoChegadaSigla(tctSiglaAeroportoChegada.getText());
@@ -1089,6 +1088,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
             }
             jspHoraPartida.setValue(horap); //coloca o valor definido em hora
+            
             //System.out.println(jspHoraPartida.getValue().toString()+ "\n o que esta na Voo.horaPartida: "+voo.getHoraPartida());
             
 

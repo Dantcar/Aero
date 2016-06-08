@@ -29,7 +29,7 @@
                   <Component id="PanelVooBotoes" alignment="0" max="32767" attributes="0"/>
                   <Component id="PanelVooTitulo" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="195" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

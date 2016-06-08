@@ -464,6 +464,7 @@ public class VooDAO {
                 + "aeroportopartidasigla = '" + voo.getAeroportoPartidaSigla() + "', "
                 + "portaopartida = '" + voo.getPortaoPartida() + "', "
                 + "datachegada = '" + voo.getDataChegada() + "', "
+                + "horachegada = '" + voo.getHoraChegada() + "', "
                 + "aeroportochegada = '" + voo.getAeroportoChegada() + "', "
                 + "aeroportochegadasigla = '" + voo.getAeroportoChegadaSigla() + "', "
                 + "portaochegada = '" + voo.getPortaoChegada() + "', "
