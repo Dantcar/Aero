@@ -10,6 +10,7 @@ package model;
 
 import Control.Util;
 import static Control.Util.reduzString;
+import static java.lang.Float.parseFloat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -379,7 +380,7 @@ public class VooDAO {
                 + tarifaF + ")";
         //System.out.println(sql);
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
             msg = msg + "Dados do Voo inseridos com sucesso. \n";
                 //JOptionPane.showMessageDialog(null, msg); 
 
@@ -424,11 +425,39 @@ public class VooDAO {
             msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        String starifae, starifab, starifaf;
 
+        float tarifaE, tarifaB, tarifaF;
+        tarifaE = 0;
+        tarifaB = 0;
+        tarifaF = 0;
+        starifae = Util.retiraPonto(voo.getTarifaE().trim());
+        starifab = Util.retiraPonto(voo.getTarifaB().trim());
+        starifaf = Util.retiraPonto(voo.getTarifaF().trim());
+
+        if (starifae != null) {
+            tarifaE = tarifaE + Float.parseFloat(starifae);
+        } else {
+            tarifaE = 0;
+        }
+
+        if (starifab != null) {
+            tarifaB = tarifaB + Float.parseFloat(starifab);
+        } else {
+            tarifaB = 0;
+        }
+
+        if (starifaf != null) {
+            tarifaF = tarifaF + Float.parseFloat(starifaf);
+        } else {
+            tarifaF = 0;
+        }
+        
         sql = "UPDATE voo SET "
                 + "numerovoo = '" + voo.getNumeroVoo() + "', "
                 + "ciaaerea = '" + voo.getCiaAerea() + "', "
-                + "prefixoaeronavevoo = '" + voo.getPrefixoAeronaveVoo() + "', "
+                + "prefixo = '" + voo.getPrefixoAeronaveVoo() + "', "
                 + "datapartida = '" + voo.getDataPartida() + "', "
                 + "horapartida = '" + voo.getHoraPartida() + "', "
                 + "aeroportopartida = '" + voo.getAeroportoPartida() + "', "
@@ -439,13 +468,14 @@ public class VooDAO {
                 + "aeroportochegadasigla = '" + voo.getAeroportoChegadaSigla() + "', "
                 + "portaochegada = '" + voo.getPortaoChegada() + "', "
                 + "escalasvoo = '" + voo.getEscalasVoo() + "', "
-                + "tarifae = '" + voo.getTarifaE() + "', "
-                + "tarifab = '" + voo.getTarifaB() + "', "
-                + "tarifaf = '" + voo.getTarifaF() + "', "
+                + "tarifae = " + tarifaE + ", "
+                + "tarifab = " + tarifaB + ", "
+                + "tarifaf = " + tarifaF + " "
                 + " WHERE numerovoo = '" + vooNumero + "'";
 
         try {
-            stmt.executeQuery(sql);
+           System.out.println(sql);
+            stmt.executeUpdate(sql);
             System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso. \n";
         } catch (SQLException ex) {

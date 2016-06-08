@@ -1022,13 +1022,17 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarVooActionPerformed
 
     private void btnPesquisarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarVooActionPerformed
+       //JOptionPane.showMessageDialog(this, "Entre com um número de Voo para executar a pesquisa,\n por favor."); 
+        tctNumeroVoo.setEditable(true);
+        //tctNumeroVoo.setText(null);
+        tctNumeroVoo.grabFocus();
         //Status dos botões 
         btnAlterarVoo.setEnabled(false);
         btnSalvarVoo.setEnabled(false);
-        btnEditarVoo.setEnabled(false);
+        btnEditarVoo.setEnabled(true);
         btnLimparVoo.setEnabled(false);
         btnExcluirVoo.setEnabled(true);
-        tctNumeroVoo.setEditable(true);
+        
         //controle da mensagem true se encontrou e false se não
         boolean flag = false;
 
@@ -1075,9 +1079,18 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
             }
             //fim do tratamento campo JDatePicker
-
-            //jdpVooDataPartida.setEditable(true);
-            //jspHoraPartida.setEnabled(true);
+            
+            
+            SimpleDateFormat fmtp = new SimpleDateFormat("HH:mm");
+            Date horap = null;
+            try {
+            horap = fmtp.parse(voo.getHoraPartida());
+            } catch (ParseException ex) {
+            Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jspHoraPartida.setValue(horap); //coloca o valor definido em hora
+            //System.out.println(jspHoraPartida.getValue().toString()+ "\n o que esta na Voo.horaPartida: "+voo.getHoraPartida());
+            
 
             //PainelVooChegada
             tctAeroportoChegada.setText(voo.getAeroportoChegada());
@@ -1102,7 +1115,14 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             }
                 //fim do tratamento campo JDatePicker
 
-            jspHoraChegada.setEnabled(true);
+            SimpleDateFormat fmtc = new SimpleDateFormat("HH:mm");
+            Date horac = null;
+            try {
+            horac = fmtc.parse(voo.getHoraChegada());
+            } catch (ParseException ex) {
+            Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jspHoraChegada.setValue(horac); //coloca o valor definido em hora
 
             //PainelVooEscalas
             tctEscalas.setText(voo.getEscalasVoo());
@@ -1128,7 +1148,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             btnEditarVoo.setEnabled(false);
             btnLimparVoo.setEnabled(true);
         }
-        if (msg.equals("")) {
+        if (msg.equals("")){
 
         } else {
             JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
@@ -1220,9 +1240,9 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             flag = true;
         }
 
-        if (flag == false) {
+        if (flag == false ) {
             JOptionPane.showMessageDialog(this, "Nenhuma Aeronave Cadastrada!!");
-            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+            
         }
     }//GEN-LAST:event_btnPesquisarAeronavePrefixoActionPerformed
 
