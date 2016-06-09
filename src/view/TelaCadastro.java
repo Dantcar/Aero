@@ -289,8 +289,17 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuVooAeronaveCadastrarActionPerformed
 
     private void novaPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaPassagemActionPerformed
-       Cadastro.montaTelaNovaPassagem();
+       //Cadastro.montaTelaNovaPassagem();
+       
+        String tituloPassagem;
+        tituloPassagem = "Gestão Passagem";
         
+        TelaNovaPassagem telaPassagem = new TelaNovaPassagem();
+        telaPassagem.setTitle(tituloPassagem);
+        telaPassagem.setVisible(true);
+        add(telaPassagem, JLayeredPane.DEFAULT_LAYER);      
+        telaPassagem.setDefaultCloseOperation(1);
+        telaPassagem.setLocation(40, 5);
         
     }//GEN-LAST:event_novaPassagemActionPerformed
 
