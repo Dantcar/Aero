@@ -25,7 +25,7 @@ import Control.ValidaCampos;
  *
  * @author deciodecarvalho
  */
-public class TelaNovaPassagem extends javax.swing.JFrame {
+public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     
 public static ArrayList<model.Passagem> arrayPass;  
 //Para ser utilizado em todas as partes do programa
@@ -133,6 +133,8 @@ private static SimpleDateFormat sdfHojePassagem;
         btnSairPassagem = new javax.swing.JButton();
         btnLimparPassagem = new javax.swing.JButton();
         btnExcluirPassagem = new javax.swing.JButton();
+        btnEditarVoo = new javax.swing.JButton();
+        btnAlterarVoo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,7 +156,7 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addComponent(lblTelaPassagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloTelaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelPassagemTituloLayout.setVerticalGroup(
             PainelPassagemTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +255,7 @@ private static SimpleDateFormat sdfHojePassagem;
                             .addComponent(tftRgPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jdpDataPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         PainelPassageiroLayout.setVerticalGroup(
             PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,7 +389,7 @@ private static SimpleDateFormat sdfHojePassagem;
                         .addComponent(rbReservada)
                         .addGap(33, 33, 33)
                         .addComponent(rbConfirmada)))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         PainelPassagemTarifasLayout.setVerticalGroup(
             PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +493,7 @@ private static SimpleDateFormat sdfHojePassagem;
                     .addComponent(tftDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tctAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE))
         );
         PainelPassagemPartidaLayout.setVerticalGroup(
             PainelPassagemPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,7 +599,7 @@ private static SimpleDateFormat sdfHojePassagem;
                             .addComponent(tftDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tftHoraChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         PainelPassagemChegadaLayout.setVerticalGroup(
             PainelPassagemChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,7 +660,7 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addGroup(PainelPassagemEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(scrPassagemObservacao)
                     .addComponent(tctPassagemEscalas, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
         PainelPassagemEscalasLayout.setVerticalGroup(
             PainelPassagemEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,13 +681,14 @@ private static SimpleDateFormat sdfHojePassagem;
         PanelPassagemBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnSalvarPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnSalvarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnSalvarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnSalvarPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen_1.png"))); // NOI18N
         btnSalvarPassagem.setText("Salvar");
         btnSalvarPassagem.setToolTipText("Salvar Alterações");
+        btnSalvarPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSalvarPassagem.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSalvarPassagem.setIconTextGap(2);
-        btnSalvarPassagem.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnSalvarPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnSalvarPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
         btnSalvarPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -694,10 +697,11 @@ private static SimpleDateFormat sdfHojePassagem;
         });
 
         btnPesquisarPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnPesquisarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnPesquisarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnPesquisarPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/lupaVermelha 40x40.png"))); // NOI18N
         btnPesquisarPassagem.setText("Pesquisar");
-        btnPesquisarPassagem.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnPesquisarPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPesquisarPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnPesquisarPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
         btnPesquisarPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -706,10 +710,11 @@ private static SimpleDateFormat sdfHojePassagem;
         });
 
         btnSairPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnSairPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
         btnSairPassagem.setText("Voltar");
-        btnSairPassagem.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnSairPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSairPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnSairPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
         btnSairPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -718,10 +723,11 @@ private static SimpleDateFormat sdfHojePassagem;
         });
 
         btnLimparPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnLimparPassagem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnLimparPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnLimparPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/oopsRed.png"))); // NOI18N
         btnLimparPassagem.setText("Limpar");
-        btnLimparPassagem.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnLimparPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLimparPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnLimparPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
         btnLimparPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -730,14 +736,48 @@ private static SimpleDateFormat sdfHojePassagem;
         });
 
         btnExcluirPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnExcluirPassagem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnExcluirPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnExcluirPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/excluir 40x40 vermelho.png"))); // NOI18N
         btnExcluirPassagem.setText("Excluir");
-        btnExcluirPassagem.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnExcluirPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnExcluirPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnExcluirPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
         btnExcluirPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirPassagemActionPerformed(evt);
+            }
+        });
+
+        btnEditarVoo.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarVoo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnEditarVoo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        btnEditarVoo.setText("Editar");
+        btnEditarVoo.setToolTipText("Editar Alterações");
+        btnEditarVoo.setDefaultCapable(false);
+        btnEditarVoo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEditarVoo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditarVoo.setIconTextGap(1);
+        btnEditarVoo.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnEditarVoo.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnEditarVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarVooActionPerformed(evt);
+            }
+        });
+
+        btnAlterarVoo.setBackground(new java.awt.Color(204, 204, 204));
+        btnAlterarVoo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnAlterarVoo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarRed.png"))); // NOI18N
+        btnAlterarVoo.setText("Alterar");
+        btnAlterarVoo.setToolTipText("Alterar Dados");
+        btnAlterarVoo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlterarVoo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAlterarVoo.setIconTextGap(0);
+        btnAlterarVoo.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnAlterarVoo.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnAlterarVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarVooActionPerformed(evt);
             }
         });
 
@@ -747,16 +787,20 @@ private static SimpleDateFormat sdfHojePassagem;
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPassagemBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSalvarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalvarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnExcluirPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnAlterarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluirPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSairPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         PanelPassagemBotoesLayout.setVerticalGroup(
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -765,7 +809,9 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnExcluirPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAlterarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -774,10 +820,10 @@ private static SimpleDateFormat sdfHojePassagem;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelGuiasPassagem, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PainelGuiasPassagem)
+                    .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1055,6 +1101,9 @@ private static SimpleDateFormat sdfHojePassagem;
     }//GEN-LAST:event_btnSairPassagemActionPerformed
 
     private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
+        limparPassagem();
+        
+        /*
         tctNumeroPassagem.setText(null);
         tctNomePassageiro.setText(null);
         tftRgPassagem.setText(null);
@@ -1084,6 +1133,7 @@ private static SimpleDateFormat sdfHojePassagem;
         tftHoraChegada.setText(null);
         tctPortaoAeroportoChegada.setText(null);
         tctPassagemEscalas.setText(null);
+        */
     }//GEN-LAST:event_btnLimparPassagemActionPerformed
 
     private void btnExcluirPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPassagemActionPerformed
@@ -1117,6 +1167,28 @@ private static SimpleDateFormat sdfHojePassagem;
         dataPassagem = jdpDataPassagem.getEditor().getText();
 
     }//GEN-LAST:event_jdpDataPassagemActionPerformed
+
+    private void btnEditarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarVooActionPerformed
+        // TODO add your handling code here:
+        //Status dos botões
+        btnAlterarVoo.setEnabled(true);
+        btnSalvarPassagem.setEnabled(false);
+        btnEditarVoo.setEnabled(false);
+
+        if (!tctNomePassageiro.isEditable()) {
+            //msg = "Pode realizar alterações agora";
+      ////      habilitarDadosPassagem();
+            //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
+        }
+        btnAlterarVoo.setEnabled(true);
+        btnEditarVoo.setEnabled(false);
+    }//GEN-LAST:event_btnEditarVooActionPerformed
+
+    private void btnAlterarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarVooActionPerformed
+        // TODO add your handling code here:
+        //btnSalvarPassageiro.doClick();
+        btnSalvarPassagemActionPerformed(evt);
+    }//GEN-LAST:event_btnAlterarVooActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1165,6 +1237,8 @@ private static SimpleDateFormat sdfHojePassagem;
     private javax.swing.JPanel PainelPassagemTitulo;
     private javax.swing.JPanel PanelPassagemBotoes;
     private javax.swing.ButtonGroup bgStatus;
+    private static javax.swing.JButton btnAlterarVoo;
+    private javax.swing.JButton btnEditarVoo;
     private javax.swing.JButton btnExcluirPassagem;
     private javax.swing.JButton btnLimparPassagem;
     private javax.swing.JButton btnPesquisarPassagem;
@@ -1220,4 +1294,113 @@ private static SimpleDateFormat sdfHojePassagem;
     private javax.swing.JFormattedTextField tftRgPassagem;
     private javax.swing.JTextArea txtPassagemObservacao;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void limparPassagem(){
+       tctNumeroPassagem.setText(null);
+        tctNomePassageiro.setText(null);
+        tftRgPassagem.setText(null);
+        
+        //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
+        
+        //rbConfirmada.setSelected(false);
+        //rbDisponivel.setSelected(false);
+        //rbReservada.setSelected(false);
+        
+        
+        bgStatus.clearSelection();
+        
+        tctNumeroVoo.setText(null);
+        tctPassagemNumeroAssento.setText(null);
+        cbxClasse.setSelectedIndex(-1);
+        tctCiaAereaPassagem.setText(null);
+        tftPassagemTarifaTotal.setText(null);
+        tctAeroportoPartida.setText(null);
+        tctSiglaAeroportoPartida.setText(null);
+        tftDataPartida.setText(null);
+        tftHoraPartida.setText(null);
+        tctPortaoAeroportoPartida.setText(null);
+        tctAeroportoChegada.setText(null);
+        tctSiglaAeroportoChegada.setText(null);
+        tftDataChegada.setText(null);
+        tftHoraChegada.setText(null);
+        tctPortaoAeroportoChegada.setText(null);
+        tctPassagemEscalas.setText(null); 
+        
+    }
+
+    private void habilitarPassagem() {
+        tctNumeroPassagem.setEditable(true);
+        tctNomePassageiro.setEditable(true);
+        tftRgPassagem.setEditable(true);
+        
+        //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
+        
+        //rbConfirmada.setSelected(false);
+        //rbDisponivel.setSelected(false);
+        //rbReservada.setSelected(false);
+        
+        
+        rbDisponivel.setEnabled(true);
+        rbReservada.setEnabled(true);
+        rbConfirmada.setEnabled(true);
+        
+        tctNumeroVoo.setEditable(true);
+        tctPassagemNumeroAssento.setEditable(true);
+        //cbxClasse.setSelectedIndex(-1);
+        cbxClasse.setEditable(true);
+        tctCiaAereaPassagem.setEditable(true);
+        tftPassagemTarifaTotal.setEditable(true);
+        tctAeroportoPartida.setEditable(true);
+        tctSiglaAeroportoPartida.setEditable(true);
+        tftDataPartida.setEditable(true);
+        tftHoraPartida.setEditable(true);
+        tctPortaoAeroportoPartida.setEditable(true);
+        tctAeroportoChegada.setEditable(true);
+        tctSiglaAeroportoChegada.setEditable(true);
+        tftDataChegada.setEditable(true);
+        tftHoraChegada.setEditable(true);
+        tctPortaoAeroportoChegada.setEditable(true);
+        tctPassagemEscalas.setEditable(true);
+    }
+    
+    private void desabilitarPassagem() {
+        tctNumeroPassagem.setEditable(false);
+        tctNomePassageiro.setEditable(false);
+        tftRgPassagem.setEditable(false);
+        
+        //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
+        
+        //rbConfirmada.setSelected(false);
+        //rbDisponivel.setSelected(false);
+        //rbReservada.setSelected(false);
+        
+        
+        rbDisponivel.setEnabled(false);
+        rbReservada.setEnabled(false);
+        rbConfirmada.setEnabled(false);
+        
+        tctNumeroVoo.setEditable(false);
+        tctPassagemNumeroAssento.setEditable(false);
+        //cbxClasse.setSelectedIndex(-1);
+        cbxClasse.setEditable(false);
+        tctCiaAereaPassagem.setEditable(false);
+        tftPassagemTarifaTotal.setEditable(false);
+        tctAeroportoPartida.setEditable(false);
+        tctSiglaAeroportoPartida.setEditable(false);
+        tftDataPartida.setEditable(false);
+        tftHoraPartida.setEditable(false);
+        tctPortaoAeroportoPartida.setEditable(false);
+        tctAeroportoChegada.setEditable(false);
+        tctSiglaAeroportoChegada.setEditable(false);
+        tftDataChegada.setEditable(false);
+        tftHoraChegada.setEditable(false);
+        tctPortaoAeroportoChegada.setEditable(false);
+        tctPassagemEscalas.setEditable(false);
+    }
+
+
 }
+
+
+
