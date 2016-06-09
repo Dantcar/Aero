@@ -1111,11 +1111,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSalvarPassagem" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnAlterarVoo" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="btnAlterarPassagem" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnLimparPassagem" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnEditarVoo" min="-2" pref="108" max="-2" attributes="0"/>
+                  <Component id="btnEditarPassagem" min="-2" pref="108" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnPesquisarPassagem" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -1134,8 +1134,8 @@
                   <Component id="btnExcluirPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLimparPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSairPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnEditarVoo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAlterarVoo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditarPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAlterarPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1264,7 +1264,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirPassagemActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnEditarVoo">
+        <Component class="javax.swing.JButton" name="btnEditarPassagem">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -1289,10 +1289,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarVooActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarPassagemActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAlterarVoo">
+        <Component class="javax.swing.JButton" name="btnAlterarPassagem">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -1316,7 +1316,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarVooActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarPassagemActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>

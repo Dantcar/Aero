@@ -133,8 +133,8 @@ private static SimpleDateFormat sdfHojePassagem;
         btnSairPassagem = new javax.swing.JButton();
         btnLimparPassagem = new javax.swing.JButton();
         btnExcluirPassagem = new javax.swing.JButton();
-        btnEditarVoo = new javax.swing.JButton();
-        btnAlterarVoo = new javax.swing.JButton();
+        btnEditarPassagem = new javax.swing.JButton();
+        btnAlterarPassagem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -748,36 +748,36 @@ private static SimpleDateFormat sdfHojePassagem;
             }
         });
 
-        btnEditarVoo.setBackground(new java.awt.Color(204, 204, 204));
-        btnEditarVoo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnEditarVoo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
-        btnEditarVoo.setText("Editar");
-        btnEditarVoo.setToolTipText("Editar Alterações");
-        btnEditarVoo.setDefaultCapable(false);
-        btnEditarVoo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnEditarVoo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnEditarVoo.setIconTextGap(1);
-        btnEditarVoo.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnEditarVoo.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnEditarVoo.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarPassagem.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnEditarPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inserir.png"))); // NOI18N
+        btnEditarPassagem.setText("Editar");
+        btnEditarPassagem.setToolTipText("Editar Alterações");
+        btnEditarPassagem.setDefaultCapable(false);
+        btnEditarPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEditarPassagem.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditarPassagem.setIconTextGap(1);
+        btnEditarPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnEditarPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnEditarPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarVooActionPerformed(evt);
+                btnEditarPassagemActionPerformed(evt);
             }
         });
 
-        btnAlterarVoo.setBackground(new java.awt.Color(204, 204, 204));
-        btnAlterarVoo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnAlterarVoo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarRed.png"))); // NOI18N
-        btnAlterarVoo.setText("Alterar");
-        btnAlterarVoo.setToolTipText("Alterar Dados");
-        btnAlterarVoo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAlterarVoo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnAlterarVoo.setIconTextGap(0);
-        btnAlterarVoo.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnAlterarVoo.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnAlterarVoo.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarPassagem.setBackground(new java.awt.Color(204, 204, 204));
+        btnAlterarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnAlterarPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarRed.png"))); // NOI18N
+        btnAlterarPassagem.setText("Alterar");
+        btnAlterarPassagem.setToolTipText("Alterar Dados");
+        btnAlterarPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlterarPassagem.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAlterarPassagem.setIconTextGap(0);
+        btnAlterarPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnAlterarPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnAlterarPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarVooActionPerformed(evt);
+                btnAlterarPassagemActionPerformed(evt);
             }
         });
 
@@ -789,11 +789,11 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addContainerGap()
                 .addComponent(btnSalvarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAlterarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAlterarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -810,8 +810,8 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addComponent(btnExcluirPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnEditarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnAlterarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnEditarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAlterarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1024,8 +1024,18 @@ private static SimpleDateFormat sdfHojePassagem;
     }//GEN-LAST:event_btnSalvarPassagemActionPerformed
 
     private void btnPesquisarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassagemActionPerformed
+        
+        
+        //Status dos botões
+        btnAlterarPassagem.setEnabled(true);
+        btnSalvarPassagem.setEnabled(false);
+        btnEditarPassagem.setEnabled(true);
+        btnLimparPassagem.setEnabled(false);
+        btnExcluirPassagem.setEnabled(true);
+        
         boolean flag = false;
 
+        
         for(int i = 0; i < arrayPass.size(); i++){
             
             if(tftRgPassagem.getText().equals(arrayPass.get(i).getRgPassageiro())){
@@ -1168,27 +1178,27 @@ private static SimpleDateFormat sdfHojePassagem;
 
     }//GEN-LAST:event_jdpDataPassagemActionPerformed
 
-    private void btnEditarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarVooActionPerformed
+    private void btnEditarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPassagemActionPerformed
         // TODO add your handling code here:
         //Status dos botões
-        btnAlterarVoo.setEnabled(true);
+        btnAlterarPassagem.setEnabled(true);
         btnSalvarPassagem.setEnabled(false);
-        btnEditarVoo.setEnabled(false);
+        btnEditarPassagem.setEnabled(false);
 
         if (!tctNomePassageiro.isEditable()) {
             //msg = "Pode realizar alterações agora";
       ////      habilitarDadosPassagem();
             //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
         }
-        btnAlterarVoo.setEnabled(true);
-        btnEditarVoo.setEnabled(false);
-    }//GEN-LAST:event_btnEditarVooActionPerformed
+        btnAlterarPassagem.setEnabled(true);
+        btnEditarPassagem.setEnabled(false);
+    }//GEN-LAST:event_btnEditarPassagemActionPerformed
 
-    private void btnAlterarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarVooActionPerformed
+    private void btnAlterarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarPassagemActionPerformed
         // TODO add your handling code here:
         //btnSalvarPassageiro.doClick();
         btnSalvarPassagemActionPerformed(evt);
-    }//GEN-LAST:event_btnAlterarVooActionPerformed
+    }//GEN-LAST:event_btnAlterarPassagemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1237,8 +1247,8 @@ private static SimpleDateFormat sdfHojePassagem;
     private javax.swing.JPanel PainelPassagemTitulo;
     private javax.swing.JPanel PanelPassagemBotoes;
     private javax.swing.ButtonGroup bgStatus;
-    private static javax.swing.JButton btnAlterarVoo;
-    private javax.swing.JButton btnEditarVoo;
+    private static javax.swing.JButton btnAlterarPassagem;
+    private javax.swing.JButton btnEditarPassagem;
     private javax.swing.JButton btnExcluirPassagem;
     private javax.swing.JButton btnLimparPassagem;
     private javax.swing.JButton btnPesquisarPassagem;
