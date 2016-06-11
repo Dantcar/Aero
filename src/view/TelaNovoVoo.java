@@ -1000,7 +1000,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
 
                 cVoo.alterarVooCtrl(objVoo, numVoo);
                 tituloMsg = "Alteração Voo";
-                msg = "Dados do Voo alterados com Sucesso";
+                msg = "Dados do Voo alterados com Sucesso!";
                 btnLimparVoo.doClick();
                 flag = true;
             }

@@ -19,7 +19,14 @@ import model.PassagemDAO;
  * @author Dac
  */
 public class PassagemCtrl {
-      
+    
+    public void enviarNovaPassagem(Passagem passagem){
+        PassagemDAO passagemDAO = new PassagemDAO();
+        passagemDAO.inserirNovaPassagem(passagem);
+    }
+    
+    
+    
     /**
      * Método buscar se existe passagem fornecendo seu número
      * @param numeroPassagem
@@ -31,18 +38,32 @@ public class PassagemCtrl {
         resposta = passagem.buscarExistePassagemNumero(numeroPassagem);
         return resposta;
     }
-    
+    /**
+     * Método para controlar a busca de uma passagem
+     * @param numeroPassagem
+     * @return 
+     */
     public static Passagem receberPassagemNumero(String numeroPassagem){
         PassagemDAO passDAO = new PassagemDAO();
         Passagem passagem = passDAO.buscarPassagemNumero(numeroPassagem);
     return passagem;
     }
     
+    /**
+     * Método para controlar a alteração de uma passagem
+     * @param passagem
+     * @param numeroPassagem 
+     */
     public void alterarPassagemCtrl(Passagem passagem, String numeroPassagem){
         PassagemDAO passDAO = new PassagemDAO();
         passDAO.alterarPassagem(passagem, numeroPassagem);
     }
     
+    /**
+     * Método para controlar a exclusão de uma passagem pelo número dela.
+     * @param passagem
+     * @param numeroPassagem 
+     */
     public void deletarPassagemCtrl(Passagem passagem, String numeroPassagem){
         PassagemDAO passDAO = new PassagemDAO();
         passDAO.deletarPassagem(passagem, numeroPassagem);
