@@ -16,6 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Passagem;
+import Control.PassagemCtrl;
+import Control.AeronaveCtrl;
+import Control.PassageiroCtrl;
 import Control.Util;
 import Control.ValidaCampos;
 //import static view.TelaPassagem.arrayPass;
@@ -882,10 +885,14 @@ private static SimpleDateFormat sdfHojePassagem;
     private void btnSalvarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarPassagemActionPerformed
         Passagem objPass;
         objPass = new Passagem();
+        PassagemCtrl cPassagem = new  PassagemCtrl();
         
+        boolean flag = false;
         String msg = "";
+        String tituloMsg = "";
         String reserva = "";
-                
+        String numeroPassagem = "";
+        
         if (rbConfirmada.isSelected()){
         reserva = "Confirmada";
         }
@@ -1018,15 +1025,45 @@ private static SimpleDateFormat sdfHojePassagem;
         
         
         if ("".equals(msg)){
-            msg = "Dados Enviados ao banco de dados do sistema!";
-            boolean resultadoPassagem = arrayPass.add(objPass);
-            JOptionPane.showMessageDialog(this, msg,"Dados Enviados", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Resposta se adcionou nova Passagem? "+resultadoPassagem+" id:"+id);
+            
+            if(btnSalvarPassagem.isEnabled()){
+                
+                boolean resultadoPassagem = arrayPass.add(objPass);
+                if (resultadoPassagem) {
+                    cPassagem.enviarNovaPassagem(objPass);
+                    tituloMsg = "Inclusão Passagem";
+                    msg = "Dados Enviados ao banco de dados do sistema!";
+                    flag = true;
+                }
+
+                btnLimparPassagem.doClick();
+            
+            
+            }else{ //Alteração Passagem
+                cPassagem.alterarPassagemCtrl(objPass, numeroPassagem);
+                tituloMsg = "Alteraçao Passagem";
+                msg ="Dados da Passagem alterados com sucesso!";
+                btnLimparPassagem.doClick();
+                flag = true;        
+            }//fim alteração
+                        
             btnLimparPassagem.doClick();
+            btnSairPassagem.doClick();
+        } else{
+            tituloMsg = "Campo Inválido ou vazio";
+            flag =  false;
+            
+            
         }
-        else{
-            JOptionPane.showMessageDialog(this, msg,"Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE );
+        
+        if (flag == false){
+            JOptionPane.showMessageDialog(this, msg,tituloMsg, JOptionPane.ERROR_MESSAGE );
         }
+        
+        /**
+         * final btnSalvarPassagemActionPerformed*
+         */
+        
     }//GEN-LAST:event_btnSalvarPassagemActionPerformed
 
     private void btnPesquisarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassagemActionPerformed
