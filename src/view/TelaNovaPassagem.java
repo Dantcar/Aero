@@ -43,6 +43,12 @@ private static SimpleDateFormat sdfHojePassagem;
      */
     public TelaNovaPassagem() {
         initComponents();
+        //habilitar e desabilitar botões
+        btnAlterarPassagem.setEnabled(false);
+        btnSalvarPassagem.setEnabled(true);
+        btnEditarPassagem.setEnabled(false);
+        btnExcluirPassagem.setEnabled(false);
+        
         cbxClasse.setSelectedIndex(-1);
         if (!temPassagemNova){
         arrayPass = new ArrayList<>();
@@ -1027,7 +1033,7 @@ private static SimpleDateFormat sdfHojePassagem;
         
         
         //Status dos botões
-        btnAlterarPassagem.setEnabled(true);
+        btnAlterarPassagem.setEnabled(false);
         btnSalvarPassagem.setEnabled(false);
         btnEditarPassagem.setEnabled(true);
         btnLimparPassagem.setEnabled(false);

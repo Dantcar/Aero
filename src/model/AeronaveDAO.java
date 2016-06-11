@@ -175,6 +175,7 @@ public class AeronaveDAO {
             JOptionPane.showMessageDialog(null, reduzString(msg)); 
         }
         msg="";
+        
         return resposta;
     }// fim buscarExisteAeronavePrefixo
 

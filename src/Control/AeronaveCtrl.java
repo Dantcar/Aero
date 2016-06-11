@@ -1,3 +1,5 @@
+package Control;
+
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
@@ -6,12 +8,10 @@
  * Ano 2016 - Janeiro a Junho 
  * Aluno Decio Antonio de Carvalho  * 
  */
-package Control;
 
-import java.sql.SQLException;
+
 import model.Aeronave;
 import model.AeronaveDAO;
-import model.VooDAO;
 
 /**
  *
@@ -31,7 +31,10 @@ public class AeronaveCtrl {
         return resposta;
     }
 
-       
+     /**
+      * Método para controlar inserir nova aeronave
+      * @param aeronave 
+      */ 
      public void receberAeronave(Aeronave aeronave){
         AeronaveDAO aeroDAO = new AeronaveDAO();
         aeroDAO.inserirNovaAeronave(aeronave);
