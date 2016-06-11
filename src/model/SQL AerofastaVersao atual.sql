@@ -3,17 +3,17 @@
 CREATE TABLE CLIENTE (
 idCliente int not null, 
 nome VARCHAR(60)not null,
-nascimento VARCHAR(8)not null,
+nascimento VARCHAR(10)not null,
 endereco VARCHAR(60)not null,
 numero VARCHAR(30)not null,
 bairro VARCHAR(60)not null,
 cidade VARCHAR(60)not null,
 uf VARCHAR(2)not null,
-cep VARCHAR(8)not null,
+cep VARCHAR(10)not null,
 email VARCHAR(60)not null,
-telefone VARCHAR(15)not null,
-RG VARCHAR(12),
-CPF VARCHAR(14)not null primary key
+telefone VARCHAR(20)not null,
+RG VARCHAR(16),
+CPF VARCHAR(18)not null primary key
 )
 
 -- DROP TABLE aeronave
@@ -42,9 +42,9 @@ cep VARCHAR(8)not null primary key
 -- DROP TABLE PAGAMENTO
 CREATE TABLE PAGAMENTO(
 idPagamento int not null,
-dataPagamento VARCHAR(8) not null,
+dataPagamento VARCHAR(10) not null,
 nomePagador VARCHAR(60) not null,
-rgPagador VARCHAR(12) not null,
+rgPagador VARCHAR(18) not null,
 cpfPagador VARCHAR(14)not null primary key,
 vlTotal float,
 formaPagamento VARCHAR(20)not null,
@@ -55,14 +55,14 @@ referenciaPagamento VARCHAR(20) not null
 CREATE TABLE PASSAGEIRO(
 idPassageiro int not null,
 nomePassageiro VARCHAR(60) not null,
-nascimentoPassageiro VARCHAR(8) not null,
-rgPassageiro VARCHAR(12) not null primary key,
-telefonePassageiro VARCHAR(15) not null,
-emailPassageiro VARCHAR(8) not null,
-contatoNome VARCHAR(8) not null,
-contatoTelefone VARCHAR(15) not null,
+nascimentoPassageiro VARCHAR(10) not null,
+rgPassageiro VARCHAR(16) not null primary key,
+telefonePassageiro VARCHAR(18) not null,
+emailPassageiro VARCHAR(60) not null,
+contatoNome VARCHAR(40) not null,
+contatoTelefone VARCHAR(18) not null,
 responsavelFinanceiro VARCHAR(60) not null,
-responsavelCPF VARCHAR(14) not null
+responsavelCPF VARCHAR(18) not null
 )
 
 -- DROP TABLE PASSAGEM
@@ -70,14 +70,14 @@ CREATE TABLE PASSAGEM(
     idPassagem int not null,
     NumeroPassagem VARCHAR(20) not null primary key,
     nomePassageiro VARCHAR(60) not null,
-    rgPassageiro VARCHAR(12) not null,
+    rgPassageiro VARCHAR(16) not null,
     reserva VARCHAR(12) not null,
     vooNumero VARCHAR(12) not null,
     CiaAerea VARCHAR(60) not null,
     assentoNumero VARCHAR(4) not null,
     classe VARCHAR(17) not null,
     tarifa float,
-    dataPassagem VARCHAR(8) not null,
+    dataPassagem VARCHAR(10) not null,
     partidaAeroporto VARCHAR(60) not null,
     partidaSiglaAeroporto VARCHAR(10) not null,
     partidaData VARCHAR(10) not null,
