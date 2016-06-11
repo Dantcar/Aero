@@ -8,6 +8,7 @@
  */
 package model;
 
+import Control.Util;
 import static Control.Util.reduzString;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -177,9 +178,92 @@ public class PassagemDAO {
     }// fim buscarExistePassagemNumero
 
     
-    
-    public void inserirNovaPassagem(String numeroPassagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Método para inserir nova passagem a base de dados Aerofast
+     * @param passagem 
+     */
+    public void inserirNovaPassagem(Passagem passagem) {
+        String msg = "";
+        String sql;
+
+        int idPassagem = buscarIdPassagemAtual();
+        //System.out.println(idVoo);
+        idPassagem = idPassagem + 1;
+        
+        conexao = DBAeroFast.getConnection();
+        
+        
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);            
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String starifa;
+
+        float tarifa;
+        tarifa = 0;
+        starifa = Util.retiraPonto(passagem.getTarifa().trim());
+       
+         if (starifa != null) {
+            tarifa = tarifa + Float.parseFloat(starifa);
+        } else {
+            tarifa = 0;
+        }
+         
+         sql = "INSERT INTO passagem VALUES ("
+                + idPassagem + ", "
+                + "'" + passagem.getNumeroPassagem() + "', "
+                + "'" + passagem.getNomePassageiro() + "', "
+                + "'" + passagem.getReserva()+ "', "
+                + "'" + passagem.getReserva() + "', "
+                + "'" + passagem.getVooNumero() + "', "
+                + "'" + passagem.getCiaAerea() + "', "
+                + "'" + passagem.getAssentoNumero() + "', "
+                + "'" + passagem.getClasse() + "', "
+                + "'" + passagem.getTarifa() + "', "
+                + "'" + passagem.getDataPassagem() + "', "
+                + "'" + passagem.getPartidaAeroporto() + "', "
+                + "'" + passagem.getPartidaSiglaAeroporto() + "', "
+                + "'" + passagem.getPartidaData() + "', "
+                + "'" + passagem.getPartidaHora() + "', "
+                + "'" + passagem.getPartidaPortao() + "', "
+                + "'" + passagem.getChegadaAeroporto() + "', "
+                + "'" + passagem.getChegadaSiglaAeroporto() + "', "
+                + "'" + passagem.getChegadaData() + "', "
+                + "'" + passagem.getChegadaHora() + "', "
+                + "'" + passagem.getChegadaPortao() + "', "
+                + "'" + passagem.getEscalasVoo() + "')";
+        
+        try {
+            stmt.executeUpdate(sql);
+            msg = msg + "Dados do Voo inseridos com sucesso. \n";
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = msg + "Erro de gravação no BD. \n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        close();
+        
+        try {
+            if (conexao.isClosed()) {
+                msg = msg + "Conexão ao banco fechada.\n";
+
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
     }//fim InserirNovaPassagem
     
     
