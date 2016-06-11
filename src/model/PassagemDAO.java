@@ -180,11 +180,98 @@ public class PassagemDAO {
     
     public void inserirNovaPassagem(String numeroPassagem) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }//fim InserirNovaPassagem
+    
+    
+    
+    /**
+     * Método que busca uma Passagem pelo número da passagem
+     * @param numeroPassagem
+     * @return 
+     */
+    public Passagem buscarPassagemNumero(String numeroPassagem) {
+            Passagem passagem = new Passagem();
+            String msg= "";
+            String sql = "SELECT * FROM passagem WHERE numeropassagem = '" + numeroPassagem + "'";
+            
+            conexao = DBAeroFast.getConnection();
+            ResultSet rs = null;
+            
+            try {
+                stmt = conexao.createStatement(
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+            } catch (SQLException ex) {
+                msg = msg + ex + "\n";
+                msg = reduzString(msg);
+                Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                rs = stmt.executeQuery(sql);
+            } catch (SQLException ex) {
+                msg = msg + ex + "\n";
+                msg = reduzString(msg);
+                Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                
+            if (rs.first()) {
+                passagem.setIdPassagem(rs.getString("idpassagem"));
+                passagem.setNumeroPassagem(rs.getString("numeropassagem"));
+                passagem.setNomePassageiro(rs.getString("nomepassageiro"));
+                passagem.setRgPassageiro(rs.getString("rgpassageiro"));
+                passagem.setReserva(rs.getString("reserva"));
+                passagem.setVooNumero(rs.getString("voonumero"));
+                passagem.setCiaAerea(rs.getString("ciaaerea"));
+                passagem.setAssentoNumero(rs.getString("assentonumero"));
+                passagem.setClasse(rs.getString("classe"));
+                passagem.setTarifa(rs.getString("tarifa"));
+                passagem.setDataPassagem(rs.getString("datapassagem"));
+                passagem.setPartidaAeroporto(rs.getString("partidaaeroporto"));
+                passagem.setPartidaSiglaAeroporto(rs.getString("partidasiglaaeroporto"));
+                passagem.setPartidaData(rs.getString("partidadata"));
+                passagem.setPartidaHora(rs.getString("partidahora"));
+                passagem.setPartidaPortao(rs.getString("partidaportao"));
+                passagem.setChegadaAeroporto(rs.getString("chegadaaeroporto"));
+                passagem.setChegadaSiglaAeroporto(rs.getString("chegadasiglaaeroporto"));
+                passagem.setChegadaData(rs.getString("chegadadata"));
+                passagem.setChegadaHora(rs.getString("chegadahora"));
+                passagem.setChegadaPortao(rs.getString("chegadaportao"));
+                passagem.setEscalasVoo(rs.getString("escalasvoo"));
+                
+                
+            }else {
+                passagem = null;
+            }
+            
+            
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+            close();
+            
+        try {
+            if (conexao.isClosed()){   
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        
+        return passagem;
     }
 
-    public Passagem buscarNovaPassagem(String numeroPassagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public void alterarPassagem(Passagem passagem, String vnumeroPassagem) {
         String msg = "";
@@ -250,9 +337,42 @@ public class PassagemDAO {
     }// fim método alterarPassagem
 
     
-    public void deletarPassagem(Passagem passagem, String numeroPassagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void deletarPassagem(Passagem passagem, String vnumeroPassagem) {
+      String msg = "";
+      String sql = "DELETE FROM passagem WHERE numeropassagem = '" + vnumeroPassagem + "'";
+      
+       if ((JOptionPane.showConfirmDialog(
+                    null,
+                    "Confirma Deletar Passagem Número: "+ vnumeroPassagem +"?",
+                    "Confirmar Deletar Passagem",
+                    JOptionPane.YES_NO_OPTION))          
+            == JOptionPane.YES_OPTION){
+           
+           conexao = DBAeroFast.getConnection();
+           
+          try {
+              stmt = conexao.createStatement();
+          } catch (SQLException ex) {
+              msg = msg + ex;
+              msg = reduzString(msg);
+              Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+           
+          try { 
+              stmt.executeUpdate(sql);
+              msg = msg + "Dados da Passagem excluidos com sucesso \n";
+          } catch (SQLException ex) {
+              msg = reduzString(msg + ex);
+              msg = reduzString(msg);
+              msg = msg + "Erro de gravação no BD \n";
+              Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          
+       }else{
+           JOptionPane.showMessageDialog(null, msg);
+       }
+       msg = "";
+    }//fim deletarPassagem
 
     
     
