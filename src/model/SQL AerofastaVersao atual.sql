@@ -88,7 +88,8 @@ CREATE TABLE PASSAGEM(
     chegadaData VARCHAR(10) not null,
     chegadaHora VARCHAR(8) not null,
     chegadaPortao VARCHAR(10) not null,   
-    EscalasVoo VARCHAR(60) not null
+    EscalasVoo VARCHAR(60) not null,
+    ObservacaoPassagem VARCHAR(600) not null
 )
 
 -- DROP TABLE VOO
