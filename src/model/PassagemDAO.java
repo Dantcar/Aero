@@ -223,7 +223,7 @@ public class PassagemDAO {
                 + "'" + passagem.getCiaAerea() + "', "
                 + "'" + passagem.getAssentoNumero() + "', "
                 + "'" + passagem.getClasse() + "', "
-                + "'" + passagem.getTarifa() + "', "
+                + passagem.getTarifa() + ", "
                 + "'" + passagem.getDataPassagem() + "', "
                 + "'" + passagem.getPartidaAeroporto() + "', "
                 + "'" + passagem.getPartidaSiglaAeroporto() + "', "

@@ -26,27 +26,30 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="PanelPassagemBotoes" max="32767" attributes="0"/>
-                  <Component id="PainelGuiasPassagem" alignment="0" max="32767" attributes="0"/>
-                  <Component id="PainelPassagemTitulo" alignment="0" max="32767" attributes="0"/>
-              </Group>
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="PainelPassagemTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="PanelPassagemBotoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="PainelGuiasPassagem" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Component id="PainelPassagemTitulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="PainelGuiasPassagem" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="PanelPassagemBotoes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="PainelPassagemTitulo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="PainelGuiasPassagem" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="PanelPassagemBotoes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,7 +72,7 @@
                   <Component id="lblTelaPassagem" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblTituloTelaPassagem" min="-2" pref="232" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="390" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -148,6 +151,8 @@
                               <Component id="lblNumeroPassagem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="tctNumeroPassagem" min="-2" pref="164" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnGerarNumeroPassagem" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
@@ -158,7 +163,11 @@
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tftRgPassagem" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tftRgPassagem" min="-2" pref="185" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnPesquisarPassageiroRG" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="jdpDataPassagem" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="tctNomePassageiro" alignment="0" min="-2" pref="454" max="-2" attributes="0"/>
                               </Group>
@@ -175,6 +184,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tctNumeroPassagem" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="lblNumeroPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGerarNumeroPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -190,8 +200,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tftRgPassagem" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="lblRgPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPesquisarPassageiroRG" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace pref="102" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -299,6 +310,36 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jdpDataPassagemActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="btnPesquisarPassageiroRG">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Pesquisar em Passageiro"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisar RG"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarPassageiroRGActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnGerarNumeroPassagem">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gerar N&#xfa;mero Passagem"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisar RG"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarNumeroPassagemActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PainelPassagemTarifas">
@@ -327,12 +368,14 @@
                               <Component id="lblNumeroVooPassagem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="tctNumeroVoo" min="-2" pref="113" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnPesquisarVooNumero" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                               <Component id="lblCiaAereaPassagem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="tctCiaAereaPassagem" min="-2" pref="342" max="-2" attributes="0"/>
+                              <Component id="tctCiaAereaPassagem" min="-2" pref="469" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
@@ -345,7 +388,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cbxClasse" min="-2" max="-2" attributes="0"/>
                                   <Component id="tctPassagemNumeroAssento" min="-2" pref="74" max="-2" attributes="0"/>
-                                  <Component id="tftPassagemTarifaTotal" min="-2" pref="143" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="tftPassagemTarifaTotal" min="-2" pref="143" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnCalcularTarifa" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -359,7 +406,7 @@
                               <Component id="rbConfirmada" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="251" max="32767" attributes="0"/>
+                      <EmptySpace pref="212" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -369,8 +416,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tctNumeroVoo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="lblNumeroVooPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPesquisarVooNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="tctCiaAereaPassagem" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="lblCiaAereaPassagem" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -389,8 +437,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblPassagemTarifa" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="tftPassagemTarifaTotal" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnCalcularTarifa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblPassagemStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rbDisponivel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -578,6 +627,36 @@
                 <Property name="text" type="java.lang.String" value="Confirmada"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="btnPesquisarVooNumero">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Pesquisar em Voo"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisar RG"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarVooNumeroActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCalcularTarifa">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="C&#xe1;lculo da Tarifa"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisar RG"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcularTarifaActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PainelPassagemPartida">
@@ -615,9 +694,9 @@
                           <Component id="tftHoraPartida" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                           <Component id="tftDataPartida" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                           <Component id="tctPortaoAeroportoPartida" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                          <Component id="tctAeroportoPartida" alignment="0" min="-2" pref="336" max="-2" attributes="0"/>
+                          <Component id="tctAeroportoPartida" alignment="0" min="-2" pref="624" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -822,11 +901,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tftDataChegada" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                                   <Component id="tftHoraChegada" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
-                                  <Component id="tctAeroportoChegada" alignment="0" min="-2" pref="271" max="-2" attributes="0"/>
+                                  <Component id="tctAeroportoChegada" alignment="0" min="-2" pref="601" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="402" max="32767" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1033,7 +1112,7 @@
                           <Component id="lblPassagemEscalasObs" min="-2" max="-2" attributes="0"/>
                           <Component id="scrPassagemObservacao" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1117,11 +1196,11 @@
                   <Component id="btnEditarPassagem" min="-2" pref="108" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnPesquisarPassagem" min="-2" pref="130" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btnExcluirPassagem" min="-2" pref="126" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnSairPassagem" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnSairPassagem" pref="150" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1132,9 +1211,9 @@
                   <Component id="btnPesquisarPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnExcluirPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLimparPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSairPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditarPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAlterarPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSairPassagem" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1189,30 +1268,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarPassagemActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnSairPassagem">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Icones/saidaDireitaRed.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Voltar"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 0, 0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[100, 50]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairPassagemActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLimparPassagem">
@@ -1320,6 +1375,30 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSairPassagem">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icones/saidaDireitaRed.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Voltar"/>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 0, 0, 0]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[100, 50]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairPassagemActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

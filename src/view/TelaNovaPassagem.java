@@ -21,6 +21,10 @@ import Control.AeronaveCtrl;
 import Control.PassageiroCtrl;
 import Control.Util;
 import Control.ValidaCampos;
+import Control.VooCtrl;
+import java.sql.SQLException;
+import model.Passageiro;
+import model.Voo;
 //import static view.TelaPassagem.arrayPass;
 
 
@@ -93,6 +97,8 @@ private static SimpleDateFormat sdfHojePassagem;
         lblNumeroPassagem = new javax.swing.JLabel();
         lblDataPassagem = new javax.swing.JLabel();
         jdpDataPassagem = new org.jdesktop.swingx.JXDatePicker();
+        btnPesquisarPassageiroRG = new javax.swing.JButton();
+        btnGerarNumeroPassagem = new javax.swing.JButton();
         PainelPassagemTarifas = new javax.swing.JPanel();
         lblPassagemTarifaE = new javax.swing.JLabel();
         tftPassagemTarifaTotal = new javax.swing.JFormattedTextField();
@@ -108,6 +114,8 @@ private static SimpleDateFormat sdfHojePassagem;
         rbDisponivel = new javax.swing.JRadioButton();
         rbReservada = new javax.swing.JRadioButton();
         rbConfirmada = new javax.swing.JRadioButton();
+        btnPesquisarVooNumero = new javax.swing.JButton();
+        btnCalcularTarifa = new javax.swing.JButton();
         PainelPassagemPartida = new javax.swing.JPanel();
         lblHoraPartidaPassagem = new javax.swing.JLabel();
         tftHoraPartida = new javax.swing.JFormattedTextField();
@@ -139,13 +147,13 @@ private static SimpleDateFormat sdfHojePassagem;
         PanelPassagemBotoes = new javax.swing.JPanel();
         btnSalvarPassagem = new javax.swing.JButton();
         btnPesquisarPassagem = new javax.swing.JButton();
-        btnSairPassagem = new javax.swing.JButton();
         btnLimparPassagem = new javax.swing.JButton();
         btnExcluirPassagem = new javax.swing.JButton();
         btnEditarPassagem = new javax.swing.JButton();
         btnAlterarPassagem = new javax.swing.JButton();
+        btnSairPassagem = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PainelPassagemTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -165,7 +173,7 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addComponent(lblTelaPassagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloTelaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         PainelPassagemTituloLayout.setVerticalGroup(
             PainelPassagemTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,6 +250,24 @@ private static SimpleDateFormat sdfHojePassagem;
             }
         });
 
+        btnPesquisarPassageiroRG.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnPesquisarPassageiroRG.setText("Pesquisar em Passageiro");
+        btnPesquisarPassageiroRG.setToolTipText("Pesquisar RG");
+        btnPesquisarPassageiroRG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarPassageiroRGActionPerformed(evt);
+            }
+        });
+
+        btnGerarNumeroPassagem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGerarNumeroPassagem.setText("Gerar Número Passagem");
+        btnGerarNumeroPassagem.setToolTipText("Pesquisar RG");
+        btnGerarNumeroPassagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarNumeroPassagemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PainelPassageiroLayout = new javax.swing.GroupLayout(PainelPassageiro);
         PainelPassageiro.setLayout(PainelPassageiroLayout);
         PainelPassageiroLayout.setHorizontalGroup(
@@ -252,7 +278,9 @@ private static SimpleDateFormat sdfHojePassagem;
                         .addGap(68, 68, 68)
                         .addComponent(lblNumeroPassagem)
                         .addGap(30, 30, 30)
-                        .addComponent(tctNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tctNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGerarNumeroPassagem))
                     .addGroup(PainelPassageiroLayout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -261,7 +289,10 @@ private static SimpleDateFormat sdfHojePassagem;
                             .addComponent(lblPassagemNome))
                         .addGap(30, 30, 30)
                         .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tftRgPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PainelPassageiroLayout.createSequentialGroup()
+                                .addComponent(tftRgPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPesquisarPassageiroRG))
                             .addComponent(jdpDataPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(226, Short.MAX_VALUE))
@@ -272,7 +303,8 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addGap(19, 19, 19)
                 .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tctNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumeroPassagem))
+                    .addComponent(lblNumeroPassagem)
+                    .addComponent(btnGerarNumeroPassagem))
                 .addGap(18, 18, 18)
                 .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jdpDataPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,8 +316,9 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addGap(21, 21, 21)
                 .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tftRgPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRgPassagem))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(lblRgPassagem)
+                    .addComponent(btnPesquisarPassageiroRG))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         PainelGuiasPassagem.addTab("Passageiro", PainelPassageiro);
@@ -362,6 +395,24 @@ private static SimpleDateFormat sdfHojePassagem;
         rbConfirmada.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         rbConfirmada.setText("Confirmada");
 
+        btnPesquisarVooNumero.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnPesquisarVooNumero.setText("Pesquisar em Voo");
+        btnPesquisarVooNumero.setToolTipText("Pesquisar RG");
+        btnPesquisarVooNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarVooNumeroActionPerformed(evt);
+            }
+        });
+
+        btnCalcularTarifa.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCalcularTarifa.setText("Cálculo da Tarifa");
+        btnCalcularTarifa.setToolTipText("Pesquisar RG");
+        btnCalcularTarifa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularTarifaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PainelPassagemTarifasLayout = new javax.swing.GroupLayout(PainelPassagemTarifas);
         PainelPassagemTarifas.setLayout(PainelPassagemTarifasLayout);
         PainelPassagemTarifasLayout.setHorizontalGroup(
@@ -372,12 +423,14 @@ private static SimpleDateFormat sdfHojePassagem;
                         .addGap(105, 105, 105)
                         .addComponent(lblNumeroVooPassagem)
                         .addGap(36, 36, 36)
-                        .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesquisarVooNumero))
                     .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(lblCiaAereaPassagem)
                         .addGap(36, 36, 36)
-                        .addComponent(tctCiaAereaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tctCiaAereaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -388,7 +441,10 @@ private static SimpleDateFormat sdfHojePassagem;
                         .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctPassagemNumeroAssento, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
+                                .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCalcularTarifa))))
                     .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(lblPassagemStatus)
@@ -398,15 +454,16 @@ private static SimpleDateFormat sdfHojePassagem;
                         .addComponent(rbReservada)
                         .addGap(33, 33, 33)
                         .addComponent(rbConfirmada)))
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         PainelPassagemTarifasLayout.setVerticalGroup(
             PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tctNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumeroVooPassagem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lblNumeroVooPassagem)
+                    .addComponent(btnPesquisarVooNumero))
+                .addGap(18, 18, 18)
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tctCiaAereaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCiaAereaPassagem))
@@ -421,8 +478,9 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassagemTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                    .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCalcularTarifa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassagemStatus)
                     .addComponent(rbDisponivel)
@@ -501,8 +559,8 @@ private static SimpleDateFormat sdfHojePassagem;
                     .addComponent(tftHoraPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tftDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tctAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(342, Short.MAX_VALUE))
+                    .addComponent(tctAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         PainelPassagemPartidaLayout.setVerticalGroup(
             PainelPassagemPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,8 +665,8 @@ private static SimpleDateFormat sdfHojePassagem;
                         .addGroup(PainelPassagemChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tftDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tftHoraChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tctAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(402, Short.MAX_VALUE))
+                            .addComponent(tctAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         PainelPassagemChegadaLayout.setVerticalGroup(
             PainelPassagemChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -682,7 +740,7 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addGroup(PainelPassagemEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPassagemEscalasObs)
                     .addComponent(scrPassagemObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         PainelGuiasPassagem.addTab("Escalas", PainelPassagemEscalas);
@@ -715,19 +773,6 @@ private static SimpleDateFormat sdfHojePassagem;
         btnPesquisarPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarPassagemActionPerformed(evt);
-            }
-        });
-
-        btnSairPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnSairPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
-        btnSairPassagem.setText("Voltar");
-        btnSairPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSairPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnSairPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnSairPassagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairPassagemActionPerformed(evt);
             }
         });
 
@@ -790,6 +835,19 @@ private static SimpleDateFormat sdfHojePassagem;
             }
         });
 
+        btnSairPassagem.setBackground(new java.awt.Color(204, 204, 204));
+        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnSairPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
+        btnSairPassagem.setText("Voltar");
+        btnSairPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSairPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnSairPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnSairPassagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairPassagemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelPassagemBotoesLayout = new javax.swing.GroupLayout(PanelPassagemBotoes);
         PanelPassagemBotoes.setLayout(PanelPassagemBotoesLayout);
         PanelPassagemBotoesLayout.setHorizontalGroup(
@@ -805,11 +863,11 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addComponent(btnEditarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnExcluirPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSairPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSairPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
         PanelPassagemBotoesLayout.setVerticalGroup(
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -818,33 +876,35 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnExcluirPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnEditarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnAlterarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnAlterarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelGuiasPassagem)
-                    .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(PainelGuiasPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addContainerGap()
                 .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PainelGuiasPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1243,6 +1303,111 @@ private static SimpleDateFormat sdfHojePassagem;
         btnSalvarPassagemActionPerformed(evt);
     }//GEN-LAST:event_btnAlterarPassagemActionPerformed
 
+    private void btnPesquisarPassageiroRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassageiroRGActionPerformed
+        String msg = "";
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        Passageiro passageiroRG = new Passageiro();
+        boolean flag = false;
+
+        try {
+            passageiroRG = PassageiroCtrl.receberPassageiroRG(tftRgPassagem.getText());
+            int vCheck = Integer.parseInt(passageiroRG.getIdPassageiro());
+
+            String vsCheck = passageiroRG.getIdPassageiro();
+
+            if (vCheck > 0) {
+                String vnome = passageiroRG.getNomePassageiro().trim();
+                tctNomePassageiro.setText(vnome);
+                
+                flag = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!, Entre com outro RG");
+                flag = true;
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovoPassageiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Nenhum Passageiro Cadastrado!!");
+            //JOptionPane.showMessageDialog(this, "Responsável não encontrado!!!, Entre com outro CPF");
+        }
+    }//GEN-LAST:event_btnPesquisarPassageiroRGActionPerformed
+
+    private void btnPesquisarVooNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarVooNumeroActionPerformed
+        String msg = "";
+        VooCtrl cVoo = new VooCtrl();
+        Voo vooPassagem = new Voo();
+
+        boolean flag = false;
+
+        vooPassagem = cVoo.receberVooNumero(tctNumeroVoo.getText());
+
+        if (vooPassagem == null) {
+            JOptionPane.showMessageDialog(this, "Voo não encontrado!!!, Entre com outro número");
+            flag = true;
+        } else {
+            String vooCiaAerea = vooPassagem.getCiaAerea().trim();
+            tctCiaAereaPassagem.setText(vooCiaAerea);
+            
+            
+            //Dados Voo Partida
+            String vooDataP = vooPassagem.getDataPartida().trim();
+            tftDataPartida.setText(vooDataP);
+            
+            String vooHoraP = vooPassagem.getHoraPartida().trim();
+            tftHoraPartida.setText(vooHoraP);
+            
+            String vooAeroportoP = vooPassagem.getAeroportoPartida().trim();
+            tctAeroportoPartida.setText(vooAeroportoP);
+            
+            String vooAeroportoPSigla = vooPassagem.getAeroportoPartidaSigla().trim();
+            tctSiglaAeroportoPartida.setText(vooAeroportoPSigla);
+            
+            String vooAeroportoPPortao = vooPassagem.getPortaoPartida().trim();
+            tctPortaoAeroportoPartida.setText(vooAeroportoPPortao);
+            
+            //Dados Voo Chegada
+            String vooDataC = vooPassagem.getDataChegada().trim();
+            tftDataChegada.setText(vooDataC);
+            
+            String vooHoraC = vooPassagem.getHoraChegada().trim();
+            tftHoraChegada.setText(vooHoraC);
+            
+            String vooAeroportoC = vooPassagem.getAeroportoChegada().trim();
+            tctAeroportoChegada.setText(vooAeroportoC);
+            
+            String vooAeroportoCSigla = vooPassagem.getAeroportoChegadaSigla().trim();
+            tctSiglaAeroportoChegada.setText(vooAeroportoCSigla);
+            
+            String vooAeroportoCPortao = vooPassagem.getPortaoChegada().trim();
+            tctPortaoAeroportoChegada.setText(vooAeroportoCPortao);
+            
+            //Dados Voo Escala
+            String vooEscalasPassagem = vooPassagem.getEscalasVoo().trim();
+            tctPassagemEscalas.setText(vooEscalasPassagem);
+            
+            flag = true;
+        }
+
+        if (flag == false ) {
+            JOptionPane.showMessageDialog(this, "Nenhum Voo Cadastrado!!");
+
+        }
+        
+    }//GEN-LAST:event_btnPesquisarVooNumeroActionPerformed
+
+    private void btnGerarNumeroPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarNumeroPassagemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGerarNumeroPassagemActionPerformed
+
+    private void btnCalcularTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTarifaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCalcularTarifaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1291,10 +1456,14 @@ private static SimpleDateFormat sdfHojePassagem;
     private javax.swing.JPanel PanelPassagemBotoes;
     private javax.swing.ButtonGroup bgStatus;
     private static javax.swing.JButton btnAlterarPassagem;
+    private static javax.swing.JButton btnCalcularTarifa;
     private javax.swing.JButton btnEditarPassagem;
     private javax.swing.JButton btnExcluirPassagem;
+    private static javax.swing.JButton btnGerarNumeroPassagem;
     private javax.swing.JButton btnLimparPassagem;
+    private static javax.swing.JButton btnPesquisarPassageiroRG;
     private javax.swing.JButton btnPesquisarPassagem;
+    private static javax.swing.JButton btnPesquisarVooNumero;
     private javax.swing.JButton btnSairPassagem;
     private javax.swing.JButton btnSalvarPassagem;
     private javax.swing.JComboBox cbxClasse;
