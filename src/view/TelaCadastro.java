@@ -70,11 +70,14 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AeroFast");
+        setBackground(new java.awt.Color(204, 204, 255));
+        setFocusTraversalPolicyProvider(true);
         setIconImages(null);
         setMinimumSize(new java.awt.Dimension(400, 200));
-        setPreferredSize(new java.awt.Dimension(510, 420));
 
         lblConexao.setText(" ");
+        lblConexao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblConexao.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
         jMenuArquivo.setText("Passagem");
         jMenuArquivo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -213,14 +216,14 @@ public class TelaCadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblConexao)
-                .addGap(0, 742, Short.MAX_VALUE))
+                .addComponent(lblConexao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblConexao)
-                .addGap(0, 419, Short.MAX_VALUE))
+                .addComponent(lblConexao, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addGap(0, 1480, Short.MAX_VALUE))
         );
 
         pack();
