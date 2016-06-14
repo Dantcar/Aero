@@ -58,6 +58,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         cbxClasse.setSelectedIndex(-1);
         //desabilitar elementos do formulario
         tctNumeroPassagem.setEditable(false);
+        tctNumeroVoo.setText("");
         if (!temPassagemNova) {
             arrayPass = new ArrayList<>();
             temPassagemNova = true;
@@ -1411,11 +1412,11 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         //PassagemCtrl cPassagem = new PassagemCtrl();
         String msg = "";
         int vNumeroPassagem=0;
-        if(tctNumeroVoo.getText() != ""){
+        if(!tctNumeroVoo.equals("")){
         vNumeroPassagem =  parseInt(tctNumeroVoo.getText());
         }
-        float vlPassagem = 0;
-        System.out.println(vNumeroPassagem);
+        //float vlPassagem = 0;
+        System.out.println("Numero da passagem atual: "+vNumeroPassagem);
         
         if (vNumeroPassagem != 0) {
             if (cbxClasse.getSelectedItem()=="Economica") {
