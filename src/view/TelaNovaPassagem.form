@@ -320,7 +320,6 @@
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Pesquisar RG passageiro"/>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Pesquisar RG passageiro"/>
               </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarPassageiroRGActionPerformed"/>
@@ -339,7 +338,6 @@
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Gerador autom&#xe1;tico n&#xfa;mero passagem"/>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Gerador autom&#xe1;tico n&#xfa;mero passagem"/>
               </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarNumeroPassagemActionPerformed"/>
@@ -643,10 +641,6 @@
                 <Property name="text" type="java.lang.String" value="Pesquisar um Voo"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pesquisar um Voo"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Pesquisar um Voo"/>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Pesquisar um Voo"/>
-              </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarVooNumeroActionPerformed"/>
               </Events>
@@ -662,9 +656,6 @@
                 <Property name="text" type="java.lang.String" value="C&#xe1;lculo da Tarifa"/>
                 <Property name="toolTipText" type="java.lang.String" value="C&#xe1;lculo da Tarifa"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="C&#xe1;lculo da Tarifa"/>
-              </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcularTarifaActionPerformed"/>
               </Events>

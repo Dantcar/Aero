@@ -34,13 +34,12 @@ public class TelaAbout extends javax.swing.JFrame {
 
         PainelAbout = new javax.swing.JPanel();
         jTabbedPaneSobre3 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaAbout1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         lblAbout = new javax.swing.JLabel();
+        classeEconomica = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,13 +54,6 @@ public class TelaAbout extends javax.swing.JFrame {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        jTextAreaAbout1.setColumns(20);
-        jTextAreaAbout1.setRows(5);
-        jTextAreaAbout1.setText("A classe Econômica é car");
-        jScrollPane1.setViewportView(jTextAreaAbout1);
-
-        jTabbedPaneSobre3.addTab("Classe Economica", jScrollPane1);
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Benefícios de utilizar nossos serviços.");
@@ -69,12 +61,17 @@ public class TelaAbout extends javax.swing.JFrame {
 
         jTabbedPaneSobre3.addTab("Classe Comercial", jScrollPane2);
 
+        jTextPane1.setText("Este Software tem Objetivo Educacional\nPara fins de aprendizagem e avaliacao na\nNa Disciplina de Programacao Orientada a Objetos - Avancada\ndo Curso de Analise de Sistemas da Fatec - Ipiranga\nAno 2016 - Janeiro a Junho \nAluno Decio Antonio de Carvalho \n\nProfessor  Alexandre");
         jScrollPane3.setViewportView(jTextPane1);
 
         jTabbedPaneSobre3.addTab("Primeira Classe", jScrollPane3);
 
         lblAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/AeroportoSantosDumunt.jpg"))); // NOI18N
         jTabbedPaneSobre3.addTab("Sobre", lblAbout);
+
+        classeEconomica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Airbus A330-200.gif"))); // NOI18N
+        classeEconomica.setName("classeEconomica"); // NOI18N
+        jTabbedPaneSobre3.addTab("Classe Economica", classeEconomica);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,12 +135,11 @@ public class TelaAbout extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelAbout;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel classeEconomica;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPaneSobre3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextAreaAbout1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblAbout;
     // End of variables declaration//GEN-END:variables
