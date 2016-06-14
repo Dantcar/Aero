@@ -7,44 +7,43 @@
  * Aluno Decio Antonio de Carvalho  * 
  */
 package view;
-import java.util.ArrayList;
+
+import Control.PassageiroCtrl;
+import Control.PassagemCtrl;
+import Control.Util;
+import Control.ValidaCampos;
+import Control.VooCtrl;
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Passagem;
-import Control.PassagemCtrl;
-import Control.AeronaveCtrl;
-import Control.PassageiroCtrl;
-import Control.Util;
-import Control.ValidaCampos;
-import Control.VooCtrl;
-import java.sql.SQLException;
 import model.Passageiro;
+import model.Passagem;
 import model.Voo;
-//import static view.TelaPassagem.arrayPass;
-
 
 /**
  *
  * @author deciodecarvalho
  */
 public class TelaNovaPassagem extends javax.swing.JInternalFrame {
-    
-public static ArrayList<model.Passagem> arrayPass;  
+
+    public static ArrayList<model.Passagem> arrayPass;
 //Para ser utilizado em todas as partes do programa
-public static boolean temPassagemNova; 
+    public static boolean temPassagemNova;
 
-private static String dataPassagem, dataHojePassagem;
-private static Date dataPs;
-private static Date hojePassagem;
-private static SimpleDateFormat sdfHojePassagem;
-
-        
-
+    private static String dataPassagem, dataHojePassagem;
+    private static Date dataPs;
+    private static Date hojePassagem;
+    private static SimpleDateFormat sdfHojePassagem;
+    private int idp = 0;
+    public float valorPassagemE, valorPassagemB, valorPassagemF = 0;
     /**
      * Creates new form TelaVazia
      */
@@ -55,25 +54,25 @@ private static SimpleDateFormat sdfHojePassagem;
         btnSalvarPassagem.setEnabled(true);
         btnEditarPassagem.setEnabled(false);
         btnExcluirPassagem.setEnabled(false);
-        
+
         cbxClasse.setSelectedIndex(-1);
         //desabilitar elementos do formulario
         tctNumeroPassagem.setEditable(false);
-        if (!temPassagemNova){
-        arrayPass = new ArrayList<>();
-        temPassagemNova = true;
+        if (!temPassagemNova) {
+            arrayPass = new ArrayList<>();
+            temPassagemNova = true;
         }
-        
+
         jdpDataPassagem.setDate(Calendar.getInstance().getTime());
         jdpDataPassagem.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
         hojePassagem = new Date();
         dataHojePassagem = Util.DataFormatada(hojePassagem);
         sdfHojePassagem = new SimpleDateFormat("dd/MM/yyyy");
-    try { 
-        hojePassagem = sdfHojePassagem.parse(dataHojePassagem);
-    } catch (ParseException ex) {
-        Logger.getLogger(TelaNovaPassagem.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            hojePassagem = sdfHojePassagem.parse(dataHojePassagem);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaNovaPassagem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -254,7 +253,7 @@ private static SimpleDateFormat sdfHojePassagem;
 
         btnPesquisarPassageiroRG.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnPesquisarPassageiroRG.setText("Pesquisar em Passageiro");
-        btnPesquisarPassageiroRG.setToolTipText("Pesquisar RG");
+        btnPesquisarPassageiroRG.setToolTipText("Pesquisar RG passageiro");
         btnPesquisarPassageiroRG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarPassageiroRGActionPerformed(evt);
@@ -263,7 +262,7 @@ private static SimpleDateFormat sdfHojePassagem;
 
         btnGerarNumeroPassagem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGerarNumeroPassagem.setText("Gerar Número Passagem");
-        btnGerarNumeroPassagem.setToolTipText("Pesquisar RG");
+        btnGerarNumeroPassagem.setToolTipText("Gerador automático número passagem");
         btnGerarNumeroPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarNumeroPassagemActionPerformed(evt);
@@ -322,6 +321,11 @@ private static SimpleDateFormat sdfHojePassagem;
                     .addComponent(btnPesquisarPassageiroRG))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
+
+        btnPesquisarPassageiroRG.getAccessibleContext().setAccessibleName("Pesquisar RG passageiro");
+        btnPesquisarPassageiroRG.getAccessibleContext().setAccessibleDescription("Pesquisar RG passageiro");
+        btnGerarNumeroPassagem.getAccessibleContext().setAccessibleName("Gerador automático número passagem");
+        btnGerarNumeroPassagem.getAccessibleContext().setAccessibleDescription("Gerador automático número passagem");
 
         PainelGuiasPassagem.addTab("Passageiro", PainelPassageiro);
 
@@ -398,8 +402,8 @@ private static SimpleDateFormat sdfHojePassagem;
         rbConfirmada.setText("Confirmada");
 
         btnPesquisarVooNumero.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnPesquisarVooNumero.setText("Pesquisar em Voo");
-        btnPesquisarVooNumero.setToolTipText("Pesquisar RG");
+        btnPesquisarVooNumero.setText("Pesquisar um Voo");
+        btnPesquisarVooNumero.setToolTipText("Pesquisar um Voo");
         btnPesquisarVooNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarVooNumeroActionPerformed(evt);
@@ -408,7 +412,7 @@ private static SimpleDateFormat sdfHojePassagem;
 
         btnCalcularTarifa.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCalcularTarifa.setText("Cálculo da Tarifa");
-        btnCalcularTarifa.setToolTipText("Pesquisar RG");
+        btnCalcularTarifa.setToolTipText("Cálculo da Tarifa");
         btnCalcularTarifa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalcularTarifaActionPerformed(evt);
@@ -441,12 +445,12 @@ private static SimpleDateFormat sdfHojePassagem;
                             .addComponent(lblPassagemTarifa))
                         .addGap(36, 36, 36)
                         .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctPassagemNumeroAssento, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                                 .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCalcularTarifa))))
+                                .addComponent(btnCalcularTarifa))
+                            .addComponent(cbxClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(lblPassagemStatus)
@@ -491,6 +495,10 @@ private static SimpleDateFormat sdfHojePassagem;
                 .addContainerGap())
         );
 
+        btnPesquisarVooNumero.getAccessibleContext().setAccessibleName("Pesquisar um Voo");
+        btnPesquisarVooNumero.getAccessibleContext().setAccessibleDescription("Pesquisar um Voo");
+        btnCalcularTarifa.getAccessibleContext().setAccessibleDescription("Cálculo da Tarifa");
+
         PainelGuiasPassagem.addTab("Passagem", PainelPassagemTarifas);
 
         PainelPassagemPartida.setBorder(javax.swing.BorderFactory.createTitledBorder("Passagem - Voo Partida"));
@@ -523,7 +531,7 @@ private static SimpleDateFormat sdfHojePassagem;
         lblAeroportoPartidaPassagem.setForeground(new java.awt.Color(102, 102, 102));
         lblAeroportoPartidaPassagem.setText("Aeroporto Partida: ");
 
-        tctAeroportoPartida.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctAeroportoPartida.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         tctAeroportoPartida.setForeground(new java.awt.Color(51, 51, 51));
         tctAeroportoPartida.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
@@ -622,7 +630,7 @@ private static SimpleDateFormat sdfHojePassagem;
         lblPassagemAeroportoChegada.setForeground(new java.awt.Color(102, 102, 102));
         lblPassagemAeroportoChegada.setText("Aeroporto Chegada: ");
 
-        tctAeroportoChegada.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctAeroportoChegada.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         tctAeroportoChegada.setForeground(new java.awt.Color(51, 51, 51));
         tctAeroportoChegada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
@@ -713,6 +721,7 @@ private static SimpleDateFormat sdfHojePassagem;
         lblPassagemEscalasObs.setText("Observações :");
 
         txtPassagemObservacao.setColumns(20);
+        txtPassagemObservacao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtPassagemObservacao.setRows(5);
         scrPassagemObservacao.setViewportView(txtPassagemObservacao);
 
@@ -947,62 +956,57 @@ private static SimpleDateFormat sdfHojePassagem;
     private void btnSalvarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarPassagemActionPerformed
         Passagem objPass;
         objPass = new Passagem();
-        PassagemCtrl cPassagem = new  PassagemCtrl();
-        
+        PassagemCtrl cPassagem = new PassagemCtrl();
+
         boolean flag = false;
         String msg = "";
         String tituloMsg = "";
         String reserva = "";
         String numeroPassagem = "";
-        
-        if (rbConfirmada.isSelected()){
-        reserva = "Confirmada";
+
+        if (rbConfirmada.isSelected()) {
+            reserva = "Confirmada";
         }
-        
-        if (rbReservada.isSelected()){
-         reserva = "Reservada";
+
+        if (rbReservada.isSelected()) {
+            reserva = "Reservada";
         }
-        
-        if (rbDisponivel.isSelected()){
-         reserva = "Disponivel";
+
+        if (rbDisponivel.isSelected()) {
+            reserva = "Disponivel";
         }
-        
-        
+
         //int id1 = arrayPass.size();
-        int id1 = cPassagem.receberIdAtual();
-        id1++;
-        String id = id1+"";
-        
+        idp = cPassagem.receberIdAtual();
+        idp++;
+        String id = idp + "";
+
         //numeroPassagem 
-        
         objPass.setIdPassagem(id);
         objPass.setNumeroPassagem(tctNumeroPassagem.getText());
-        
+
         /**
          * DataPassagem
          */
         dataPassagem = jdpDataPassagem.getEditor().getText();
         objPass.setDataPassagem(dataPassagem);
         // objPass.setDataPassagem(tftDataPassagem.getText());
-        
-        
+
         objPass.setNomePassageiro(tctNomePassageiro.getText());
         objPass.setRgPassageiro(tftRgPassagem.getText());
         objPass.setReserva(reserva);
         objPass.setVooNumero(tctNumeroVoo.getText());
         objPass.setCiaAerea(tctCiaAereaPassagem.getText());
         objPass.setAssentoNumero(tctPassagemNumeroAssento.getText());
-        
+
         /**
          * Tratamento para o ComboBox -1
          */
-        if (cbxClasse.getSelectedIndex()==-1){  
+        if (cbxClasse.getSelectedIndex() == -1) {
+        } else {
+            objPass.setClasse(cbxClasse.getSelectedItem().toString());
         }
-        else{
-        objPass.setClasse(cbxClasse.getSelectedItem().toString());
-        }
-        
-        
+
         objPass.setTarifa(tftPassagemTarifaTotal.getText());
         objPass.setPartidaAeroporto(tctAeroportoPartida.getText());
         objPass.setPartidaSiglaAeroporto(tctSiglaAeroportoPartida.getText());
@@ -1019,8 +1023,7 @@ private static SimpleDateFormat sdfHojePassagem;
         objPass.setObservacaoPassagem(txtPassagemObservacao.getText());
         //String msg;
         //msg = "";
-       
-        
+
         boolean validaNumeroPassagem = ValidaCampos.validaVazio(tctNumeroPassagem.getText());
         boolean validaNomePassageiro = ValidaCampos.validaNome(tctNomePassageiro.getText());
         boolean validaRgPassageiro = ValidaCampos.validaRG(tftRgPassagem.getText());
@@ -1028,26 +1031,26 @@ private static SimpleDateFormat sdfHojePassagem;
         boolean validaNumeroAssento = ValidaCampos.validaVazio(tctPassagemNumeroAssento.getText());
         boolean validaTarifaTotal = ValidaCampos.validaStringNumero(tftPassagemTarifaTotal.getText());
         boolean validaStatusPassagem = ValidaCampos.validaStatus(rbDisponivel.isSelected(),
-                rbReservada.isSelected(),rbConfirmada.isSelected());
+                rbReservada.isSelected(), rbConfirmada.isSelected());
         /**
-         * 
+         *
          * Validar Data Passagem
-         * 
+         *
          */
         try {
             dataPs = sdfHojePassagem.parse(dataPassagem);
         } catch (ParseException ex) {
             Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (dataPs.before(hojePassagem)) {
-        msg = msg + "Campo Data Passagem inválido: "+ dataPassagem + "\n";
+            msg = msg + "Campo Data Passagem inválido: " + dataPassagem + "\n";
             dataPassagem = null;
         } else {
-            
+
         }
         //fim validacao dataPartida
-        
+
         if (validaNumeroPassagem) {
         } else {
             msg = msg + "Campo Número Passagem Vazio" + "\n";
@@ -1061,38 +1064,37 @@ private static SimpleDateFormat sdfHojePassagem;
         } else {
             msg = msg + "Campo Rg Passageiro inválido" + "\n";
         }
-        
+
         if (validaNumeroVoo) {
         } else {
             msg = msg + "Campo Número Voo Vazio" + "\n";
         }
-        
-        if (cbxClasse.getSelectedIndex()==-1){
-         msg = msg + "Campo Classe da Passagem não selecionado: "+ "\n";
-            cbxClasse.setSelectedIndex(-1);    
+
+        if (cbxClasse.getSelectedIndex() == -1) {
+            msg = msg + "Campo Classe da Passagem não selecionado: " + "\n";
+            cbxClasse.setSelectedIndex(-1);
         }
-        
+
         if (validaNumeroAssento) {
         } else {
             msg = msg + "Campo Número Assento Vazio" + "\n";
         }
-        
+
         if (validaTarifaTotal) {
         } else {
             msg = msg + "Campo Tarifa Total Vazio" + "\n";
         }
-        
-        if (validaStatusPassagem){
-            
-        }else{
-            msg = msg + "Status da Passagem não selecionado! "+"\n";
+
+        if (validaStatusPassagem) {
+
+        } else {
+            msg = msg + "Status da Passagem não selecionado! " + "\n";
         }
-        
-        
-        if ("".equals(msg)){
-            
-            if(btnSalvarPassagem.isEnabled()){
-                
+
+        if ("".equals(msg)) {
+
+            if (btnSalvarPassagem.isEnabled()) {
+
                 boolean resultadoPassagem = arrayPass.add(objPass);
                 if (resultadoPassagem) {
                     cPassagem.enviarNovaPassagem(objPass);
@@ -1102,78 +1104,71 @@ private static SimpleDateFormat sdfHojePassagem;
                 }
 
                 btnLimparPassagem.doClick();
-            
-            
-            }else{ //Alteração Passagem
+
+            } else { //Alteração Passagem
                 cPassagem.alterarPassagemCtrl(objPass, numeroPassagem);
                 tituloMsg = "Alteraçao Passagem";
-                msg ="Dados da Passagem alterados com sucesso!";
+                msg = "Dados da Passagem alterados com sucesso!";
                 btnLimparPassagem.doClick();
-                flag = true;        
+                flag = true;
             }//fim alteração
-                        
+
             btnLimparPassagem.doClick();
             btnSairPassagem.doClick();
-        } else{
+        } else {
             tituloMsg = "Campo Inválido ou vazio";
-            flag =  false;
-            
-            
+            flag = false;
+
         }
-        
-        if (flag == false){
-            JOptionPane.showMessageDialog(this, msg,tituloMsg, JOptionPane.ERROR_MESSAGE );
+
+        if (flag == false) {
+            JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.ERROR_MESSAGE);
         }
-        
+
         /**
          * final btnSalvarPassagemActionPerformed*
          */
-        
+
     }//GEN-LAST:event_btnSalvarPassagemActionPerformed
 
     private void btnPesquisarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassagemActionPerformed
-        
-        
+
         //Status dos botões
         btnAlterarPassagem.setEnabled(false);
         btnSalvarPassagem.setEnabled(false);
         btnEditarPassagem.setEnabled(true);
         btnLimparPassagem.setEnabled(false);
         btnExcluirPassagem.setEnabled(true);
-        
+
         boolean flag = false;
 
-        
-        for(int i = 0; i < arrayPass.size(); i++){
-            
-            if(tftRgPassagem.getText().equals(arrayPass.get(i).getRgPassageiro())){
+        for (int i = 0; i < arrayPass.size(); i++) {
 
-                if(arrayPass.get(i).getReserva().equals("Reservada")){
-                   rbReservada.setSelected(true);
+            if (tftRgPassagem.getText().equals(arrayPass.get(i).getRgPassageiro())) {
+
+                if (arrayPass.get(i).getReserva().equals("Reservada")) {
+                    rbReservada.setSelected(true);
                 }
-                if(arrayPass.get(i).getReserva().equals("Confirmada")){
-                   rbConfirmada.setSelected(true); 
+                if (arrayPass.get(i).getReserva().equals("Confirmada")) {
+                    rbConfirmada.setSelected(true);
                 }
-                if(arrayPass.get(i).getReserva().equals("Disponivel")){
-                   rbDisponivel.setSelected(true); 
+                if (arrayPass.get(i).getReserva().equals("Disponivel")) {
+                    rbDisponivel.setSelected(true);
                 }
-                
+
                 /**
                  * Tratamento do campo tipo jDatePicker
                  */
                 String sdataPartida = arrayPass.get(i).getDataPassagem();
-               // Date dtPartida = new Date();
+                // Date dtPartida = new Date();
                 SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyyy");
                 try {
-                 Date dtPartida = sdf2.parse(sdataPartida);
+                    Date dtPartida = sdf2.parse(sdataPartida);
                     jdpDataPassagem.setDate(dtPartida);
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 //fim do tratamento campo JDatePicker 
-
-
-
 
                 //jdpDataPassagem
                 tctNumeroPassagem.setText(arrayPass.get(i).getNumeroPassagem());
@@ -1186,16 +1181,13 @@ private static SimpleDateFormat sdfHojePassagem;
                 tftPassagemTarifaTotal.setText(arrayPass.get(i).getTarifa());
                 tctAeroportoPartida.setText(arrayPass.get(i).getPartidaAeroporto());
                 tctSiglaAeroportoPartida.setText(arrayPass.get(i).getPartidaSiglaAeroporto());
-                
-                
+
                 tftDataPartida.setText(arrayPass.get(i).getPartidaData());
                 tftHoraPartida.setText(arrayPass.get(i).getPartidaHora());
                 tctPortaoAeroportoPartida.setText(arrayPass.get(i).getPartidaPortao());
                 tctAeroportoChegada.setText(arrayPass.get(i).getChegadaAeroporto());
                 tctSiglaAeroportoChegada.setText(arrayPass.get(i).getChegadaSiglaAeroporto());
-                
-                
-                
+
                 tftDataChegada.setText(arrayPass.get(i).getChegadaData());
                 tftHoraChegada.setText(arrayPass.get(i).getChegadaHora());
                 tctPortaoAeroportoChegada.setText(arrayPass.get(i).getChegadaPortao());
@@ -1205,65 +1197,66 @@ private static SimpleDateFormat sdfHojePassagem;
             }//fim do if
         }// fim do for
 
-        if(arrayPass.isEmpty())
-        JOptionPane.showMessageDialog(this,"Nenhuma Passagem Cadastrada!!");
-        else if (flag == false)
-        JOptionPane.showMessageDialog(this, "Passagem não encontrada!!!");
+        if (arrayPass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhuma Passagem Cadastrada!!");
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Passagem não encontrada!!!");
+        }
     }//GEN-LAST:event_btnPesquisarPassagemActionPerformed
 
     private void btnSairPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassagemActionPerformed
         this.PanelPassagemBotoes.setVisible(false);
         this.PainelGuiasPassagem.setVisible(false);
-        
+
         this.dispose();
     }//GEN-LAST:event_btnSairPassagemActionPerformed
 
     private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
         limparPassagem();
-        
+
         /*
-        tctNumeroPassagem.setText(null);
-        tctNomePassageiro.setText(null);
-        tftRgPassagem.setText(null);
+         tctNumeroPassagem.setText(null);
+         tctNomePassageiro.setText(null);
+         tftRgPassagem.setText(null);
         
-        //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
+         //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
         
-        //rbConfirmada.setSelected(false);
-        //rbDisponivel.setSelected(false);
-        //rbReservada.setSelected(false);
+         //rbConfirmada.setSelected(false);
+         //rbDisponivel.setSelected(false);
+         //rbReservada.setSelected(false);
         
         
-        bgStatus.clearSelection();
+         bgStatus.clearSelection();
         
-        tctNumeroVoo.setText(null);
-        tctPassagemNumeroAssento.setText(null);
-        cbxClasse.setSelectedIndex(-1);
-        tctCiaAereaPassagem.setText(null);
-        tftPassagemTarifaTotal.setText(null);
-        tctAeroportoPartida.setText(null);
-        tctSiglaAeroportoPartida.setText(null);
-        tftDataPartida.setText(null);
-        tftHoraPartida.setText(null);
-        tctPortaoAeroportoPartida.setText(null);
-        tctAeroportoChegada.setText(null);
-        tctSiglaAeroportoChegada.setText(null);
-        tftDataChegada.setText(null);
-        tftHoraChegada.setText(null);
-        tctPortaoAeroportoChegada.setText(null);
-        tctPassagemEscalas.setText(null);
-        */
+         tctNumeroVoo.setText(null);
+         tctPassagemNumeroAssento.setText(null);
+         cbxClasse.setSelectedIndex(-1);
+         tctCiaAereaPassagem.setText(null);
+         tftPassagemTarifaTotal.setText(null);
+         tctAeroportoPartida.setText(null);
+         tctSiglaAeroportoPartida.setText(null);
+         tftDataPartida.setText(null);
+         tftHoraPartida.setText(null);
+         tctPortaoAeroportoPartida.setText(null);
+         tctAeroportoChegada.setText(null);
+         tctSiglaAeroportoChegada.setText(null);
+         tftDataChegada.setText(null);
+         tftHoraChegada.setText(null);
+         tctPortaoAeroportoChegada.setText(null);
+         tctPassagemEscalas.setText(null);
+         */
     }//GEN-LAST:event_btnLimparPassagemActionPerformed
 
     private void btnExcluirPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPassagemActionPerformed
         boolean flag = false;
 
-        for(int i = 0; i < arrayPass.size(); i++){
+        for (int i = 0; i < arrayPass.size(); i++) {
 
-            if(tctNumeroPassagem.getText().trim().equals(arrayPass.get(i).getNumeroPassagem())){
+            if (tctNumeroPassagem.getText().trim().equals(arrayPass.get(i).getNumeroPassagem())) {
                 String removidaPassagem = arrayPass.get(i).getNumeroPassagem();
                 Passagem removido = arrayPass.remove(i);
 
-                JOptionPane.showMessageDialog(this,"Passagem nº: "+removidaPassagem+" Removida!");
+                JOptionPane.showMessageDialog(this, "Passagem nº: " + removidaPassagem + " Removida!");
                 btnLimparPassagem.doClick(); //Limpar tela
 
                 flag = true;
@@ -1271,10 +1264,11 @@ private static SimpleDateFormat sdfHojePassagem;
             }//fim do if
         }// fim do for
 
-        if(arrayPass.isEmpty())
-        JOptionPane.showMessageDialog(this,"Nenhuma Passagem Cadastrada!!");
-        else if (flag == false)
-        JOptionPane.showMessageDialog(this, "Número de Passagem não Encontrado!!!");
+        if (arrayPass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhuma Passagem Cadastrada!!");
+        } else if (flag == false) {
+            JOptionPane.showMessageDialog(this, "Número de Passagem não Encontrado!!!");
+        }
     }//GEN-LAST:event_btnExcluirPassagemActionPerformed
 
     private void tctNomePassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tctNomePassageiroActionPerformed
@@ -1295,7 +1289,7 @@ private static SimpleDateFormat sdfHojePassagem;
 
         if (!tctNomePassageiro.isEditable()) {
             //msg = "Pode realizar alterações agora";
-      ////      habilitarDadosPassagem();
+            ////      habilitarDadosPassagem();
             //  JOptionPane.showMessageDialog(this, msg,"", JOptionPane.INFORMATION_MESSAGE );
         }
         btnAlterarPassagem.setEnabled(true);
@@ -1323,7 +1317,7 @@ private static SimpleDateFormat sdfHojePassagem;
             if (vCheck > 0) {
                 String vnome = passageiroRG.getNomePassageiro().trim();
                 tctNomePassageiro.setText(vnome);
-                
+
                 flag = true;
             } else {
                 JOptionPane.showMessageDialog(this, "Passageiro não encontrado!!!, Entre com outro RG");
@@ -1357,62 +1351,99 @@ private static SimpleDateFormat sdfHojePassagem;
         } else {
             String vooCiaAerea = vooPassagem.getCiaAerea().trim();
             tctCiaAereaPassagem.setText(vooCiaAerea);
-            
-            
+
             //Dados Voo Partida
             String vooDataP = vooPassagem.getDataPartida().trim();
             tftDataPartida.setText(vooDataP);
-            
+
             String vooHoraP = vooPassagem.getHoraPartida().trim();
             tftHoraPartida.setText(vooHoraP);
-            
+
             String vooAeroportoP = vooPassagem.getAeroportoPartida().trim();
             tctAeroportoPartida.setText(vooAeroportoP);
-            
+
             String vooAeroportoPSigla = vooPassagem.getAeroportoPartidaSigla().trim();
             tctSiglaAeroportoPartida.setText(vooAeroportoPSigla);
-            
+
             String vooAeroportoPPortao = vooPassagem.getPortaoPartida().trim();
             tctPortaoAeroportoPartida.setText(vooAeroportoPPortao);
-            
+
             //Dados Voo Chegada
             String vooDataC = vooPassagem.getDataChegada().trim();
             tftDataChegada.setText(vooDataC);
-            
+
             String vooHoraC = vooPassagem.getHoraChegada().trim();
             tftHoraChegada.setText(vooHoraC);
-            
+
             String vooAeroportoC = vooPassagem.getAeroportoChegada().trim();
             tctAeroportoChegada.setText(vooAeroportoC);
-            
+
             String vooAeroportoCSigla = vooPassagem.getAeroportoChegadaSigla().trim();
             tctSiglaAeroportoChegada.setText(vooAeroportoCSigla);
-            
+
             String vooAeroportoCPortao = vooPassagem.getPortaoChegada().trim();
             tctPortaoAeroportoChegada.setText(vooAeroportoCPortao);
-            
+
             //Dados Voo Escala
             String vooEscalasPassagem = vooPassagem.getEscalasVoo().trim();
             tctPassagemEscalas.setText(vooEscalasPassagem);
             
+            valorPassagemE = parseFloat(vooPassagem.getTarifaE());
+            valorPassagemB = parseFloat(vooPassagem.getTarifaB());
+            valorPassagemF = parseFloat(vooPassagem.getTarifaF());
             flag = true;
         }
 
-        if (flag == false ) {
+        if (flag == false) {
             JOptionPane.showMessageDialog(this, "Nenhum Voo Cadastrado!!");
 
         }
-        
+
     }//GEN-LAST:event_btnPesquisarVooNumeroActionPerformed
 
     private void btnGerarNumeroPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarNumeroPassagemActionPerformed
         PassagemCtrl cPassagem = new PassagemCtrl();
-        int numeroPassagem = cPassagem.receberNumeroPassagem()+10;
-        tctNumeroPassagem.setText(""+numeroPassagem);
+        int numeroPassagem = cPassagem.receberNumeroPassagem() + 10;
+        tctNumeroPassagem.setText("" + numeroPassagem);
     }//GEN-LAST:event_btnGerarNumeroPassagemActionPerformed
 
     private void btnCalcularTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTarifaActionPerformed
-        // TODO add your handling code here:
+        //PassagemCtrl cPassagem = new PassagemCtrl();
+        String msg = "";
+        int vNumeroPassagem=0;
+        if(tctNumeroVoo.getText() != ""){
+        vNumeroPassagem =  parseInt(tctNumeroVoo.getText());
+        }
+        float vlPassagem = 0;
+        System.out.println(vNumeroPassagem);
+        
+        if (vNumeroPassagem != 0) {
+            if (cbxClasse.getSelectedItem()=="Economica") {
+             //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
+             tftPassagemTarifaTotal.setText(""+valorPassagemE);
+             msg = "Preço da passagem Classe Economica = R$ "+valorPassagemE;
+            }
+            else if(cbxClasse.getSelectedItem()=="Empresarial"){
+             //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
+             tftPassagemTarifaTotal.setText(""+valorPassagemB);
+             msg = "Preço da passagem Classe Empresarial = R$ "+valorPassagemB;
+            }
+            else if(cbxClasse.getSelectedItem()=="Primeira")
+            {
+            //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
+            tftPassagemTarifaTotal.setText(""+valorPassagemF );
+             msg = "Preço da passagem Primeira Classe = R$ "+valorPassagemF;
+            }else{
+             msg = "Escolha a classe da passagem!";    
+        }
+
+        } else {
+            
+            msg = "Entre com um número de voo!";
+
+        }
+
+        JOptionPane.showMessageDialog(this, msg);
     }//GEN-LAST:event_btnCalcularTarifaActionPerformed
 
     /**
@@ -1524,21 +1555,17 @@ private static SimpleDateFormat sdfHojePassagem;
     private javax.swing.JTextArea txtPassagemObservacao;
     // End of variables declaration//GEN-END:variables
 
-    
-    private void limparPassagem(){
-       tctNumeroPassagem.setText(null);
+    private void limparPassagem() {
+        tctNumeroPassagem.setText(null);
         tctNomePassageiro.setText(null);
         tftRgPassagem.setText(null);
-        
+
         //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
-        
         //rbConfirmada.setSelected(false);
         //rbDisponivel.setSelected(false);
         //rbReservada.setSelected(false);
-        
-        
         bgStatus.clearSelection();
-        
+
         tctNumeroVoo.setText(null);
         tctPassagemNumeroAssento.setText(null);
         cbxClasse.setSelectedIndex(-1);
@@ -1554,26 +1581,23 @@ private static SimpleDateFormat sdfHojePassagem;
         tftDataChegada.setText(null);
         tftHoraChegada.setText(null);
         tctPortaoAeroportoChegada.setText(null);
-        tctPassagemEscalas.setText(null); 
-        
+        tctPassagemEscalas.setText(null);
+
     }
 
     private void habilitarPassagem() {
         tctNumeroPassagem.setEditable(true);
         tctNomePassageiro.setEditable(true);
         tftRgPassagem.setEditable(true);
-        
+
         //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
-        
         //rbConfirmada.setSelected(false);
         //rbDisponivel.setSelected(false);
         //rbReservada.setSelected(false);
-        
-        
         rbDisponivel.setEnabled(true);
         rbReservada.setEnabled(true);
         rbConfirmada.setEnabled(true);
-        
+
         tctNumeroVoo.setEditable(true);
         tctPassagemNumeroAssento.setEditable(true);
         //cbxClasse.setSelectedIndex(-1);
@@ -1592,23 +1616,20 @@ private static SimpleDateFormat sdfHojePassagem;
         tctPortaoAeroportoChegada.setEditable(true);
         tctPassagemEscalas.setEditable(true);
     }
-    
+
     private void desabilitarPassagem() {
         tctNumeroPassagem.setEditable(false);
         tctNomePassageiro.setEditable(false);
         tftRgPassagem.setEditable(false);
-        
+
         //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
-        
         //rbConfirmada.setSelected(false);
         //rbDisponivel.setSelected(false);
         //rbReservada.setSelected(false);
-        
-        
         rbDisponivel.setEnabled(false);
         rbReservada.setEnabled(false);
         rbConfirmada.setEnabled(false);
-        
+
         tctNumeroVoo.setEditable(false);
         tctPassagemNumeroAssento.setEditable(false);
         //cbxClasse.setSelectedIndex(-1);
@@ -1628,8 +1649,4 @@ private static SimpleDateFormat sdfHojePassagem;
         tctPassagemEscalas.setEditable(false);
     }
 
-
 }
-
-
-
