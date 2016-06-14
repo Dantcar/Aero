@@ -78,5 +78,11 @@ public class PassagemCtrl {
         PassagemDAO passagemDAO = new PassagemDAO();
         return resposta = passagemDAO.buscarNumPassagemAtual();
     }
+
+    public float recebeValorClasseVoo(String disponivel) {
+        float resposta;
+        PassagemDAO passagemDAO = new PassagemDAO();
+        return resposta = passagemDAO.buscarValorPassagemVoo();
+    }
     
 }

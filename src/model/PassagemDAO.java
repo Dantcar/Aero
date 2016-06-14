@@ -515,4 +515,8 @@ public class PassagemDAO {
         return resposta;
     }
 
+    public float buscarValorPassagemVoo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }//fim Classe PassagemDAO 
