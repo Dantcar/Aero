@@ -966,10 +966,13 @@ private static SimpleDateFormat sdfHojePassagem;
         }
         
         
-        int id1 = arrayPass.size();
+        //int id1 = arrayPass.size();
+        int id1 = cPassagem.receberIdAtual();
         id1++;
         String id = id1+"";
-
+        
+        //numeroPassagem 
+        
         objPass.setIdPassagem(id);
         objPass.setNumeroPassagem(tctNumeroPassagem.getText());
         
@@ -1011,7 +1014,7 @@ private static SimpleDateFormat sdfHojePassagem;
         objPass.setChegadaHora(tftHoraChegada.getText());
         objPass.setChegadaPortao(tctPortaoAeroportoChegada.getText());
         objPass.setEscalasVoo(tctPassagemEscalas.getText());
-
+        objPass.setObservacaoPassagem(txtPassagemObservacao.getText());
         //String msg;
         //msg = "";
        
@@ -1401,7 +1404,9 @@ private static SimpleDateFormat sdfHojePassagem;
     }//GEN-LAST:event_btnPesquisarVooNumeroActionPerformed
 
     private void btnGerarNumeroPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarNumeroPassagemActionPerformed
-        // TODO add your handling code here:
+        PassagemCtrl cPassagem = new PassagemCtrl();
+        int numeroPassagem = cPassagem.receberNumeroPassagem()+10;
+        tctNumeroPassagem.setText(""+numeroPassagem);
     }//GEN-LAST:event_btnGerarNumeroPassagemActionPerformed
 
     private void btnCalcularTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTarifaActionPerformed

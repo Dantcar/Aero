@@ -25,7 +25,11 @@ public class PassagemCtrl {
         passagemDAO.inserirNovaPassagem(passagem);
     }
     
-    
+    public int receberIdAtual(){
+        int resposta;
+       PassagemDAO passagemDAO = new PassagemDAO();
+        return resposta = passagemDAO.buscarIdPassagemAtual(); 
+    }
     
     /**
      * Método buscar se existe passagem fornecendo seu número
@@ -67,6 +71,12 @@ public class PassagemCtrl {
     public void deletarPassagemCtrl(Passagem passagem, String numeroPassagem){
         PassagemDAO passDAO = new PassagemDAO();
         passDAO.deletarPassagem(passagem, numeroPassagem);
+    }
+
+    public int receberNumeroPassagem() {
+        int resposta;
+        PassagemDAO passagemDAO = new PassagemDAO();
+        return resposta = passagemDAO.buscarNumPassagemAtual();
     }
     
 }
