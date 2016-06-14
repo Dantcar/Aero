@@ -30,7 +30,23 @@ public class Cliente {
    public static int vidCliente;
     public Cliente() {
     }
-
+    
+    /**
+     * Método Construtor
+     * @param idCliente
+     * @param nome
+     * @param nascimento
+     * @param endereco
+     * @param numero
+     * @param bairro
+     * @param cidade
+     * @param uf
+     * @param cep
+     * @param email
+     * @param telefone
+     * @param rg
+     * @param cpf 
+     */
     public Cliente(String idCliente, String nome, String nascimento, String endereco, String numero, String bairro, String cidade, String uf, String cep, String email, String telefone, String rg, String cpf) {
         this.idCliente = idCliente;
         this.nome = nome;

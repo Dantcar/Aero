@@ -11,38 +11,40 @@ package model;
 /**
  * @version 0.1
  * @author Décio Antonio de Carvalho
- * @since 09-abr-2016
+ * @since 13- Junho-2016
  */
 public class Passagem {
-  private String idPassagem;
-  private String NumeroPassagem;        //<=== Número Passagem
-  private String nomePassageiro;        //<=== buscar em Passageiro
-  private String rgPassageiro;          //<=== Buscar em Passageiro
-  private String reserva;               //<=== 
-  private String vooNumero;             //<=== buscar em voo Partida
-  private String CiaAerea;              //<=== 
-  private String assentoNumero;         //<=== buscar em Aeronave
-  private String classe;                //<=== buscar em avião
-  private String tarifa;                //<=== buscar em Voo
-  private String dataPassagem;          //<== DataPartida buscar em voo
-  private String partidaAeroporto;      //<=== Aeroporto Partida buscar em voo 
-  private String partidaSiglaAeroporto; //<=== Aeroporto Partida buscar em voo
-  private String partidaData;           //<=== Data Partida buscar em Voo
-  private String partidaHora;           //<=== Hora Partida buscar em voo
-  private String partidaPortao;         //<=== Portao Partida buscar em Voo
-  private String chegadaAeroporto;      //<=== Aeroporto Chegada buscar em voo
-  private String chegadaSiglaAeroporto; //<=== Aeroporto Partida buscar em voo
-  private String chegadaData;           //<=== Data Chegada buscar em Voo
-  private String chegadaHora;           //<=== Hora Chegada buscar em Voo
-  private String chegadaPortao;         //<=== Portao Partida buscar em Voo       
-  private String EscalasVoo;            //<=== Escalas buscar em Voo
+  private String idPassagem;            //<== id                                1
+  private String NumeroPassagem;        //<=== Número Passagem                  2
+  private String nomePassageiro;        //<=== buscar em Passageiro             3
+  private String rgPassageiro;          //<=== Buscar em Passageiro             4
+  private String reserva;               //<=== reserva                          5
+  private String vooNumero;             //<=== buscar em voo Partida            6
+  private String CiaAerea;              //<=== Companhia Aérea                  7
+  private String assentoNumero;         //<=== buscar em Aeronave               8
+  private String classe;                //<=== buscar em avião                  9
+  private String tarifa;                //<=== buscar em Voo                    10
+  private String dataPassagem;          //<== DataPartida buscar em voo         11
+  private String partidaAeroporto;      //<=== Aeroporto Partida buscar em voo  12 
+  private String partidaSiglaAeroporto; //<=== Aeroporto Partida buscar em voo  13
+  private String partidaData;           //<=== Data Partida buscar em Voo       14
+  private String partidaHora;           //<=== Hora Partida buscar em voo       15
+  private String partidaPortao;         //<=== Portao Partida buscar em Voo     16
+  private String chegadaAeroporto;      //<=== Aeroporto Chegada buscar em voo  17
+  private String chegadaSiglaAeroporto; //<=== Aeroporto Partida buscar em voo  18
+  private String chegadaData;           //<=== Data Chegada buscar em Voo       19
+  private String chegadaHora;           //<=== Hora Chegada buscar em Voo       20
+  private String chegadaPortao;         //<=== Portao Partida buscar em Voo     21      
+  private String EscalasVoo;            //<=== Escalas buscar em Voo            22
+  private String ObservacaoPassagem;
 
+    
+  
   /**
    * Construtor Padrao
    */
     public Passagem() {
     }
-
     /**
      * 
      * @param idPassagem
@@ -66,9 +68,10 @@ public class Passagem {
      * @param chegadaData
      * @param chegadaHora
      * @param chegadaPortao
-     * @param EscalasVoo 
+     * @param EscalasVoo
+     * @param ObservacaoPassagem 
      */
-    public Passagem(String idPassagem, String NumeroPassagem, String nomePassageiro, String rgPassageiro, String reserva, String vooNumero, String CiaAerea, String assentoNumero, String classe, String tarifa, String dataPassagem, String partidaAeroporto, String partidaSiglaAeroporto, String partidaData, String partidaHora, String partidaPortao, String chegadaAeroporto, String chegadaSiglaAeroporto, String chegadaData, String chegadaHora, String chegadaPortao, String EscalasVoo) {
+    public Passagem(String idPassagem, String NumeroPassagem, String nomePassageiro, String rgPassageiro, String reserva, String vooNumero, String CiaAerea, String assentoNumero, String classe, String tarifa, String dataPassagem, String partidaAeroporto, String partidaSiglaAeroporto, String partidaData, String partidaHora, String partidaPortao, String chegadaAeroporto, String chegadaSiglaAeroporto, String chegadaData, String chegadaHora, String chegadaPortao, String EscalasVoo, String ObservacaoPassagem) {
         this.idPassagem = idPassagem;
         this.NumeroPassagem = NumeroPassagem;
         this.nomePassageiro = nomePassageiro;
@@ -91,8 +94,11 @@ public class Passagem {
         this.chegadaHora = chegadaHora;
         this.chegadaPortao = chegadaPortao;
         this.EscalasVoo = EscalasVoo;
+        this.ObservacaoPassagem = ObservacaoPassagem;
     }
-
+    
+    
+    
     public String getIdPassagem() {
         return idPassagem;
     }
@@ -268,6 +274,14 @@ public class Passagem {
     public void setEscalasVoo(String EscalasVoo) {
         this.EscalasVoo = EscalasVoo;
     }
-   
- 
+
+    public String getObservacaoPassagem() {
+        return ObservacaoPassagem;
+    }
+
+    public void setObservacaoPassagem(String ObservacaoPassagem) {
+        this.ObservacaoPassagem = ObservacaoPassagem;
+    }
+
+    
 }//Fim Classe Passagem
