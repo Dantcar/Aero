@@ -235,8 +235,9 @@ public class PassagemDAO {
                 + "'" + passagem.getChegadaData() + "', "
                 + "'" + passagem.getChegadaHora() + "', "
                 + "'" + passagem.getChegadaPortao() + "', "
-                + "'" + passagem.getEscalasVoo() + "')";
-        
+                + "'" + passagem.getEscalasVoo() + "', "
+                + "'" + passagem.getObservacaoPassagem() + "')";
+        System.out.println(sql);
         try {
             stmt.executeUpdate(sql);
             msg = msg + "Dados do Voo inseridos com sucesso. \n";
