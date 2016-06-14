@@ -57,6 +57,8 @@ private static SimpleDateFormat sdfHojePassagem;
         btnExcluirPassagem.setEnabled(false);
         
         cbxClasse.setSelectedIndex(-1);
+        //desabilitar elementos do formulario
+        tctNumeroPassagem.setEditable(false);
         if (!temPassagemNova){
         arrayPass = new ArrayList<>();
         temPassagemNova = true;
