@@ -328,6 +328,7 @@ public class PassagemDAO {
                 passagem.setChegadaHora(rs.getString("chegadahora"));
                 passagem.setChegadaPortao(rs.getString("chegadaportao"));
                 passagem.setEscalasVoo(rs.getString("escalasvoo"));
+                passagem.setObservacaoPassagem(rs.getString("observacaopassagem"));
 
             } else {
                 passagem = null;
@@ -390,12 +391,14 @@ public class PassagemDAO {
                 + "chegadadata = '" + passagem.getChegadaData() + "', "
                 + "chegadahora = '" + passagem.getChegadaHora() + "', "
                 + "chegadaportao = '" + passagem.getChegadaPortao() + "', "
-                + "escalasvoo = '" + passagem.getEscalasVoo() + "' "
+                + "escalasvoo = '" + passagem.getEscalasVoo() + "', "
+                + "OBSERVACAOPASSAGEM = '" + passagem.getObservacaoPassagem() + "' "
                 + " WHERE numeropassagem = '" + vnumeroPassagem + "'";
 
         try {
-            stmt.executeUpdate(sql);
             System.out.println("Esta é minha SQL: " + sql);
+            stmt.executeUpdate(sql);
+            
             msg = msg + "Dados da passagem alterados com sucesso. \n";
         } catch (SQLException ex) {
             msg = reduzString(msg + ex);

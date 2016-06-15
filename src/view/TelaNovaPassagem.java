@@ -59,7 +59,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         btnCalcularTarifa.setEnabled(false);
         cbxClasse.setSelectedIndex(-1);
         //desabilitar elementos do formulario
-        tctNumeroPassagem.setEditable(false);
+        //tctNumeroPassagem.setEditable(false);
         tctNumeroVoo.setText("");
         desabilitarPartidaChegada();
         if (!temPassagemNova) {
@@ -987,7 +987,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         //numeroPassagem 
         objPass.setIdPassagem(id);
         objPass.setNumeroPassagem(tctNumeroPassagem.getText());
-
+        numeroPassagem = tctNumeroPassagem.getText().trim();
         /**
          * DataPassagem
          */
@@ -1202,8 +1202,14 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
             tftHoraChegada.setText(passagem.getChegadaHora());
             tctPortaoAeroportoChegada.setText(passagem.getChegadaPortao());
             tctPassagemEscalas.setText(passagem.getEscalasVoo());
+            tctPassagemObservacao.setText(passagem.getObservacaoPassagem());
             desabilitarPassagem();
             btnSalvarPassagem.setEnabled(false);
+            btnPesquisarVooNumero.setEnabled(false);
+            btnCalcularTarifa.setEnabled(false);
+            //tctCiaAereaPassagem.setEditable(true);
+            btnPesquisarPassageiroRG.setEnabled(false);
+            btnGerarNumeroPassagem.setEnabled(false);
             flag = true;
 
         }//fim do if
