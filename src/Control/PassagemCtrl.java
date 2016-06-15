@@ -11,6 +11,7 @@ package Control;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import model.Passagem;
 import model.PassagemDAO;
 
@@ -98,5 +99,10 @@ public class PassagemCtrl {
         return lista = passagemDAO.findComboGenericoPassagem(campo);
     }
 
+    public List<Passagem>   receberListaPassagens(){
+       PassagemDAO passDAO = new PassagemDAO();
+       List<Passagem> lista = passDAO.listarPassagens();
+       return lista; 
         
+    }
 }

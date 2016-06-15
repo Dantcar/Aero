@@ -29,9 +29,9 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
         populaJComboBoxGenerico("nomepassageiro", 3);
         populaJComboBoxGenerico("rgpassageiro", 4);
         cbxNumeroPassagem.setSelectedIndex(-1);
-        cbxDataPassagem.setSelectedIndex(-1);
-        cbxNomePassageiro.setSelectedIndex(-1);
-        cbxRgPassageiroPassagem.setSelectedIndex(-1);
+       // cbxDataPassagem.setSelectedIndex(-1);
+       // cbxNomePassageiro.setSelectedIndex(-1);
+       // cbxRgPassageiroPassagem.setSelectedIndex(-1);
     
     
     }
@@ -51,13 +51,13 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
                 cbxNumeroPassagem.removeAllItems();
             }
         else if(item == 2){
-           cbxDataPassagem.removeAllItems(); 
+    //       cbxDataPassagem.removeAllItems(); 
         }
         else if(item == 3){
-           cbxNomePassageiro.removeAllItems(); 
+     //      cbxNomePassageiro.removeAllItems(); 
         }
         else if(item == 4){
-           cbxRgPassageiroPassagem.removeAllItems(); 
+      //     cbxRgPassageiroPassagem.removeAllItems(); 
         }
         
         ArrayList lista = cPassagem.populaComboGenerico(campo); //retorna os numeros de passagem do banco.
@@ -67,13 +67,13 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
               cbxNumeroPassagem.addItem(String.valueOf(i.next()));
             }
             else if(item == 2){
-           cbxDataPassagem.addItem(String.valueOf(i.next()));
+         //  cbxDataPassagem.addItem(String.valueOf(i.next()));
             }
             else if(item == 3){
-           cbxNomePassageiro.addItem(String.valueOf(i.next()));
+       //    cbxNomePassageiro.addItem(String.valueOf(i.next()));
             }
             else if(item == 4){
-           cbxRgPassageiroPassagem.addItem(String.valueOf(i.next()));
+        //   cbxRgPassageiroPassagem.addItem(String.valueOf(i.next()));
             }
         }
     }
@@ -84,13 +84,13 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
                 cbxNumeroPassagem.removeAllItems();
             }
         else if(item == 2){
-           cbxDataPassagem.removeAllItems(); 
+          // cbxDataPassagem.removeAllItems(); 
         }
         else if(item == 3){
-           cbxNomePassageiro.removeAllItems(); 
+         //  cbxNomePassageiro.removeAllItems(); 
         }
         else if(item == 4){
-           cbxRgPassageiroPassagem.removeAllItems(); 
+          // cbxRgPassageiroPassagem.removeAllItems(); 
         }
         
         ArrayList lista = cPassagem.populaComboGenerico(campo); //retorna os numeros de passagem do banco.
@@ -100,13 +100,13 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
            cbxNumeroPassagem.addItem(String.valueOf(i.next()));
            }
            else if(item == 2){
-           cbxDataPassagem.addItem(String.valueOf(i.next()));
+          // cbxDataPassagem.addItem(String.valueOf(i.next()));
             }
             else if(item == 3){
-           cbxNomePassageiro.addItem(String.valueOf(i.next()));
+          // cbxNomePassageiro.addItem(String.valueOf(i.next()));
             }
             else if(item == 4){
-           cbxRgPassageiroPassagem.addItem(String.valueOf(i.next()));
+          // cbxRgPassageiroPassagem.addItem(String.valueOf(i.next()));
             }
         }
     }
@@ -117,15 +117,9 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
         lblTelaPassagem = new javax.swing.JLabel();
         lblTituloTelaPassagem = new javax.swing.JLabel();
         PainelPassageiro = new javax.swing.JPanel();
-        lblPassagemNome = new javax.swing.JLabel();
-        lblRgPassagem = new javax.swing.JLabel();
         lblNumeroPassagem = new javax.swing.JLabel();
         cbxNumeroPassagem = new javax.swing.JComboBox();
-        cbxNomePassageiro = new javax.swing.JComboBox();
-        cbxRgPassageiroPassagem = new javax.swing.JComboBox();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabRelatorioPassagem = new javax.swing.JTable();
-        cbxDataPassagem = new javax.swing.JComboBox();
+        btnListarPassagem = new javax.swing.JButton();
         PanelPassagemBotoes = new javax.swing.JPanel();
         btnImprimirRelatorioPassagem = new javax.swing.JButton();
         btnPesquisarPassagem = new javax.swing.JButton();
@@ -167,14 +161,6 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
 
         PainelPassageiro.setBorder(javax.swing.BorderFactory.createTitledBorder("Passagem Aérea - Passageiro"));
 
-        lblPassagemNome.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblPassagemNome.setForeground(new java.awt.Color(102, 102, 102));
-        lblPassagemNome.setText("Passageiro :");
-
-        lblRgPassagem.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblRgPassagem.setForeground(new java.awt.Color(102, 102, 102));
-        lblRgPassagem.setText("RG :");
-
         lblNumeroPassagem.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblNumeroPassagem.setForeground(new java.awt.Color(102, 102, 102));
         lblNumeroPassagem.setText("Número Passagem : ");
@@ -186,77 +172,37 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
             }
         });
 
-        cbxNomePassageiro.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        cbxNomePassageiro.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxNomePassageiroItemStateChanged(evt);
+        btnListarPassagem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnListarPassagem.setText("Listar Passagem");
+        btnListarPassagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPassagemActionPerformed(evt);
             }
         });
-
-        cbxRgPassageiroPassagem.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        cbxRgPassageiroPassagem.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxRgPassageiroPassagemItemStateChanged(evt);
-            }
-        });
-
-        tabRelatorioPassagem.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tabRelatorioPassagem);
 
         javax.swing.GroupLayout PainelPassageiroLayout = new javax.swing.GroupLayout(PainelPassageiro);
         PainelPassageiro.setLayout(PainelPassageiroLayout);
         PainelPassageiroLayout.setHorizontalGroup(
             PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumeroPassagem)
-                            .addComponent(lblPassagemNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRgPassagem, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                                .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(cbxDataPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbxNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxRgPassageiroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(lblNumeroPassagem)
+                .addGap(18, 18, 18)
+                .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnListarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelPassageiroLayout.setVerticalGroup(
             PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPassageiroLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumeroPassagem)
-                    .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxDataPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassagemNome)
-                    .addComponent(cbxNomePassageiro, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRgPassagem)
-                    .addComponent(cbxRgPassageiroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnListarPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(lblNumeroPassagem)))
+                .addGap(137, 137, 137))
         );
 
         PanelPassagemBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -351,7 +297,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
                     .addComponent(PainelPassageiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -363,7 +309,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
                 .addComponent(PainelPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -372,14 +318,6 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     private void cbxNumeroPassagemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNumeroPassagemItemStateChanged
 
     }//GEN-LAST:event_cbxNumeroPassagemItemStateChanged
-
-    private void cbxNomePassageiroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNomePassageiroItemStateChanged
-
-    }//GEN-LAST:event_cbxNomePassageiroItemStateChanged
-
-    private void cbxRgPassageiroPassagemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxRgPassageiroPassagemItemStateChanged
-
-    }//GEN-LAST:event_cbxRgPassageiroPassagemItemStateChanged
 
     private void btnImprimirRelatorioPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioPassagemActionPerformed
 
@@ -397,6 +335,15 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnSairPassagemActionPerformed
 
+    private void btnListarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassagemActionPerformed
+       PassagemCtrl cPassagem = new PassagemCtrl();
+       FrameListaPassagem flp;
+       flp = new FrameListaPassagem(cPassagem.receberListaPassagens());
+       
+       flp.setVisible(true);
+      
+    }//GEN-LAST:event_btnListarPassagemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelPassageiro;
@@ -404,18 +351,12 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PanelPassagemBotoes;
     private javax.swing.JButton btnImprimirRelatorioPassagem;
     private javax.swing.JButton btnLimparPassagem;
+    private javax.swing.JButton btnListarPassagem;
     private javax.swing.JButton btnPesquisarPassagem;
     private javax.swing.JButton btnSairPassagem;
-    private javax.swing.JComboBox cbxDataPassagem;
-    private javax.swing.JComboBox cbxNomePassageiro;
     private javax.swing.JComboBox cbxNumeroPassagem;
-    private javax.swing.JComboBox cbxRgPassageiroPassagem;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblNumeroPassagem;
-    private javax.swing.JLabel lblPassagemNome;
-    private javax.swing.JLabel lblRgPassagem;
     private javax.swing.JLabel lblTelaPassagem;
     private javax.swing.JLabel lblTituloTelaPassagem;
-    private javax.swing.JTable tabRelatorioPassagem;
     // End of variables declaration//GEN-END:variables
 }
