@@ -1275,27 +1275,27 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimparPassagemActionPerformed
 
     private void btnExcluirPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPassagemActionPerformed
+        btnSalvarPassagem.setEnabled(false);
+        btnAlterarPassagem.setEnabled(false);
+        btnEditarPassagem.setEnabled(false);
+        
         boolean flag = false;
-
-        for (int i = 0; i < arrayPass.size(); i++) {
-
-            if (tctNumeroPassagem.getText().trim().equals(arrayPass.get(i).getNumeroPassagem())) {
-                String removidaPassagem = arrayPass.get(i).getNumeroPassagem();
-                Passagem removido = arrayPass.remove(i);
-
-                JOptionPane.showMessageDialog(this, "Passagem nº: " + removidaPassagem + " Removida!");
-                btnLimparPassagem.doClick(); //Limpar tela
-
-                flag = true;
-
-            }//fim do if
-        }// fim do for
-
-        if (arrayPass.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhuma Passagem Cadastrada!!");
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Número de Passagem não Encontrado!!!");
+        
+        Passagem passagem = new Passagem();
+        PassagemCtrl cPassagem = new PassagemCtrl();
+        
+        passagem = cPassagem.receberPassagemNumero(tctNumeroPassagem.getText());
+        
+        if (passagem != null){
+            desabilitarPassagem();
+            cPassagem.deletarPassagemCtrl( tctNumeroPassagem.getText());
+            limparPassagem();
+            habilitarPassagem();
+            flag = true;
+        }else{
+            
         }
+        
     }//GEN-LAST:event_btnExcluirPassagemActionPerformed
 
     private void tctNomePassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tctNomePassageiroActionPerformed

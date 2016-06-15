@@ -68,9 +68,9 @@ public class PassagemCtrl {
      * @param passagem
      * @param numeroPassagem 
      */
-    public void deletarPassagemCtrl(Passagem passagem, String numeroPassagem){
+    public void deletarPassagemCtrl(String numeroPassagem){
         PassagemDAO passDAO = new PassagemDAO();
-        passDAO.deletarPassagem(passagem, numeroPassagem);
+        passDAO.deletarPassagem(numeroPassagem);
     }
 
     public int receberNumeroPassagem() {

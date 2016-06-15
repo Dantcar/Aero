@@ -424,7 +424,7 @@ public class PassagemDAO {
         msg = "";
     }// fim método alterarPassagem
 
-    public void deletarPassagem(Passagem passagem, String vnumeroPassagem) {
+    public void deletarPassagem(String vnumeroPassagem) {
         String msg = "";
         String sql = "DELETE FROM passagem WHERE numeropassagem = '" + vnumeroPassagem + "'";
 
