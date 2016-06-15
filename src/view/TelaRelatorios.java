@@ -338,9 +338,20 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     private void btnListarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassagemActionPerformed
        PassagemCtrl cPassagem = new PassagemCtrl();
        FrameListaPassagem flp;
-       flp = new FrameListaPassagem(cPassagem.receberListaPassagens());
+       flp = new FrameListaPassagem(cPassagem.listarPassagens());
        
        flp.setVisible(true);
+       
+       
+       /* ClienteCtrl controller = new ClienteCtrl();
+        try {
+            FrameLista fm = new FrameLista(controller.listar());
+            fm.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
       
     }//GEN-LAST:event_btnListarPassagemActionPerformed
 

@@ -26,10 +26,22 @@ public class FrameListaPassagem extends javax.swing.JFrame {
      */
     public FrameListaPassagem(List<Passagem> lista) {
         initComponents();
-        receberListaPassagens(lista);
-        setLocation(500,300);
+        carregarLista(lista);
+        setLocation(100,100);
+        
     }
-
+    
+    private void carregarLista(List<Passagem> listaPassagens){
+       String newline = System.getProperty("line.separator");
+       String resultado = "";
+       for (Passagem p : listaPassagens){
+         resultado += "Num:  " + p.getNumeroPassagem() + " Data: "+p.getPartidaData() + " Hora: "+ 
+         p.getPartidaHora() + " Aeroporto Partida: " + p.getPartidaAeroporto() + " Destino: " + p.getChegadaAeroporto();
+         resultado += newline;
+       }
+       txtPassagem.setText(resultado);
+       
+    }
    
 
     /**
@@ -41,17 +53,30 @@ public class FrameListaPassagem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtPassagem = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtPassagem.setColumns(20);
+        txtPassagem.setRows(5);
+        jScrollPane1.setViewportView(txtPassagem);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,5 +118,7 @@ public class FrameListaPassagem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtPassagem;
     // End of variables declaration//GEN-END:variables
 }

@@ -102,7 +102,11 @@ public class PassagemCtrl {
     public List<Passagem>   receberListaPassagens(){
        PassagemDAO passDAO = new PassagemDAO();
        List<Passagem> lista = passDAO.listarPassagens();
-       return lista; 
-        
+       return lista;    
+    }
+    public List<Passagem> listarPassagens() {
+        PassagemDAO passDAO = new PassagemDAO();
+        List<Passagem> lista = passDAO.listarPassagens();
+        return lista;
     }
 }

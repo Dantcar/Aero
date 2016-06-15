@@ -621,7 +621,58 @@ public class PassagemDAO {
     }// fim método findComboNumeroPassagem
 
     public List<Passagem> listarPassagens() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        List<Passagem> listaPassagem = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM passagem ORDER BY 1 DESC";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+                Passagem passagem = new Passagem();
+                passagem.setNumeroPassagem(rs.getString("numeropassagem"));
+                passagem.setNomePassageiro(rs.getString("nomepassageiro"));
+                passagem.setPartidaData(rs.getString("partidadata"));
+                passagem.setPartidaHora(rs.getString("partidahora"));
+                passagem.setPartidaAeroporto(rs.getString("partidaaeroporto"));
+                passagem.setChegadaAeroporto(rs.getString("chegadaaeroporto"));
+
+                //adiciona objeto cliente a listaCliente
+                listaPassagem.add(passagem);
+            }
+           
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return listaPassagem;
     }
 
 }//fim Classe PassagemDAO 
