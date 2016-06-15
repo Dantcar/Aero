@@ -44,12 +44,14 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     private static SimpleDateFormat sdfHojePassagem;
     private int idp = 0;
     public float valorPassagemE, valorPassagemB, valorPassagemF = 0;
+
     /**
      * Creates new form TelaVazia
      */
     public TelaNovaPassagem() {
         initComponents();
         //habilitar e desabilitar botões
+        btnGerarNumeroPassagem.setEnabled(true);
         btnAlterarPassagem.setEnabled(false);
         btnSalvarPassagem.setEnabled(true);
         btnEditarPassagem.setEnabled(false);
@@ -146,7 +148,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         tctPassagemEscalas = new javax.swing.JTextField();
         lblPassagemEscalasObs = new javax.swing.JLabel();
         scrPassagemObservacao = new javax.swing.JScrollPane();
-        txtPassagemObservacao = new javax.swing.JTextArea();
+        tctPassagemObservacao = new javax.swing.JTextArea();
         PanelPassagemBotoes = new javax.swing.JPanel();
         btnSalvarPassagem = new javax.swing.JButton();
         btnPesquisarPassagem = new javax.swing.JButton();
@@ -325,9 +327,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         );
 
         btnPesquisarPassageiroRG.getAccessibleContext().setAccessibleName("Pesquisar RG passageiro");
-        btnPesquisarPassageiroRG.getAccessibleContext().setAccessibleDescription("Pesquisar RG passageiro");
         btnGerarNumeroPassagem.getAccessibleContext().setAccessibleName("Gerador automático número passagem");
-        btnGerarNumeroPassagem.getAccessibleContext().setAccessibleDescription("Gerador automático número passagem");
 
         PainelGuiasPassagem.addTab("Passageiro", PainelPassageiro);
 
@@ -390,6 +390,11 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
 
         cbxClasse.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         cbxClasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Economica", "Empresarial", "Primeira" }));
+        cbxClasse.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxClasseItemStateChanged(evt);
+            }
+        });
 
         bgStatus.add(rbDisponivel);
         rbDisponivel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -496,10 +501,6 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                     .addComponent(rbConfirmada))
                 .addContainerGap())
         );
-
-        btnPesquisarVooNumero.getAccessibleContext().setAccessibleName("Pesquisar um Voo");
-        btnPesquisarVooNumero.getAccessibleContext().setAccessibleDescription("Pesquisar um Voo");
-        btnCalcularTarifa.getAccessibleContext().setAccessibleDescription("Cálculo da Tarifa");
 
         PainelGuiasPassagem.addTab("Passagem", PainelPassagemTarifas);
 
@@ -722,10 +723,10 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         lblPassagemEscalasObs.setForeground(new java.awt.Color(102, 102, 102));
         lblPassagemEscalasObs.setText("Observações :");
 
-        txtPassagemObservacao.setColumns(20);
-        txtPassagemObservacao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtPassagemObservacao.setRows(5);
-        scrPassagemObservacao.setViewportView(txtPassagemObservacao);
+        tctPassagemObservacao.setColumns(20);
+        tctPassagemObservacao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        tctPassagemObservacao.setRows(5);
+        scrPassagemObservacao.setViewportView(tctPassagemObservacao);
 
         javax.swing.GroupLayout PainelPassagemEscalasLayout = new javax.swing.GroupLayout(PainelPassagemEscalas);
         PainelPassagemEscalas.setLayout(PainelPassagemEscalasLayout);
@@ -1022,7 +1023,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         objPass.setChegadaHora(tftHoraChegada.getText());
         objPass.setChegadaPortao(tctPortaoAeroportoChegada.getText());
         objPass.setEscalasVoo(tctPassagemEscalas.getText());
-        objPass.setObservacaoPassagem(txtPassagemObservacao.getText());
+        objPass.setObservacaoPassagem(tctPassagemObservacao.getText());
         //String msg;
         //msg = "";
 
@@ -1137,7 +1138,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
 
         //Status dos botões
         btnAlterarPassagem.setEnabled(false);
-        btnSalvarPassagem.setEnabled(false);
+        btnSalvarPassagem.setEnabled(true);
         btnEditarPassagem.setEnabled(true);
         btnLimparPassagem.setEnabled(false);
         btnExcluirPassagem.setEnabled(true);
@@ -1149,66 +1150,78 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         tctNumeroPassagem.setEditable(true);
         PassagemCtrl cPassagem = new PassagemCtrl();
         Passagem passagem = new Passagem();
-        
+
         passagem = PassagemCtrl.receberPassagemNumero(vNumPassagem);
-            
-            if (passagem != null) {
 
-                if (passagem.getReserva().equals("Reservada")) {
-                    rbReservada.setSelected(true);
-                }
-                if (passagem.getReserva().equals("Confirmada")) {
-                    rbConfirmada.setSelected(true);
-                }
-                if (passagem.getReserva().equals("Disponivel")) {
-                    rbDisponivel.setSelected(true);
-                }
+        if (passagem != null) {
 
-                /**
-                 * Tratamento do campo tipo jDatePicker
-                 */
-                String sdataPartida = passagem.getDataPassagem();
-                // Date dtPartida = new Date();
-                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyyy");
-                try {
-                    Date dtPartida = sdf2.parse(sdataPartida);
-                    jdpDataPassagem.setDate(dtPartida);
-                } catch (ParseException ex) {
-                    Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if (passagem.getReserva().equals("Reservada")) {
+                rbReservada.setSelected(true);
+            }
+            if (passagem.getReserva().equals("Confirmada")) {
+                rbConfirmada.setSelected(true);
+            }
+            if (passagem.getReserva().equals("Disponivel")) {
+                rbDisponivel.setSelected(true);
+            }
+
+            /**
+             * Tratamento do campo tipo jDatePicker
+             */
+            String sdataPartida = passagem.getDataPassagem();
+            // Date dtPartida = new Date();
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyyy");
+            try {
+                Date dtPartida = sdf2.parse(sdataPartida);
+                jdpDataPassagem.setDate(dtPartida);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaNovoVoo.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 //fim do tratamento campo JDatePicker 
 
-                //jdpDataPassagem
-                tctNumeroPassagem.setText(passagem.getNumeroPassagem());
-                tctNomePassageiro.setText(passagem.getNomePassageiro());
-                tftRgPassagem.setText(passagem.getRgPassageiro());
-                tctNumeroVoo.setText(passagem.getVooNumero());
-                tctPassagemNumeroAssento.setText(passagem.getAssentoNumero());
-                cbxClasse.setSelectedItem(passagem.getClasse());
-                tctCiaAereaPassagem.setText(passagem.getCiaAerea());
-                tftPassagemTarifaTotal.setText(passagem.getTarifa());
-                tctAeroportoPartida.setText(passagem.getPartidaAeroporto());
-                tctSiglaAeroportoPartida.setText(passagem.getPartidaSiglaAeroporto());
+            //jdpDataPassagem
+            tctNumeroPassagem.setText(passagem.getNumeroPassagem());
+            tctNomePassageiro.setText(passagem.getNomePassageiro());
+            tftRgPassagem.setText(passagem.getRgPassageiro());
+            tctNumeroVoo.setText(passagem.getVooNumero());
+            tctPassagemNumeroAssento.setText(passagem.getAssentoNumero());
+            cbxClasse.setSelectedItem(passagem.getClasse());
+            cbxClasse.setEnabled(false);
+            tctCiaAereaPassagem.setText(passagem.getCiaAerea());
+            tftPassagemTarifaTotal.setText(passagem.getTarifa());
+            tctAeroportoPartida.setText(passagem.getPartidaAeroporto());
+            tctSiglaAeroportoPartida.setText(passagem.getPartidaSiglaAeroporto());
 
-                tftDataPartida.setText(passagem.getPartidaData());
-                tftHoraPartida.setText(passagem.getPartidaHora());
-                tctPortaoAeroportoPartida.setText(passagem.getPartidaPortao());
-                tctAeroportoChegada.setText(passagem.getChegadaAeroporto());
-                tctSiglaAeroportoChegada.setText(passagem.getChegadaSiglaAeroporto());
+            tftDataPartida.setText(passagem.getPartidaData());
+            tftHoraPartida.setText(passagem.getPartidaHora());
+            tctPortaoAeroportoPartida.setText(passagem.getPartidaPortao());
+            tctAeroportoChegada.setText(passagem.getChegadaAeroporto());
+            tctSiglaAeroportoChegada.setText(passagem.getChegadaSiglaAeroporto());
 
-                tftDataChegada.setText(passagem.getChegadaData());
-                tftHoraChegada.setText(passagem.getChegadaHora());
-                tctPortaoAeroportoChegada.setText(passagem.getChegadaPortao());
-                tctPassagemEscalas.setText(passagem.getEscalasVoo());
+            tftDataChegada.setText(passagem.getChegadaData());
+            tftHoraChegada.setText(passagem.getChegadaHora());
+            tctPortaoAeroportoChegada.setText(passagem.getChegadaPortao());
+            tctPassagemEscalas.setText(passagem.getEscalasVoo());
+            desabilitarPassagem();
+            btnSalvarPassagem.setEnabled(false);
+            flag = true;
 
-                flag = true;
-            }//fim do if
-        
+        }//fim do if
+        else {
+            if (tctNumeroPassagem.isValid()) {
+                msg = msg + "Passagem não encontrada!,\n Por favor Entre com outro número de passagem\n";
+            }
+            flag = true;
+        }
 
-        if (arrayPass.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhuma Passagem Cadastrada!!");
-        } else if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Passagem não encontrada!!!");
+        if (flag == false && tctNumeroPassagem.isValid()) {
+            msg = msg + "Nenhum Passagem Cadastrada!\n";
+
+            btnSalvarPassagem.setEnabled(true);
+        }
+
+        if (msg != "") {
+            JOptionPane.showMessageDialog(this, msg);
         }
     }//GEN-LAST:event_btnPesquisarPassagemActionPerformed
 
@@ -1294,7 +1307,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         btnAlterarPassagem.setEnabled(true);
         btnSalvarPassagem.setEnabled(false);
         btnEditarPassagem.setEnabled(false);
-
+        habilitarPartidaChegada();
         if (!tctNomePassageiro.isEditable()) {
             //msg = "Pode realizar alterações agora";
             ////      habilitarDadosPassagem();
@@ -1308,6 +1321,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         //btnSalvarPassageiro.doClick();
         btnSalvarPassagemActionPerformed(evt);
+
     }//GEN-LAST:event_btnAlterarPassagemActionPerformed
 
     private void btnPesquisarPassageiroRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassageiroRGActionPerformed
@@ -1395,7 +1409,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
             //Dados Voo Escala
             String vooEscalasPassagem = vooPassagem.getEscalasVoo().trim();
             tctPassagemEscalas.setText(vooEscalasPassagem);
-            
+
             valorPassagemE = parseFloat(vooPassagem.getTarifaE());
             valorPassagemB = parseFloat(vooPassagem.getTarifaB());
             valorPassagemF = parseFloat(vooPassagem.getTarifaF());
@@ -1419,41 +1433,43 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     private void btnCalcularTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTarifaActionPerformed
         //PassagemCtrl cPassagem = new PassagemCtrl();
         String msg = "";
-        int vNumeroPassagem=0;
-        if(!tctNumeroVoo.equals("")){
-        vNumeroPassagem =  parseInt(tctNumeroVoo.getText());
+        int vNumeroPassagem = 0;
+        if (!tctNumeroVoo.equals("")) {
+            vNumeroPassagem = parseInt(tctNumeroVoo.getText());
         }
         //float vlPassagem = 0;
-        System.out.println("Numero da passagem atual: "+vNumeroPassagem);
-        
+        System.out.println("Numero da passagem atual: " + vNumeroPassagem);
+
         if (vNumeroPassagem != 0) {
-            if (cbxClasse.getSelectedItem()=="Economica") {
-             //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
-             tftPassagemTarifaTotal.setText(""+valorPassagemE);
-             msg = "Preço da passagem Classe Economica = R$ "+valorPassagemE;
+            if (cbxClasse.getSelectedItem() == "Economica") {
+                //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
+                tftPassagemTarifaTotal.setText("" + valorPassagemE);
+                //msg = "Preço da passagem Classe Economica = R$ " + valorPassagemE;
+            } else if (cbxClasse.getSelectedItem() == "Empresarial") {
+                //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
+                tftPassagemTarifaTotal.setText("" + valorPassagemB);
+                //msg = "Preço da passagem Classe Empresarial = R$ " + valorPassagemB;
+            } else if (cbxClasse.getSelectedItem() == "Primeira") {
+                //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
+                tftPassagemTarifaTotal.setText("" + valorPassagemF);
+                //msg = "Preço da passagem Primeira Classe = R$ " + valorPassagemF;
+            } else {
+                msg = "Escolha a classe da passagem!";
             }
-            else if(cbxClasse.getSelectedItem()=="Empresarial"){
-             //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
-             tftPassagemTarifaTotal.setText(""+valorPassagemB);
-             msg = "Preço da passagem Classe Empresarial = R$ "+valorPassagemB;
-            }
-            else if(cbxClasse.getSelectedItem()=="Primeira")
-            {
-            //vlPassagem = cPassagem.recebeValorClasseVoo("Disponivel");
-            tftPassagemTarifaTotal.setText(""+valorPassagemF );
-             msg = "Preço da passagem Primeira Classe = R$ "+valorPassagemF;
-            }else{
-             msg = "Escolha a classe da passagem!";    
-        }
 
         } else {
-            
             msg = "Entre com um número de voo!";
-
         }
-
-        JOptionPane.showMessageDialog(this, msg);
+        if (msg != "") {
+            JOptionPane.showMessageDialog(this, msg);
+        }
     }//GEN-LAST:event_btnCalcularTarifaActionPerformed
+
+    private void cbxClasseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxClasseItemStateChanged
+        if (tctNumeroVoo.isValid()) {
+            btnCalcularTarifa.doClick();
+        }
+    }//GEN-LAST:event_cbxClasseItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1551,6 +1567,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     private static javax.swing.JTextField tctNumeroVoo;
     private static javax.swing.JTextField tctPassagemEscalas;
     private static javax.swing.JTextField tctPassagemNumeroAssento;
+    private javax.swing.JTextArea tctPassagemObservacao;
     private static javax.swing.JTextField tctPortaoAeroportoChegada;
     private static javax.swing.JTextField tctPortaoAeroportoPartida;
     private static javax.swing.JTextField tctSiglaAeroportoChegada;
@@ -1561,7 +1578,6 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField tftHoraPartida;
     private javax.swing.JFormattedTextField tftPassagemTarifaTotal;
     private javax.swing.JFormattedTextField tftRgPassagem;
-    private javax.swing.JTextArea txtPassagemObservacao;
     // End of variables declaration//GEN-END:variables
 
     private void limparPassagem() {
@@ -1596,6 +1612,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
 
     private void habilitarPassagem() {
         tctNumeroPassagem.setEditable(true);
+        jdpDataPassagem.setEditable(true);
         tctNomePassageiro.setEditable(true);
         tftRgPassagem.setEditable(true);
 
@@ -1628,6 +1645,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
 
     private void desabilitarPassagem() {
         tctNumeroPassagem.setEditable(false);
+        jdpDataPassagem.setEditable(false);
         tctNomePassageiro.setEditable(false);
         tftRgPassagem.setEditable(false);
 
@@ -1655,46 +1673,20 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         tftDataChegada.setEditable(false);
         tftHoraChegada.setEditable(false);
         tctPortaoAeroportoChegada.setEditable(false);
+        tctPassagemEscalas.setEditable(false);
         tctPassagemEscalas.setEditable(false);
     }
-    
+
     private void desabilitarPartidaChegada() {
-        /*
+        //VooPassagem
+        //btnPesquisarVooNumero.setEnabled(false);
+        btnCalcularTarifa.setEnabled(false);
+        tctCiaAereaPassagem.setEditable(false);
+        //btnPesquisarPassageiroRG.setEnabled(false);
+        //btnGerarNumeroPassagem.setEnabled(false);
         tctNumeroPassagem.setEditable(false);
         tctNomePassageiro.setEditable(false);
-        tftRgPassagem.setEditable(false);
 
-        //carro.setBiCombustivel(rbBiCombustivelSim.isSelected() ? "sim": "não");
-        //rbConfirmada.setSelected(false);
-        //rbDisponivel.setSelected(false);
-        //rbReservada.setSelected(false);
-        rbDisponivel.setEnabled(false);
-        rbReservada.setEnabled(false);
-        rbConfirmada.setEnabled(false);
-
-        tctNumeroVoo.setEditable(false);
-        tctPassagemNumeroAssento.setEditable(false);
-        //cbxClasse.setSelectedIndex(-1);
-        cbxClasse.setEditable(false);
-        tctCiaAereaPassagem.setEditable(false);
-        tftPassagemTarifaTotal.setEditable(false);
-        tctAeroportoPartida.setEditable(false);
-        tctSiglaAeroportoPartida.setEditable(false);
-        tftDataPartida.setEditable(false);
-        tftHoraPartida.setEditable(false);
-        tctPortaoAeroportoPartida.setEditable(false);
-        tctAeroportoChegada.setEditable(false);
-        tctSiglaAeroportoChegada.setEditable(false);
-        tftDataChegada.setEditable(false);
-        tftHoraChegada.setEditable(false);
-        tctPortaoAeroportoChegada.setEditable(false);
-        tctPassagemEscalas.setEditable(false);
-        */
-        
-//VooPassagem
-        tctCiaAereaPassagem.setEditable(false);
-        tctNumeroPassagem.setEditable(false);
-        tctNomePassageiro.setEditable(false);
         //Partida
         tctAeroportoPartida.setEditable(false);
         tctSiglaAeroportoPartida.setEditable(false);
@@ -1709,7 +1701,29 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         tctPortaoAeroportoChegada.setEditable(false);
         //Escalas
         tctPassagemEscalas.setEditable(false);
-        
+        tctPassagemObservacao.setEditable(true);
+    }
+
+    private void habilitarPartidaChegada() {
+        //VooPassagem
+        btnPesquisarVooNumero.setEnabled(true);
+        btnCalcularTarifa.setEnabled(true);
+        //tctCiaAereaPassagem.setEditable(true);
+        btnPesquisarPassageiroRG.setEnabled(true);
+        btnGerarNumeroPassagem.setEnabled(true);
+        tctNumeroVoo.setEditable(true);
+        jdpDataPassagem.setEditable(true);
+        tftRgPassagem.setEditable(true);
+        cbxClasse.setEnabled(true);
+        tctPassagemNumeroAssento.setEditable(true);
+        tftPassagemTarifaTotal.setEditable(true);
+        rbDisponivel.setEnabled(true);
+        rbReservada.setEnabled(true);
+        rbConfirmada.setEnabled(true);
+
+        //Escalas
+        tctPassagemObservacao.setEditable(true);
+
     }
 
 }
