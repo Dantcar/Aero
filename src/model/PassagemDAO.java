@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -398,7 +399,7 @@ public class PassagemDAO {
         try {
             System.out.println("Esta é minha SQL: " + sql);
             stmt.executeUpdate(sql);
-            
+
             msg = msg + "Dados da passagem alterados com sucesso. \n";
         } catch (SQLException ex) {
             msg = reduzString(msg + ex);
@@ -521,5 +522,101 @@ public class PassagemDAO {
     public float buscarValorPassagemVoo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void populaComboBoxNumeroPassagem() {
+
+    }
+
+    public ArrayList findComboNumeroPassagem() {
+        String msg = "";
+        String sql = "SELECT numeropassagem FROM passagem ORDER BY 1 DESC";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        lista = new ArrayList();
+        try {
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return lista;
+    }// fim método findComboNumeroPassagem
+
+    public ArrayList findComboGenericoPassagem(String campo) {
+        String msg = "";
+        String sql = "SELECT " + campo + " FROM passagem ORDER BY 1 DESC";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        lista = new ArrayList();
+        try {
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return lista;
+    }// fim método findComboNumeroPassagem
 
 }//fim Classe PassagemDAO 

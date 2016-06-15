@@ -10,6 +10,7 @@ package Control;
  */
 
 
+import java.util.ArrayList;
 import model.Passagem;
 import model.PassagemDAO;
 
@@ -85,5 +86,17 @@ public class PassagemCtrl {
         return resposta = passagemDAO.buscarValorPassagemVoo();
     }
     
+    public ArrayList populaComboNumeroPassagem(){
+        ArrayList lista;
+        PassagemDAO passagemDAO = new PassagemDAO();
+        return lista = passagemDAO.findComboNumeroPassagem();
+    }
     
+    public ArrayList populaComboGenerico(String campo){
+        ArrayList lista;
+        PassagemDAO passagemDAO = new PassagemDAO();
+        return lista = passagemDAO.findComboGenericoPassagem(campo);
+    }
+
+        
 }
