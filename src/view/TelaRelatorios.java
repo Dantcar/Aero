@@ -17,7 +17,7 @@ import java.util.Iterator;
  * @author deciodecarvalho
  */
 public class TelaRelatorios extends javax.swing.JInternalFrame {
-
+    public static String numeroPassagem;
     /**
      * Creates new form TelaRelatorios
      */
@@ -25,9 +25,9 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
         initComponents();
     //populaJComboBox();
         populaJComboBoxGenerico("numeropassagem", 1);        
-        populaJComboBoxGenerico("datapassagem", 2);
-        populaJComboBoxGenerico("nomepassageiro", 3);
-        populaJComboBoxGenerico("rgpassageiro", 4);
+       // populaJComboBoxGenerico("datapassagem", 2);
+       // populaJComboBoxGenerico("nomepassageiro", 3);
+       // populaJComboBoxGenerico("rgpassageiro", 4);
         cbxNumeroPassagem.setSelectedIndex(-1);
        // cbxDataPassagem.setSelectedIndex(-1);
        // cbxNomePassageiro.setSelectedIndex(-1);
@@ -336,12 +336,14 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairPassagemActionPerformed
 
     private void btnListarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassagemActionPerformed
+       numeroPassagem = cbxNumeroPassagem.getSelectedItem().toString();
        PassagemCtrl cPassagem = new PassagemCtrl();
        FrameListaPassagem flp;
-       flp = new FrameListaPassagem(cPassagem.listarPassagens());
-       
+      // flp = new FrameListaPassagem(cPassagem.listarPassagens());
+       flp = new FrameListaPassagem(cPassagem.listarPassagemNumero(numeroPassagem));
+      
        flp.setVisible(true);
-       
+       flp.setLocation(120, 100);
        
        /* ClienteCtrl controller = new ClienteCtrl();
         try {

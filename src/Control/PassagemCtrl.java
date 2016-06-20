@@ -109,4 +109,9 @@ public class PassagemCtrl {
         List<Passagem> lista = passDAO.listarPassagens();
         return lista;
     }
+     public List<Passagem> listarPassagemNumero(String numero) {
+        PassagemDAO passDAO = new PassagemDAO();
+        List<Passagem> lista = passDAO.listarPassagem(numero);
+        return lista;
+    }
 }
