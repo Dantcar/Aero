@@ -27,7 +27,7 @@ public class FrameListaPassagem extends javax.swing.JFrame {
     public FrameListaPassagem(List<Passagem> lista) {
         initComponents();
         carregarLista(lista);
-        setLocation(100,100);
+       
         
     }
     
