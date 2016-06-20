@@ -17,20 +17,21 @@ import java.util.Iterator;
  * @author deciodecarvalho
  */
 public class TelaRelatorios extends javax.swing.JInternalFrame {
-    public static String numeroPassagem;
+    public static String numeroPassagem, nomePassageiro;
     /**
      * Creates new form TelaRelatorios
      */
     public TelaRelatorios() {
         initComponents();
     //populaJComboBox();
-        populaJComboBoxGenerico("numeropassagem", 1);        
+        populaJComboBoxGenerico("numeropassagem", 1);
+        populaJComboBoxNome();
        // populaJComboBoxGenerico("datapassagem", 2);
        // populaJComboBoxGenerico("nomepassageiro", 3);
        // populaJComboBoxGenerico("rgpassageiro", 4);
         cbxNumeroPassagem.setSelectedIndex(-1);
        // cbxDataPassagem.setSelectedIndex(-1);
-       // cbxNomePassageiro.setSelectedIndex(-1);
+        cbxNomePassageiro.setSelectedIndex(-1);
        // cbxRgPassageiroPassagem.setSelectedIndex(-1);
     
     
@@ -45,6 +46,16 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
             cbxNumeroPassagem.addItem(String.valueOf(i.next()));
         }
     }
+    
+    public void populaJComboBoxNome() {
+        PassagemCtrl cPassagem = new PassagemCtrl();
+        cbxNomePassageiro.removeAllItems(); //remove os itens atuais do comboBox.
+        ArrayList lista = cPassagem.populaComboNomePassagem(); //retorna os numeros de passagem do banco.
+        Iterator i = lista.iterator();
+        while (i.hasNext()) {
+            cbxNomePassageiro.addItem(String.valueOf(i.next()));
+        }
+    }
     private void populaJComboBoxGenerico(String campo, int item) {
         PassagemCtrl cPassagem = new PassagemCtrl();
         if (item == 1){
@@ -54,7 +65,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     //       cbxDataPassagem.removeAllItems(); 
         }
         else if(item == 3){
-     //      cbxNomePassageiro.removeAllItems(); 
+             cbxNomePassageiro.removeAllItems(); 
         }
         else if(item == 4){
       //     cbxRgPassageiroPassagem.removeAllItems(); 
@@ -70,7 +81,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
          //  cbxDataPassagem.addItem(String.valueOf(i.next()));
             }
             else if(item == 3){
-       //    cbxNomePassageiro.addItem(String.valueOf(i.next()));
+              cbxNomePassageiro.addItem(String.valueOf(i.next()));
             }
             else if(item == 4){
         //   cbxRgPassageiroPassagem.addItem(String.valueOf(i.next()));
@@ -87,7 +98,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
           // cbxDataPassagem.removeAllItems(); 
         }
         else if(item == 3){
-         //  cbxNomePassageiro.removeAllItems(); 
+               cbxNomePassageiro.removeAllItems(); 
         }
         else if(item == 4){
           // cbxRgPassageiroPassagem.removeAllItems(); 
@@ -103,7 +114,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
           // cbxDataPassagem.addItem(String.valueOf(i.next()));
             }
             else if(item == 3){
-          // cbxNomePassageiro.addItem(String.valueOf(i.next()));
+           cbxNomePassageiro.addItem(String.valueOf(i.next()));
             }
             else if(item == 4){
           // cbxRgPassageiroPassagem.addItem(String.valueOf(i.next()));
@@ -120,9 +131,11 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
         lblNumeroPassagem = new javax.swing.JLabel();
         cbxNumeroPassagem = new javax.swing.JComboBox();
         btnListarPassagem = new javax.swing.JButton();
+        btnListarPassagemTodas = new javax.swing.JButton();
+        lblNomePassageiroRelatorio = new javax.swing.JLabel();
+        cbxNomePassageiro = new javax.swing.JComboBox();
+        btnListarPassagemNome = new javax.swing.JButton();
         PanelPassagemBotoes = new javax.swing.JPanel();
-        btnImprimirRelatorioPassagem = new javax.swing.JButton();
-        btnPesquisarPassagem = new javax.swing.JButton();
         btnLimparPassagem = new javax.swing.JButton();
         btnSairPassagem = new javax.swing.JButton();
 
@@ -173,10 +186,37 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
         });
 
         btnListarPassagem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarPassagem.setText("Listar Passagem");
+        btnListarPassagem.setText("Mostrar Passagem");
         btnListarPassagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarPassagemActionPerformed(evt);
+            }
+        });
+
+        btnListarPassagemTodas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnListarPassagemTodas.setText("Listar todas Passagens");
+        btnListarPassagemTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPassagemTodasActionPerformed(evt);
+            }
+        });
+
+        lblNomePassageiroRelatorio.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblNomePassageiroRelatorio.setForeground(new java.awt.Color(102, 102, 102));
+        lblNomePassageiroRelatorio.setText("Nome Passageiro : ");
+
+        cbxNomePassageiro.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
+        cbxNomePassageiro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxNomePassageiroItemStateChanged(evt);
+            }
+        });
+
+        btnListarPassagemNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnListarPassagemNome.setText("Mostrar Passagem");
+        btnListarPassagemNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPassagemNomeActionPerformed(evt);
             }
         });
 
@@ -186,11 +226,21 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
             PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPassageiroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNumeroPassagem)
-                .addGap(18, 18, 18)
-                .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnListarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
+                        .addComponent(lblNumeroPassagem)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnListarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
+                        .addComponent(lblNomePassageiroRelatorio)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnListarPassagemNome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
+                .addComponent(btnListarPassagemTodas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelPassageiroLayout.setVerticalGroup(
@@ -198,43 +248,23 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
             .addGroup(PainelPassageiroLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnListarPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                        .addComponent(lblNumeroPassagem)))
-                .addGap(137, 137, 137))
+                        .addComponent(btnListarPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnListarPassagemTodas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
+                        .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxNumeroPassagem)
+                            .addComponent(lblNumeroPassagem))
+                        .addGap(2, 2, 2)))
+                .addGap(40, 40, 40)
+                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomePassageiroRelatorio)
+                    .addComponent(btnListarPassagemNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
         );
 
         PanelPassagemBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        btnImprimirRelatorioPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnImprimirRelatorioPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnImprimirRelatorioPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen_1.png"))); // NOI18N
-        btnImprimirRelatorioPassagem.setText("Imprimir");
-        btnImprimirRelatorioPassagem.setToolTipText("Salvar Alterações");
-        btnImprimirRelatorioPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnImprimirRelatorioPassagem.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnImprimirRelatorioPassagem.setIconTextGap(2);
-        btnImprimirRelatorioPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnImprimirRelatorioPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnImprimirRelatorioPassagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirRelatorioPassagemActionPerformed(evt);
-            }
-        });
-
-        btnPesquisarPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnPesquisarPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnPesquisarPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/lupaVermelha 40x40.png"))); // NOI18N
-        btnPesquisarPassagem.setText("Pesquisar");
-        btnPesquisarPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnPesquisarPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnPesquisarPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnPesquisarPassagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarPassagemActionPerformed(evt);
-            }
-        });
 
         btnLimparPassagem.setBackground(new java.awt.Color(204, 204, 204));
         btnLimparPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -268,20 +298,14 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPassagemBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnImprimirRelatorioPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 552, Short.MAX_VALUE)
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
         PanelPassagemBotoesLayout.setVerticalGroup(
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnImprimirRelatorioPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPesquisarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -309,7 +333,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
                 .addComponent(PainelPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -318,14 +342,6 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     private void cbxNumeroPassagemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNumeroPassagemItemStateChanged
 
     }//GEN-LAST:event_cbxNumeroPassagemItemStateChanged
-
-    private void btnImprimirRelatorioPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioPassagemActionPerformed
-
-    }//GEN-LAST:event_btnImprimirRelatorioPassagemActionPerformed
-
-    private void btnPesquisarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPassagemActionPerformed
-
-    }//GEN-LAST:event_btnPesquisarPassagemActionPerformed
 
     private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
 
@@ -345,29 +361,51 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
        flp.setVisible(true);
        flp.setLocation(120, 100);
        
-       /* ClienteCtrl controller = new ClienteCtrl();
-        try {
-            FrameLista fm = new FrameLista(controller.listar());
-            fm.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-      
+           
     }//GEN-LAST:event_btnListarPassagemActionPerformed
+
+    private void btnListarPassagemTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassagemTodasActionPerformed
+       // numeroPassagem = cbxNumeroPassagem.getSelectedItem().toString();
+       PassagemCtrl cPassagem = new PassagemCtrl();
+       FrameListaPassagem flp;
+      // flp = new FrameListaPassagem(cPassagem.listarPassagens());
+       flp = new FrameListaPassagem(cPassagem.listarPassagens());
+      
+       flp.setVisible(true);
+       flp.setLocation(120, 100);
+    }//GEN-LAST:event_btnListarPassagemTodasActionPerformed
+
+    private void cbxNomePassageiroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNomePassageiroItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxNomePassageiroItemStateChanged
+
+    private void btnListarPassagemNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassagemNomeActionPerformed
+       nomePassageiro = cbxNomePassageiro.getSelectedItem().toString();
+        // numeroPassagem = cbxNumeroPassagem.getSelectedItem().toString();
+       PassagemCtrl cPassagem = new PassagemCtrl();
+       FrameListaPassagem flp;
+      // flp = new FrameListaPassagem(cPassagem.listarPassagens());
+       flp = new FrameListaPassagem(cPassagem.listarPassagemNome(nomePassageiro));
+      
+       flp.setVisible(true);
+       flp.setLocation(120, 100); 
+        
+        
+    }//GEN-LAST:event_btnListarPassagemNomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelPassageiro;
     private javax.swing.JPanel PainelPassagemTitulo;
     private javax.swing.JPanel PanelPassagemBotoes;
-    private javax.swing.JButton btnImprimirRelatorioPassagem;
     private javax.swing.JButton btnLimparPassagem;
     private javax.swing.JButton btnListarPassagem;
-    private javax.swing.JButton btnPesquisarPassagem;
+    private javax.swing.JButton btnListarPassagemNome;
+    private javax.swing.JButton btnListarPassagemTodas;
     private javax.swing.JButton btnSairPassagem;
+    private javax.swing.JComboBox cbxNomePassageiro;
     private javax.swing.JComboBox cbxNumeroPassagem;
+    private javax.swing.JLabel lblNomePassageiroRelatorio;
     private javax.swing.JLabel lblNumeroPassagem;
     private javax.swing.JLabel lblTelaPassagem;
     private javax.swing.JLabel lblTituloTelaPassagem;

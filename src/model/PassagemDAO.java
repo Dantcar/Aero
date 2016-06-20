@@ -650,14 +650,21 @@ public class PassagemDAO {
         }
         try {
             while (rs.next()) {
-                Passagem passagem = new Passagem();
+                 Passagem passagem = new Passagem();
+                passagem.setCiaAerea(rs.getString("ciaaerea"));
+                passagem.setDataPassagem(rs.getString("datapassagem"));
                 passagem.setNumeroPassagem(rs.getString("numeropassagem"));
+                passagem.setClasse(rs.getString("classe"));
+                passagem.setAssentoNumero(rs.getString("assentonumero"));
+                passagem.setPartidaPortao(rs.getString("partidaportao"));
                 passagem.setNomePassageiro(rs.getString("nomepassageiro"));
+                passagem.setRgPassageiro(rs.getString("rgpassageiro"));
+                passagem.setVooNumero(rs.getString("voonumero"));
                 passagem.setPartidaData(rs.getString("partidadata"));
                 passagem.setPartidaHora(rs.getString("partidahora"));
                 passagem.setPartidaAeroporto(rs.getString("partidaaeroporto"));
                 passagem.setChegadaAeroporto(rs.getString("chegadaaeroporto"));
-
+                passagem.setReserva(rs.getString("reserva"));
                 //adiciona objeto cliente a listaCliente
                 listaPassagem.add(passagem);
             }
@@ -707,14 +714,20 @@ public class PassagemDAO {
         try {
             while (rs.next()) {
                 Passagem passagem = new Passagem();
+                passagem.setCiaAerea(rs.getString("ciaaerea"));
+                passagem.setDataPassagem(rs.getString("datapassagem"));
                 passagem.setNumeroPassagem(rs.getString("numeropassagem"));
+                passagem.setClasse(rs.getString("classe"));
+                passagem.setAssentoNumero(rs.getString("assentonumero"));
+                passagem.setPartidaPortao(rs.getString("partidaportao"));
                 passagem.setNomePassageiro(rs.getString("nomepassageiro"));
                 passagem.setRgPassageiro(rs.getString("rgpassageiro"));
+                passagem.setVooNumero(rs.getString("voonumero"));
                 passagem.setPartidaData(rs.getString("partidadata"));
                 passagem.setPartidaHora(rs.getString("partidahora"));
                 passagem.setPartidaAeroporto(rs.getString("partidaaeroporto"));
                 passagem.setChegadaAeroporto(rs.getString("chegadaaeroporto"));
-
+                passagem.setReserva(rs.getString("reserva"));
                 //adiciona objeto cliente a listaCliente
                 listaPassagem.add(passagem);
             }
@@ -730,6 +743,116 @@ public class PassagemDAO {
             JOptionPane.showMessageDialog(null, msg);
         }    
      return listaPassagem;   
+    }
+    
+    public List<Passagem> listarPassagemNome(String nome) {
+        //int numPassagem = parseInt(numero);
+        List<Passagem> listaPassagem = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM passagem WHERE nomepassageiro LIKE "+"'"+nome+"'";
+        System.out.println(sql);
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+                Passagem passagem = new Passagem();
+                passagem.setCiaAerea(rs.getString("ciaaerea"));
+                passagem.setDataPassagem(rs.getString("datapassagem"));
+                passagem.setNumeroPassagem(rs.getString("numeropassagem"));
+                passagem.setClasse(rs.getString("classe"));
+                passagem.setAssentoNumero(rs.getString("assentonumero"));
+                passagem.setPartidaPortao(rs.getString("partidaportao"));
+                passagem.setNomePassageiro(rs.getString("nomepassageiro"));
+                passagem.setRgPassageiro(rs.getString("rgpassageiro"));
+                passagem.setVooNumero(rs.getString("voonumero"));
+                passagem.setPartidaData(rs.getString("partidadata"));
+                passagem.setPartidaHora(rs.getString("partidahora"));
+                passagem.setPartidaAeroporto(rs.getString("partidaaeroporto"));
+                passagem.setChegadaAeroporto(rs.getString("chegadaaeroporto"));
+                passagem.setReserva(rs.getString("reserva"));
+                //adiciona objeto cliente a listaCliente
+                listaPassagem.add(passagem);
+            }
+           
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }    
+     return listaPassagem;   
+    }
+
+    public ArrayList findComboNomePassageiro() {
+         String msg = "";
+        String sql = "SELECT nomepassageiro FROM passagem ORDER BY 1 DESC";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        lista = new ArrayList();
+        try {
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return lista;
+        
     }
 
 }//fim Classe PassagemDAO 

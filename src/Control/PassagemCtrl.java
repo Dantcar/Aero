@@ -114,4 +114,17 @@ public class PassagemCtrl {
         List<Passagem> lista = passDAO.listarPassagem(numero);
         return lista;
     }
+      public List<Passagem> listarPassagemNome(String nome) {
+        PassagemDAO passDAO = new PassagemDAO();
+        List<Passagem> lista = passDAO.listarPassagemNome(nome);
+        return lista;
+    }
+
+    public ArrayList populaComboNomePassagem() {
+       ArrayList lista;
+        PassagemDAO passagemDAO = new PassagemDAO();
+        return lista = passagemDAO.findComboNomePassageiro();
+        
+        
+    }
 }
