@@ -8,7 +8,22 @@
  */
 package view;
 
+import static Control.Util.reduzString;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Passagem;
 
 /**
@@ -36,15 +51,15 @@ public class FrameListaPassagem extends javax.swing.JFrame {
        String newline = System.getProperty("line.separator");
        String resultado = "";
        for (Passagem p : listaPassagens){
-         resultado +="\n\n\t\t\tPASSAGEM AÉREA \n"
-         +"\n\tEmpresa Aérea: " + p.getCiaAerea()+"\n"
-         +"\n\tPassagem Número:  " + p.getNumeroPassagem()+ "\t\tAdquirida em: "+ p.getDataPassagem() + "\n"
-         +"\n\tClasse : " + p.getClasse() + "\tNúmero Assento: "+ p.getAssentoNumero() + "\n"
-         +"\n\tPassageiro: "+ p.getNomePassageiro() + "\tRG: "+ p.getRgPassageiro()+"\n"
-         +"\n\tData Voo: "+p.getPartidaData() + "\tHora Voo: "+ p.getPartidaHora() +"\tEmbarque pelo Portão: "+ p.getPartidaPortao()+"\n"
-         +"\n\t Voo número: "+ p.getVooNumero() + "\n"
-         +"\n\tAeroporto Partida: " + p.getPartidaAeroporto()+"\n"
-         +"\n\tAeroporto Destino: " + p.getChegadaAeroporto()+"\n"
+         resultado +="\n\n\t\t\t PASSAGEM AÉREA \n"
+         +"\n\tEmpresa Aérea: " + p.getCiaAerea()
+         +"\n\tPassagem Número:  " + p.getNumeroPassagem()+ "\t\t Adquirida em: "+ p.getDataPassagem() + "\n"
+         +"\n\tClasse : " + p.getClasse() + "\t Número Assento: "+ p.getAssentoNumero()+"\n"
+         +"\n\tPassageiro: "+ p.getNomePassageiro() + "\t RG: "+ p.getRgPassageiro()+"\n"
+         +"\n\tData Voo: "+p.getPartidaData() + "\t Hora Voo: "+ p.getPartidaHora() +"\t Embarque pelo Portão: "+ p.getPartidaPortao()+"\n"
+         +"\n\t Voo número: "+ p.getVooNumero()
+         +"\n\tAeroporto Partida: " + p.getPartidaAeroporto()
+         +"\n\tAeroporto Destino: " + p.getChegadaAeroporto()
          +"\n\tStatus desta passagem: "+ p.getReserva() + "\n";
          resultado += newline;
        }
@@ -155,7 +170,44 @@ public class FrameListaPassagem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairPassagemRelatorioActionPerformed
 
     private void btnImprimirRelatorioPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioPassagemActionPerformed
-
+       //criamos um documento vazio
+       String msg ="";
+       String tituloMsg = "Relatório PDF";
+       String passagemTexto = txtPassagem.getText();
+        Document documento = new Document();
+        
+        try {
+            //criar o documento no diretório do projeto Netbeans AeroFast
+            PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFast.pdf"));
+            
+            //abrir o documento criado.
+            documento.open();
+            
+            //ajustar o tamanho da pagina
+            documento.setPageSize(PageSize.A4);
+            
+            //Adicionar um paragrafo
+            documento.add(new Paragraph(passagemTexto));
+        
+        } catch (DocumentException | FileNotFoundException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(FrameListaPassagem.class.getName()).log(Level.SEVERE, null, ex);
+       
+        }finally{
+            documento.close();
+            
+            if (!"".equals(msg)){
+                JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+                msg="";
+            }else
+            {
+                msg = "Relatório criado em PDF com sucesso";
+                JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+                msg="";
+            }
+        }
+        
     }//GEN-LAST:event_btnImprimirRelatorioPassagemActionPerformed
 
     /**
