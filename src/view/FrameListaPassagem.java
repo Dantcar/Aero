@@ -40,10 +40,11 @@ public class FrameListaPassagem extends javax.swing.JFrame {
      * Creates new form FrameListaPassagem
      */
     public FrameListaPassagem(List<Passagem> lista) {
+        String title="Relatórios Passagens Aéreas - Aerofast";
         initComponents();
-        setLocation(50,50);
-        carregarLista(lista);
-       
+        this.setLocation(50,50);
+        this.carregarLista(lista);
+        this.setTitle(title);
         
     }
     
@@ -95,8 +96,8 @@ public class FrameListaPassagem extends javax.swing.JFrame {
 
         btnImprimirRelatorioPassagem.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnImprimirRelatorioPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ticarGreen_1.png"))); // NOI18N
-        btnImprimirRelatorioPassagem.setText("Imprimir");
+        btnImprimirRelatorioPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
+        btnImprimirRelatorioPassagem.setText("Imprimir em PDF");
         btnImprimirRelatorioPassagem.setToolTipText("Salvar Alterações");
         btnImprimirRelatorioPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnImprimirRelatorioPassagem.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

@@ -344,7 +344,10 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxNumeroPassagemItemStateChanged
 
     private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
-
+         cbxNumeroPassagem.setSelectedIndex(-1);
+       // cbxDataPassagem.setSelectedIndex(-1);
+        cbxNomePassageiro.setSelectedIndex(-1);
+       // cbxRgPassageiroPassagem.setSelectedIndex(-1);
     }//GEN-LAST:event_btnLimparPassagemActionPerformed
 
     private void btnSairPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassagemActionPerformed
@@ -352,6 +355,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairPassagemActionPerformed
 
     private void btnListarPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassagemActionPerformed
+       String title="Relatórios Passagem - Aerofast";
        numeroPassagem = cbxNumeroPassagem.getSelectedItem().toString();
        PassagemCtrl cPassagem = new PassagemCtrl();
        FrameListaPassagem flp;
@@ -359,6 +363,7 @@ public class TelaRelatorios extends javax.swing.JInternalFrame {
        flp = new FrameListaPassagem(cPassagem.listarPassagemNumero(numeroPassagem));
       
        flp.setVisible(true);
+       flp.setTitle(title);
        flp.setLocation(120, 100);
        
            
