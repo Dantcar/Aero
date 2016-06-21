@@ -53,15 +53,18 @@ public class FrameListaPassagem extends javax.swing.JFrame {
        String resultado = "";
        for (Passagem p : listaPassagens){
          resultado +="\n\n\t\t\t PASSAGEM AÉREA \n"
+         +"\n\tStatus Passagem: "+ p.getReserva() + "\n"
          +"\n\tEmpresa Aérea: " + p.getCiaAerea()
          +"\n\tPassagem Número:  " + p.getNumeroPassagem()+ "\t\t Adquirida em: "+ p.getDataPassagem() + "\n"
          +"\n\tClasse : " + p.getClasse() + "\t Número Assento: "+ p.getAssentoNumero()+"\n"
          +"\n\tPassageiro: "+ p.getNomePassageiro() + "\t RG: "+ p.getRgPassageiro()+"\n"
-         +"\n\tData Voo: "+p.getPartidaData() + "\t Hora Voo: "+ p.getPartidaHora() +"\t Embarque pelo Portão: "+ p.getPartidaPortao()+"\n"
-         +"\n\t Voo número: "+ p.getVooNumero()
-         +"\n\tAeroporto Partida: " + p.getPartidaAeroporto()
-         +"\n\tAeroporto Destino: " + p.getChegadaAeroporto()
-         +"\n\tStatus desta passagem: "+ p.getReserva() + "\n";
+         +"\n\tVoo número: "+ p.getVooNumero()
+         +"\n\tData Voo: "+p.getPartidaData() + "\t Hora Voo: "+ p.getPartidaHora() 
+         +"\n\tEmbarque pelo Portão: " + p.getPartidaPortao()+"\n"
+         +"\n\tAeroporto Partida:"
+         +"\n\t" + p.getPartidaAeroporto()
+         +"\n\tAeroporto Destino"
+         +"\n\t" + p.getChegadaAeroporto();
          resultado += newline;
        }
        txtPassagem.setText(resultado);
@@ -137,15 +140,17 @@ public class FrameListaPassagem extends javax.swing.JFrame {
         );
         PainelRelatoriosPassagemLayout.setVerticalGroup(
             PainelRelatoriosPassagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelatoriosPassagemLayout.createSequentialGroup()
+            .addGroup(PainelRelatoriosPassagemLayout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
-                .addGroup(PainelRelatoriosPassagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(PainelRelatoriosPassagemLayout.createSequentialGroup()
+                .addGroup(PainelRelatoriosPassagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelatoriosPassagemLayout.createSequentialGroup()
                         .addComponent(btnSairPassagemRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnImprimirRelatorioPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                        .addGap(195, 195, 195)
+                        .addComponent(btnImprimirRelatorioPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelatoriosPassagemLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,13 +159,11 @@ public class FrameListaPassagem extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PainelRelatoriosPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PainelRelatoriosPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+            .addComponent(PainelRelatoriosPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
