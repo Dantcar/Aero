@@ -169,7 +169,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
 
         try {
             //criar o documento no diretório do projeto Netbeans AeroFast
-            PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFast.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFastClientes.pdf"));
 
             //abrir o documento criado.
             documento.open();
