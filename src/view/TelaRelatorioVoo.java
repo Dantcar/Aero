@@ -106,6 +106,7 @@ public static String numeroVoo;
 
         btnListarVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarVoo.setText("Mostrar Voo");
+        btnListarVoo.setEnabled(false);
         btnListarVoo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarVooActionPerformed(evt);

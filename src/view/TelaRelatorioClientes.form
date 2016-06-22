@@ -284,6 +284,7 @@
               <Font name="Arial" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Listar todos Clientes"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarClientesTodosActionPerformed"/>
