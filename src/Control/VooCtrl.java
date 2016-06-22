@@ -9,6 +9,8 @@
 package Control;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Voo;
 import model.VooDAO;
 
@@ -49,6 +51,18 @@ public class VooCtrl {
     public static int receberNumeroVoo(){
         VooDAO vooDAO = new VooDAO();
         return vooDAO.buscarNumeroVoo();
+    }
+    
+    public ArrayList populaComboVooNumero(){
+        ArrayList lista;
+        VooDAO vooDAO = new VooDAO();
+        return lista = vooDAO.listarVooNumero();
+    }
+    
+    public List<Voo> listaVoo(){
+        VooDAO vooDAO = new VooDAO();
+        List<Voo> lista = vooDAO.listarVoos();
+        return lista;
     }
       
   

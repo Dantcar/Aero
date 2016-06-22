@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -390,5 +392,183 @@ public class ClienteDAO {
         }
         
     }//fim deletar cliente
+     
+    /**
+     * Método para listar cliente para utilizar no relatório
+     * @return 
+     */
+    public ArrayList findComboClienteNome() {
+      String msg="";
+      String sql = "SELECT nome FROM cliente ORDER BY 1 ASC";
+      conexao = DBAeroFast.getConnection();
+      ResultSet rs;
+      rs = null;
+      
+      ArrayList lista;
+      lista = null;
+      
+     try {
+         stmt = conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+    
+     try {
+         rs = stmt.executeQuery(sql);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     
+     lista = new ArrayList();
+     
+     try {
+         while (rs.next()) {
+             lista.add(rs.getString(1));
+         }
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return lista;
+    
+    }// fim método findComboClienteNome
+    
+    /**
+     * Método para listar clientes para o relatórios
+     * @return 
+     */
+    public List<Cliente> listarClientes() {
+        
+        List<Cliente> listaClientesNome = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM cliente ORDER BY 1 ASC";
+        System.out.println(sql);
+                
+     try {
+         stmt = conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+     try {  
+         rs = stmt.executeQuery(sql);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     
+     try {
+         while (rs.next()) {
+          Cliente cl = new Cliente();
+          cl.setIdCliente(rs.getString("idcliente"));
+          cl.setNome(rs.getString("nome"));
+          cl.setNascimento(rs.getString("nascimento"));
+          cl.setEndereco(rs.getString("endereco"));
+          cl.setNumero(rs.getString("numero"));
+          cl.setBairro(rs.getString("bairro"));
+          cl.setCidade(rs.getString("cidade"));
+          cl.setUf(rs.getString("uf"));
+          cl.setCep(rs.getString("cep"));
+          cl.setEmail(rs.getString("email"));
+          cl.setTelefone(rs.getString("telefone"));
+          cl.setRg(rs.getString("rg"));
+          cl.setCpf(rs.getString("cpf"));
+          listaClientesNome.add(cl);
+             
+         }
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return listaClientesNome;
+    }//Fim método listarClientes()
+    
+    /**
+     * Método para listar cliente pelo nome para utilizar nos relatórios
+     * @param nomeCliente
+     * @return 
+     */
+    public List<Cliente> listarClienteNome(String nomeCliente) {
+        List <Cliente> listaCliente = new ArrayList<>();
+        
+        String msg = "";
+        String sql = "SELECT * FROM cliente WHERE nome LIKE "+"'"+nomeCliente+"'";
+        System.out.println(sql);
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+        
+     try {
+         stmt = conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+     try {
+         rs = stmt.executeQuery(sql);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     
+     try {
+         while (rs.next()) {
+             Cliente cl = new Cliente();
+             cl.setIdCliente(rs.getString("idcliente"));
+             cl.setNome(rs.getString("nome"));
+             cl.setNascimento(rs.getString("nascimento"));
+             cl.setEndereco(rs.getString("endereco"));
+             cl.setNumero(rs.getString("numero"));
+             cl.setBairro(rs.getString("bairro"));
+             cl.setCidade(rs.getString("cidade"));
+             cl.setUf(rs.getString("uf"));
+             cl.setCep(rs.getString("cep"));
+             cl.setEmail(rs.getString("email"));
+             cl.setTelefone(rs.getString("telefone"));
+             cl.setRg(rs.getString("rg"));
+             cl.setCpf(rs.getString("cpf"));
+             listaCliente.add(cl);
+             
+         }
+     } catch (SQLException ex) {
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return listaCliente;
+    }
+    
+    
     
 } // final da classe ClienteDAO

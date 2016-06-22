@@ -24,31 +24,52 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Cliente;
+import model.Voo;
+
 
 /**
  *
  * @author deciocarvalho
  */
-public class FrameListaClientes extends javax.swing.JFrame {
+public class FrameListaVoos extends javax.swing.JFrame {
 
-    public FrameListaClientes() {
-    
-    }
-
-    
-        
     /**
-     * Creates new form NovoJFrame
+     * Creates new form FrameListaVoos
      */
-    public FrameListaClientes(List<Cliente> lista) {
-        String title="Relatórios Clientes";
+    public FrameListaVoos() {
+        initComponents();
+    }
+    
+    public FrameListaVoos(List<Voo> lista) {
+        String title="Relatórios Voo";
         initComponents();
         this.setLocation(50,50);
-        this.carregarListaCliente(lista);
+        this.carregarListaVoo(lista);
         this.setTitle(title);
         
+    }//Fim construtor list
+    
+    private void carregarListaVoo(List<Voo> ListaVoos){
+      String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
+      String resultado = "";
+      
+      for (Voo v : ListaVoos){
+          resultado +=""
+        +"\n\tNumero Voo: "+ v.getNumeroVoo()+"\n"
+        +"\n\tCompanhia Aérea: "+ v.getCiaAerea()+ "\n"
+        +"\n\tPrefixo: "+ v.getPrefixoAeronaveVoo()+ "\n"
+                  
+                  
+                  
+        ;
+        resultado +=newline;  
+      }
+      resultado="\n\n\t\t\t RELATÓRIOS VOOS\n"+resultado;
+      txtVoo.setText(resultado);
+      
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,49 +80,49 @@ public class FrameListaClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSairVooRelatorio = new javax.swing.JButton();
+        btnImprimirRelatorioVoo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtCliente = new javax.swing.JTextArea();
-        btnImprimirRelatorioCliente = new javax.swing.JButton();
-        btnSairClienteRelatorio = new javax.swing.JButton();
+        txtVoo = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtCliente.setEditable(false);
-        txtCliente.setBackground(new java.awt.Color(125, 181, 199));
-        txtCliente.setColumns(20);
-        txtCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        txtCliente.setRows(7);
-        txtCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
-        jScrollPane1.setViewportView(txtCliente);
-
-        btnImprimirRelatorioCliente.setBackground(new java.awt.Color(204, 204, 204));
-        btnImprimirRelatorioCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnImprimirRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
-        btnImprimirRelatorioCliente.setText("Imprimir em PDF");
-        btnImprimirRelatorioCliente.setToolTipText("Salvar Alterações");
-        btnImprimirRelatorioCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnImprimirRelatorioCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnImprimirRelatorioCliente.setIconTextGap(2);
-        btnImprimirRelatorioCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnImprimirRelatorioCliente.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnImprimirRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnSairVooRelatorio.setBackground(new java.awt.Color(204, 204, 204));
+        btnSairVooRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSairVooRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
+        btnSairVooRelatorio.setText("Voltar");
+        btnSairVooRelatorio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSairVooRelatorio.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnSairVooRelatorio.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnSairVooRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirRelatorioClienteActionPerformed(evt);
+                btnSairVooRelatorioActionPerformed(evt);
             }
         });
 
-        btnSairClienteRelatorio.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairClienteRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnSairClienteRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
-        btnSairClienteRelatorio.setText("Voltar");
-        btnSairClienteRelatorio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSairClienteRelatorio.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnSairClienteRelatorio.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnSairClienteRelatorio.addActionListener(new java.awt.event.ActionListener() {
+        btnImprimirRelatorioVoo.setBackground(new java.awt.Color(204, 204, 204));
+        btnImprimirRelatorioVoo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnImprimirRelatorioVoo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
+        btnImprimirRelatorioVoo.setText("Imprimir em PDF");
+        btnImprimirRelatorioVoo.setToolTipText("Salvar Alterações");
+        btnImprimirRelatorioVoo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnImprimirRelatorioVoo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnImprimirRelatorioVoo.setIconTextGap(2);
+        btnImprimirRelatorioVoo.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnImprimirRelatorioVoo.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnImprimirRelatorioVoo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairClienteRelatorioActionPerformed(evt);
+                btnImprimirRelatorioVooActionPerformed(evt);
             }
         });
+
+        txtVoo.setEditable(false);
+        txtVoo.setBackground(new java.awt.Color(184, 230, 206));
+        txtVoo.setColumns(20);
+        txtVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtVoo.setRows(7);
+        txtVoo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
+        jScrollPane1.setViewportView(txtVoo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,20 +131,20 @@ public class FrameListaClientes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(btnSairClienteRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSairClienteRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(195, 195, 195)
-                        .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,44 +153,21 @@ public class FrameListaClientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void carregarListaCliente(List<Cliente> ListaClientes){
-      String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
-      String resultado = "";
-      
-      for (Cliente c : ListaClientes){
-          
-          resultado += ""
-          +"\n\tCódigo Cliente: "+c.getIdCliente()+"\n"
-          +"\n\tNome: "+c.getNome()
-          +"\n\tEndereço: "+c.getEndereco().trim()+","+ c.getNumero()
-          +"\n\tBairro: "+c.getBairro().trim() + " - Cep: "+ c.getCep()
-          +"\n\tCidade: "+c.getCidade().trim() + " - UF: "+ c.getUf()
-          +"\n\tEmail: "+c.getEmail().trim()
-          +"\n\tTelefone: "+c.getTelefone()
-          +"\n\t RG: "+c.getRg() + " - CPF: "+c.getCpf();
-          
-          resultado += newline;
 
-      }
-      resultado="\n\n\t\t\t CADASTRO CLIENTES\n"+resultado;
-      txtCliente.setText(resultado);
-      
-        
-    }
-    
-    
-    
-    
-    private void btnImprimirRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioClienteActionPerformed
+    private void btnSairVooRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairVooRelatorioActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairVooRelatorioActionPerformed
+
+    private void btnImprimirRelatorioVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioVooActionPerformed
         //criamos um documento vazio
         String msg ="";
         String tituloMsg = "Relatório PDF";
-        String passagemTexto = txtCliente.getText();
+        String passagemTexto = txtVoo.getText();
         Document documento = new Document();
 
         try {
             //criar o documento no diretório do projeto Netbeans AeroFast
-            PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFast.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream("RelatorioVooAeroFast.pdf"));
 
             //abrir o documento criado.
             documento.open();
@@ -198,12 +196,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
                 msg="";
             }
         }
-
-    }//GEN-LAST:event_btnImprimirRelatorioClienteActionPerformed
-
-    private void btnSairClienteRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairClienteRelatorioActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnSairClienteRelatorioActionPerformed
+    }//GEN-LAST:event_btnImprimirRelatorioVooActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,29 +215,28 @@ public class FrameListaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameListaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameListaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameListaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameListaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameListaClientes().setVisible(true);
+                new FrameListaVoos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnImprimirRelatorioCliente;
-    private javax.swing.JButton btnSairClienteRelatorio;
+    private javax.swing.JButton btnImprimirRelatorioVoo;
+    private javax.swing.JButton btnSairVooRelatorio;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtCliente;
+    private javax.swing.JTextArea txtVoo;
     // End of variables declaration//GEN-END:variables
 }

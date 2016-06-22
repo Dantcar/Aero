@@ -9,6 +9,8 @@
 package Control;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Cliente;
 import model.ClienteDAO;
 
@@ -46,5 +48,26 @@ public class ClienteCtrl {
         ClienteDAO cliDAO = new ClienteDAO();
         cliDAO.deletarCliente(cliente, cpf);
     } 
+
+    public ArrayList populaComboClienteNome() {
+       ArrayList lista;
+       ClienteDAO clienteDAO = new ClienteDAO();
+       return lista = clienteDAO.findComboClienteNome();
+    
+    }
+
+    public List<Cliente> listarClientes() {
+       ClienteDAO clienteDAO = new ClienteDAO();
+       List<Cliente> lista = clienteDAO.listarClientes();
+       return lista;
+    
+    }
+
+    public List<Cliente> listaClientesNome(String nomeCliente) {
+       ClienteDAO clienteDAO = new ClienteDAO();
+       List<Cliente> lista = clienteDAO.listarClienteNome(nomeCliente);
+       return lista;
+    
+    }
         
 }
