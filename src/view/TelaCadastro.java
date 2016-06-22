@@ -314,7 +314,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         String tituloStatus;
         tituloStatus = "Relatórios Passagens";
         
-        TelaRelatorios relPassagem = new TelaRelatorios();
+        TelaRelatorioPassagem relPassagem = new TelaRelatorioPassagem();
         relPassagem.setTitle(tituloStatus);
         relPassagem.setVisible(true);
         add(relPassagem, JLayeredPane.DEFAULT_LAYER);

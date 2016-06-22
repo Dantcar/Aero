@@ -16,12 +16,12 @@ import java.util.Iterator;
  *
  * @author deciodecarvalho
  */
-public class TelaRelatorios extends javax.swing.JInternalFrame {
+public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
     public static String numeroPassagem, nomePassageiro;
     /**
      * Creates new form TelaRelatorios
      */
-    public TelaRelatorios() {
+    public TelaRelatorioPassagem() {
         initComponents();
     //populaJComboBox();
         populaJComboBoxGenerico("numeropassagem", 1);
