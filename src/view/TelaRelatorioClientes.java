@@ -12,32 +12,35 @@ import Control.ClienteCtrl;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 /**
  *
  * @author deciocarvalho
  */
 public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
+
     public static String rgCliente, nomeCliente;
+
     /**
      * Creates new form TelaRelatorioClientes
      */
     public TelaRelatorioClientes() {
         initComponents();
         populaJComboBoxClienteNome();
-    }
-    
- public void populaJComboBoxClienteNome(){
-     ClienteCtrl cCliente = new ClienteCtrl();
-     cbxNomeCliente.removeAllItems(); //remove os itens atuais do comboBox.
-     ArrayList lista = cCliente.populaComboClienteNome(); //retorna os nomes dos clientes do banco.
-     Iterator i = lista.iterator();
-     while (i.hasNext()){
-     cbxNomeCliente.addItem(String.valueOf(i.next()));
-     }
- }
 
- 
+        //Limpar ComboBox
+        cbxNomeCliente.setSelectedIndex(-1);
+    }
+
+    public void populaJComboBoxClienteNome() {
+        ClienteCtrl cCliente = new ClienteCtrl();
+        cbxNomeCliente.removeAllItems(); //remove os itens atuais do comboBox.
+        ArrayList lista = cCliente.populaComboClienteNome(); //retorna os nomes dos clientes do banco.
+        Iterator i = lista.iterator();
+        while (i.hasNext()) {
+            cbxNomeCliente.addItem(String.valueOf(i.next()));
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,7 +232,8 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
-        
+        //Limpar ComboBox
+        cbxNomeCliente.setSelectedIndex(-1);
     }//GEN-LAST:event_btnLimparPassagemActionPerformed
 
     private void btnSairPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassagemActionPerformed
@@ -241,26 +245,25 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxNomeClienteItemStateChanged
 
     private void btnListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClienteActionPerformed
-       nomeCliente = cbxNomeCliente.getSelectedItem().toString();
-       ClienteCtrl cCliente = new ClienteCtrl();
-       FrameListaClientes flc;
-       flc = new FrameListaClientes(cCliente.listaClientesNome(nomeCliente));
-       
-       flc.setVisible(true);
-       flc.setLocation(120, 100);
-       
-        
-        
+        nomeCliente = cbxNomeCliente.getSelectedItem().toString();
+        ClienteCtrl cCliente = new ClienteCtrl();
+        FrameListaClientes flc;
+        flc = new FrameListaClientes(cCliente.listaClientesNome(nomeCliente));
+
+        flc.setVisible(true);
+        flc.setLocation(120, 100);
+
+
     }//GEN-LAST:event_btnListarClienteActionPerformed
 
     private void btnListarClientesTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesTodosActionPerformed
         ClienteCtrl cCliente = new ClienteCtrl();
         FrameListaClientes flc;
         flc = new FrameListaClientes(cCliente.listarClientes());
-        
+
         flc.setVisible(true);
-        flc.setLocation(120, 100);        
-        
+        flc.setLocation(120, 100);
+
     }//GEN-LAST:event_btnListarClientesTodosActionPerformed
 
 

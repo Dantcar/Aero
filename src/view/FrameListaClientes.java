@@ -146,7 +146,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
           +"\n\tCidade: "+c.getCidade().trim() + " - UF: "+ c.getUf()
           +"\n\tEmail: "+c.getEmail().trim()
           +"\n\tTelefone: "+c.getTelefone()
-          +"\n\t RG: "+c.getRg() + " - CPF: "+c.getCpf();
+          +"\n\tRG: "+c.getRg() + " - CPF: "+c.getCpf();
           
           resultado += newline;
 

@@ -24,6 +24,7 @@ public static String numeroVoo;
     public TelaRelatorioVoo() {
         initComponents();
         populaJComboBoxVooNumero();
+        cbxNumeroVoo.setSelectedIndex(-1);
     }
     
     public void populaJComboBoxVooNumero(){
@@ -255,7 +256,8 @@ public static String numeroVoo;
     }//GEN-LAST:event_btnSairVooRelatorioActionPerformed
 
     private void btnLimparVooRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparVooRelatorioActionPerformed
-
+        cbxNumeroVoo.setSelectedIndex(-1);
+        
     }//GEN-LAST:event_btnLimparVooRelatorioActionPerformed
 
 

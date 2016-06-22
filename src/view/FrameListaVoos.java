@@ -55,10 +55,16 @@ public class FrameListaVoos extends javax.swing.JFrame {
       
       for (Voo v : ListaVoos){
           resultado +=""
-        +"\n\tNumero Voo: "+ v.getNumeroVoo()+"\n"
-        +"\n\tCompanhia Aérea: "+ v.getCiaAerea()+ "\n"
-        +"\n\tPrefixo: "+ v.getPrefixoAeronaveVoo()+ "\n"
-                  
+                    +"\n\tNumero Voo: "+ v.getNumeroVoo()+"\n"
+                    +"\n\tCompanhia Aérea: "+ v.getCiaAerea()+ "\n"
+                    +"\n\tPrefixo: "+ v.getPrefixoAeronaveVoo()+ "\n"
+                    +"\tData Voo: "+ v.getDataPartida()+ "\n"
+                    +"\tHora Voo: "+ v.getHoraPartida()+ "\n"
+                    +"\tPartida Aeroporto: "+ v.getAeroportoPartidaSigla().trim() + "- "+ v.getAeroportoPartida().trim() +"\n"
+                    +"\tDestino Aeroporto: "+ v.getAeroportoChegadaSigla().trim() + "- "+ v.getHoraChegada().trim() + "\n"
+                    +"\n\tEscalas: "+ v.getEscalasVoo().trim() +"\n"
+                    +"\tTarifas:    Economica\tEmpresaria\tPrimeira Classe\n"
+                    +"\tValor:   R$ "+v.getTarifaE()+"\tR$ "+v.getTarifaB()+"\tR$ "+v.getTarifaF()+"\n"
                   
                   
         ;
