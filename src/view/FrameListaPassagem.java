@@ -87,7 +87,7 @@ public class FrameListaPassagem extends javax.swing.JFrame {
         btnImprimirRelatorioPassagem = new javax.swing.JButton();
         btnSairPassagemRelatorio = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtPassagem.setEditable(false);
         txtPassagem.setBackground(new java.awt.Color(242, 239, 19));

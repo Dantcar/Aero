@@ -61,11 +61,11 @@ public class FrameListaVoos extends javax.swing.JFrame {
                     +"\tData Voo: "+ v.getDataPartida()+ "\n"
                     +"\tHora Voo: "+ v.getHoraPartida()+ "\n"
                     +"\tPartida Aeroporto: "+ v.getAeroportoPartidaSigla().trim() + "- "+ v.getAeroportoPartida().trim() +"\n"
-                    +"\tDestino Aeroporto: "+ v.getAeroportoChegadaSigla().trim() + "- "+ v.getHoraChegada().trim() + "\n"
+                    +"\tDestino Aeroporto: "+ v.getAeroportoChegadaSigla().trim() + "- "+ v.getAeroportoChegada().trim() + "\n"
                     +"\n\tEscalas: "+ v.getEscalasVoo().trim() +"\n"
-                    +"\tTarifas:    Economica\tEmpresaria\tPrimeira Classe\n"
-                    +"\tValor:   R$ "+v.getTarifaE()+"\tR$ "+v.getTarifaB()+"\tR$ "+v.getTarifaF()+"\n"
-                  
+                    +"\tTarifas:\tEconomica\tEmpresaria\tPrimeira Classe\n"
+                    +"\tValor:  \tR$ "+v.getTarifaE()+"\tR$ "+v.getTarifaB()+"\tR$ "+v.getTarifaF()+"\n"
+                    +"\t------------------------------------------------------------------------------------------------------------------------"
                   
         ;
         resultado +=newline;  
@@ -91,7 +91,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtVoo = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnSairVooRelatorio.setBackground(new java.awt.Color(204, 204, 204));
         btnSairVooRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -122,7 +122,6 @@ public class FrameListaVoos extends javax.swing.JFrame {
             }
         });
 
-        txtVoo.setEditable(false);
         txtVoo.setBackground(new java.awt.Color(184, 230, 206));
         txtVoo.setColumns(20);
         txtVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -167,7 +166,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
     private void btnImprimirRelatorioVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioVooActionPerformed
         //criamos um documento vazio
         String msg ="";
-        String tituloMsg = "Relatório PDF";
+       String tituloMsg = "Relatório PDF";
         String passagemTexto = txtVoo.getText();
         Document documento = new Document();
 
@@ -183,7 +182,8 @@ public class FrameListaVoos extends javax.swing.JFrame {
 
             //Adicionar um paragrafo
             documento.add(new Paragraph(passagemTexto));
-
+            
+            
         } catch (DocumentException | FileNotFoundException ex) {
             msg = msg + ex;
             msg = reduzString(msg);
