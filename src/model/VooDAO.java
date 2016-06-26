@@ -563,7 +563,7 @@ public class VooDAO {
 
     public List<Voo> listarVoos() {
         List<Voo> listaVoos = new ArrayList<>();
-        String msg = "msg";
+        String msg = "";
         String sql = "SELECT * FROM voo ORDER BY 1 ASC";
         System.out.println(sql);
         conexao = DBAeroFast.getConnection();
