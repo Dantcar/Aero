@@ -623,6 +623,7 @@ public class VooDAO {
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
+            msg="";
         }
 
         return listaVoos;

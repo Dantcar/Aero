@@ -64,7 +64,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
         btnImprimirRelatorioCliente = new javax.swing.JButton();
         btnSairClienteRelatorio = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtCliente.setEditable(false);
         txtCliente.setBackground(new java.awt.Color(125, 181, 199));
@@ -169,7 +169,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
 
         try {
             //criar o documento no diretório do projeto Netbeans AeroFast
-            PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFast.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFastClientes.pdf"));
 
             //abrir o documento criado.
             documento.open();

@@ -167,6 +167,7 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
 
         btnListarClientesTodos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarClientesTodos.setText("Listar todos Clientes");
+        btnListarClientesTodos.setEnabled(false);
         btnListarClientesTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarClientesTodosActionPerformed(evt);
