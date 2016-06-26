@@ -63,7 +63,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
                     +"\tPartida Aeroporto: "+ v.getAeroportoPartidaSigla().trim() + "- "+ v.getAeroportoPartida().trim() +"\n"
                     +"\tDestino Aeroporto: "+ v.getAeroportoChegadaSigla().trim() + "- "+ v.getAeroportoChegada().trim() + "\n"
                     +"\n\tEscalas: "+ v.getEscalasVoo().trim() +"\n"
-                    +"\tTarifas:\tEconomica\tEmpresaria\tPrimeira Classe\n"
+                    +"\tTarifas:\tEconomica\tEmpresarial\tPrimeira Classe\n"
                     +"\tValor:  \tR$ "+v.getTarifaE()+"\tR$ "+v.getTarifaB()+"\tR$ "+v.getTarifaF()+"\n"
                     +"\t------------------------------------------------------------------------------------------------------------------------"
                   
