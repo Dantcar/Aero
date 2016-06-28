@@ -455,6 +455,11 @@ public class ClienteDAO {
         String msg = "";
         String sql = "SELECT * FROM cliente ORDER BY 1 ASC";
         System.out.println(sql);
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
                 
      try {
          stmt = conexao.createStatement(
@@ -519,9 +524,7 @@ public class ClienteDAO {
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
-        ArrayList lista;
-        lista = null;
-        
+                
      try {
          stmt = conexao.createStatement(
                  ResultSet.TYPE_SCROLL_INSENSITIVE,

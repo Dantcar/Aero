@@ -27,7 +27,7 @@ public static String numeroVoo;
         cbxNumeroVoo.setSelectedIndex(-1);
     }
     
-    public void populaJComboBoxVooNumero(){
+    private void populaJComboBoxVooNumero(){
      VooCtrl cVoo = new VooCtrl();
      cbxNumeroVoo.removeAllItems(); //remove os itens atuais do comboBox.
      ArrayList lista = cVoo.populaComboVooNumero(); //retorna os nomes dos clientes do banco.
@@ -54,6 +54,7 @@ public static String numeroVoo;
         cbxNumeroVoo = new javax.swing.JComboBox();
         btnListarVoo = new javax.swing.JButton();
         btnListarVoosTodos = new javax.swing.JButton();
+        lblRelatorioVooFundo = new javax.swing.JLabel();
         PanelRelVoosBotoes = new javax.swing.JPanel();
         btnSairVooRelatorio = new javax.swing.JButton();
         btnLimparVooRelatorio = new javax.swing.JButton();
@@ -92,10 +93,13 @@ public static String numeroVoo;
         );
 
         PainelRelOpcoesVoo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PainelRelOpcoesVoo.setLayout(null);
 
         lblNomeVoo.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblNomeVoo.setForeground(new java.awt.Color(102, 102, 102));
         lblNomeVoo.setText("Número Voo: ");
+        PainelRelOpcoesVoo.add(lblNomeVoo);
+        lblNomeVoo.setBounds(10, 30, 84, 17);
 
         cbxNumeroVoo.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         cbxNumeroVoo.addItemListener(new java.awt.event.ItemListener() {
@@ -103,15 +107,18 @@ public static String numeroVoo;
                 cbxNumeroVooItemStateChanged(evt);
             }
         });
+        PainelRelOpcoesVoo.add(cbxNumeroVoo);
+        cbxNumeroVoo.setBounds(100, 30, 275, 21);
 
         btnListarVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarVoo.setText("Mostrar Voo");
-        btnListarVoo.setEnabled(false);
         btnListarVoo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarVooActionPerformed(evt);
             }
         });
+        PainelRelOpcoesVoo.add(btnListarVoo);
+        btnListarVoo.setBounds(10, 90, 142, 23);
 
         btnListarVoosTodos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarVoosTodos.setText("Listar todos Voos");
@@ -120,37 +127,12 @@ public static String numeroVoo;
                 btnListarVoosTodosActionPerformed(evt);
             }
         });
+        PainelRelOpcoesVoo.add(btnListarVoosTodos);
+        btnListarVoosTodos.setBounds(210, 90, 160, 23);
 
-        javax.swing.GroupLayout PainelRelOpcoesVooLayout = new javax.swing.GroupLayout(PainelRelOpcoesVoo);
-        PainelRelOpcoesVoo.setLayout(PainelRelOpcoesVooLayout);
-        PainelRelOpcoesVooLayout.setHorizontalGroup(
-            PainelRelOpcoesVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelRelOpcoesVooLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNomeVoo)
-                .addGap(18, 18, 18)
-                .addComponent(cbxNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnListarVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnListarVoosTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
-        PainelRelOpcoesVooLayout.setVerticalGroup(
-            PainelRelOpcoesVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelRelOpcoesVooLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(PainelRelOpcoesVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PainelRelOpcoesVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnListarVoo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnListarVoosTodos))
-                    .addGroup(PainelRelOpcoesVooLayout.createSequentialGroup()
-                        .addGroup(PainelRelOpcoesVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxNumeroVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNomeVoo))
-                        .addGap(2, 2, 2)))
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
+        lblRelatorioVooFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Airbus A330-200.gif"))); // NOI18N
+        PainelRelOpcoesVoo.add(lblRelatorioVooFundo);
+        lblRelatorioVooFundo.setBounds(380, 0, 495, 350);
 
         PanelRelVoosBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -216,10 +198,9 @@ public static String numeroVoo;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PainelVooRelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelRelOpcoesVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PainelRelOpcoesVoo, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelRelVoosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -235,10 +216,9 @@ public static String numeroVoo;
         numeroVoo = cbxNumeroVoo.getSelectedItem().toString();
         VooCtrl cVoo = new VooCtrl();
         FrameListaVoos flv;
-        flv = new FrameListaVoos(cVoo.listaVoo());
-
+        flv = new FrameListaVoos(cVoo.listaVooNumero(numeroVoo));
         flv.setVisible(true);
-        flv.setLocation(120, 100);
+        flv.setLocation(10, 10);
 
     }//GEN-LAST:event_btnListarVooActionPerformed
 
@@ -248,7 +228,8 @@ public static String numeroVoo;
         flv = new FrameListaVoos(cVoo.listaVoo());
 
         flv.setVisible(true);
-        flv.setLocation(120, 100);
+        flv.setLocation(10, 10);
+        
 
     }//GEN-LAST:event_btnListarVoosTodosActionPerformed
 
@@ -272,6 +253,7 @@ public static String numeroVoo;
     private javax.swing.JButton btnSairVooRelatorio;
     private javax.swing.JComboBox cbxNumeroVoo;
     private javax.swing.JLabel lblNomeVoo;
+    private javax.swing.JLabel lblRelatorioVooFundo;
     private javax.swing.JLabel lblTelaRelatorioVoo;
     private javax.swing.JLabel lblTituloRelatorioVoo;
     // End of variables declaration//GEN-END:variables

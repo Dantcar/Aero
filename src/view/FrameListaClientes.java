@@ -14,11 +14,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.IOException;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -65,6 +62,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
         btnSairClienteRelatorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCliente.setEditable(false);
         txtCliente.setBackground(new java.awt.Color(125, 181, 199));
@@ -73,6 +71,8 @@ public class FrameListaClientes extends javax.swing.JFrame {
         txtCliente.setRows(7);
         txtCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         jScrollPane1.setViewportView(txtCliente);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 32, 791, 308));
 
         btnImprimirRelatorioCliente.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -89,6 +89,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
                 btnImprimirRelatorioClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(btnImprimirRelatorioCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 277, 171, -1));
 
         btnSairClienteRelatorio.setBackground(new java.awt.Color(204, 204, 204));
         btnSairClienteRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -102,33 +103,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
                 btnSairClienteRelatorioActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(btnSairClienteRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSairClienteRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195)
-                        .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
-        );
+        getContentPane().add(btnSairClienteRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 171, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,6 +128,7 @@ public class FrameListaClientes extends javax.swing.JFrame {
       }
       resultado="\n\n\t\t\t CADASTRO CLIENTES\n"+resultado;
       txtCliente.setText(resultado);
+      txtCliente.setEditable(false);
       
         
     }

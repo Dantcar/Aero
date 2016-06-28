@@ -61,6 +61,9 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
         cbxNomeCliente = new javax.swing.JComboBox();
         btnListarCliente = new javax.swing.JButton();
         btnListarClientesTodos = new javax.swing.JButton();
+        lblRelatorioClientesFundo = new javax.swing.JLabel();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PainelRelTituloCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -76,24 +79,23 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
         PainelRelTituloClienteLayout.setHorizontalGroup(
             PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelTituloClienteLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
+                .addGap(90, 90, 90)
                 .addComponent(lblTelaRelatorioCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(89, 89, 89)
                 .addComponent(lblTituloRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         PainelRelTituloClienteLayout.setVerticalGroup(
             PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelTituloClienteLayout.createSequentialGroup()
-                .addGroup(PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PainelRelTituloClienteLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTelaRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelRelTituloClienteLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(lblTituloRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTelaRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        getContentPane().add(PainelRelTituloCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
         PanelRelClientesBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -128,11 +130,11 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
         PanelRelClientesBotoesLayout.setHorizontalGroup(
             PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRelClientesBotoesLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(398, 398, 398)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap())
         );
         PanelRelClientesBotoesLayout.setVerticalGroup(
             PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +145,8 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
                     .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(PanelRelClientesBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 271, -1, -1));
 
         PainelRelOpcoesCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -167,7 +171,6 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
 
         btnListarClientesTodos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarClientesTodos.setText("Listar todos Clientes");
-        btnListarClientesTodos.setEnabled(false);
         btnListarClientesTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarClientesTodosActionPerformed(evt);
@@ -180,54 +183,35 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNomeCliente)
-                .addGap(18, 18, 18)
-                .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
+                        .addComponent(lblNomeCliente)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
+                        .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         PainelRelOpcoesClienteLayout.setVerticalGroup(
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnListarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnListarClientesTodos))
-                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
-                        .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNomeCliente))
-                        .addGap(2, 2, 2)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomeCliente))
+                .addGap(27, 27, 27)
+                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnListarCliente)
+                    .addComponent(btnListarClientesTodos))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelRelClientesBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PainelRelTituloCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelRelOpcoesCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PainelRelTituloCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelRelOpcoesCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelRelClientesBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(PainelRelOpcoesCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+
+        lblRelatorioClientesFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relClientes.jpg"))); // NOI18N
+        getContentPane().add(lblRelatorioClientesFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 250, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -278,6 +262,7 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSairPassagem;
     private javax.swing.JComboBox cbxNomeCliente;
     private javax.swing.JLabel lblNomeCliente;
+    private javax.swing.JLabel lblRelatorioClientesFundo;
     private javax.swing.JLabel lblTelaRelatorioCliente;
     private javax.swing.JLabel lblTituloRelatorioCliente;
     // End of variables declaration//GEN-END:variables

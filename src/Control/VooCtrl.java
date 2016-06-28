@@ -64,6 +64,13 @@ public class VooCtrl {
         List<Voo> lista = vooDAO.listarVoos();
         return lista;
     }
+
+    public List<Voo> listaVooNumero(String numeroVoo) {
+        VooDAO vooDAO = new VooDAO();
+        List<Voo> lista = vooDAO.listarVooNumero(numeroVoo);
+        return lista;
+    
+    }
       
   
 }//Final da Classe VooCtrl

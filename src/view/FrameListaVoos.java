@@ -14,11 +14,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.IOException;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -43,9 +40,10 @@ public class FrameListaVoos extends javax.swing.JFrame {
     public FrameListaVoos(List<Voo> lista) {
         String title="Relatórios Voo";
         initComponents();
-        this.setLocation(50,50);
+        this.setLocation(10,10);
         this.carregarListaVoo(lista);
         this.setTitle(title);
+       
         
     }//Fim construtor list
     
@@ -72,7 +70,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
       }
       resultado="\n\n\t\t\t RELATÓRIOS VOOS\n"+resultado;
       txtVoo.setText(resultado);
-      
+      txtVoo.setEditable(false);
     }
     
     
@@ -90,8 +88,11 @@ public class FrameListaVoos extends javax.swing.JFrame {
         btnImprimirRelatorioVoo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtVoo = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(10, 10));
+        getContentPane().setLayout(null);
 
         btnSairVooRelatorio.setBackground(new java.awt.Color(204, 204, 204));
         btnSairVooRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -105,6 +106,8 @@ public class FrameListaVoos extends javax.swing.JFrame {
                 btnSairVooRelatorioActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSairVooRelatorio);
+        btnSairVooRelatorio.setBounds(890, 330, 171, 50);
 
         btnImprimirRelatorioVoo.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioVoo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -121,6 +124,8 @@ public class FrameListaVoos extends javax.swing.JFrame {
                 btnImprimirRelatorioVooActionPerformed(evt);
             }
         });
+        getContentPane().add(btnImprimirRelatorioVoo);
+        btnImprimirRelatorioVoo.setBounds(270, 330, 171, 50);
 
         txtVoo.setBackground(new java.awt.Color(184, 230, 206));
         txtVoo.setColumns(20);
@@ -129,32 +134,12 @@ public class FrameListaVoos extends javax.swing.JFrame {
         txtVoo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         jScrollPane1.setViewportView(txtVoo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195)
-                        .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
-        );
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(270, 10, 791, 308);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relVoo.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(30, 60, 210, 240);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,8 +151,9 @@ public class FrameListaVoos extends javax.swing.JFrame {
     private void btnImprimirRelatorioVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioVooActionPerformed
         //criamos um documento vazio
         String msg ="";
-       String tituloMsg = "Relatório PDF";
+        String tituloMsg = "Relatório PDF";
         String passagemTexto = txtVoo.getText();
+        
         Document documento = new Document();
 
         try {
@@ -242,6 +228,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImprimirRelatorioVoo;
     private javax.swing.JButton btnSairVooRelatorio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtVoo;
     // End of variables declaration//GEN-END:variables

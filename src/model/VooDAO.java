@@ -623,7 +623,7 @@ public class VooDAO {
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
-            msg="";
+            msg = "";
         }
 
         return listaVoos;
@@ -674,6 +674,74 @@ public class VooDAO {
 
         return lista;
     }//Fil listarVooNumero
+
+    public List<Voo> listarVooNumero(String vooNumero) {
+        List<Voo> listaVoo = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM voo WHERE numerovoo = '" + vooNumero + "'";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+        try {
+            while (rs.next()) {
+                Voo v = new Voo();
+                v.setIdVoo(rs.getString("idvoo"));
+                v.setNumeroVoo(rs.getString("numerovoo"));
+                v.setCiaAerea(rs.getString("ciaaerea"));
+                v.setPrefixoAeronaveVoo(rs.getString("prefixo"));
+                v.setAeroportoPartidaSigla(rs.getString("aeroportopartidasigla"));
+                v.setAeroportoPartida(rs.getString("aeroportopartida"));
+                v.setDataPartida(rs.getString("datapartida"));
+                v.setHoraPartida(rs.getString("horapartida"));
+                v.setPortaoPartida(rs.getString("portaopartida"));
+                v.setAeroportoChegadaSigla(rs.getString("aeroportochegadasigla"));
+                v.setAeroportoChegada(rs.getString("aeroportochegada"));
+                v.setDataChegada(rs.getString("datachegada"));
+                v.setHoraChegada(rs.getString("horachegada"));
+                v.setPortaoChegada(rs.getString("portaochegada"));
+                v.setEscalasVoo(rs.getString("escalasvoo"));
+                v.setTarifaE(rs.getString("tarifae"));
+                v.setTarifaB(rs.getString("tarifab"));
+                v.setTarifaF(rs.getString("tarifaf"));
+                listaVoo.add(v); 
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return listaVoo;
+        
+
+    }
 
 }//fim classe VooDAO
 
