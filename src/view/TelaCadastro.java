@@ -57,6 +57,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblConexao = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArquivo = new javax.swing.JMenu();
@@ -83,9 +84,12 @@ public class TelaCadastro extends javax.swing.JFrame {
         setIconImages(null);
         setMinimumSize(new java.awt.Dimension(400, 200));
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         lblConexao.setText(" ");
         lblConexao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblConexao.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        jPanel1.add(lblConexao, java.awt.BorderLayout.CENTER);
 
         jMenuArquivo.setText("Passagem");
         jMenuArquivo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -237,14 +241,14 @@ public class TelaCadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblConexao, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                .addGap(0, 378, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2831, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblConexao, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                .addGap(0, 1481, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -431,6 +435,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSairSair;
     private javax.swing.JMenu jMenuSobre;
     private javax.swing.JMenuItem jMenuSobreTela;
+    private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblConexao;
     private javax.swing.JMenuItem novaPassagem;
     // End of variables declaration//GEN-END:variables
