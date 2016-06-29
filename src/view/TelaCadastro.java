@@ -8,7 +8,10 @@
  */
 package view;
 
-import Control.Cadastro;import javax.swing.JLayeredPane;
+import Control.Cadastro;import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import javax.swing.JLayeredPane;
 ;
 /*
 import java.awt.Image;
@@ -39,6 +42,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         //this.setResizable(false);
         this.setBounds(0, 0, 1200, 800);
         this.setIconImage(null);
+        // coloca uma figura na barra de título da janela
+        URL url = this.getClass().getResource("/Icones/iconePrincipal.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo);
     }
 
     /**

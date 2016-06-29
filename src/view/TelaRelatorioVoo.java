@@ -73,10 +73,10 @@ public static String numeroVoo;
         PainelVooRelTituloLayout.setHorizontalGroup(
             PainelVooRelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelVooRelTituloLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
+                .addGap(166, 166, 166)
                 .addComponent(lblTelaRelatorioVoo)
-                .addGap(43, 43, 43)
-                .addComponent(lblTituloRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(lblTituloRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelVooRelTituloLayout.setVerticalGroup(
@@ -171,7 +171,7 @@ public static String numeroVoo;
                 .addComponent(btnLimparVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(398, 398, 398)
                 .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         PanelRelVoosBotoesLayout.setVerticalGroup(
             PanelRelVoosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

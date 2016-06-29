@@ -111,7 +111,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
                 btnSairVooRelatorioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSairVooRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 330, 171, -1));
+        getContentPane().add(btnSairVooRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 320, 171, -1));
 
         btnImprimirRelatorioVoo.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioVoo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -128,7 +128,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
                 btnImprimirRelatorioVooActionPerformed(evt);
             }
         });
-        getContentPane().add(btnImprimirRelatorioVoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 171, -1));
+        getContentPane().add(btnImprimirRelatorioVoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 171, -1));
 
         txtVoo.setBackground(new java.awt.Color(184, 230, 206));
         txtVoo.setColumns(20);
@@ -137,7 +137,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
         txtVoo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         jScrollPane1.setViewportView(txtVoo);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 791, 308));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 791, 300));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relVoo.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 210, 240));

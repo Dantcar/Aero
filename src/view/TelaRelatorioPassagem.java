@@ -138,6 +138,9 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
         PanelPassagemBotoes = new javax.swing.JPanel();
         btnLimparPassagem = new javax.swing.JButton();
         btnSairPassagem = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PainelPassagemTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -153,30 +156,31 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
         PainelPassagemTituloLayout.setHorizontalGroup(
             PainelPassagemTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPassagemTituloLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
+                .addGap(283, 283, 283)
                 .addComponent(lblTelaPassagem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(78, 78, 78)
                 .addComponent(lblTituloTelaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(481, Short.MAX_VALUE))
         );
         PainelPassagemTituloLayout.setVerticalGroup(
             PainelPassagemTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelPassagemTituloLayout.createSequentialGroup()
-                .addGroup(PainelPassagemTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PainelPassagemTituloLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTelaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelPassagemTituloLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(lblTituloTelaPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PainelPassagemTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloTelaPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTelaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
+        getContentPane().add(PainelPassagemTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
         PainelPassageiro.setBorder(javax.swing.BorderFactory.createTitledBorder("Passagem Aérea - Passageiro"));
+        PainelPassageiro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNumeroPassagem.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblNumeroPassagem.setForeground(new java.awt.Color(102, 102, 102));
         lblNumeroPassagem.setText("Número Passagem : ");
+        PainelPassageiro.add(lblNumeroPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, -1, -1));
 
         cbxNumeroPassagem.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         cbxNumeroPassagem.addItemListener(new java.awt.event.ItemListener() {
@@ -184,6 +188,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 cbxNumeroPassagemItemStateChanged(evt);
             }
         });
+        PainelPassageiro.add(cbxNumeroPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 28, 181, -1));
 
         btnListarPassagem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarPassagem.setText("Mostrar Passagem");
@@ -192,6 +197,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 btnListarPassagemActionPerformed(evt);
             }
         });
+        PainelPassageiro.add(btnListarPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 27, 142, -1));
 
         btnListarPassagemTodas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarPassagemTodas.setText("Listar todas Passagens");
@@ -200,10 +206,12 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 btnListarPassagemTodasActionPerformed(evt);
             }
         });
+        PainelPassageiro.add(btnListarPassagemTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 181, -1));
 
         lblNomePassageiroRelatorio.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblNomePassageiroRelatorio.setForeground(new java.awt.Color(102, 102, 102));
         lblNomePassageiroRelatorio.setText("Nome Passageiro : ");
+        PainelPassageiro.add(lblNomePassageiroRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         cbxNomePassageiro.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         cbxNomePassageiro.addItemListener(new java.awt.event.ItemListener() {
@@ -211,6 +219,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 cbxNomePassageiroItemStateChanged(evt);
             }
         });
+        PainelPassageiro.add(cbxNomePassageiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 275, -1));
 
         btnListarPassagemNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarPassagemNome.setText("Mostrar Passagem");
@@ -219,50 +228,9 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 btnListarPassagemNomeActionPerformed(evt);
             }
         });
+        PainelPassageiro.add(btnListarPassagemNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 142, -1));
 
-        javax.swing.GroupLayout PainelPassageiroLayout = new javax.swing.GroupLayout(PainelPassageiro);
-        PainelPassageiro.setLayout(PainelPassageiroLayout);
-        PainelPassageiroLayout.setHorizontalGroup(
-            PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                        .addComponent(lblNumeroPassagem)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxNumeroPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnListarPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                        .addComponent(lblNomePassageiroRelatorio)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnListarPassagemNome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
-                .addComponent(btnListarPassagemTodas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        PainelPassageiroLayout.setVerticalGroup(
-            PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnListarPassagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnListarPassagemTodas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PainelPassageiroLayout.createSequentialGroup()
-                        .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxNumeroPassagem)
-                            .addComponent(lblNumeroPassagem))
-                        .addGap(2, 2, 2)))
-                .addGap(40, 40, 40)
-                .addGroup(PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomePassageiroRelatorio)
-                    .addComponent(btnListarPassagemNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(75, 75, 75))
-        );
+        getContentPane().add(PainelPassageiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 91, 600, 220));
 
         PanelPassagemBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -297,11 +265,11 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
         PanelPassagemBotoesLayout.setHorizontalGroup(
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPassagemBotoesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(37, 37, 37)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 552, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(41, 41, 41))
         );
         PanelPassagemBotoesLayout.setVerticalGroup(
             PanelPassagemBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,31 +278,10 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelPassageiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 11, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PainelPassagemTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PainelPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelPassagemBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        getContentPane().add(PanelPassagemBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 600, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relPassageiro.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 91, -1, 412));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -410,6 +357,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSairPassagem;
     private javax.swing.JComboBox cbxNomePassageiro;
     private javax.swing.JComboBox cbxNumeroPassagem;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblNomePassageiroRelatorio;
     private javax.swing.JLabel lblNumeroPassagem;
     private javax.swing.JLabel lblTelaPassagem;

@@ -56,10 +56,10 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                   <Component id="lblTelaRelatorioVoo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="lblTituloRelatorioVoo" min="-2" pref="232" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <Component id="lblTituloRelatorioVoo" min="-2" pref="366" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -216,7 +216,7 @@
                   <Component id="btnLimparVooRelatorio" min="-2" pref="177" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="398" max="-2" attributes="0"/>
                   <Component id="btnSairVooRelatorio" min="-2" pref="127" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="164" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
