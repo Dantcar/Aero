@@ -47,11 +47,16 @@ public class FrameListaVoos extends javax.swing.JFrame {
         
     }//Fim construtor list
     
+    /**
+     * Método para carregar a listagem de voos conforme formato abaixo
+     * @param ListaVoos 
+     */
     private void carregarListaVoo(List<Voo> ListaVoos){
       String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
       String resultado = "";
       
       for (Voo v : ListaVoos){
+          
           resultado +=""
                     +"\n\tNumero Voo: "+ v.getNumeroVoo()+"\n"
                     +"\n\tCompanhia Aérea: "+ v.getCiaAerea()+ "\n"
@@ -92,7 +97,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(10, 10));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSairVooRelatorio.setBackground(new java.awt.Color(204, 204, 204));
         btnSairVooRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -106,8 +111,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
                 btnSairVooRelatorioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSairVooRelatorio);
-        btnSairVooRelatorio.setBounds(890, 330, 171, 50);
+        getContentPane().add(btnSairVooRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 330, 171, -1));
 
         btnImprimirRelatorioVoo.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioVoo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -124,8 +128,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
                 btnImprimirRelatorioVooActionPerformed(evt);
             }
         });
-        getContentPane().add(btnImprimirRelatorioVoo);
-        btnImprimirRelatorioVoo.setBounds(270, 330, 171, 50);
+        getContentPane().add(btnImprimirRelatorioVoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 171, -1));
 
         txtVoo.setBackground(new java.awt.Color(184, 230, 206));
         txtVoo.setColumns(20);
@@ -134,12 +137,10 @@ public class FrameListaVoos extends javax.swing.JFrame {
         txtVoo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         jScrollPane1.setViewportView(txtVoo);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(270, 10, 791, 308);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 791, 308));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relVoo.jpg"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 60, 210, 240);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 210, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,6 +222,7 @@ public class FrameListaVoos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrameListaVoos().setVisible(true);
+                
             }
         });
     }
