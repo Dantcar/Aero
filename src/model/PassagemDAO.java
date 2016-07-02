@@ -750,7 +750,7 @@ public class PassagemDAO {
         List<Passagem> listaPassagem = new ArrayList<>();
         String msg = "";
         String sql = "SELECT * FROM passagem WHERE nomepassageiro LIKE "+"'"+nome+"'";
-        System.out.println(sql);
+        //System.out.println(sql);
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;

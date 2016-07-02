@@ -1,23 +1,38 @@
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
-  * Na Disciplina de Programa��o Orientada a Objetos - Avan�ada
-  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
-  * Ano 2016 - Janeiro a Junho 
-  * Aluno Decio Antonio de Carvalho  * 
+ * Na Disciplina de Programa��o Orientada a Objetos - Avan�ada
+ *  do Curso de Analise de Sistemas da Fatec - Ipiranga
+ * Ano 2016 - Janeiro a Junho 
+ * Aluno Decio Antonio de Carvalho  * 
  */
 package view;
 
 import Control.VooCtrl;
+import static Control.Util.reduzString;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Voo;
 
 /**
  *
  * @author deciocarvalho
  */
 public class TelaRelatorioVoo extends javax.swing.JInternalFrame {
-public static String numeroVoo;
+
+    public static String numeroVoo;
+
     /**
      * Creates new form TelaRelatorioVoo
      */
@@ -26,16 +41,16 @@ public static String numeroVoo;
         populaJComboBoxVooNumero();
         cbxNumeroVoo.setSelectedIndex(-1);
     }
-    
-    private void populaJComboBoxVooNumero(){
-     VooCtrl cVoo = new VooCtrl();
-     cbxNumeroVoo.removeAllItems(); //remove os itens atuais do comboBox.
-     ArrayList lista = cVoo.populaComboVooNumero(); //retorna os nomes dos clientes do banco.
-     Iterator i = lista.iterator();
-     while (i.hasNext()){
-     cbxNumeroVoo.addItem(String.valueOf(i.next()));
-     }
- }
+
+    private void populaJComboBoxVooNumero() {
+        VooCtrl cVoo = new VooCtrl();
+        cbxNumeroVoo.removeAllItems(); //remove os itens atuais do comboBox.
+        ArrayList lista = cVoo.populaComboVooNumero(); //retorna os nomes dos clientes do banco.
+        Iterator i = lista.iterator();
+        while (i.hasNext()) {
+            cbxNumeroVoo.addItem(String.valueOf(i.next()));
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,18 +61,97 @@ public static String numeroVoo;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PainelVooRelTitulo = new javax.swing.JPanel();
-        lblTituloRelatorioVoo = new javax.swing.JLabel();
-        lblTelaRelatorioVoo = new javax.swing.JLabel();
+        PainelRelVooOpcoes = new javax.swing.JTabbedPane();
         PainelRelOpcoesVoo = new javax.swing.JPanel();
         lblNomeVoo = new javax.swing.JLabel();
         cbxNumeroVoo = new javax.swing.JComboBox();
         btnListarVoo = new javax.swing.JButton();
         btnListarVoosTodos = new javax.swing.JButton();
         lblRelatorioVooFundo = new javax.swing.JLabel();
+        PainelRelImpressaoVoos = new javax.swing.JPanel();
+        PanelScrollRelVoo = new javax.swing.JScrollPane();
+        txReltVoo = new javax.swing.JTextArea();
+        PainelVooRelTitulo = new javax.swing.JPanel();
+        lblTituloRelatorioVoo = new javax.swing.JLabel();
+        lblTelaRelatorioVoo = new javax.swing.JLabel();
         PanelRelVoosBotoes = new javax.swing.JPanel();
         btnSairVooRelatorio = new javax.swing.JButton();
         btnLimparVooRelatorio = new javax.swing.JButton();
+        btnImprimirRelatorioVoo = new javax.swing.JButton();
+
+        PainelRelOpcoesVoo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PainelRelOpcoesVoo.setLayout(null);
+
+        lblNomeVoo.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblNomeVoo.setForeground(new java.awt.Color(102, 102, 102));
+        lblNomeVoo.setText("Número Voo: ");
+        PainelRelOpcoesVoo.add(lblNomeVoo);
+        lblNomeVoo.setBounds(10, 30, 84, 17);
+
+        cbxNumeroVoo.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
+        cbxNumeroVoo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxNumeroVooItemStateChanged(evt);
+            }
+        });
+        PainelRelOpcoesVoo.add(cbxNumeroVoo);
+        cbxNumeroVoo.setBounds(100, 30, 275, 30);
+
+        btnListarVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnListarVoo.setText("Mostrar Voo");
+        btnListarVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarVooActionPerformed(evt);
+            }
+        });
+        PainelRelOpcoesVoo.add(btnListarVoo);
+        btnListarVoo.setBounds(400, 30, 140, 30);
+
+        btnListarVoosTodos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnListarVoosTodos.setText("Listar todos Voos");
+        btnListarVoosTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarVoosTodosActionPerformed(evt);
+            }
+        });
+        PainelRelOpcoesVoo.add(btnListarVoosTodos);
+        btnListarVoosTodos.setBounds(10, 90, 170, 30);
+
+        lblRelatorioVooFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Airbus A330-200.gif"))); // NOI18N
+        PainelRelOpcoesVoo.add(lblRelatorioVooFundo);
+        lblRelatorioVooFundo.setBounds(595, 0, 280, 350);
+
+        PainelRelVooOpcoes.addTab("Relatório de Voos", PainelRelOpcoesVoo);
+
+        txReltVoo.setBackground(new java.awt.Color(184, 230, 206));
+        txReltVoo.setColumns(20);
+        txReltVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txReltVoo.setRows(7);
+        txReltVoo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
+        PanelScrollRelVoo.setViewportView(txReltVoo);
+
+        javax.swing.GroupLayout PainelRelImpressaoVoosLayout = new javax.swing.GroupLayout(PainelRelImpressaoVoos);
+        PainelRelImpressaoVoos.setLayout(PainelRelImpressaoVoosLayout);
+        PainelRelImpressaoVoosLayout.setHorizontalGroup(
+            PainelRelImpressaoVoosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 901, Short.MAX_VALUE)
+            .addGroup(PainelRelImpressaoVoosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PainelRelImpressaoVoosLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PanelScrollRelVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        PainelRelImpressaoVoosLayout.setVerticalGroup(
+            PainelRelImpressaoVoosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 356, Short.MAX_VALUE)
+            .addGroup(PainelRelImpressaoVoosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PainelRelImpressaoVoosLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PanelScrollRelVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        PainelRelVooOpcoes.addTab("Relatórios Voos", PainelRelImpressaoVoos);
 
         PainelVooRelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -92,48 +186,6 @@ public static String numeroVoo;
                 .addContainerGap())
         );
 
-        PainelRelOpcoesVoo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        PainelRelOpcoesVoo.setLayout(null);
-
-        lblNomeVoo.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblNomeVoo.setForeground(new java.awt.Color(102, 102, 102));
-        lblNomeVoo.setText("Número Voo: ");
-        PainelRelOpcoesVoo.add(lblNomeVoo);
-        lblNomeVoo.setBounds(10, 30, 84, 17);
-
-        cbxNumeroVoo.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        cbxNumeroVoo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxNumeroVooItemStateChanged(evt);
-            }
-        });
-        PainelRelOpcoesVoo.add(cbxNumeroVoo);
-        cbxNumeroVoo.setBounds(100, 30, 275, 21);
-
-        btnListarVoo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarVoo.setText("Mostrar Voo");
-        btnListarVoo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarVooActionPerformed(evt);
-            }
-        });
-        PainelRelOpcoesVoo.add(btnListarVoo);
-        btnListarVoo.setBounds(10, 90, 142, 23);
-
-        btnListarVoosTodos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarVoosTodos.setText("Listar todos Voos");
-        btnListarVoosTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarVoosTodosActionPerformed(evt);
-            }
-        });
-        PainelRelOpcoesVoo.add(btnListarVoosTodos);
-        btnListarVoosTodos.setBounds(210, 90, 160, 23);
-
-        lblRelatorioVooFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Airbus A330-200.gif"))); // NOI18N
-        PainelRelOpcoesVoo.add(lblRelatorioVooFundo);
-        lblRelatorioVooFundo.setBounds(380, 0, 495, 350);
-
         PanelRelVoosBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnSairVooRelatorio.setBackground(new java.awt.Color(204, 204, 204));
@@ -162,6 +214,22 @@ public static String numeroVoo;
             }
         });
 
+        btnImprimirRelatorioVoo.setBackground(new java.awt.Color(204, 204, 204));
+        btnImprimirRelatorioVoo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnImprimirRelatorioVoo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
+        btnImprimirRelatorioVoo.setText("Imprimir em PDF");
+        btnImprimirRelatorioVoo.setToolTipText("Salvar Alterações");
+        btnImprimirRelatorioVoo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnImprimirRelatorioVoo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnImprimirRelatorioVoo.setIconTextGap(2);
+        btnImprimirRelatorioVoo.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnImprimirRelatorioVoo.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnImprimirRelatorioVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirRelatorioVooActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelRelVoosBotoesLayout = new javax.swing.GroupLayout(PanelRelVoosBotoes);
         PanelRelVoosBotoes.setLayout(PanelRelVoosBotoesLayout);
         PanelRelVoosBotoesLayout.setHorizontalGroup(
@@ -169,7 +237,9 @@ public static String numeroVoo;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRelVoosBotoesLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(btnLimparVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(398, 398, 398)
+                .addGap(105, 105, 105)
+                .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
                 .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(164, Short.MAX_VALUE))
         );
@@ -179,7 +249,8 @@ public static String numeroVoo;
                 .addGap(14, 14, 14)
                 .addGroup(PanelRelVoosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimparVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLimparVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -188,20 +259,23 @@ public static String numeroVoo;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelRelVoosBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelVooRelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PainelRelOpcoesVoo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelRelVoosBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PainelVooRelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(PainelRelVooOpcoes))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addComponent(PainelVooRelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelRelOpcoesVoo, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PainelRelVooOpcoes)
+                .addGap(18, 18, 18)
                 .addComponent(PanelRelVoosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -213,24 +287,20 @@ public static String numeroVoo;
     }//GEN-LAST:event_cbxNumeroVooItemStateChanged
 
     private void btnListarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarVooActionPerformed
+
         numeroVoo = cbxNumeroVoo.getSelectedItem().toString();
         VooCtrl cVoo = new VooCtrl();
-        FrameListaVoos flv;
-        flv = new FrameListaVoos(cVoo.listaVooNumero(numeroVoo));
-        flv.setVisible(true);
-        flv.setLocation(10, 10);
+        List voo = cVoo.listaVooNumero(numeroVoo);
+        PainelRelVooOpcoes.setSelectedIndex(1);
+        this.carregarListaVoo(voo);
 
     }//GEN-LAST:event_btnListarVooActionPerformed
 
     private void btnListarVoosTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarVoosTodosActionPerformed
         VooCtrl cVoo = new VooCtrl();
-        FrameListaVoos flv;
-        flv = new FrameListaVoos(cVoo.listaVoo());
-
-        flv.setVisible(true);
-        flv.setLocation(10, 10);
-        
-
+        List voos = cVoo.listaVoo();
+        PainelRelVooOpcoes.setSelectedIndex(1);
+        this.carregarListaVoo(voos);
     }//GEN-LAST:event_btnListarVoosTodosActionPerformed
 
     private void btnSairVooRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairVooRelatorioActionPerformed
@@ -239,14 +309,58 @@ public static String numeroVoo;
 
     private void btnLimparVooRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparVooRelatorioActionPerformed
         cbxNumeroVoo.setSelectedIndex(-1);
-        
+        txReltVoo.setText("");
     }//GEN-LAST:event_btnLimparVooRelatorioActionPerformed
+
+    private void btnImprimirRelatorioVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioVooActionPerformed
+        //criamos um documento vazio
+        String msg = "";
+        String tituloMsg = "Relatório PDF";
+        String passagemTexto = txReltVoo.getText();
+
+        Document documento = new Document();
+
+        try {
+            //criar o documento no diretório do projeto Netbeans AeroFast
+            PdfWriter.getInstance(documento, new FileOutputStream("RelatorioAeroFastVoos.pdf"));
+
+            //abrir o documento criado.
+            documento.open();
+
+            //ajustar o tamanho da pagina
+            documento.setPageSize(PageSize.A4);
+
+            //Adicionar um paragrafo
+            documento.add(new Paragraph(passagemTexto));
+
+        } catch (DocumentException | FileNotFoundException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(FrameListaPassagem.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            documento.close();
+
+            if (!"".equals(msg)) {
+                JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+                msg = "";
+            } else {
+                msg = "Relatório criado em PDF com sucesso";
+                JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+                msg = "";
+            }
+        }
+    }//GEN-LAST:event_btnImprimirRelatorioVooActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PainelRelImpressaoVoos;
     private javax.swing.JPanel PainelRelOpcoesVoo;
+    private javax.swing.JTabbedPane PainelRelVooOpcoes;
     private javax.swing.JPanel PainelVooRelTitulo;
     private javax.swing.JPanel PanelRelVoosBotoes;
+    private javax.swing.JScrollPane PanelScrollRelVoo;
+    private javax.swing.JButton btnImprimirRelatorioVoo;
     private javax.swing.JButton btnLimparVooRelatorio;
     private javax.swing.JButton btnListarVoo;
     private javax.swing.JButton btnListarVoosTodos;
@@ -256,5 +370,37 @@ public static String numeroVoo;
     private javax.swing.JLabel lblRelatorioVooFundo;
     private javax.swing.JLabel lblTelaRelatorioVoo;
     private javax.swing.JLabel lblTituloRelatorioVoo;
+    private javax.swing.JTextArea txReltVoo;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Método para carregar a listagem de voos conforme formato abaixo
+     *
+     * @param ListaVoos
+     */
+    private void carregarListaVoo(List<Voo> ListaVoos) {
+        String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
+        String resultado = "";
+
+        for (Voo v : ListaVoos) {
+
+            resultado += ""
+                    + "\n\tNumero Voo: " + v.getNumeroVoo() + "\n"
+                    + "\n\tCompanhia Aérea: " + v.getCiaAerea() + "\n"
+                    + "\n\tPrefixo: " + v.getPrefixoAeronaveVoo() + "\n"
+                    + "\tData Voo: " + v.getDataPartida() + "\n"
+                    + "\tHora Voo: " + v.getHoraPartida() + "\n"
+                    + "\tPartida Aeroporto: " + v.getAeroportoPartidaSigla().trim() + "- " + v.getAeroportoPartida().trim() + "\n"
+                    + "\tDestino Aeroporto: " + v.getAeroportoChegadaSigla().trim() + "- " + v.getAeroportoChegada().trim() + "\n"
+                    + "\n\tEscalas: " + v.getEscalasVoo().trim() + "\n"
+                    + "\tTarifas:\tEconomica\tEmpresarial\tPrimeira Classe\n"
+                    + "\tValor:  \tR$ " + v.getTarifaE() + "\tR$ " + v.getTarifaB() + "\tR$ " + v.getTarifaF() + "\n"
+                    + "\t------------------------------------------------------------------------------------------------------------------------";
+            resultado += newline;
+        }
+        resultado = "\n\n\t\t\t RELATÓRIOS VOOS\n" + resultado;
+        txReltVoo.setText(resultado);
+        txReltVoo.setEditable(false);
+    }
+
 }

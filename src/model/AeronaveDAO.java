@@ -10,10 +10,13 @@ package model;
 
 import static Control.Util.reduzString;
 import java.awt.HeadlessException;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,7 +37,7 @@ public class AeronaveDAO {
      * método para encerrar Connection, Statement e ResutlSet
      */
     private void close() {
-        String msg ="";
+        String msg = "";
         try {
             if (rs != null) {
                 rs.close();
@@ -51,16 +54,16 @@ public class AeronaveDAO {
             msg = msg + e + "\n";
             msg = reduzString(msg);
         }
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, msg); 
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
         }
-        msg="";
+        msg = "";
     }//fim close()
 
     /**
-     * Método para buscar ultimo idAeronave
-     * Revisao 0.1
+     * Método para buscar ultimo idAeronave Revisao 0.1
+     *
      * @return
      */
     public int buscarIdAeronaveAtual() {
@@ -95,24 +98,24 @@ public class AeronaveDAO {
                 resposta = idAeronaveNow;
             }
         } catch (SQLException ex) {
-           msg = msg + ex + "\n";
-           msg = reduzString(msg);
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         close();
         try {
-            if(conexao.isClosed()){   
+            if (conexao.isClosed()) {
             }
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, msg); 
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
         }
-        msg="";
+        msg = "";
         return resposta;
 
     }//fim buscar idAeronaveAtual
@@ -126,12 +129,12 @@ public class AeronaveDAO {
     public boolean buscarExisteAeronavePrefixo(String prefixo) {
         boolean resposta = true;
         String msg = "";
-        String sql ="SELECT * FROM aeronave WHERE prefixo = '" + prefixo + "'";
-        
+        String sql = "SELECT * FROM aeronave WHERE prefixo = '" + prefixo + "'";
+
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
-        
+
         try {
             stmt = conexao.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -169,13 +172,13 @@ public class AeronaveDAO {
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, reduzString(msg)); 
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, reduzString(msg));
         }
-        msg="";
-        
+        msg = "";
+
         return resposta;
     }// fim buscarExisteAeronavePrefixo
 
@@ -192,7 +195,7 @@ public class AeronaveDAO {
 
         conexao = DBAeroFast.getConnection();
         ResultSet rs = null;
-        
+
         try {
             stmt = conexao.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -202,7 +205,7 @@ public class AeronaveDAO {
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
@@ -210,7 +213,7 @@ public class AeronaveDAO {
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             if (rs.first()) {
                 aeronave.setIdAeronave(rs.getString(1));
@@ -224,29 +227,29 @@ public class AeronaveDAO {
             } else {
                 aeronave = null;
             }
-            
+
         } catch (SQLException ex) {
             msg = msg + ex;
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         close();
-        
+
         try {
-            if (conexao.isClosed()) {   
+            if (conexao.isClosed()) {
             }
         } catch (SQLException ex) {
             msg = msg + ex;
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, msg); 
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
         }
-        
-        msg="";
+
+        msg = "";
         return aeronave;
     }//fim buscarAeronavePrefixo
 
@@ -259,7 +262,7 @@ public class AeronaveDAO {
     public void inserirNovaAeronave(Aeronave aeronave) {
         String msg = "";
         String sql;
-        
+
         int idAeronave = buscarIdAeronaveAtual();
         System.out.println(idAeronave);
         idAeronave = idAeronave + 1;
@@ -268,22 +271,21 @@ public class AeronaveDAO {
         int ec = aeronave.getSeatEconomyClasse();
 
         //System.out.println("\nEste id vai pro banco:" + idAeronave + "bc: "+ bc+"fc: "+fc+"ec: "+ec);
-
         conexao = DBAeroFast.getConnection();
-        
+
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {
-             msg = msg + ex + "\n";
-             msg = reduzString(msg);
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         sql = "INSERT INTO aeronave VALUES ("
                 + idAeronave + ", "
                 + "'" + aeronave.getPrefixo() + "', "
-                +  ec + ", "
-                +  fc + ", "
-                +  bc + ", "
+                + ec + ", "
+                + fc + ", "
+                + bc + ", "
                 + "'" + aeronave.getModelo() + "', "
                 + "'" + aeronave.getFabricante() + "', "
                 + "'" + aeronave.getOperadora() + "')";
@@ -301,28 +303,28 @@ public class AeronaveDAO {
         try {
             if (conexao.isClosed()) {
                 msg = msg + "Conexão ao banco fechada.\n";
-                
+
             }
         } catch (SQLException ex) {
-                msg = msg + ex;
-                msg = reduzString(msg);
+            msg = msg + ex;
+            msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, msg); 
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
         }
-        msg="";
+        msg = "";
     } //fim inserirAeronave
 
     /**
      * Método para realizar alterações na Base dados Aeronave
+     *
      * @versao 0.1
      * @param aeronave
      * @param vprefixo
-     * @throws SQLException
      */
-    public void alterarAeronave(Aeronave aeronave, String vprefixo)  {
+    public void alterarAeronave(Aeronave aeronave, String vprefixo) {
         String msg = "";
         conexao = DBAeroFast.getConnection();
         try {
@@ -332,7 +334,7 @@ public class AeronaveDAO {
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String sql = "UPDATE aeronave SET "
                 + "prefixo = '" + aeronave.getPrefixo() + "', "
                 + "seateconomyclasse = " + aeronave.getSeatEconomyClasse() + ", "
@@ -347,7 +349,7 @@ public class AeronaveDAO {
             stmt.executeUpdate(sql);
             System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso. \n";
-           
+
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg + e);
             msg = reduzString(msg);
@@ -356,16 +358,16 @@ public class AeronaveDAO {
         close();
         try {
             if (conexao.isClosed()) {
-                msg = msg + "Conexão ao banco fechada" +"\n";
+                msg = msg + "Conexão ao banco fechada" + "\n";
             }
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, msg); 
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
         }
         msg = "";
     }//fim método alterarAeronave v0.1
@@ -379,40 +381,40 @@ public class AeronaveDAO {
     public void deletarAeronave(Aeronave aeronave, String vprefixo) {
         String msg = "";
         String sql = "DELETE FROM aeronave WHERE prefixo = '" + vprefixo + "'";
-                          
+
         if ((JOptionPane.showConfirmDialog(
-                    null,
-                    "Confirma Deletar Aeronave Prefixo: "+ vprefixo +"?",
-                    "Confirmar Deletar Aeronave",
-                    JOptionPane.YES_NO_OPTION))          
-            == JOptionPane.YES_OPTION){
-            
+                null,
+                "Confirma Deletar Aeronave Prefixo: " + vprefixo + "?",
+                "Confirmar Deletar Aeronave",
+                JOptionPane.YES_NO_OPTION))
+                == JOptionPane.YES_OPTION) {
+
             conexao = DBAeroFast.getConnection();
-            
+
             try {
-                    stmt = conexao.createStatement();
-                 } catch (SQLException ex) {
-                    msg = msg + ex;
-                    msg = reduzString(msg);
-                    Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                stmt = conexao.createStatement();
+            } catch (SQLException ex) {
+                msg = msg + ex;
+                msg = reduzString(msg);
+                Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
-                    stmt.executeUpdate(sql); 
-                    msg = msg + "Dados da aeronave excluidos com sucesso \n";
-                    
-                } catch (SQLException | HeadlessException e) {
-                    msg = reduzString(msg + e);
-                    msg = reduzString(msg);
-                    msg = msg + "Erro de gravação no BD \n";
-                   
-                }
-                        
-            } else { 
-             
-            }         
-             
+                stmt.executeUpdate(sql);
+                msg = msg + "Dados da aeronave excluidos com sucesso \n";
+
+            } catch (SQLException | HeadlessException e) {
+                msg = reduzString(msg + e);
+                msg = reduzString(msg);
+                msg = msg + "Erro de gravação no BD \n";
+
+            }
+
+        } else {
+
+        }
+
         close();
-       
+
         try {
             if (conexao.isClosed()) {
                 msg = msg + "Conexão ao banco fechada\n";
@@ -422,11 +424,182 @@ public class AeronaveDAO {
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if ("".equals(msg)){
-        }else{
-            JOptionPane.showMessageDialog(null, msg); 
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
         }
-         msg = "";
+        msg = "";
     }//fim deletarAeronave
 
-}
+    /**
+     * Método para criar e devolver uma lista de aeronaves pelo prefixos
+     *
+     * @return
+     */
+    public ArrayList findComboAeronave() {
+        String msg = "";
+        String sql = "SELECT prefixo FROM aeronave";
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        lista = new ArrayList();
+
+        try {
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return lista; //fim Classe findComboAeronave().
+    }
+
+    /**
+     * Método que retorna uma lista com aeronave fornecendo o seu prefixo
+     *
+     * @param vprefixo
+     * @return
+     */
+    public List<Aeronave> listarAeronavePrefixo(String vprefixo) {
+        List<Aeronave> listaAeronave = new ArrayList<>();
+        listaAeronave = null;
+        String msg = "";
+        String sql = "SELECT * FROM passagem WHERE prefixo LIKE " + "'" + vprefixo + "'";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs.next()) {
+                Aeronave aeronave = new Aeronave();
+
+                aeronave.setIdAeronave(rs.getString("idaeronave"));
+                aeronave.setPrefixo(rs.getString("prefixo"));
+                aeronave.setSeatEconomyClasse(parseInt(rs.getString("seateconomyclasse")));
+                aeronave.setSeatFirstClasse(parseInt(rs.getString("seatfirstclasse")));
+                aeronave.setSeatBusinesClasse(parseInt(rs.getString("seatbusinesclasse")));
+                aeronave.setModelo(rs.getString("modelo"));
+                aeronave.setFabricante(rs.getString("fabricante"));
+                aeronave.setOperadora(rs.getString("operadora"));
+                //adicionar esta aeronave na listaAeronaves
+                listaAeronave.add(aeronave);
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return listaAeronave;
+    }// fim do método listaAeronaves().
+
+    public List<Aeronave> listarTodasAeronaves() {
+        List<Aeronave> listaAeronaves = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM aeronave ORDER BY 1 DESC ";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs.next()) {
+                Aeronave aeronave = new Aeronave();
+
+                aeronave.setIdAeronave(rs.getString("idaeronave"));
+                aeronave.setPrefixo(rs.getString("prefixo"));
+                aeronave.setSeatEconomyClasse(parseInt(rs.getString("seateconomyclasse")));
+                aeronave.setSeatFirstClasse(parseInt(rs.getString("seatfirstclasse")));
+                aeronave.setSeatBusinesClasse(parseInt(rs.getString("seatbusinesclasse")));
+                aeronave.setModelo(rs.getString("modelo"));
+                aeronave.setFabricante(rs.getString("fabricante"));
+                aeronave.setOperadora(rs.getString("operadora"));
+                //adicionar esta aeronave na listaAeronaves
+                listaAeronaves.add(aeronave);
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return listaAeronaves;
+    }//fim do método listarTodasAeronaves.
+
+}//fim da Classe AeronaveDAO

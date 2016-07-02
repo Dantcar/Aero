@@ -9,8 +9,21 @@
 package view;
 
 import Control.ClienteCtrl;
+import static Control.Util.reduzString;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Cliente;
 
 /**
  *
@@ -25,13 +38,13 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
      */
     public TelaRelatorioClientes() {
         initComponents();
-        populaJComboBoxClienteNome();
+        populaJComboBoxClientesNome();
 
         //Limpar ComboBox
         cbxNomeCliente.setSelectedIndex(-1);
     }
 
-    public void populaJComboBoxClienteNome() {
+    private void populaJComboBoxClientesNome() {
         ClienteCtrl cCliente = new ClienteCtrl();
         cbxNomeCliente.removeAllItems(); //remove os itens atuais do comboBox.
         ArrayList lista = cCliente.populaComboClienteNome(); //retorna os nomes dos clientes do banco.
@@ -54,14 +67,19 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
         lblTituloRelatorioCliente = new javax.swing.JLabel();
         lblTelaRelatorioCliente = new javax.swing.JLabel();
         PanelRelClientesBotoes = new javax.swing.JPanel();
-        btnSairPassagem = new javax.swing.JButton();
         btnLimparPassagem = new javax.swing.JButton();
+        btnSairPassagem = new javax.swing.JButton();
+        btnImprimirRelatorioCliente = new javax.swing.JButton();
+        lblRelatorioClientesFundo = new javax.swing.JLabel();
+        PanelTabRelClientesImpresso = new javax.swing.JTabbedPane();
         PainelRelOpcoesCliente = new javax.swing.JPanel();
         lblNomeCliente = new javax.swing.JLabel();
         cbxNomeCliente = new javax.swing.JComboBox();
         btnListarCliente = new javax.swing.JButton();
         btnListarClientesTodos = new javax.swing.JButton();
-        lblRelatorioClientesFundo = new javax.swing.JLabel();
+        PainelRelImpresso = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtRelCliente = new javax.swing.JTextArea();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -79,38 +97,25 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
         PainelRelTituloClienteLayout.setHorizontalGroup(
             PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelTituloClienteLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(246, 246, 246)
                 .addComponent(lblTelaRelatorioCliente)
-                .addGap(89, 89, 89)
+                .addGap(67, 67, 67)
                 .addComponent(lblTituloRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(361, Short.MAX_VALUE))
         );
         PainelRelTituloClienteLayout.setVerticalGroup(
             PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelTituloClienteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTelaRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTelaRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTituloRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        getContentPane().add(PainelRelTituloCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
+        getContentPane().add(PainelRelTituloCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 940, -1));
 
         PanelRelClientesBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        btnSairPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnSairPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
-        btnSairPassagem.setText("Voltar");
-        btnSairPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSairPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnSairPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnSairPassagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairPassagemActionPerformed(evt);
-            }
-        });
 
         btnLimparPassagem.setBackground(new java.awt.Color(204, 204, 204));
         btnLimparPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -125,28 +130,63 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSairPassagem.setBackground(new java.awt.Color(204, 204, 204));
+        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSairPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
+        btnSairPassagem.setText("Voltar");
+        btnSairPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSairPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnSairPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnSairPassagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairPassagemActionPerformed(evt);
+            }
+        });
+
+        btnImprimirRelatorioCliente.setBackground(new java.awt.Color(204, 204, 204));
+        btnImprimirRelatorioCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnImprimirRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
+        btnImprimirRelatorioCliente.setText("Imprimir em PDF");
+        btnImprimirRelatorioCliente.setToolTipText("Salvar Alterações");
+        btnImprimirRelatorioCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnImprimirRelatorioCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnImprimirRelatorioCliente.setIconTextGap(2);
+        btnImprimirRelatorioCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnImprimirRelatorioCliente.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnImprimirRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirRelatorioClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelRelClientesBotoesLayout = new javax.swing.GroupLayout(PanelRelClientesBotoes);
         PanelRelClientesBotoes.setLayout(PanelRelClientesBotoesLayout);
         PanelRelClientesBotoesLayout.setHorizontalGroup(
             PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRelClientesBotoesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         PanelRelClientesBotoesLayout.setVerticalGroup(
             PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelRelClientesBotoesLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addGroup(PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(PanelRelClientesBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 271, -1, -1));
+        getContentPane().add(PanelRelClientesBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 670, -1));
+
+        lblRelatorioClientesFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relClientes.jpg"))); // NOI18N
+        getContentPane().add(lblRelatorioClientesFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 360));
 
         PainelRelOpcoesCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -192,7 +232,7 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
                         .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(281, Short.MAX_VALUE))
         );
         PainelRelOpcoesClienteLayout.setVerticalGroup(
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,13 +245,37 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
                 .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnListarCliente)
                     .addComponent(btnListarClientesTodos))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
-        getContentPane().add(PainelRelOpcoesCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        PanelTabRelClientesImpresso.addTab("Relatórios Clientes", PainelRelOpcoesCliente);
 
-        lblRelatorioClientesFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relClientes.jpg"))); // NOI18N
-        getContentPane().add(lblRelatorioClientesFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 250, -1));
+        txtRelCliente.setEditable(false);
+        txtRelCliente.setBackground(new java.awt.Color(125, 181, 199));
+        txtRelCliente.setColumns(20);
+        txtRelCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtRelCliente.setRows(7);
+        txtRelCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
+        jScrollPane1.setViewportView(txtRelCliente);
+
+        javax.swing.GroupLayout PainelRelImpressoLayout = new javax.swing.GroupLayout(PainelRelImpresso);
+        PainelRelImpresso.setLayout(PainelRelImpressoLayout);
+        PainelRelImpressoLayout.setHorizontalGroup(
+            PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelRelImpressoLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PainelRelImpressoLayout.setVerticalGroup(
+            PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelRelImpressoLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+
+        PanelTabRelClientesImpresso.addTab("Relatório Impresso", PainelRelImpresso);
+
+        getContentPane().add(PanelTabRelClientesImpresso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 680, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,6 +283,8 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
     private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
         //Limpar ComboBox
         cbxNomeCliente.setSelectedIndex(-1);
+         txtRelCliente.setText("");
+        
     }//GEN-LAST:event_btnLimparPassagemActionPerformed
 
     private void btnSairPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassagemActionPerformed
@@ -230,40 +296,114 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxNomeClienteItemStateChanged
 
     private void btnListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClienteActionPerformed
+        String title="Relatórios Clientes";
         nomeCliente = cbxNomeCliente.getSelectedItem().toString();
         ClienteCtrl cCliente = new ClienteCtrl();
-        FrameListaClientes flc;
-        flc = new FrameListaClientes(cCliente.listaClientesNome(nomeCliente));
-
-        flc.setVisible(true);
-        flc.setLocation(120, 100);
-
-
+        List cliente = cCliente.listaClientesNome(nomeCliente);
+        PanelTabRelClientesImpresso.setSelectedIndex(1); 
+        this.carregarListaCliente2(cliente);
+        
     }//GEN-LAST:event_btnListarClienteActionPerformed
 
     private void btnListarClientesTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesTodosActionPerformed
+        String title="Relatórios Clientes";
         ClienteCtrl cCliente = new ClienteCtrl();
-        FrameListaClientes flc;
-        flc = new FrameListaClientes(cCliente.listarClientes());
-
-        flc.setVisible(true);
-        flc.setLocation(120, 100);
-
+        PanelTabRelClientesImpresso.setSelectedIndex(1);
+        List clientes = cCliente.listarClientes();
+        this.carregarListaCliente2(clientes);
+       
     }//GEN-LAST:event_btnListarClientesTodosActionPerformed
+
+    private void btnImprimirRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioClienteActionPerformed
+        //criamos um documento vazio
+        String msg ="";
+        String tituloMsg = "Relatório PDF";
+        String passagemTexto = txtRelCliente.getText();
+        Document documento = new Document();
+
+        try {
+            try {
+                //criar o documento no diretório do projeto Netbeans AeroFast
+                PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFastClientes.pdf"));
+            } catch (FileNotFoundException ex) {
+                msg = msg + ex;
+                msg = reduzString(msg);
+                Logger.getLogger(TelaRelatorioClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //abrir o documento criado.
+            documento.open();
+
+            //ajustar o tamanho da pagina
+            documento.setPageSize(PageSize.A4);
+
+            //Adicionar um paragrafo
+            documento.add(new Paragraph(passagemTexto));
+
+        } catch (DocumentException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(FrameListaPassagem.class.getName()).log(Level.SEVERE, null, ex);
+
+        }finally{
+            documento.close();
+
+            if (!"".equals(msg)){
+                JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+                msg="";
+            }else
+            {
+                msg = "Relatório criado em PDF com sucesso";
+                JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
+                msg="";
+            }
+        }
+    }//GEN-LAST:event_btnImprimirRelatorioClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PainelRelImpresso;
     private javax.swing.JPanel PainelRelOpcoesCliente;
     private javax.swing.JPanel PainelRelTituloCliente;
     private javax.swing.JPanel PanelRelClientesBotoes;
+    private javax.swing.JTabbedPane PanelTabRelClientesImpresso;
+    private javax.swing.JButton btnImprimirRelatorioCliente;
     private javax.swing.JButton btnLimparPassagem;
     private javax.swing.JButton btnListarCliente;
     private javax.swing.JButton btnListarClientesTodos;
     private javax.swing.JButton btnSairPassagem;
     private javax.swing.JComboBox cbxNomeCliente;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblRelatorioClientesFundo;
     private javax.swing.JLabel lblTelaRelatorioCliente;
     private javax.swing.JLabel lblTituloRelatorioCliente;
+    private javax.swing.JTextArea txtRelCliente;
     // End of variables declaration//GEN-END:variables
+
+private void carregarListaCliente2(List<Cliente> ListaClientes){
+      String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
+      String resultado = "";
+      
+      for (Cliente c : ListaClientes){
+          
+          resultado += ""
+          +"\n\tCódigo Cliente: "+c.getIdCliente()+"\n"
+          +"\n\tNome: "+c.getNome()
+          +"\n\tEndereço: "+c.getEndereco().trim()+","+ c.getNumero()
+          +"\n\tBairro: "+c.getBairro().trim() + " - Cep: "+ c.getCep()
+          +"\n\tCidade: "+c.getCidade().trim() + " - UF: "+ c.getUf()
+          +"\n\tEmail: "+c.getEmail().trim()
+          +"\n\tTelefone: "+c.getTelefone()
+          +"\n\tRG: "+c.getRg() + " - CPF: "+c.getCpf();
+          
+          resultado += newline;
+
+      }
+      resultado="\n\n\t\t\t CADASTRO CLIENTES\n"+resultado;
+      txtRelCliente.setText(resultado);
+      txtRelCliente.setEditable(false);
+      
+        
+    }
 }

@@ -10,6 +10,8 @@ package Control;
  */
 
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Aeronave;
 import model.AeronaveDAO;
 
@@ -58,6 +60,29 @@ public class AeronaveCtrl {
        AeronaveDAO aeroDAO = new AeronaveDAO();
        aeroDAO.deletarAeronave(aeronave, prefixo);
         
+    }
+    
+    public ArrayList populaComboPrefixoAeronave(){
+        ArrayList lista;
+        AeronaveDAO aeronaveDAO = new AeronaveDAO();
+        return lista = aeronaveDAO.findComboAeronave();
+    }
+    
+    /**
+     * Método para controlar a listagem de aeronaves pelo prefixo.
+     * @param prefixo
+     * @return 
+     */
+    public List<Aeronave> listarAeronavePrefixo(String prefixo){
+        AeronaveDAO aeroDAO = new AeronaveDAO();
+        List<Aeronave> lista = aeroDAO.listarAeronavePrefixo(prefixo);
+        return lista;
+    }
+    
+    public List<Aeronave> listarAeronavesTodas(){
+        AeronaveDAO aeroDAO = new AeronaveDAO();
+        List<Aeronave> lista = aeroDAO.listarTodasAeronaves();
+        return lista; 
     }
     
 }

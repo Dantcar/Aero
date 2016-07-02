@@ -71,7 +71,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         Menu_Relatorios = new javax.swing.JMenu();
         MenuRelatorioPassagem = new javax.swing.JMenuItem();
         MenuRelatorioClientes = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        MenuRelatorioVoos = new javax.swing.JMenuItem();
+        MenuRelatorioAeronaves = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
         jMenuSobreTela = new javax.swing.JMenuItem();
         jMenu1Sair = new javax.swing.JMenu();
@@ -191,16 +192,27 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
         Menu_Relatorios.add(MenuRelatorioClientes);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/aeronave 40x40.jpg"))); // NOI18N
-        jMenuItem1.setText("Voos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        MenuRelatorioVoos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        MenuRelatorioVoos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        MenuRelatorioVoos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/aeronave 40x40.jpg"))); // NOI18N
+        MenuRelatorioVoos.setText("Voos");
+        MenuRelatorioVoos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                MenuRelatorioVoosActionPerformed(evt);
             }
         });
-        Menu_Relatorios.add(jMenuItem1);
+        Menu_Relatorios.add(MenuRelatorioVoos);
+
+        MenuRelatorioAeronaves.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        MenuRelatorioAeronaves.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        MenuRelatorioAeronaves.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/voos-on-line_1.png"))); // NOI18N
+        MenuRelatorioAeronaves.setText("Aeronaves");
+        MenuRelatorioAeronaves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuRelatorioAeronavesActionPerformed(evt);
+            }
+        });
+        Menu_Relatorios.add(MenuRelatorioAeronaves);
 
         jMenuBar1.add(Menu_Relatorios);
 
@@ -371,7 +383,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         
     }//GEN-LAST:event_MenuRelatorioClientesActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MenuRelatorioVoosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelatorioVoosActionPerformed
        
         String tituloStatus;
         tituloStatus = "Relatórios Voos";
@@ -384,7 +396,21 @@ public class TelaCadastro extends javax.swing.JFrame {
         relVoo.setLocation(40, 50);
         
         
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_MenuRelatorioVoosActionPerformed
+
+    private void MenuRelatorioAeronavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelatorioAeronavesActionPerformed
+        String tituloStatus;
+        tituloStatus = "Relatórios Aeronaves";
+        
+        TelaRelatorioAeronave relAeronave = new TelaRelatorioAeronave();
+        relAeronave.setTitle(tituloStatus);
+        relAeronave.setVisible(true);
+        add(relAeronave, JLayeredPane.DEFAULT_LAYER);
+        relAeronave.setDefaultCloseOperation(1);
+        relAeronave.setLocation(40, 50); 
+        
+        
+    }//GEN-LAST:event_MenuRelatorioAeronavesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,8 +448,10 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuCliente;
     private javax.swing.JMenuItem MenuNovoVoo;
     private javax.swing.JMenuItem MenuPassageiro;
+    private javax.swing.JMenuItem MenuRelatorioAeronaves;
     private javax.swing.JMenuItem MenuRelatorioClientes;
     private javax.swing.JMenuItem MenuRelatorioPassagem;
+    private javax.swing.JMenuItem MenuRelatorioVoos;
     private javax.swing.JMenu MenuVoo;
     private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
     private javax.swing.JMenu Menu_Relatorios;
@@ -431,7 +459,6 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastro;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuSairSair;
     private javax.swing.JMenu jMenuSobre;
     private javax.swing.JMenuItem jMenuSobreTela;
