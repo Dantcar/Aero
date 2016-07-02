@@ -476,9 +476,9 @@ public class VooDAO {
                 + " WHERE numerovoo = '" + vooNumero + "'";
 
         try {
-            System.out.println(sql);
+            //System.out.println(sql);
             stmt.executeUpdate(sql);
-            System.out.println("Esta é minha SQL: " + sql);
+            //System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso. \n";
         } catch (SQLException ex) {
             msg = reduzString(msg + ex);
@@ -619,7 +619,10 @@ public class VooDAO {
             msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        close();
+        
+        
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
@@ -667,6 +670,8 @@ public class VooDAO {
             msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        close();
+        
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
@@ -733,6 +738,9 @@ public class VooDAO {
             msg = reduzString(msg);
             Logger.getLogger(VooDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        close();
+                
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);

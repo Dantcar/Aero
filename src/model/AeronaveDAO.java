@@ -438,7 +438,8 @@ public class AeronaveDAO {
      */
     public ArrayList findComboAeronave() {
         String msg = "";
-        String sql = "SELECT prefixo FROM aeronave";
+        String sql = "SELECT prefixo FROM aeronave ORDER BY 1 ASC";
+        conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
         ArrayList lista;
@@ -538,6 +539,8 @@ public class AeronaveDAO {
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        close();
+
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
@@ -594,6 +597,8 @@ public class AeronaveDAO {
             msg = reduzString(msg);
             Logger.getLogger(AeronaveDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        close();
 
         if ("".equals(msg)) {
         } else {

@@ -28,7 +28,9 @@ import model.Aeronave;
  * @author Décio
  */
 public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
- public static String prefixoAeronave;
+
+    public static String prefixoAeronave;
+
     /**
      * Creates new form TelaRelatorioAeronave
      */
@@ -292,7 +294,6 @@ public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
         } catch (DocumentException | FileNotFoundException ex) {
             msg = msg + ex;
             msg = reduzString(msg);
-            
 
         } finally {
             documento.close();
@@ -352,32 +353,40 @@ public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void populaJComboBoxAeronavePrefixo() {
-     AeronaveCtrl cAeronave = new AeronaveCtrl();
-     cbxPrefixoAeronave.removeAllItems(); //remove os itens atuais do comboBox.
-     ArrayList lista = cAeronave.populaComboPrefixoAeronave(); //retorna os prefixos das aeronaves.
-     Iterator i = lista.iterator();
-     while (i.hasNext()){
-         cbxPrefixoAeronave.addItem(String.valueOf(i.next()));
-     }
-    
+        AeronaveCtrl cAeronave = new AeronaveCtrl();
+        cbxPrefixoAeronave.removeAllItems(); //remove os itens atuais do comboBox.
+        ArrayList lista = cAeronave.populaComboPrefixoAeronave(); //retorna os prefixos das aeronaves.
+        Iterator i = lista.iterator();
+        while (i.hasNext()) {
+            cbxPrefixoAeronave.addItem(String.valueOf(i.next()));
+        }
+
     }
 
     private void carregarLista(List<Aeronave> ListaAeronaves) {
-       
+
         String newline = System.getProperty("line.separator");
         String resultado = "";
-        
-        for (Aeronave a : ListaAeronaves){
-           resultado += ""
-                   +"\n\tId Aeronave: "+a.getIdAeronave()+"\n";
-           
-           
-           resultado += newline;
+
+        for (Aeronave a : ListaAeronaves) {
+            resultado += ""
+                    + "\n\tId Aeronave: " + a.getIdAeronave() + "\n"
+                    + "\n\tPrefixo Aeronave: " + a.getPrefixo() + "\n"
+                    + "n\tQuantidade Assentos: \tClasse Economica \tClasse Empresarial \tPrimeira Classe"
+                    + "\n\t                   " + a.getSeatEconomyClasse() + "\t\t"
+                    + a.getSeatBusinesClasse()
+                    + "\t\t" + a.getSeatFirstClasse() + "\n"
+                    + "\tModelo: " + a.getModelo() + "\n"
+                    + "\tFabricante: " + a.getFabricante() + "\n"
+                    + "\tOperadora: " + a.getOperadora() + "\n"
+                    + "\t------------------------------------------------------------------------------------------------------------------------";
+            resultado += newline;
+
         }
-        
-        resultado = "\n\n\t\t\t Lista Aeronaves Sistema AeroFast\n"+resultado;
+
+        resultado = "\n\n\t\t\t Lista Aeronaves Sistema AeroFast\n" + resultado;
         txtAeronave.setText(resultado);
         txtAeronave.setEditable(false);
-    
+
     }
 }

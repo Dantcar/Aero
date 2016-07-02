@@ -302,7 +302,7 @@
                   <Component id="btnImprimirRelatorioVoo" min="-2" pref="171" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   <Component id="btnSairVooRelatorio" min="-2" pref="127" max="-2" attributes="0"/>
-                  <EmptySpace pref="164" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
