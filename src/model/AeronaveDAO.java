@@ -264,7 +264,7 @@ public class AeronaveDAO {
         String sql;
 
         int idAeronave = buscarIdAeronaveAtual();
-        System.out.println(idAeronave);
+        //System.out.println(idAeronave);
         idAeronave = idAeronave + 1;
         int bc = aeronave.getSeatBusinesClasse();
         int fc = aeronave.getSeatFirstClasse();
@@ -347,7 +347,7 @@ public class AeronaveDAO {
 
         try {
             stmt.executeUpdate(sql);
-            System.out.println("Esta é minha SQL: " + sql);
+            //System.out.println("Esta é minha SQL: " + sql);
             msg = msg + "Dados da aeronave alterados com sucesso. \n";
 
         } catch (SQLException | HeadlessException e) {
@@ -491,9 +491,9 @@ public class AeronaveDAO {
      */
     public List<Aeronave> listarAeronavePrefixo(String vprefixo) {
         List<Aeronave> listaAeronave = new ArrayList<>();
-        listaAeronave = null;
+        //listaAeronave = null;
         String msg = "";
-        String sql = "SELECT * FROM passagem WHERE prefixo LIKE " + "'" + vprefixo + "'";
+        String sql = "SELECT * FROM aeronave WHERE prefixo LIKE " + "'" + vprefixo + "'";
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
@@ -519,6 +519,7 @@ public class AeronaveDAO {
         }
 
         try {
+            //System.out.println(sql);
             while (rs.next()) {
                 Aeronave aeronave = new Aeronave();
 

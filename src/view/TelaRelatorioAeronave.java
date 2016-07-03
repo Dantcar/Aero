@@ -162,21 +162,21 @@ public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
         PainelRelAeronave.add(btnListarRelAeronave, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, -1, 30));
 
         btnListarRelAeronavesTodas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarRelAeronavesTodas.setText("Listar todas Passagens");
+        btnListarRelAeronavesTodas.setText("Listar todas Aeronaves");
         btnListarRelAeronavesTodas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarRelAeronavesTodasActionPerformed(evt);
             }
         });
-        PainelRelAeronave.add(btnListarRelAeronavesTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 190, 30));
+        PainelRelAeronave.add(btnListarRelAeronavesTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 190, 30));
 
-        lblRelFotoAeronave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relPassageiro.jpg"))); // NOI18N
-        PainelRelAeronave.add(lblRelFotoAeronave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 330, 350));
+        lblRelFotoAeronave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/aeronavesBoeing.jpg"))); // NOI18N
+        PainelRelAeronave.add(lblRelFotoAeronave, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, 260));
 
         PanelRelAeronave.addTab("Relatório Aeronaves", PainelRelAeronave);
 
         txtAeronave.setEditable(false);
-        txtAeronave.setBackground(new java.awt.Color(242, 239, 19));
+        txtAeronave.setBackground(new java.awt.Color(250, 250, 250));
         txtAeronave.setColumns(20);
         txtAeronave.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtAeronave.setRows(7);
@@ -372,8 +372,8 @@ public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
             resultado += ""
                     + "\n\tId Aeronave: " + a.getIdAeronave() + "\n"
                     + "\n\tPrefixo Aeronave: " + a.getPrefixo() + "\n"
-                    + "n\tQuantidade Assentos: \tClasse Economica \tClasse Empresarial \tPrimeira Classe"
-                    + "\n\t                   " + a.getSeatEconomyClasse() + "\t\t"
+                    + "\n\tQuantidade Assentos: \tClasse Economica \tClasse Empresarial \tPrimeira Classe"
+                    + "\n\t\t\t " + a.getSeatEconomyClasse() + "\t\t"
                     + a.getSeatBusinesClasse()
                     + "\t\t" + a.getSeatFirstClasse() + "\n"
                     + "\tModelo: " + a.getModelo() + "\n"
