@@ -258,7 +258,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
         lblNumeroPassagem.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblNumeroPassagem.setForeground(new java.awt.Color(102, 102, 102));
         lblNumeroPassagem.setText("Número Passagem : ");
-        PainelPassageiro.add(lblNumeroPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
+        PainelPassageiro.add(lblNumeroPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         cbxNumeroPassagem.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         cbxNumeroPassagem.addItemListener(new java.awt.event.ItemListener() {
@@ -266,7 +266,12 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 cbxNumeroPassagemItemStateChanged(evt);
             }
         });
-        PainelPassageiro.add(cbxNumeroPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 160, 30));
+        cbxNumeroPassagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNumeroPassagemActionPerformed(evt);
+            }
+        });
+        PainelPassageiro.add(cbxNumeroPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 160, 30));
 
         btnListarPassagem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarPassagem.setText("Mostrar Passagem");
@@ -275,7 +280,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 btnListarPassagemActionPerformed(evt);
             }
         });
-        PainelPassageiro.add(btnListarPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, -1, 30));
+        PainelPassageiro.add(btnListarPassagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, 30));
 
         btnListarPassagemTodas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarPassagemTodas.setText("Listar todas Passagens");
@@ -289,7 +294,7 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
         lblNomePassageiroRelatorio.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblNomePassageiroRelatorio.setForeground(new java.awt.Color(102, 102, 102));
         lblNomePassageiroRelatorio.setText("Nome Passageiro : ");
-        PainelPassageiro.add(lblNomePassageiroRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
+        PainelPassageiro.add(lblNomePassageiroRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
 
         cbxNomePassageiro.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         cbxNomePassageiro.addItemListener(new java.awt.event.ItemListener() {
@@ -297,19 +302,24 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
                 cbxNomePassageiroItemStateChanged(evt);
             }
         });
-        PainelPassageiro.add(cbxNomePassageiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 320, 30));
+        cbxNomePassageiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNomePassageiroActionPerformed(evt);
+            }
+        });
+        PainelPassageiro.add(cbxNomePassageiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 320, 30));
 
         btnListarPassagemNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarPassagemNome.setText("Mostrar Passagem");
+        btnListarPassagemNome.setText("Passagens do Passageiro");
         btnListarPassagemNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarPassagemNomeActionPerformed(evt);
             }
         });
-        PainelPassageiro.add(btnListarPassagemNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 120, 142, 30));
+        PainelPassageiro.add(btnListarPassagemNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 190, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relPassageiro.jpg"))); // NOI18N
-        PainelPassageiro.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 330, 350));
+        PainelPassageiro.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 300, 350));
 
         PanelRelPassagem.addTab("Relatório Passagens", PainelPassageiro);
 
@@ -426,6 +436,22 @@ public class TelaRelatorioPassagem extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnImprimirRelatorioPassagemActionPerformed
+
+    private void cbxNumeroPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNumeroPassagemActionPerformed
+       if((cbxNumeroPassagem.getSelectedIndex())!=-1){
+          btnListarPassagem.setEnabled(true);
+       }else{
+         btnListarPassagem.setEnabled(false);  
+       }
+    }//GEN-LAST:event_cbxNumeroPassagemActionPerformed
+
+    private void cbxNomePassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomePassageiroActionPerformed
+      if((cbxNomePassageiro.getSelectedIndex())!=-1){
+          btnListarPassagemNome.setEnabled(true);
+       }else{
+         btnListarPassagemNome.setEnabled(false);  
+       }
+    }//GEN-LAST:event_cbxNomePassageiroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

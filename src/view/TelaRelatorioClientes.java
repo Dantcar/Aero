@@ -39,6 +39,7 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
     public TelaRelatorioClientes() {
         initComponents();
         populaJComboBoxClientesNome();
+        btnListarCliente.setEnabled(false);
 
         //Limpar ComboBox
         cbxNomeCliente.setSelectedIndex(-1);
@@ -200,8 +201,14 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
                 cbxNomeClienteItemStateChanged(evt);
             }
         });
+        cbxNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNomeClienteActionPerformed(evt);
+            }
+        });
 
         btnListarCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnListarCliente.setMnemonic('E');
         btnListarCliente.setText("Mostrar Cliente");
         btnListarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,29 +230,27 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                         .addComponent(lblNomeCliente)
                         .addGap(18, 18, 18)
-                        .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
-                        .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(281, Short.MAX_VALUE))
+                        .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         PainelRelOpcoesClienteLayout.setVerticalGroup(
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(35, 35, 35)
                 .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomeCliente))
-                .addGap(27, 27, 27)
-                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListarCliente)
-                    .addComponent(btnListarClientesTodos))
-                .addContainerGap(203, Short.MAX_VALUE))
+                    .addComponent(lblNomeCliente)
+                    .addComponent(btnListarCliente))
+                .addGap(76, 76, 76)
+                .addComponent(btnListarClientesTodos)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         PanelTabRelClientesImpresso.addTab("Relatórios Clientes", PainelRelOpcoesCliente);
@@ -359,6 +364,14 @@ public class TelaRelatorioClientes extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnImprimirRelatorioClienteActionPerformed
+
+    private void cbxNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomeClienteActionPerformed
+       if((cbxNomeCliente.getSelectedIndex())!=-1){
+          btnListarCliente.setEnabled(true);
+       }else{
+         btnListarCliente.setEnabled(false);  
+       }
+    }//GEN-LAST:event_cbxNomeClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

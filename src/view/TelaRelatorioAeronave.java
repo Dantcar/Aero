@@ -150,6 +150,11 @@ public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
                 cbxPrefixoAeronaveItemStateChanged(evt);
             }
         });
+        cbxPrefixoAeronave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPrefixoAeronaveActionPerformed(evt);
+            }
+        });
         PainelRelAeronave.add(cbxPrefixoAeronave, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 160, 30));
 
         btnListarRelAeronave.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -330,6 +335,15 @@ public class TelaRelatorioAeronave extends javax.swing.JInternalFrame {
         List aeronave = cAeronave.listarAeronavesTodas();
         this.carregarLista(aeronave);
     }//GEN-LAST:event_btnListarRelAeronavesTodasActionPerformed
+
+    private void cbxPrefixoAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPrefixoAeronaveActionPerformed
+        if ((cbxPrefixoAeronave.getSelectedIndex()) != -1) {
+            btnListarRelAeronave.setEnabled(true);
+        } else {
+            btnListarRelAeronave.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_cbxPrefixoAeronaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,8 +8,8 @@
  */
 package view;
 
-import Control.VooCtrl;
 import static Control.Util.reduzString;
+import Control.VooCtrl;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
@@ -92,6 +92,11 @@ public class TelaRelatorioVoo extends javax.swing.JInternalFrame {
         cbxNumeroVoo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxNumeroVooItemStateChanged(evt);
+            }
+        });
+        cbxNumeroVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNumeroVooActionPerformed(evt);
             }
         });
         PainelRelOpcoesVoo.add(cbxNumeroVoo);
@@ -241,7 +246,7 @@ public class TelaRelatorioVoo extends javax.swing.JInternalFrame {
                 .addComponent(btnImprimirRelatorioVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
                 .addComponent(btnSairVooRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelRelVoosBotoesLayout.setVerticalGroup(
             PanelRelVoosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,6 +356,14 @@ public class TelaRelatorioVoo extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnImprimirRelatorioVooActionPerformed
+
+    private void cbxNumeroVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNumeroVooActionPerformed
+        if ((cbxNumeroVoo.getSelectedIndex()) != -1) {
+            btnListarVoo.setEnabled(true);
+        } else {
+            btnListarVoo.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbxNumeroVooActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -650,7 +651,7 @@ public class PassagemDAO {
         }
         try {
             while (rs.next()) {
-                 Passagem passagem = new Passagem();
+                Passagem passagem = new Passagem();
                 passagem.setCiaAerea(rs.getString("ciaaerea"));
                 passagem.setDataPassagem(rs.getString("datapassagem"));
                 passagem.setNumeroPassagem(rs.getString("numeropassagem"));
@@ -668,13 +669,13 @@ public class PassagemDAO {
                 //adiciona objeto cliente a listaCliente
                 listaPassagem.add(passagem);
             }
-           
+
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
             Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }
+
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
@@ -686,7 +687,7 @@ public class PassagemDAO {
         //int numPassagem = parseInt(numero);
         List<Passagem> listaPassagem = new ArrayList<>();
         String msg = "";
-        String sql = "SELECT * FROM passagem WHERE numeropassagem = "+"'"+numero+"'";
+        String sql = "SELECT * FROM passagem WHERE numeropassagem = " + "'" + numero + "'";
         System.out.println(sql);
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
@@ -731,25 +732,25 @@ public class PassagemDAO {
                 //adiciona objeto cliente a listaCliente
                 listaPassagem.add(passagem);
             }
-           
+
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
             Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }
+
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
-        }    
-     return listaPassagem;   
+        }
+        return listaPassagem;
     }
-    
+
     public List<Passagem> listarPassagemNome(String nome) {
         //int numPassagem = parseInt(numero);
         List<Passagem> listaPassagem = new ArrayList<>();
         String msg = "";
-        String sql = "SELECT * FROM passagem WHERE nomepassageiro LIKE "+"'"+nome+"'";
+        String sql = "SELECT * FROM passagem WHERE nomepassageiro LIKE " + "'" + nome + "'";
         //System.out.println(sql);
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
@@ -794,28 +795,28 @@ public class PassagemDAO {
                 //adiciona objeto cliente a listaCliente
                 listaPassagem.add(passagem);
             }
-           
+
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
             Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }
+
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
-        }    
-     return listaPassagem;   
+        }
+        return listaPassagem;
     }
 
     public ArrayList findComboNomePassageiro() {
-         String msg = "";
+        String msg = "";
         String sql = "SELECT nomepassageiro FROM passagem ORDER BY 1 DESC";
         conexao = DBAeroFast.getConnection();
         ResultSet rs;
         rs = null;
-        ArrayList lista;
-        lista = null;
+        ArrayList lista = null, novalista = null;
+       
 
         try {
             stmt = conexao.createStatement(
@@ -835,12 +836,15 @@ public class PassagemDAO {
             Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        lista = new ArrayList();
+        novalista = new ArrayList();
+        //Set<List> novalista = new HashSet<>();
+
         try {
             while (rs.next()) {
-                lista.add(rs.getString(1));
+                novalista.add(rs.getString(1));
             }
-        } catch (SQLException ex) {
+            lista = new ArrayList(new HashSet(novalista));
+         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
             Logger.getLogger(PassagemDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -852,7 +856,7 @@ public class PassagemDAO {
         }
 
         return lista;
-        
+
     }
 
 }//fim Classe PassagemDAO 
