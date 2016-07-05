@@ -8,7 +8,8 @@
  */
 package view;
 
-import Control.Cadastro;import java.awt.Image;
+import Control.Cadastro;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import javax.swing.JLayeredPane;
