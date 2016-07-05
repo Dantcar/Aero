@@ -73,6 +73,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         MenuRelatorioClientes = new javax.swing.JMenuItem();
         MenuRelatorioVoos = new javax.swing.JMenuItem();
         MenuRelatorioAeronaves = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
         jMenuSobreTela = new javax.swing.JMenuItem();
         jMenu1Sair = new javax.swing.JMenu();
@@ -213,6 +214,17 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
         Menu_Relatorios.add(MenuRelatorioAeronaves);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/pessoaFisica.jpeg"))); // NOI18N
+        jMenuItem1.setText("Passageiros");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Menu_Relatorios.add(jMenuItem1);
 
         jMenuBar1.add(Menu_Relatorios);
 
@@ -412,6 +424,18 @@ public class TelaCadastro extends javax.swing.JFrame {
         
     }//GEN-LAST:event_MenuRelatorioAeronavesActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        String tituloStatus;
+        tituloStatus = "Relatórios Passageiros";
+        
+        TelaRelatorioAeronave relAeronave = new TelaRelatorioAeronave();
+        relAeronave.setTitle(tituloStatus);
+        relAeronave.setVisible(true);
+        add(relAeronave, JLayeredPane.DEFAULT_LAYER);
+        relAeronave.setDefaultCloseOperation(1);
+        relAeronave.setLocation(40, 50); 
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -459,6 +483,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastro;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuSairSair;
     private javax.swing.JMenu jMenuSobre;
     private javax.swing.JMenuItem jMenuSobreTela;
