@@ -103,8 +103,7 @@ public class EscolherAssento extends JPanel
         int numPairs = labels.length;
         calendar = Calendar.getInstance();
         JFormattedTextField ftf = null;
-        
-        
+
         /**
          * Spinner 1 para o campo Classe de voo
          */
@@ -124,8 +123,7 @@ public class EscolherAssento extends JPanel
         if (ftf != null) {
             ftf.setColumns(20); //specify more width than we need
             ftf.setHorizontalAlignment(JTextField.RIGHT);
-            
-            
+
         }
         //final Spinner 1
 
@@ -193,17 +191,15 @@ public class EscolherAssento extends JPanel
             ftf.setForeground(FALL_COLOR);
             ftf.setColumns(20); //specify more width than we need
             ftf.setHorizontalAlignment(JTextField.RIGHT);
-            
-            if(ftf.getText()=="Ocupado"){
-            ftf.setForeground(SUMMER_COLOR);
+
+            if (ftf.getText() == "Ocupado") {
+                ftf.setForeground(SUMMER_COLOR);
+            } else if (ftf.getText() == "Livre") {
+                ftf.setForeground(SPRING_COLOR);
+            } else {
+                ftf.setForeground(FALL_COLOR);
             }
-            else if(ftf.getText()=="Livre"){
-            ftf.setForeground(SPRING_COLOR);   
-            }
-            else{
-              ftf.setForeground(FALL_COLOR);  
-            }
-                        
+
             ftf.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 3));
             spinnerStatus.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         }
@@ -211,7 +207,6 @@ public class EscolherAssento extends JPanel
 
         //Listen for changes on the date spinner.
         //spinnerStatus.addChangeListener(this);
-
         //Lay out the panel.
         AssentoUtilitario.makeCompactGrid(this,
                 numPairs, 2, //rows, cols
@@ -236,11 +231,6 @@ public class EscolherAssento extends JPanel
         }
     }
 
-    
-
-    
-   
-
     static protected JSpinner addLabeledSpinner(Container c,
             String label,
             SpinnerModel model) {
@@ -262,29 +252,53 @@ public class EscolherAssento extends JPanel
         //Create and set up the window.
         JFrame frame = new JFrame("Assentos Aeronave AeroFast");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Specify FlowLayout for the layout manager.
         frame.setLayout(new FlowLayout());
+        
+        MostraAssentosGrafico desenho;
+        desenho = new MostraAssentosGrafico();
+        
+        // Specify FlowLayout for the layout manager.
+        //frame.setLayout(new FlowLayout());
+        //frame.setLayout(new GridLayout(8,1));
+        //Add content to the window.
+        //frame.add(new EscolherAssento(true)); //funcao cicloSpAssento habilitada
+        //frame.add(new EscolherAssento(false)); //funcao cicloApAssento desabilitada nao cicla opções
+        Container cp = frame.getContentPane();
+        cp.setLayout(new FlowLayout());
+
+        //Container cpQuiz = frame.getContentPane();
+        Container cpBotoes = frame.getContentPane();
+        cpBotoes.setLayout(new FlowLayout());
+
+        //Container cpQuiz = frame.getContentPane();
+        Container cpGrafico = frame.getContentPane();
+        cpGrafico.setLayout(new FlowLayout());
+
+       
+        //cpBotoes.setLayout(new FlowLayout());      
+
         JButton btnAssentoSeleciona = new JButton("Seleciona");
         JButton btnAssentoVoltar = new JButton("Voltar");
         JButton btnAssentoLimpar = new JButton("Limpar");
-        
-        
-        //Add content to the window.
-        frame.add(new EscolherAssento(true)); //funcao cicloSpAssento habilitada
-        //frame.add(new EscolherAssento(false)); //funcao cicloApAssento desabilitada nao cicla opções
-        
-        frame.add(btnAssentoSeleciona);
-        frame.add(btnAssentoVoltar);
-        frame.add(btnAssentoLimpar);
-        /**
-         * 
-         * JButton btnAssentoSeleciona = new JButton("Seleciona");
-        JButton btnAssentoVoltar = new JButton("Voltar");
-        JButton btnAssentoLimpar = new JButton("Limpar");
+
+        cpBotoes.add(btnAssentoSeleciona);
+        cpBotoes.add(btnAssentoVoltar);
+        cpBotoes.add(btnAssentoLimpar);
+        /*
+         cpBotoes.add(btnAssentoSeleciona, BorderLayout.PAGE_END);
+         cpBotoes.add(btnAssentoVoltar, BorderLayout.PAGE_END);
+         cpBotoes.add(btnAssentoLimpar, BorderLayout.PAGE_END);
          */
+       //cpBotoes.setEnabled(false);
+
+        cp.add(new EscolherAssento(true));
+
+        cpGrafico.add(desenho);
+        
         //Display the window.
         frame.pack();
         frame.setLocation(400, 400);
+        frame.setSize(600, 600);
         frame.setVisible(true);
     }
 
@@ -365,41 +379,38 @@ public class EscolherAssento extends JPanel
         }
     }
 
-/**
- * JButton jbtnAlpha = new JButton("Alpha");
-JButton jbtnBeta = new JButton("Beta");
-// Add action listener for Alpha.
-jbtnAlpha.addActionListener(new ActionListener() {
-public void actionPerformed(ActionEvent ae) {
-jlab.setText("Alpha was pressed.");
-}
-});
-* 
-* 
-*  
- * @param e 
- */
-    
-    
+    /**
+     * JButton jbtnAlpha = new JButton("Alpha"); JButton jbtnBeta = new
+     * JButton("Beta"); // Add action listener for Alpha.
+     * jbtnAlpha.addActionListener(new ActionListener() { public void
+     * actionPerformed(ActionEvent ae) { jlab.setText("Alpha was pressed."); }
+     * });
+     *     
+*
+     *
+     * @param e
+     */
     @Override
     public void stateChanged(ChangeEvent e) {
-        
+
     }
-    
-     protected String setColorStringForeground(String txt){
-         String cor = "Black";
-           if(null != txt)switch (txt) {
-            case "Ocupado":
-                cor = "SUMMER_COLOR";
-                break;
-            case "Livre":
-                cor = "SPRING_COLOR";
-                break;
-            default:
-                cor = "FALL_COLOR";
-                break;
+
+    protected String setColorStringForeground(String txt) {
+        String cor = "Black";
+        if (null != txt) {
+            switch (txt) {
+                case "Ocupado":
+                    cor = "SUMMER_COLOR";
+                    break;
+                case "Livre":
+                    cor = "SPRING_COLOR";
+                    break;
+                default:
+                    cor = "FALL_COLOR";
+                    break;
+            }
         }
-            return cor;
-    } 
+        return cor;
+    }
 
 }
