@@ -60,10 +60,12 @@ package Control;
  */
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.net.URL;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -101,7 +103,8 @@ public class EscolherAssento extends JPanel
         int numPairs = labels.length;
         calendar = Calendar.getInstance();
         JFormattedTextField ftf = null;
-
+        
+        
         /**
          * Spinner 1 para o campo Classe de voo
          */
@@ -233,7 +236,10 @@ public class EscolherAssento extends JPanel
         }
     }
 
-       
+    
+
+    
+   
 
     static protected JSpinner addLabeledSpinner(Container c,
             String label,
@@ -256,11 +262,26 @@ public class EscolherAssento extends JPanel
         //Create and set up the window.
         JFrame frame = new JFrame("Assentos Aeronave AeroFast");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        // Specify FlowLayout for the layout manager.
+        frame.setLayout(new FlowLayout());
+        JButton btnAssentoSeleciona = new JButton("Seleciona");
+        JButton btnAssentoVoltar = new JButton("Voltar");
+        JButton btnAssentoLimpar = new JButton("Limpar");
+        
+        
         //Add content to the window.
         frame.add(new EscolherAssento(true)); //funcao cicloSpAssento habilitada
         //frame.add(new EscolherAssento(false)); //funcao cicloApAssento desabilitada nao cicla opções
-
+        
+        frame.add(btnAssentoSeleciona);
+        frame.add(btnAssentoVoltar);
+        frame.add(btnAssentoLimpar);
+        /**
+         * 
+         * JButton btnAssentoSeleciona = new JButton("Seleciona");
+        JButton btnAssentoVoltar = new JButton("Voltar");
+        JButton btnAssentoLimpar = new JButton("Limpar");
+         */
         //Display the window.
         frame.pack();
         frame.setLocation(400, 400);
@@ -344,10 +365,41 @@ public class EscolherAssento extends JPanel
         }
     }
 
-
+/**
+ * JButton jbtnAlpha = new JButton("Alpha");
+JButton jbtnBeta = new JButton("Beta");
+// Add action listener for Alpha.
+jbtnAlpha.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent ae) {
+jlab.setText("Alpha was pressed.");
+}
+});
+* 
+* 
+*  
+ * @param e 
+ */
+    
+    
     @Override
     public void stateChanged(ChangeEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
+    
+     protected String setColorStringForeground(String txt){
+         String cor = "Black";
+           if(null != txt)switch (txt) {
+            case "Ocupado":
+                cor = "SUMMER_COLOR";
+                break;
+            case "Livre":
+                cor = "SPRING_COLOR";
+                break;
+            default:
+                cor = "FALL_COLOR";
+                break;
+        }
+            return cor;
+    } 
 
 }
