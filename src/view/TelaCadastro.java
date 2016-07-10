@@ -429,12 +429,12 @@ public class TelaCadastro extends javax.swing.JFrame {
         String tituloStatus;
         tituloStatus = "Relatórios Passageiros";
         
-        TelaRelatorioAeronave relAeronave = new TelaRelatorioAeronave();
-        relAeronave.setTitle(tituloStatus);
-        relAeronave.setVisible(true);
-        add(relAeronave, JLayeredPane.DEFAULT_LAYER);
-        relAeronave.setDefaultCloseOperation(1);
-        relAeronave.setLocation(40, 50); 
+        TelaRelatorioPassageiro relPassageiro = new TelaRelatorioPassageiro();
+        relPassageiro.setTitle(tituloStatus);
+        relPassageiro.setVisible(true);
+        add(relPassageiro, JLayeredPane.DEFAULT_LAYER);
+        relPassageiro.setDefaultCloseOperation(1);
+        relPassageiro.setLocation(40, 50); 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

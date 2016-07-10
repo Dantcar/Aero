@@ -408,7 +408,7 @@ public class ClienteDAO {
       lista = null;
       
      try {
-         stmt = conexao.createStatement(
+                 stmt = conexao.createStatement(
                  ResultSet.TYPE_SCROLL_INSENSITIVE,
                  ResultSet.CONCUR_READ_ONLY);
      } catch (SQLException ex) {

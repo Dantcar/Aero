@@ -14,11 +14,66 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PassageiroDAO {
+    
+    /**
+     * Método para retornar lista de nome para comboBox
+     * @return 
+     */
+    public ArrayList findComboNomePassageiro() {
+        String msg = "";
+        String sql = "SELECT nomepassageiro FROM passageiro ORDER BY 1 ASC";
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        lista = new ArrayList();
+        
+        try {
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return lista;
+
+    }//fim método findComboPassageiroNomePassageiro().
 
     private Connection conexao;
     private Statement stmt;
@@ -69,7 +124,7 @@ public class PassageiroDAO {
         }
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM passageiro ORDER BY 1 DESC"); 
+            rs = stmt.executeQuery("SELECT * FROM passageiro ORDER BY 1 DESC");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
@@ -113,7 +168,6 @@ public class PassageiroDAO {
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
         String sql = "INSERT INTO passageiro VALUES ("
-                
                 + idPassageiro + ", "
                 + "'" + passageiro.getNomePassageiro() + "', "
                 + "'" + passageiro.getNascimentoPassageiro() + "', "
@@ -163,7 +217,7 @@ public class PassageiroDAO {
                 ResultSet.CONCUR_READ_ONLY);
         rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rgpassageiro = '" + rg + "'");
         if (rs.first()) {
-            
+
             passageiro.setIdPassageiro(rs.getString(1));
             passageiro.setNomePassageiro(rs.getString(2));
             passageiro.setNascimentoPassageiro(rs.getString(3));
@@ -189,9 +243,11 @@ public class PassageiroDAO {
     }// fim buscar passageiro
 
     /**
-     * Método para verificar a existencia de um RG de passageiro na base de dados
+     * Método para verificar a existencia de um RG de passageiro na base de
+     * dados
+     *
      * @param rg
-     * @return 
+     * @return
      */
     public boolean buscarExistePassageiroRG(String rg) {
         boolean resposta = true;
@@ -205,7 +261,7 @@ public class PassageiroDAO {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
-            msg = reduzString(msg+ex);
+            msg = reduzString(msg + ex);
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
             Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,7 +269,7 @@ public class PassageiroDAO {
         try {
             rs = stmt.executeQuery("SELECT * FROM passageiro WHERE rgpassageiro = '" + rg + "'");
         } catch (SQLException ex) {
-            msg = reduzString(msg+ex);
+            msg = reduzString(msg + ex);
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
             Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -233,21 +289,22 @@ public class PassageiroDAO {
 
         return resposta;
     }//Fim buscarExistePassageiroRG
-    
+
     /**
-     * Método para realizar alterações na tabela passageiro,
-     * enviando o parametro passageiro e rg.
+     * Método para realizar alterações na tabela passageiro, enviando o
+     * parametro passageiro e rg.
+     *
      * @param passageiro
      * @param vrg
      * @throws ClassNotFoundException
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void alterarPassageiro(Passageiro passageiro, String vrg) throws ClassNotFoundException, SQLException{
+    public void alterarPassageiro(Passageiro passageiro, String vrg) throws ClassNotFoundException, SQLException {
         String msg;
-        msg="";
+        msg = "";
         conexao = DBAeroFast.getConnection();
         stmt = conexao.createStatement();
-        
+
         //String sql = "UPDATE passageiro SET " + "CPF = '"+ passageiro.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
         String sql = "UPDATE passageiro SET "
                 //+ "idPassageiro = "+ parseInt(passageiro.getIdPassageiro())+", "
@@ -260,72 +317,194 @@ public class PassageiroDAO {
                 + "contatoTelefone = '" + passageiro.getContatoTelefone() + "', "
                 + "responsavelFinanceiro = '" + passageiro.getResponsavelFinanceiro() + "', "
                 + "responsavelCPF = '" + passageiro.getResponsavelCPF() + "' "
-                + " WHERE RGPASSAGEIRO = '" + vrg +"'";
+                + " WHERE RGPASSAGEIRO = '" + vrg + "'";
         System.out.println(sql);
         try {
             stmt.executeUpdate(sql);
-           
-            msg = msg+"Dados do passageiro alterados com sucesso \n";
-           // JOptionPane.showMessageDialog(null, msg );
+
+            msg = msg + "Dados do passageiro alterados com sucesso \n";
+            // JOptionPane.showMessageDialog(null, msg );
         } catch (SQLException | HeadlessException e) {
-            msg = reduzString(msg+e);
+            msg = reduzString(msg + e);
             msg = reduzString(msg);
-            msg = msg+"Erro de gravação no BD \n";
-           // JOptionPane.showMessageDialog(null,msg );
+            msg = msg + "Erro de gravação no BD \n";
+            // JOptionPane.showMessageDialog(null,msg );
         }
         close();
-        if (conexao.isClosed()){
-         msg = msg+"Conexão ao banco fechada";
-         JOptionPane.showMessageDialog(null,msg );   
+        if (conexao.isClosed()) {
+            msg = msg + "Conexão ao banco fechada";
+            JOptionPane.showMessageDialog(null, msg);
         }
-            
+
     }//fim alterar passageiro
-    
-     /**
-     * 
+
+    /**
+     *
      * @param passageiro
      * @param vrg
-     * @throws SQLException 
+     * @throws SQLException
      */
-     public void deletarPassageiro(Passageiro passageiro, String vrg) throws SQLException {
+    public void deletarPassageiro(Passageiro passageiro, String vrg) throws SQLException {
         String msg;
-        msg="";
-        
+        msg = "";
+
         conexao = DBAeroFast.getConnection();
-     try {
-         stmt = conexao.createStatement();
-     } catch (SQLException ex) {
-         msg = msg+ex;
-         msg = reduzString(msg);
-         Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
-     }
-        
-        String sql ="DELETE FROM passageiro WHERE RGPASSAGEIRO = '" + vrg + "'";
-               
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            msg = msg + ex;
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String sql = "DELETE FROM passageiro WHERE RGPASSAGEIRO = '" + vrg + "'";
+
         try {
             int n = JOptionPane.showConfirmDialog(
-            null,
-            "Confirma Deletar Passageiro?",
-            "Confirmar Deletar Passageiro",
-            JOptionPane.YES_NO_OPTION);
-            if(true){
-            stmt.executeUpdate(sql);
+                    null,
+                    "Confirma Deletar Passageiro?",
+                    "Confirmar Deletar Passageiro",
+                    JOptionPane.YES_NO_OPTION);
+            if (true) {
+                stmt.executeUpdate(sql);
             }
-            
-            msg = msg+"Dados do passageiro excluidos com sucesso \n";
-          
+
+            msg = msg + "Dados do passageiro excluidos com sucesso \n";
+
         } catch (SQLException | HeadlessException e) {
-            msg = reduzString(msg+e);
+            msg = reduzString(msg + e);
             msg = reduzString(msg);
-            msg = msg+"Erro de gravação no BD \n";
-          
+            msg = msg + "Erro de gravação no BD \n";
+
         }
         close();
-        if (conexao.isClosed()){
-         msg = msg+"Conexão ao banco fechada";
-         JOptionPane.showMessageDialog(null,msg );   
+        if (conexao.isClosed()) {
+            msg = msg + "Conexão ao banco fechada";
+            JOptionPane.showMessageDialog(null, msg);
         }
-        
+
     }//fim deletar passageiro
+
+    public List<Passageiro> listarTodosPassageiros() {
+        List<Passageiro> listaPassageirosNome = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM passageiro ORDER BY 1 ASC";
+        System.out.println(sql);
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs.next()) {
+                Passageiro p = new Passageiro();
+                p.setIdPassageiro(rs.getString("idpassageiro"));
+                p.setNomePassageiro(rs.getString("nomepassageiro"));
+                p.setNascimentoPassageiro(rs.getString("nascimentopassageiro"));
+                p.setRgPassageiro(rs.getString("rgpassageiro"));
+                p.setTelefonePassageiro(rs.getString("telefonepassageiro"));
+                p.setEmailPassageiro(rs.getString("emailpassageiro"));
+                p.setContatoNome(rs.getString("contatonome"));
+                p.setContatoTelefone(rs.getString("contatotelefone"));
+                p.setResponsavelFinanceiro(rs.getString("responsavelfinanceiro"));
+                p.setResponsavelCPF(rs.getString("responsavelcpf"));
+
+                listaPassageirosNome.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return listaPassageirosNome;
+
+    }
+
+    /**
+     *
+     *
+     * @return lista com os dados do passageiro
+     */
+    public List<Passageiro> listarNomePassageiro(String nomePassageiro) {
+
+        List<Passageiro> listaPassageiroNome = new ArrayList<>();
+        String msg = "";
+        String sql = "SELECT * FROM passageiro WHERE nomepassageiro LIKE " + "'" + nomePassageiro + "'";
+        System.out.println(sql);
+        conexao = DBAeroFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        ArrayList lista;
+        lista = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs.next()) {
+                Passageiro p = new Passageiro();
+                p.setIdPassageiro(rs.getString("idpassageiro"));
+                p.setNomePassageiro(rs.getString("nomepassageiro"));
+                p.setNascimentoPassageiro(rs.getString("nascimentopassageiro"));
+                p.setRgPassageiro(rs.getString("rgpassageiro"));
+                p.setTelefonePassageiro(rs.getString("telefonepassageiro"));
+                p.setEmailPassageiro(rs.getString("emailpassageiro"));
+                p.setContatoNome(rs.getString("contatonome"));
+                p.setContatoTelefone(rs.getString("contatotelefone"));
+                p.setResponsavelFinanceiro(rs.getString("responsavelfinanceiro"));
+                p.setResponsavelCPF(rs.getString("responsavelcpf"));
+
+                listaPassageiroNome.add(p);
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(PassageiroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return listaPassageiroNome;
+    }
 
 }
