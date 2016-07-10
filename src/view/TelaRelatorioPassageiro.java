@@ -52,8 +52,9 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
         Iterator i = lista.iterator();
         while (i.hasNext()) {
             cbxNomePassageiro.addItem(String.valueOf(i.next()));
-            cbxNomePassageiro.setSelectedItem(-1);
+            
         }
+        cbxNomePassageiro.setSelectedItem(-1);
     }
 
     /**
@@ -372,7 +373,13 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImprimirRelatorioPassageiroActionPerformed
 
     private void cbxNomePassageiroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNomePassageiroItemStateChanged
-
+            if((cbxNomePassageiro.getSelectedIndex())!=-1){
+          btnListarPassageiro.setEnabled(true);
+       }else{
+         btnListarPassageiro.setEnabled(false);  
+       }
+        
+        
     }//GEN-LAST:event_cbxNomePassageiroItemStateChanged
 
     private void cbxNomePassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomePassageiroActionPerformed
