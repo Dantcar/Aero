@@ -8,17 +8,52 @@
  */
 package view;
 
+import Control.PassageiroCtrl;
+import static Control.Util.reduzString;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Passageiro;
 /**
  *
  * @author deciocarvalho
  */
 public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
 
+        public static String rgPassageiro, nomePassageiro;
+    
     /**
      * Creates new form TelaRelatorioPassageiro
      */
     public TelaRelatorioPassageiro() {
         initComponents();
+        populaJComboBoxPassageirosNome();
+        btnListarPassageiro.setEnabled(false);
+        
+        //Limpar ComBox
+        cbxNomePassageiro.setSelectedItem(-1);
+        
+    }
+    
+    private void populaJComboBoxPassageirosNome() {
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        cbxNomePassageiro.removeAllItems(); //remove os itens atuais do comboBox.
+        ArrayList lista = cPassageiro.populaComboPassageiroNome(); //retorna os nomes dos clientes do banco.
+        Iterator i = lista.iterator();
+        while (i.hasNext()) {
+            cbxNomePassageiro.addItem(String.valueOf(i.next()));
+            cbxNomePassageiro.setSelectedItem(-1);
+        }
     }
 
     /**
@@ -129,7 +164,7 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRelPassageiroBotoesLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(btnLimparRelPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addComponent(btnImprimirRelatorioPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addComponent(btnSairRelPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,7 +244,7 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
                     .addComponent(btnListarPassageiro))
                 .addGap(26, 26, 26)
                 .addComponent(btnListarPassageiroTodos)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         PanelTabRelPassageirosImpresso.addTab("Relatórios Passageiros", PainelRelOpcoesPassageiro);
@@ -226,21 +261,15 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
         PainelRelImpressoPassageiro.setLayout(PainelRelImpressoPassageiroLayout);
         PainelRelImpressoPassageiroLayout.setHorizontalGroup(
             PainelRelImpressoPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 693, Short.MAX_VALUE)
-            .addGroup(PainelRelImpressoPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelImpressoPassageiroLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1RelPassageirio, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelImpressoPassageiroLayout.createSequentialGroup()
+                .addGap(0, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane1RelPassageirio, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PainelRelImpressoPassageiroLayout.setVerticalGroup(
             PainelRelImpressoPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 306, Short.MAX_VALUE)
-            .addGroup(PainelRelImpressoPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelRelImpressoPassageiroLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1RelPassageirio, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(PainelRelImpressoPassageiroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1RelPassageirio, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
         );
 
         PanelTabRelPassageirosImpresso.addTab("Relatório Impresso", PainelRelImpressoPassageiro);
@@ -252,17 +281,17 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(PainelRelTituloPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 14, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblRelatorioClientesFundo)
-                        .addGap(43, 43, 43)
-                        .addComponent(PanelTabRelPassageirosImpresso, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(PanelRelPassageiroBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(PainelRelTituloPassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(821, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelTabRelPassageirosImpresso, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PanelRelPassageiroBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,13 +301,14 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblRelatorioClientesFundo))
+                        .addComponent(lblRelatorioClientesFundo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(PanelTabRelPassageirosImpresso, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelRelPassageiroBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(PanelTabRelPassageirosImpresso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelRelPassageiroBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
 
         pack();
@@ -305,11 +335,11 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
         try {
             try {
                 //criar o documento no diretório do projeto Netbeans AeroFast
-                PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFastClientes.pdf"));
+                PdfWriter.getInstance(documento, new FileOutputStream("documentoAeroFastPassageiros.pdf"));
             } catch (FileNotFoundException ex) {
                 msg = msg + ex;
                 msg = reduzString(msg);
-                Logger.getLogger(TelaRelatorioClientes.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaRelatorioPassageiro.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             //abrir o documento criado.
@@ -355,19 +385,20 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
 
     private void btnListarPassageiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassageiroActionPerformed
         String title="Relatórios Clientes";
-        nomeCliente = cbxNomePassageiro.getSelectedItem().toString();
-        ClienteCtrl cCliente = new ClienteCtrl();
-        List cliente = cCliente.listaClientesNome(nomePainelRelOpcoesPassageirolTabRelClientesImpresso.setSelectedIndex(1);
-        this.carregarListaCliente2(cliente);
+        nomePassageiro = cbxNomePassageiro.getSelectedItem().toString();
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        List passageiro = cPassageiro.listaPassageiroNome(nomePassageiro);
+       PanelTabRelPassageirosImpresso.setSelectedIndex(1); //troca para o painel do relatório
+        this.carregarListaPassageiros(passageiro);
 
     }//GEN-LAST:event_btnListarPassageiroActionPerformed
 
     private void btnListarPassageiroTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPassageiroTodosActionPerformed
         String title="Relatórios Clientes";
-        ClienteCtrl cCliente = new ClienteCtrl();
-        PanelTabRelClientesImpresso.setSelectedIndex(1);
-        List clientes = cCliente.listarClientes();
-        this.carregarListaCliente2(clientes);
+        PassageiroCtrl cPassageiro = new PassageiroCtrl();
+        PanelTabRelPassageirosImpresso.setSelectedIndex(1); //troca para o painel do relatório
+        List passageiros = cPassageiro.listarTodosPassageiros();
+        this.carregarListaPassageiros(passageiros);
 
     }//GEN-LAST:event_btnListarPassageiroTodosActionPerformed
 
@@ -391,4 +422,34 @@ public class TelaRelatorioPassageiro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTituloRelatorioPassageiro;
     private javax.swing.JTextArea txtRelPassageiro;
     // End of variables declaration//GEN-END:variables
+
+    
+
+    private void carregarListaPassageiros(List<Passageiro> listaPassageiros ) {
+      String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
+      String resultado = "";
+      
+      for (Passageiro p : listaPassageiros){
+          
+          resultado += ""
+                  +"\n\tCódigo Passageiro: "+p.getIdPassageiro()+"\n"
+                  +"\n\tNome: "+p.getNomePassageiro()+"\n"
+                  +"\n\tData Nascimento: "+p.getNascimentoPassageiro()+"\n"
+                  +"\n\tRG: "+p.getRgPassageiro()+"\n"
+                  +"\n\tTelefone :"+p.getTelefonePassageiro()+"\n"
+                  +"\n\tEmail :"+p.getEmailPassageiro()+"\n"
+                  +"\n\tResponsável Financeiro: "+p.getResponsavelFinanceiro()+"\n"
+                  +"\n\tCPF do Responsável Financeiro :"+p.getResponsavelCPF()+"\n"
+                  +"\n\tPessoa para contato: "+p.getContatoNome()+"\n"
+                  +"\n\tTelefone do contato: "+p.getTelefonePassageiro()+"\n"
+                  +"\n\t- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+                  
+                  resultado += newline;
+          
+      }
+      resultado="\n\n\t\t\t CADASTRO PASSAGEIROS\n"+resultado;
+      txtRelPassageiro.setText(resultado);
+      txtRelPassageiro.setEditable(false);
+    
+    }
 }
