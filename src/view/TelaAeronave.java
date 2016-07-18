@@ -88,6 +88,14 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblNumAssentosPrimeira = new javax.swing.JLabel();
         tctOperadoraAeronave = new javax.swing.JTextField();
         lblOperadoraAeronave = new javax.swing.JLabel();
+        tftClasseEconomicaColunas = new javax.swing.JFormattedTextField();
+        tftClasseEmpresarialColunas = new javax.swing.JFormattedTextField();
+        tftPrimeiraClasseColunas = new javax.swing.JFormattedTextField();
+        lblNumAssentosEconomicaCol = new javax.swing.JLabel();
+        lblNumAssentosEmpresarialCol = new javax.swing.JLabel();
+        lblNumAssentosPrimeiraCol = new javax.swing.JLabel();
+        lblClasse4 = new javax.swing.JLabel();
+        tftLayoutAssentos = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -349,6 +357,54 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         lblOperadoraAeronave.setForeground(new java.awt.Color(102, 102, 102));
         lblOperadoraAeronave.setText("Operadora:");
 
+        tftClasseEconomicaColunas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        tftClasseEconomicaColunas.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tftClasseEconomicaColunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftClasseEconomicaColunasActionPerformed(evt);
+            }
+        });
+
+        tftClasseEmpresarialColunas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        tftClasseEmpresarialColunas.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tftClasseEmpresarialColunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftClasseEmpresarialColunasActionPerformed(evt);
+            }
+        });
+
+        tftPrimeiraClasseColunas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        tftPrimeiraClasseColunas.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tftPrimeiraClasseColunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftPrimeiraClasseColunasActionPerformed(evt);
+            }
+        });
+
+        lblNumAssentosEconomicaCol.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblNumAssentosEconomicaCol.setForeground(new java.awt.Color(102, 102, 102));
+        lblNumAssentosEconomicaCol.setText("Quantidade de colunas de assentos");
+
+        lblNumAssentosEmpresarialCol.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblNumAssentosEmpresarialCol.setForeground(new java.awt.Color(102, 102, 102));
+        lblNumAssentosEmpresarialCol.setText("Quantidade de colunas de assentos");
+
+        lblNumAssentosPrimeiraCol.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblNumAssentosPrimeiraCol.setForeground(new java.awt.Color(102, 102, 102));
+        lblNumAssentosPrimeiraCol.setText("Quantidade de colunas de assentos");
+
+        lblClasse4.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblClasse4.setForeground(new java.awt.Color(102, 102, 102));
+        lblClasse4.setText("Layout assentos:");
+
+        tftLayoutAssentos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        tftLayoutAssentos.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tftLayoutAssentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftLayoutAssentosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PainelAeronaveVooLayout = new javax.swing.GroupLayout(PainelAeronaveVoo);
         PainelAeronaveVoo.setLayout(PainelAeronaveVooLayout);
         PainelAeronaveVooLayout.setHorizontalGroup(
@@ -365,27 +421,39 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                             .addComponent(lblOperadoraAeronave))
                         .addGap(27, 27, 27)
                         .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tftPrefixoAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctModeloAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tctFabricanteAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tctOperadoraAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tftPrefixoAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PainelAeronaveVooLayout.createSequentialGroup()
                                 .addComponent(tftClasseEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblNumAssentosEconomica))
-                            .addComponent(tctFabricanteAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tctOperadoraAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblNumAssentosEmpresarial)
+                                .addGap(26, 26, 26)
+                                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tftPrimeiraClasseColunas, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                                    .addComponent(tftClasseEmpresarialColunas, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tftClasseEconomicaColunas, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNumAssentosPrimeiraCol)
+                                    .addComponent(lblNumAssentosEmpresarialCol)
+                                    .addComponent(lblNumAssentosEconomicaCol)))))
                     .addGroup(PainelAeronaveVooLayout.createSequentialGroup()
                         .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblClasse2)
-                            .addComponent(lblClasse3))
+                            .addComponent(lblClasse3)
+                            .addComponent(lblClasse4))
                         .addGap(18, 18, 18)
                         .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tftClasseEmpresarial, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tftPrimeiraClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tftPrimeiraClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tftLayoutAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumAssentosEmpresarial)
-                            .addComponent(lblNumAssentosPrimeira))))
-                .addContainerGap(184, Short.MAX_VALUE))
+                            .addComponent(lblNumAssentosPrimeira)
+                            .addComponent(lblNumAssentosEconomica))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelAeronaveVooLayout.setVerticalGroup(
             PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,21 +475,39 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                     .addComponent(lblPrefixoAeronave)
                     .addComponent(tftPrefixoAeronave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
-                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblClasse1)
-                    .addComponent(tftClasseEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumAssentosEconomica))
-                .addGap(18, 18, 18)
-                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblClasse2)
-                    .addComponent(tftClasseEmpresarial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumAssentosEmpresarial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblClasse3)
-                    .addComponent(tftPrimeiraClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumAssentosPrimeira))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelAeronaveVooLayout.createSequentialGroup()
+                        .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblClasse1)
+                            .addComponent(tftClasseEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumAssentosEmpresarial)
+                            .addComponent(tftClasseEconomicaColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblClasse2)
+                            .addComponent(tftClasseEmpresarial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumAssentosPrimeira))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblClasse3)
+                            .addComponent(tftPrimeiraClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumAssentosEconomica))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblClasse4)
+                            .addComponent(tftLayoutAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8))
+                    .addGroup(PainelAeronaveVooLayout.createSequentialGroup()
+                        .addComponent(lblNumAssentosEconomicaCol)
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tftClasseEmpresarialColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumAssentosEmpresarialCol))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PainelAeronaveVooLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tftPrimeiraClasseColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumAssentosPrimeiraCol))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -432,22 +518,19 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(PainelAeronaveVoo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PainelAeronaveVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelAeronaveVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PainelAeronaveVoo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -723,6 +806,22 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
         btnSalvarAeronaveActionPerformed(evt);
     }//GEN-LAST:event_btnAlterarAeronaveActionPerformed
 
+    private void tftClasseEconomicaColunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEconomicaColunasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tftClasseEconomicaColunasActionPerformed
+
+    private void tftClasseEmpresarialColunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftClasseEmpresarialColunasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tftClasseEmpresarialColunasActionPerformed
+
+    private void tftPrimeiraClasseColunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftPrimeiraClasseColunasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tftPrimeiraClasseColunasActionPerformed
+
+    private void tftLayoutAssentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftLayoutAssentosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tftLayoutAssentosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -779,11 +878,15 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblClasse1;
     private javax.swing.JLabel lblClasse2;
     private javax.swing.JLabel lblClasse3;
+    private javax.swing.JLabel lblClasse4;
     private javax.swing.JLabel lblFabricanteAeronave;
     private javax.swing.JLabel lblModeloAeronave;
     private javax.swing.JLabel lblNumAssentosEconomica;
+    private javax.swing.JLabel lblNumAssentosEconomicaCol;
     private javax.swing.JLabel lblNumAssentosEmpresarial;
+    private javax.swing.JLabel lblNumAssentosEmpresarialCol;
     private javax.swing.JLabel lblNumAssentosPrimeira;
+    private javax.swing.JLabel lblNumAssentosPrimeiraCol;
     private javax.swing.JLabel lblOperadoraAeronave;
     private javax.swing.JLabel lblPrefixoAeronave;
     private javax.swing.JLabel lblTelaAeronave;
@@ -792,9 +895,13 @@ public class TelaAeronave extends javax.swing.JInternalFrame {
     private static javax.swing.JTextField tctModeloAeronave;
     private static javax.swing.JTextField tctOperadoraAeronave;
     private javax.swing.JFormattedTextField tftClasseEconomica;
+    private javax.swing.JFormattedTextField tftClasseEconomicaColunas;
     private javax.swing.JFormattedTextField tftClasseEmpresarial;
+    private javax.swing.JFormattedTextField tftClasseEmpresarialColunas;
+    private javax.swing.JFormattedTextField tftLayoutAssentos;
     private static javax.swing.JTextField tftPrefixoAeronave;
     private javax.swing.JFormattedTextField tftPrimeiraClasse;
+    private javax.swing.JFormattedTextField tftPrimeiraClasseColunas;
     // End of variables declaration//GEN-END:variables
 
     /**
