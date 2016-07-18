@@ -27,15 +27,19 @@ public class Aeronave {
     private String modelo;
     private String fabricante;
     private String operadora;
+    private Integer economyCol;
+    private Integer firstCol;
+    private Integer businesCol;
+    private String layout;
 
     /**
      * Construtor padrão
      */
     public Aeronave() {
     }
-     
-     /**
-     * Método construtor 
+    
+    /**
+     * Metodo construtor
      * @param idAeronave
      * @param prefixo
      * @param seatEconomyClasse
@@ -43,9 +47,13 @@ public class Aeronave {
      * @param seatBusinesClasse
      * @param modelo
      * @param fabricante
-     * @param operadora 
+     * @param operadora
+     * @param economyCol
+     * @param firstCol
+     * @param businesCol
+     * @param layout 
      */
-    public Aeronave(String idAeronave, String prefixo, Integer seatEconomyClasse, Integer seatFirstClasse, Integer seatBusinesClasse, String modelo, String fabricante, String operadora) {
+    public Aeronave(String idAeronave, String prefixo, Integer seatEconomyClasse, Integer seatFirstClasse, Integer seatBusinesClasse, String modelo, String fabricante, String operadora, Integer economyCol, Integer firstCol, Integer businesCol, String layout) {
         this.idAeronave = idAeronave;
         this.prefixo = prefixo;
         this.seatEconomyClasse = seatEconomyClasse;
@@ -54,6 +62,10 @@ public class Aeronave {
         this.modelo = modelo;
         this.fabricante = fabricante;
         this.operadora = operadora;
+        this.economyCol = economyCol;
+        this.firstCol = firstCol;
+        this.businesCol = businesCol;
+        this.layout = layout;
     }
 
     public String getIdAeronave() {
@@ -119,6 +131,41 @@ public class Aeronave {
     public void setOperadora(String operadora) {
         this.operadora = operadora;
     }
+
+    public Integer getEconomyCol() {
+        return economyCol;
+    }
+
+    public void setEconomyCol(Integer economyCol) {
+        this.economyCol = economyCol;
+    }
+
+    public Integer getFirstCol() {
+        return firstCol;
+    }
+
+    public void setFirstCol(Integer firstCol) {
+        this.firstCol = firstCol;
+    }
+
+    public Integer getBusinesCol() {
+        return businesCol;
+    }
+
+    public void setBusinesCol(Integer businesCol) {
+        this.businesCol = businesCol;
+    }
+
+    public String getLayout() {
+        return layout;
+    }
+
+    public void setLayout(String layout) {
+        this.layout = layout;
+    }
+     
+    
+
 
      
     

@@ -121,6 +121,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         rbConfirmada = new javax.swing.JRadioButton();
         btnPesquisarVooNumero = new javax.swing.JButton();
         btnCalcularTarifa = new javax.swing.JButton();
+        btnEscolherAssento = new javax.swing.JButton();
         PainelPassagemPartida = new javax.swing.JPanel();
         lblHoraPartidaPassagem = new javax.swing.JLabel();
         tftHoraPartida = new javax.swing.JFormattedTextField();
@@ -149,6 +150,9 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         lblPassagemEscalasObs = new javax.swing.JLabel();
         scrPassagemObservacao = new javax.swing.JScrollPane();
         tctPassagemObservacao = new javax.swing.JTextArea();
+        PainelAssentos = new javax.swing.JPanel();
+        lblNumeroVooPassagemMapaAssentos = new javax.swing.JLabel();
+        lblNumeroVooPassagemSelecionado = new javax.swing.JLabel();
         PanelPassagemBotoes = new javax.swing.JPanel();
         btnSalvarPassagem = new javax.swing.JButton();
         btnPesquisarPassagem = new javax.swing.JButton();
@@ -300,7 +304,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                                 .addComponent(btnPesquisarPassageiroRG))
                             .addComponent(jdpDataPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctNomePassageiro, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         PainelPassageiroLayout.setVerticalGroup(
             PainelPassageiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +327,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                     .addComponent(tftRgPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRgPassagem)
                     .addComponent(btnPesquisarPassageiroRG))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         btnPesquisarPassageiroRG.getAccessibleContext().setAccessibleName("Pesquisar RG passageiro");
@@ -356,6 +360,11 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         tctNumeroVoo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tctNumeroVooMouseReleased(evt);
+            }
+        });
+        tctNumeroVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tctNumeroVooActionPerformed(evt);
             }
         });
 
@@ -426,6 +435,16 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEscolherAssento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnEscolherAssento.setText("Escolher Assento");
+        btnEscolherAssento.setToolTipText("Cálculo da Tarifa");
+        btnEscolherAssento.setEnabled(false);
+        btnEscolherAssento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEscolherAssentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PainelPassagemTarifasLayout = new javax.swing.GroupLayout(PainelPassagemTarifas);
         PainelPassagemTarifas.setLayout(PainelPassagemTarifasLayout);
         PainelPassagemTarifasLayout.setHorizontalGroup(
@@ -452,12 +471,16 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                             .addComponent(lblPassagemTarifa))
                         .addGap(36, 36, 36)
                         .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tctPassagemNumeroAssento, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                                 .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCalcularTarifa))
-                            .addComponent(cbxClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
+                                    .addComponent(tctPassagemNumeroAssento, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEscolherAssento))
+                                .addComponent(cbxClasse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(PainelPassagemTarifasLayout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(lblPassagemStatus)
@@ -467,7 +490,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                         .addComponent(rbReservada)
                         .addGap(33, 33, 33)
                         .addComponent(rbConfirmada)))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         PainelPassagemTarifasLayout.setVerticalGroup(
             PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,13 +510,15 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPassagemAssentoNumero)
-                    .addComponent(tctPassagemNumeroAssento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tctPassagemNumeroAssento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEscolherAssento)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassagemTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tftPassagemTarifaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCalcularTarifa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addGroup(PainelPassagemTarifasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassagemStatus)
                     .addComponent(rbDisponivel)
@@ -573,7 +598,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                     .addComponent(tftDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tctPortaoAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tctAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         PainelPassagemPartidaLayout.setVerticalGroup(
             PainelPassagemPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,7 +704,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                             .addComponent(tftDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tftHoraChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tctAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         PainelPassagemChegadaLayout.setVerticalGroup(
             PainelPassagemChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -741,7 +766,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                 .addGroup(PainelPassagemEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(scrPassagemObservacao)
                     .addComponent(tctPassagemEscalas, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addContainerGap(329, Short.MAX_VALUE))
         );
         PainelPassagemEscalasLayout.setVerticalGroup(
             PainelPassagemEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -754,10 +779,40 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
                 .addGroup(PainelPassagemEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPassagemEscalasObs)
                     .addComponent(scrPassagemObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         PainelGuiasPassagem.addTab("Escalas", PainelPassagemEscalas);
+
+        lblNumeroVooPassagemMapaAssentos.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblNumeroVooPassagemMapaAssentos.setForeground(new java.awt.Color(102, 102, 102));
+        lblNumeroVooPassagemMapaAssentos.setText("Número Voo:");
+
+        lblNumeroVooPassagemSelecionado.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        lblNumeroVooPassagemSelecionado.setForeground(new java.awt.Color(0, 51, 255));
+        lblNumeroVooPassagemSelecionado.setText(" ");
+
+        javax.swing.GroupLayout PainelAssentosLayout = new javax.swing.GroupLayout(PainelAssentos);
+        PainelAssentos.setLayout(PainelAssentosLayout);
+        PainelAssentosLayout.setHorizontalGroup(
+            PainelAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelAssentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNumeroVooPassagemMapaAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNumeroVooPassagemSelecionado, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(660, Short.MAX_VALUE))
+        );
+        PainelAssentosLayout.setVerticalGroup(
+            PainelAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelAssentosLayout.createSequentialGroup()
+                .addGroup(PainelAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumeroVooPassagemMapaAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNumeroVooPassagemSelecionado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 354, Short.MAX_VALUE))
+        );
+
+        PainelGuiasPassagem.addTab("Mapa Assentos", PainelAssentos);
 
         PanelPassagemBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -1420,6 +1475,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
             valorPassagemB = parseFloat(vooPassagem.getTarifaB());
             valorPassagemF = parseFloat(vooPassagem.getTarifaF());
             btnCalcularTarifa.setEnabled(true);
+            btnEscolherAssento.setEnabled(true);
             flag = true;
         }
 
@@ -1477,6 +1533,21 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbxClasseItemStateChanged
 
+    private void btnEscolherAssentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherAssentoActionPerformed
+       PainelGuiasPassagem.setSelectedIndex(5);
+       String vooSelecionado = tctNumeroVoo.getText();
+       System.out.println(vooSelecionado);
+       lblNumeroVooPassagemSelecionado.setText(vooSelecionado);
+        
+        
+    }//GEN-LAST:event_btnEscolherAssentoActionPerformed
+
+    private void tctNumeroVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tctNumeroVooActionPerformed
+       if (!tctNumeroVoo.getText().isEmpty()){
+           btnEscolherAssento.setEnabled(true);
+       }
+    }//GEN-LAST:event_tctNumeroVooActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1515,6 +1586,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PainelAssentos;
     private javax.swing.JTabbedPane PainelGuiasPassagem;
     private javax.swing.JPanel PainelPassageiro;
     private javax.swing.JPanel PainelPassagemChegada;
@@ -1527,6 +1599,7 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     private static javax.swing.JButton btnAlterarPassagem;
     private static javax.swing.JButton btnCalcularTarifa;
     private javax.swing.JButton btnEditarPassagem;
+    private static javax.swing.JButton btnEscolherAssento;
     private javax.swing.JButton btnExcluirPassagem;
     private static javax.swing.JButton btnGerarNumeroPassagem;
     private javax.swing.JButton btnLimparPassagem;
@@ -1544,6 +1617,8 @@ public class TelaNovaPassagem extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblHoraPartidaPassagem;
     private javax.swing.JLabel lblNumeroPassagem;
     private javax.swing.JLabel lblNumeroVooPassagem;
+    private javax.swing.JLabel lblNumeroVooPassagemMapaAssentos;
+    private javax.swing.JLabel lblNumeroVooPassagemSelecionado;
     private javax.swing.JLabel lblPassagemAeroportoChegada;
     private javax.swing.JLabel lblPassagemAssentoNumero;
     private javax.swing.JLabel lblPassagemDataChegada;

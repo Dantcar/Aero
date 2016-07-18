@@ -61,6 +61,7 @@ package Control;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.net.URL;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
@@ -82,7 +83,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class EscolherAssento extends JPanel
-        implements ChangeListener {
+       implements ChangeListener {
 
     protected Calendar calendar;
     protected JSpinner dateSpinner;
@@ -95,6 +96,12 @@ public class EscolherAssento extends JPanel
     public static URL url;
 
     protected static ImageIcon ii = new ImageIcon("/Icones/calendarioRed.png");
+
+    public EscolherAssento() {
+        
+        
+        
+    }
 
     public EscolherAssento(boolean ciclar) {
         super(new SpringLayout());
@@ -253,6 +260,9 @@ public class EscolherAssento extends JPanel
         JFrame frame = new JFrame("Assentos Aeronave AeroFast");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
+        JPanel painel = new JPanel();
+        painel.setLayout(new GridLayout(4,2,5,5));
+        
         
         MostraAssentosGrafico desenho;
         desenho = new MostraAssentosGrafico();
@@ -281,9 +291,7 @@ public class EscolherAssento extends JPanel
         JButton btnAssentoVoltar = new JButton("Voltar");
         JButton btnAssentoLimpar = new JButton("Limpar");
 
-        cpBotoes.add(btnAssentoSeleciona);
-        cpBotoes.add(btnAssentoVoltar);
-        cpBotoes.add(btnAssentoLimpar);
+       
         /*
          cpBotoes.add(btnAssentoSeleciona, BorderLayout.PAGE_END);
          cpBotoes.add(btnAssentoVoltar, BorderLayout.PAGE_END);
@@ -294,23 +302,25 @@ public class EscolherAssento extends JPanel
         cp.add(new EscolherAssento(true));
 
         cpGrafico.add(desenho);
-        
+        cpBotoes.add(btnAssentoSeleciona);
+        cpBotoes.add(btnAssentoVoltar);
+        cpBotoes.add(btnAssentoLimpar);
         //Display the window.
         frame.pack();
         frame.setLocation(400, 400);
         frame.setSize(600, 600);
         frame.setVisible(true);
+        //btnAssentoSeleciona.addActionListener(this);
+        
     }
 
     public static void main(String[] args) {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                //Turn off metal's use of bold fonts
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                createAndShowGUI();
-            }
+        SwingUtilities.invokeLater(() -> {
+            //Turn off metal's use of bold fonts
+            UIManager.put("swing.boldMetal", Boolean.FALSE);
+            createAndShowGUI();
         });
     }
 

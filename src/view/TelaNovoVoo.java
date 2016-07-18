@@ -159,6 +159,20 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         PainelVooEscalas = new javax.swing.JPanel();
         lblEscalas = new javax.swing.JLabel();
         tctEscalas = new javax.swing.JTextField();
+        PainelVooAssentos = new javax.swing.JPanel();
+        lblAssentosEconomica = new javax.swing.JLabel();
+        lblAssentosBusiness = new javax.swing.JLabel();
+        lblAssentosFirst = new javax.swing.JLabel();
+        lblAssentosRetEconomica = new javax.swing.JLabel();
+        lblAssentosRetBusiness = new javax.swing.JLabel();
+        lblAssentosRetFirst = new javax.swing.JLabel();
+        lblAssentosLayout = new javax.swing.JLabel();
+        lblAssentosRetLayout = new javax.swing.JLabel();
+        lblTituloNumAssentos = new javax.swing.JLabel();
+        lblTituloNumColunas = new javax.swing.JLabel();
+        lblAssentosRetEconomicaColunas = new javax.swing.JLabel();
+        lblAssentosRetBusinessColunas = new javax.swing.JLabel();
+        lblAssentosRetFirstColunas = new javax.swing.JLabel();
         PanelVooTitulo = new javax.swing.JPanel();
         lblTituloTelaVoo = new javax.swing.JLabel();
         lblTelaVoo = new javax.swing.JLabel();
@@ -321,7 +335,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                             .addComponent(tftTarifaE, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                             .addComponent(tftTarifaB)
                             .addComponent(tftTarifaF))))
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(544, Short.MAX_VALUE))
         );
         PainelTarifasVoosLayout.setVerticalGroup(
             PainelTarifasVoosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,7 +425,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                         .addComponent(tctSiglaAeroportoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)
                         .addComponent(cbxAeroportosPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 213, Short.MAX_VALUE))
+                        .addGap(0, 216, Short.MAX_VALUE))
                     .addGroup(PainelVooPartidaLayout.createSequentialGroup()
                         .addGroup(PainelVooPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PainelVooPartidaLayout.createSequentialGroup()
@@ -526,28 +540,25 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                         .addComponent(lblSiglaAeroportoChegada)
                         .addGap(18, 18, 18)
                         .addComponent(tctSiglaAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
-                        .addComponent(cbxAeroportosChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))
+                        .addGap(64, 64, 64)
+                        .addComponent(cbxAeroportosChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelVooChegadaLayout.createSequentialGroup()
+                        .addComponent(lblAeroportoChegada)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tctAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelVooChegadaLayout.createSequentialGroup()
+                        .addComponent(lblHoraChegada)
+                        .addGap(18, 18, 18)
+                        .addComponent(jspHoraChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PainelVooChegadaLayout.createSequentialGroup()
                         .addGroup(PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelVooChegadaLayout.createSequentialGroup()
-                                .addComponent(lblAeroportoChegada)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tctAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelVooChegadaLayout.createSequentialGroup()
-                                .addComponent(lblHoraChegada)
-                                .addGap(18, 18, 18)
-                                .addComponent(jspHoraChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelVooChegadaLayout.createSequentialGroup()
-                                .addGroup(PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDataChegada)
-                                    .addComponent(lblPortaoChegada))
-                                .addGap(18, 18, 18)
-                                .addGroup(PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tctPortaoAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jdpVooDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(265, Short.MAX_VALUE))))
+                            .addComponent(lblDataChegada)
+                            .addComponent(lblPortaoChegada))
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tctPortaoAeroportoChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdpVooDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         PainelVooChegadaLayout.setVerticalGroup(
             PainelVooChegadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,7 +608,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 .addComponent(lblEscalas)
                 .addGap(18, 18, 18)
                 .addComponent(tctEscalas, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         PainelVooEscalasLayout.setVerticalGroup(
             PainelVooEscalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,6 +621,139 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
         );
 
         PainelGuiasVoo.addTab("Escalas", PainelVooEscalas);
+
+        lblAssentosEconomica.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosEconomica.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosEconomica.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAssentosEconomica.setText("Economica: ");
+
+        lblAssentosBusiness.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosBusiness.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosBusiness.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAssentosBusiness.setText("Bussines:");
+
+        lblAssentosFirst.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosFirst.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosFirst.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAssentosFirst.setText("First:");
+
+        lblAssentosRetEconomica.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetEconomica.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetEconomica.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblAssentosRetBusiness.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetBusiness.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetBusiness.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblAssentosRetFirst.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetFirst.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetFirst.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblAssentosLayout.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosLayout.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosLayout.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAssentosLayout.setText("Layout: ");
+
+        lblAssentosRetLayout.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetLayout.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetLayout.setText(" ");
+        lblAssentosRetLayout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblTituloNumAssentos.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTituloNumAssentos.setForeground(new java.awt.Color(102, 102, 102));
+        lblTituloNumAssentos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloNumAssentos.setText("Número Assentos");
+
+        lblTituloNumColunas.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTituloNumColunas.setForeground(new java.awt.Color(102, 102, 102));
+        lblTituloNumColunas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloNumColunas.setText("Número Colunas");
+
+        lblAssentosRetEconomicaColunas.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetEconomicaColunas.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetEconomicaColunas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblAssentosRetBusinessColunas.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetBusinessColunas.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetBusinessColunas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblAssentosRetFirstColunas.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblAssentosRetFirstColunas.setForeground(new java.awt.Color(102, 102, 102));
+        lblAssentosRetFirstColunas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout PainelVooAssentosLayout = new javax.swing.GroupLayout(PainelVooAssentos);
+        PainelVooAssentos.setLayout(PainelVooAssentosLayout);
+        PainelVooAssentosLayout.setHorizontalGroup(
+            PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                                .addComponent(lblAssentosEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(lblAssentosRetEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                                .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAssentosBusiness, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAssentosFirst, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAssentosLayout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAssentosRetLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAssentosRetFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAssentosRetBusiness, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(59, 59, 59)
+                        .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAssentosRetEconomicaColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAssentosRetFirstColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAssentosRetBusinessColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(lblTituloNumAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTituloNumColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(598, Short.MAX_VALUE))
+        );
+        PainelVooAssentosLayout.setVerticalGroup(
+            PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloNumAssentos)
+                    .addComponent(lblTituloNumColunas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                        .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                                .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblAssentosEconomica)
+                                    .addComponent(lblAssentosRetEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(lblAssentosBusiness))
+                            .addComponent(lblAssentosRetBusiness, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAssentosFirst, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAssentosRetFirst, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAssentosLayout)
+                            .addComponent(lblAssentosRetLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                        .addGroup(PainelVooAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PainelVooAssentosLayout.createSequentialGroup()
+                                .addComponent(lblAssentosRetEconomicaColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35))
+                            .addComponent(lblAssentosRetBusinessColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAssentosRetFirstColunas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
+        PainelGuiasVoo.addTab("Layout Assentos", PainelVooAssentos);
 
         PanelVooTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -763,7 +907,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
                 .addComponent(btnExcluirVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSairVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         PanelVooBotoesLayout.setVerticalGroup(
             PanelVooBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -786,10 +930,11 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PainelGuiasVoo)
-                    .addComponent(PanelVooBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelVooTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PanelVooBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(PainelGuiasVoo)
+                        .addComponent(PanelVooTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1305,6 +1450,7 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PainelEmpresaVoo;
     private javax.swing.JTabbedPane PainelGuiasVoo;
     private javax.swing.JPanel PainelTarifasVoos;
+    private javax.swing.JPanel PainelVooAssentos;
     private javax.swing.JPanel PainelVooChegada;
     private javax.swing.JPanel PainelVooEscalas;
     private javax.swing.JPanel PainelVooPartida;
@@ -1326,6 +1472,17 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner jspHoraPartida;
     private javax.swing.JLabel lblAeroportoChegada;
     private javax.swing.JLabel lblAeroportoPartida;
+    private javax.swing.JLabel lblAssentosBusiness;
+    private javax.swing.JLabel lblAssentosEconomica;
+    private javax.swing.JLabel lblAssentosFirst;
+    private javax.swing.JLabel lblAssentosLayout;
+    private javax.swing.JLabel lblAssentosRetBusiness;
+    private javax.swing.JLabel lblAssentosRetBusinessColunas;
+    private javax.swing.JLabel lblAssentosRetEconomica;
+    private javax.swing.JLabel lblAssentosRetEconomicaColunas;
+    private javax.swing.JLabel lblAssentosRetFirst;
+    private javax.swing.JLabel lblAssentosRetFirstColunas;
+    private javax.swing.JLabel lblAssentosRetLayout;
     private javax.swing.JLabel lblCiaAerea;
     private javax.swing.JLabel lblDataChegada;
     private javax.swing.JLabel lblDataPartida;
@@ -1343,6 +1500,8 @@ public class TelaNovoVoo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTarifaE;
     private javax.swing.JLabel lblTarifaF;
     private javax.swing.JLabel lblTelaVoo;
+    private javax.swing.JLabel lblTituloNumAssentos;
+    private javax.swing.JLabel lblTituloNumColunas;
     private javax.swing.JLabel lblTituloTelaVoo;
     private static javax.swing.JTextField tctAeroportoChegada;
     private static javax.swing.JTextField tctAeroportoPartida;
